@@ -1,0 +1,19 @@
+---
+engines:
+ rubocop:
+   enabled: true
+
+pylint:
+  enabled: true
+  python_version: 3
+
+exclude_paths:
+  - '.github/**'
+  - '**.md'
+  - 'docs/**'
+  - 'paper/**'
+  - 'pubblications/**'
+  - plasticity/__init__.py
+  - plasticity/model/__init__.py
+  - plasticity/cython/__init__.py
+  - plasticity/utils/__init__.py

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_911b18c25225ad5cb4ae7480cb868c47" kind="dir">
+    <compoundname>/home/nico/Code</compoundname>
+    <innerdir refid="dir_7ad830a7306606d27520bdf5a905f90e">/home/nico/Code/plasticity</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/nico/Code/"/>
+  </compounddef>
+</doxygen>

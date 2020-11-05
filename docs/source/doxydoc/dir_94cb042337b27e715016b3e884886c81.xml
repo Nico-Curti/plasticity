@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_94cb042337b27e715016b3e884886c81" kind="dir">
+    <compoundname>/home/nico/Code/plasticity/include</compoundname>
+    <innerfile refid="activations_8h">activations.h</innerfile>
+    <innerfile refid="base_8h">base.h</innerfile>
+    <innerfile refid="bcm_8h">bcm.h</innerfile>
+    <innerfile refid="data__dispatcher_8h">data_dispatcher.h</innerfile>
+    <innerfile refid="fmath_8h">fmath.h</innerfile>
+    <innerfile refid="hopfield_8h">hopfield.h</innerfile>
+    <innerfile refid="utils_8h">utils.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/nico/Code/plasticity/include/"/>
+  </compounddef>
+</doxygen>

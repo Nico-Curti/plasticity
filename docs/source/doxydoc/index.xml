@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.17">
+  <compound refid="classBasePlasticity" kind="class"><name>BasePlasticity</name>
+    <member refid="classBasePlasticity_1a427d9ff731f3db65bf5474e078b36467" kind="variable"><name>output</name></member>
+    <member refid="classBasePlasticity_1ac85dc18520a49febfcffd6646b0ab9b6" kind="variable"><name>weights</name></member>
+    <member refid="classBasePlasticity_1a1b218e7e7c6f5494aee2a8f8e603cbec" kind="variable"><name>theta</name></member>
+    <member refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" kind="variable"><name>activation</name></member>
+    <member refid="classBasePlasticity_1adf83370e29d977f79690bf17ed3668bf" kind="variable"><name>gradient</name></member>
+    <member refid="classBasePlasticity_1a4a6ecb6e802bdfc043346c41b2682ca1" kind="variable"><name>batch</name></member>
+    <member refid="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" kind="variable"><name>outputs</name></member>
+    <member refid="classBasePlasticity_1a6a98b64e6ab4ff78982b15e8f74ecb2f" kind="variable"><name>nweights</name></member>
+    <member refid="classBasePlasticity_1a974bdeec773185818312b6c82f7a764b" kind="variable"><name>mu</name></member>
+    <member refid="classBasePlasticity_1a45ee1f1803e06f09d9044e9252852631" kind="variable"><name>sigma</name></member>
+    <member refid="classBasePlasticity_1a6261a44333fc063f8a0c96f24e52bf9b" kind="variable"><name>epsilon</name></member>
+    <member refid="classBasePlasticity_1a9bc89cbc53982004dddd6c05a6f8c78b" kind="variable"><name>engine</name></member>
+    <member refid="classBasePlasticity_1ac3b0a942271707d1ac30cfb495fa91b6" kind="variable"><name>precision</name></member>
+    <member refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" kind="function"><name>BasePlasticity</name></member>
+    <member refid="classBasePlasticity_1a6095d857e3d72d44ab14e707d4f1c97d" kind="function"><name>BasePlasticity</name></member>
+    <member refid="classBasePlasticity_1a36aafa34a7d39721930afd46d2ccc5cd" kind="function"><name>BasePlasticity</name></member>
+    <member refid="classBasePlasticity_1a8fd48d4e055c774a6add951156790041" kind="function"><name>operator=</name></member>
+    <member refid="classBasePlasticity_1a4f812c1d906aa5e828bfcc65ce4e510a" kind="function"><name>~BasePlasticity</name></member>
+    <member refid="classBasePlasticity_1a1adfa1440172822a6e3280e0142fb80e" kind="function"><name>fit</name></member>
+    <member refid="classBasePlasticity_1a4104d12babea679995d21a5de08d7129" kind="function"><name>predict</name></member>
+    <member refid="classBasePlasticity_1ad5bfcab20dd11a25024d8fb83c0e4c23" kind="function"><name>save_weights</name></member>
+    <member refid="classBasePlasticity_1a05b0d33b49372359fb6c96e80013ee78" kind="function"><name>load_weights</name></member>
+    <member refid="classBasePlasticity_1a35be8a52e26ce61050f1408d2f69fa66" kind="function"><name>get_weights</name></member>
+    <member refid="classBasePlasticity_1a3ceca70b3099d2a4beebf28f6a48a1c2" kind="function"><name>weights_update</name></member>
+    <member refid="classBasePlasticity_1a0a98532ea9e9b5d125cb127aa08143c7" kind="function"><name>check_dims</name></member>
+    <member refid="classBasePlasticity_1a91d7baac000c8ab71aa526c919ca393c" kind="function"><name>check_is_fitted</name></member>
+    <member refid="classBasePlasticity_1a5f9be9c944b9840a9372fd09b9b034a2" kind="function"><name>normalize_weights</name></member>
+    <member refid="classBasePlasticity_1aceecfca1b48f9d7e37ae865b41c4ef52" kind="function"><name>_fit</name></member>
+    <member refid="classBasePlasticity_1ac0b63f34c4066d1e59480ff7085697f7" kind="function"><name>_predict</name></member>
+  </compound>
+  <compound refid="classBCM" kind="class"><name>BCM</name>
+    <member refid="classBCM_1a09d3456546b0f80ebcda02fa4f803870" kind="variable"><name>interaction_matrix</name></member>
+    <member refid="classBCM_1ad407a3e2ebf8c89ec3e24dc441daff4d" kind="function"><name>BCM</name></member>
+    <member refid="classBCM_1aacec2c922e994d7f4b6d33aa59667429" kind="function"><name>BCM</name></member>
+    <member refid="classBCM_1a9f89c34dc96cc5bb74cc9b3b8f6c454c" kind="function"><name>operator=</name></member>
+    <member refid="classBCM_1add33374e61bfea8b6331cad75acb8eac" kind="function"><name>~BCM</name></member>
+    <member refid="classBCM_1aa13af88336fddb68d60c7a007c63879a" kind="function"><name>weights_update</name></member>
+    <member refid="classBCM_1aa33368c82222851cb8403566f30d1eca" kind="function"><name>init_interaction_matrix</name></member>
+  </compound>
+  <compound refid="classdata__dispatcher" kind="class"><name>data_dispatcher</name>
+    <member refid="classdata__dispatcher_1ae09bb2f3e4d0b097efcc0d9748339336" kind="variable"><name>batch</name></member>
+    <member refid="classdata__dispatcher_1ac554125a64fe13dd309a601f26a6be8d" kind="variable"><name>indices</name></member>
+    <member refid="classdata__dispatcher_1af724ea38d5403cde7717460f59a54482" kind="variable"><name>num_batches</name></member>
+    <member refid="classdata__dispatcher_1a4534481c56bb11ba842d11c49b601663" kind="variable"><name>batch_dimension</name></member>
+    <member refid="classdata__dispatcher_1aa78476c02bdbbfb8f79c1159e9c409fa" kind="function"><name>data_dispatcher</name></member>
+    <member refid="classdata__dispatcher_1a0f15d139d58173887861aa5d28cf3280" kind="function"><name>~data_dispatcher</name></member>
+    <member refid="classdata__dispatcher_1a10585190c2f35014a789081f0b08ee0a" kind="function"><name>get_batch</name></member>
+    <member refid="classdata__dispatcher_1a1fc9b0f2b18e75a74d7aba81273df143" kind="function"><name>randomize</name></member>
+  </compound>
+  <compound refid="namespacemath" kind="namespace"><name>math</name>
+    <member refid="namespacemath_1a6dfb3bbb253c924b625bd9a370d3dbf9" kind="variable"><name>int_e</name></member>
+    <member refid="namespacemath_1ae4e4a3cf49f3b2f61a2aeeac91cf7efa" kind="variable"><name>int_10</name></member>
+    <member refid="namespacemath_1a4fc54ba253b24d9c8cfce936c428eece" kind="variable"><name>log2_over_2</name></member>
+    <member refid="namespacemath_1ab383f6ee1f765317585429ab87e1467a" kind="variable"><name>magic_number</name></member>
+    <member refid="namespacemath_1a2f614a16fb8bef21700fff3bca0203e0" kind="variable"><name>ln10</name></member>
+    <member refid="namespacemath_1adc7cab897398fac27e55772cce761c50" kind="function"><name>pow2</name></member>
+    <member refid="namespacemath_1a13d3cf63d92a1c41f09508100f4fa2a2" kind="function"><name>exp</name></member>
+    <member refid="namespacemath_1a6a78fd8a4b75a09d7ab12ec0f30cb14f" kind="function"><name>log2</name></member>
+    <member refid="namespacemath_1a27d30e4a25b508c53770ec0e16ebaff5" kind="function"><name>log</name></member>
+    <member refid="namespacemath_1af49ed44c2047eb392757535867e083f4" kind="function"><name>pow</name></member>
+    <member refid="namespacemath_1a90c3d8a0c7fb7a9a893d36659544a50d" kind="function"><name>log10</name></member>
+    <member refid="namespacemath_1a0d42357c4cfb9b650d08da4aecb81c1a" kind="function"><name>atanh</name></member>
+    <member refid="namespacemath_1ac0c70db8bf603c79f1f5d207148cab68" kind="function"><name>tanh</name></member>
+    <member refid="namespacemath_1a2c18cf38be24af6b01a94cb4f4b5f85b" kind="function"><name>hardtanh</name></member>
+    <member refid="namespacemath_1a5159164653db729fa67e1bf04af2c8ba" kind="function"><name>sqrt</name></member>
+    <member refid="namespacemath_1ada08f861ea6a28396b41db3221d789a6" kind="function"><name>rsqrt</name></member>
+    <member refid="namespacemath_1abb8e0d8db22fad9f3804a0341bac8eef" kind="function"><name>sign</name></member>
+    <member refid="namespacemath_1a55838ccfd75b9e437b202e781dd4b049" kind="function"><name>gcd</name></member>
+    <member refid="namespacemath_1ab6303a0f45d5a302af6a2dd0c6d63307" kind="function"><name>gd</name></member>
+  </compound>
+  <compound refid="namespacestd" kind="namespace"><name>std</name>
+    <member refid="utils_8h_1a7555adcfa1d636d70f3804287e8242b6" kind="function"><name>make_unique</name></member>
+  </compound>
+  <compound refid="namespacetransfer" kind="namespace"><name>transfer</name>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4" kind="enum"><name>@0</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a695741512ccb45671e1b1e7561fdf494" kind="enumvalue"><name>_logistic_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4af2cb2934a970c242680cedcc2febc539" kind="enumvalue"><name>_loggy_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4afee03b7fce96f1a3b20dd862b11e0779" kind="enumvalue"><name>_relu_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4ad70087c43f5179f085ea9069bcd88f01" kind="enumvalue"><name>_elu_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4ad119efda1dab606a5915e865a8ba5cad" kind="enumvalue"><name>_relie_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4ade6c15708c0abecd0ad6698242eada65" kind="enumvalue"><name>_ramp_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a7cdc24596da1fe3fa1d5453ee7989fee" kind="enumvalue"><name>_linear_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a90a116aea94ed2bb19de072070385c2d" kind="enumvalue"><name>_tanh_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a1e9ac157e70d1955d93d0ec99bf2e73f" kind="enumvalue"><name>_plse_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a08da53428d0e76985e229e7202d17d19" kind="enumvalue"><name>_leaky_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a99bc041ffcdbf869a0504b4a5d6a1009" kind="enumvalue"><name>_stair_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4ab4d50dd7a0a7bba8865d548ed26ed9ea" kind="enumvalue"><name>_hardtan_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a5057677b0e68ef06385f5ce889d80a30" kind="enumvalue"><name>_lhtan_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4aaacc124986304d5dfc0be4a8b21f87f6" kind="enumvalue"><name>_selu_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a01ea4827fd6b08e0c5befedb9ccc35ea" kind="enumvalue"><name>_elliot_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a9be8821a6cac94f368780a37f9a2f9fa" kind="enumvalue"><name>_symm_elliot_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a6ac08dd99e66dca91d8f24bbadbef755" kind="enumvalue"><name>_softplus_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a57a635e7aba6c6444dc87ffde3016c6c" kind="enumvalue"><name>_softsign_</name></member>
+    <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a712f02cd48697dee7c5da9bbec847a64" kind="enumvalue"><name>_asymm_logistic_</name></member>
+    <member refid="namespacetransfer_1a7a2fefd9c121e5feed9093074883b300" kind="variable"><name>get_activation</name></member>
+    <member refid="namespacetransfer_1a5ab5e921662a38b858237c9feb8e81c5" kind="variable"><name>leaky_coeff</name></member>
+    <member refid="namespacetransfer_1ae78adb47a2865cb0abdcac1df7bdc0b4" kind="variable"><name>steepness</name></member>
+    <member refid="namespacetransfer_1a74c69d07c8fbfee9e8b8026d13fb68b3" kind="variable"><name>activate</name></member>
+    <member refid="namespacetransfer_1a85df5dac767d25bfb67f70e30e8f967f" kind="variable"><name>gradient</name></member>
+    <member refid="namespacetransfer_1ac0dc62ada21f04a5abf9e198faef9dd9" kind="function"><name>linear</name></member>
+    <member refid="namespacetransfer_1a3410c1085f6c3cb23311e2245fcc5217" kind="function"><name>g_linear</name></member>
+    <member refid="namespacetransfer_1a0393615420e494217c108f89406f76c6" kind="function"><name>stair</name></member>
+    <member refid="namespacetransfer_1af758fd3da6a28c25c6fb1dc277b1a354" kind="function"><name>g_stair</name></member>
+    <member refid="namespacetransfer_1a233959ee107c12595bf88f574ef23cee" kind="function"><name>hardtan</name></member>
+    <member refid="namespacetransfer_1a174c3179a960ea5a1f7968089bd8fc48" kind="function"><name>g_hardtan</name></member>
+    <member refid="namespacetransfer_1a8c0c5af76f000512fb1f1ab450f4821d" kind="function"><name>logistic</name></member>
+    <member refid="namespacetransfer_1a24f94b11956a680837c71e5d2287ab68" kind="function"><name>g_logistic</name></member>
+    <member refid="namespacetransfer_1ae99eb10667b25cec0ba9d29cd2d6a1a6" kind="function"><name>loggy</name></member>
+    <member refid="namespacetransfer_1a6e046089b4a6485942daaddddba90ecc" kind="function"><name>g_loggy</name></member>
+    <member refid="namespacetransfer_1ad7bdc71f362e306c1fdcefcde7299f1e" kind="function"><name>relu</name></member>
+    <member refid="namespacetransfer_1ab3dac00b993205842c4284f7b9ae451a" kind="function"><name>g_relu</name></member>
+    <member refid="namespacetransfer_1a4a8957c702a656b754b77b115c6da31c" kind="function"><name>elu</name></member>
+    <member refid="namespacetransfer_1ac4b0e8dfb1313c5b87f7409dc97856e0" kind="function"><name>g_elu</name></member>
+    <member refid="namespacetransfer_1a84cbc279eb8f192cd3fd699e516e2709" kind="function"><name>relie</name></member>
+    <member refid="namespacetransfer_1a9c89857df810f76d6b01cbcf42afe781" kind="function"><name>g_relie</name></member>
+    <member refid="namespacetransfer_1ac463297b4f2e45aea0f34fe03e554208" kind="function"><name>ramp</name></member>
+    <member refid="namespacetransfer_1a07b7e7fa03d905d5a9da14f780acd169" kind="function"><name>g_ramp</name></member>
+    <member refid="namespacetransfer_1a641c85cbca35f4c39c834e5e5314b19e" kind="function"><name>leaky</name></member>
+    <member refid="namespacetransfer_1a683d77df5c1c19c861f3aebe525e25f8" kind="function"><name>g_leaky</name></member>
+    <member refid="namespacetransfer_1a083455e56499500765f54847677733da" kind="function"><name>tanhy</name></member>
+    <member refid="namespacetransfer_1a976c84314d7c109c3232fc8eadda2c00" kind="function"><name>g_tanhy</name></member>
+    <member refid="namespacetransfer_1ad0a517976a2229fa232166cd018f1539" kind="function"><name>plse</name></member>
+    <member refid="namespacetransfer_1a15f0f35ffad416ded003d1dca00b02de" kind="function"><name>g_plse</name></member>
+    <member refid="namespacetransfer_1a314049a8a223252d912a8ec0d1741bed" kind="function"><name>lhtan</name></member>
+    <member refid="namespacetransfer_1a06860665cdae5f8bef86c9bd338ef7b5" kind="function"><name>g_lhtan</name></member>
+    <member refid="namespacetransfer_1a7bad4c5a1851fef004c45fc55e3a6ace" kind="function"><name>selu</name></member>
+    <member refid="namespacetransfer_1a4473e49bc3f9172658651a2c9621fa0c" kind="function"><name>g_selu</name></member>
+    <member refid="namespacetransfer_1aee41661c5995d912ca0b1362ba0922e3" kind="function"><name>elliot</name></member>
+    <member refid="namespacetransfer_1a47451b410372d84a404dab11666ebba8" kind="function"><name>g_elliot</name></member>
+    <member refid="namespacetransfer_1ab82df4b2bc9838b6a5995ff542c2aad1" kind="function"><name>symm_elliot</name></member>
+    <member refid="namespacetransfer_1aab8a0454804fe5b40749aeeb44dcfe4b" kind="function"><name>g_symm_elliot</name></member>
+    <member refid="namespacetransfer_1a776fb49e022f043a94d76a45b3e95999" kind="function"><name>softplus</name></member>
+    <member refid="namespacetransfer_1a07c82b6a3b125e6476f454a3d3c6e36f" kind="function"><name>g_softplus</name></member>
+    <member refid="namespacetransfer_1a89f82cceba3f6aa4104f1058f86da912" kind="function"><name>softsign</name></member>
+    <member refid="namespacetransfer_1ae1497e47342744280df0afe13bc9610e" kind="function"><name>g_softsign</name></member>
+    <member refid="namespacetransfer_1abf7bbf11b30f9fac962e540441819bf0" kind="function"><name>asymm_logistic</name></member>
+    <member refid="namespacetransfer_1aeab248179d88fdb717789fd21da379b9" kind="function"><name>g_asymm_logistic</name></member>
+    <member refid="namespacetransfer_1ad953913b879672198f3cb955265b657f" kind="function"><name>swish_array</name></member>
+    <member refid="namespacetransfer_1a34658cce8136f320ecd3ed2a19f1c022" kind="function"><name>swish_gradient</name></member>
+    <member refid="namespacetransfer_1a9112e5909d930e22230b144a35234a04" kind="function"><name>mish_array</name></member>
+    <member refid="namespacetransfer_1ab36a75f25f70c2304c1ef6e5a80d5c7a" kind="function"><name>mish_gradient</name></member>
+  </compound>
+  <compound refid="namespaceutils" kind="namespace"><name>utils</name>
+    <member refid="namespaceutils_1a2cced40efe2ba8dfd91ab631c8e19bba" kind="function"><name>what_time_is_it_now</name></member>
+    <member refid="namespaceutils_1aee4b1108131ca374f4c4cf42f1a625c7" kind="function"><name>elapsed_time</name></member>
+    <member refid="namespaceutils_1ab6e3de392c555f49fdc9326ce36d71a9" kind="function"><name>operator*</name></member>
+    <member refid="namespaceutils_1a12db57dc074f7f23c447e302e636e41b" kind="function"><name>operator*</name></member>
+    <member refid="namespaceutils_1aaab5e88355f4e1485387e3d16a1dc9c9" kind="function"><name>print_progress</name></member>
+    <member refid="namespaceutils_1ab7a2cde9dc8fa709dcffc0dd2056d892" kind="function"><name>file_exists</name></member>
+    <member refid="namespaceutils_1a887b7a3287864333ff22b05327f88d19" kind="function"><name>mergeargsort_serial</name></member>
+    <member refid="namespaceutils_1a3d261d5ba27e92ce7ab72d3f9096615e" kind="function"><name>mergeargsort_parallel_omp</name></member>
+    <member refid="namespaceutils_1af1269571e6741db7bb9e819e74bedf7d" kind="function"><name>argsort</name></member>
+  </compound>
+  <compound refid="activations_8h" kind="file"><name>activations.h</name>
+  </compound>
+  <compound refid="base_8h" kind="file"><name>base.h</name>
+    <member refid="base_8h_1a80a8b1aec81995e16eb50277831747ad" kind="define"><name>ERROR_K_POSITIVE</name></member>
+    <member refid="base_8h_1ac2c86502e66f2307ca9396dd8c77174e" kind="define"><name>ERROR_FITTED</name></member>
+    <member refid="base_8h_1a6103a7d0f62795c68e45eae3d7d4fdf6" kind="define"><name>ERROR_DIMENSIONS</name></member>
+  </compound>
+  <compound refid="bcm_8h" kind="file"><name>bcm.h</name>
+  </compound>
+  <compound refid="data__dispatcher_8h" kind="file"><name>data_dispatcher.h</name>
+    <member refid="data__dispatcher_8h_1ac29a98d6b4dd073016bdbe84b8094e13" kind="define"><name>ERROR_DISPATCH</name></member>
+  </compound>
+  <compound refid="fmath_8h" kind="file"><name>fmath.h</name>
+  </compound>
+  <compound refid="hopfield_8h" kind="file"><name>hopfield.h</name>
+  </compound>
+  <compound refid="utils_8h" kind="file"><name>utils.h</name>
+    <member refid="utils_8h_1a2e3484535ee610c8e19e9859563abe48" kind="define"><name>__unused</name></member>
+    <member refid="utils_8h_1a41ff14e585aca69984fd070badcda5a9" kind="define"><name>DLLSPEC</name></member>
+    <member refid="utils_8h_1a69793e71975c25754a8236df29896e15" kind="define"><name>PBWIDTH</name></member>
+    <member refid="utils_8h_1a20a8ab7265b34d3991ec545da2a5d199" kind="define"><name>RESET_COUT</name></member>
+    <member refid="utils_8h_1a60cee83cb17f7f508a9353f9d65b366e" kind="variable"><name>FILL_VALUE</name></member>
+    <member refid="utils_8h_1a4a24f71756aa5af72e545c4d5ec89e38" kind="variable"><name>NULL_VALUE</name></member>
+  </compound>
+  <compound refid="dir_911b18c25225ad5cb4ae7480cb868c47" kind="dir"><name>/home/nico/Code</name>
+  </compound>
+  <compound refid="dir_43e0a1f539e00dcfa1a6bc4d4fee4fc2" kind="dir"><name>/home</name>
+  </compound>
+  <compound refid="dir_94cb042337b27e715016b3e884886c81" kind="dir"><name>/home/nico/Code/plasticity/include</name>
+  </compound>
+  <compound refid="dir_286188036a6f69a2571aeb75726499cb" kind="dir"><name>/home/nico</name>
+  </compound>
+  <compound refid="dir_7ad830a7306606d27520bdf5a905f90e" kind="dir"><name>/home/nico/Code/plasticity</name>
+  </compound>
+</doxygenindex>

@@ -1,0 +1,10 @@
+include *.md
+include LICENSE
+include CMakeLists.txt
+include *.txt
+include *.yml
+include include/*
+include hpp/*
+include plasticity/lib/*.pxd
+include plasticity/lib/*.hpp
+include plasticity/source/*.pyx

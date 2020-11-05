@@ -1,0 +1,331 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacemath" kind="namespace" language="C++">
+    <compoundname>math</compoundname>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacemath_1a6dfb3bbb253c924b625bd9a370d3dbf9" prot="public" static="yes" mutable="no">
+        <type>const float</type>
+        <definition>const float math::int_e</definition>
+        <argsstring></argsstring>
+        <name>int_e</name>
+        <initializer>= 1076754516.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="11" column="20" bodyfile="/home/nico/Code/plasticity/include/fmath.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacemath_1ae4e4a3cf49f3b2f61a2aeeac91cf7efa" prot="public" static="yes" mutable="no">
+        <type>const float</type>
+        <definition>const float math::int_10</definition>
+        <argsstring></argsstring>
+        <name>int_10</name>
+        <initializer>= 1092616192.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="12" column="20" bodyfile="/home/nico/Code/plasticity/include/fmath.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacemath_1a4fc54ba253b24d9c8cfce936c428eece" prot="public" static="yes" mutable="no">
+        <type>const float</type>
+        <definition>const float math::log2_over_2</definition>
+        <argsstring></argsstring>
+        <name>log2_over_2</name>
+        <initializer>= 0.34657359027997264311f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="13" column="20" bodyfile="/home/nico/Code/plasticity/include/fmath.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacemath_1ab383f6ee1f765317585429ab87e1467a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float math::magic_number</definition>
+        <argsstring></argsstring>
+        <name>magic_number</name>
+        <initializer>= std :: <ref refid="namespacemath_1af49ed44c2047eb392757535867e083f4" kindref="member">pow</ref>(2.f, 23) * (127.f - 0.043035)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="22" column="26" bodyfile="/home/nico/Code/plasticity/include/fmath.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacemath_1a2f614a16fb8bef21700fff3bca0203e0" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float math::ln10</definition>
+        <argsstring></argsstring>
+        <name>ln10</name>
+        <initializer>= std :: <ref refid="namespacemath_1a27d30e4a25b508c53770ec0e16ebaff5" kindref="member">log</ref>(10.f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="23" column="26" bodyfile="/home/nico/Code/plasticity/include/fmath.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacemath_1adc7cab897398fac27e55772cce761c50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float math::pow2</definition>
+        <argsstring>(const float &amp;p)</argsstring>
+        <name>pow2</name>
+        <param>
+          <type>const float &amp;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="28" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="28" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacemath_1a13d3cf63d92a1c41f09508100f4fa2a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float math::exp</definition>
+        <argsstring>(const float &amp;p)</argsstring>
+        <name>exp</name>
+        <param>
+          <type>const float &amp;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="29" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="29" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacemath_1a6a78fd8a4b75a09d7ab12ec0f30cb14f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float math::log2</definition>
+        <argsstring>(const float &amp;x)</argsstring>
+        <name>log2</name>
+        <param>
+          <type>const float &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="30" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="30" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacemath_1a27d30e4a25b508c53770ec0e16ebaff5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float math::log</definition>
+        <argsstring>(const float &amp;x)</argsstring>
+        <name>log</name>
+        <param>
+          <type>const float &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="31" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="31" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacemath_1af49ed44c2047eb392757535867e083f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float math::pow</definition>
+        <argsstring>(const float &amp;a, const float &amp;b)</argsstring>
+        <name>pow</name>
+        <param>
+          <type>const float &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const float &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="32" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="32" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacemath_1a90c3d8a0c7fb7a9a893d36659544a50d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float math::log10</definition>
+        <argsstring>(const float &amp;x)</argsstring>
+        <name>log10</name>
+        <param>
+          <type>const float &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="33" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="33" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacemath_1a0d42357c4cfb9b650d08da4aecb81c1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float math::atanh</definition>
+        <argsstring>(const float &amp;x)</argsstring>
+        <name>atanh</name>
+        <param>
+          <type>const float &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="34" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="34" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacemath_1ac0c70db8bf603c79f1f5d207148cab68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float math::tanh</definition>
+        <argsstring>(const float &amp;x)</argsstring>
+        <name>tanh</name>
+        <param>
+          <type>const float &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="35" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="35" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacemath_1a2c18cf38be24af6b01a94cb4f4b5f85b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float math::hardtanh</definition>
+        <argsstring>(const float &amp;x)</argsstring>
+        <name>hardtanh</name>
+        <param>
+          <type>const float &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="36" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="36" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacemath_1a5159164653db729fa67e1bf04af2c8ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float math::sqrt</definition>
+        <argsstring>(const float &amp;x)</argsstring>
+        <name>sqrt</name>
+        <param>
+          <type>const float &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="37" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="37" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacemath_1ada08f861ea6a28396b41db3221d789a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float math::rsqrt</definition>
+        <argsstring>(const float &amp;x)</argsstring>
+        <name>rsqrt</name>
+        <param>
+          <type>const float &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="38" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="38" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacemath_1abb8e0d8db22fad9f3804a0341bac8eef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int math::sign</definition>
+        <argsstring>(const float &amp;x)</argsstring>
+        <name>sign</name>
+        <param>
+          <type>const float &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="40" column="5" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="40" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacemath_1a55838ccfd75b9e437b202e781dd4b049" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int math::gcd</definition>
+        <argsstring>(const int &amp;a, const int &amp;b)</argsstring>
+        <name>gcd</name>
+        <param>
+          <type>const int &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const int &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="41" column="5" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="41" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacemath_1ab6303a0f45d5a302af6a2dd0c6d63307" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int math::gd</definition>
+        <argsstring>(const int &amp;a)</argsstring>
+        <name>gd</name>
+        <param>
+          <type>const int &amp;</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="42" column="5" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="42" declcolumn="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/nico/Code/plasticity/include/fmath.h" line="9" column="1"/>
+  </compounddef>
+</doxygen>

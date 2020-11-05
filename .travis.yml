@@ -1,0 +1,392 @@
+language: cpp
+
+matrix:
+  fast_finish: true
+  include:
+# linux + gcc
+
+    - os: linux
+      compiler: gcc
+      name: ubuntu 14.04 - native gcc
+      addons:
+        apt:
+          update: true
+          packages:
+            - libeigen3-dev
+      env:
+        - MATRIX_EVAL=""
+
+    - os: linux
+      compiler: gcc
+      name: ubuntu 14.04 - gcc@4.8.5
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.8
+            - libeigen3-dev
+      env:
+        - MATRIX_EVAL="CC=gcc-4.8 && CXX=g++-4.8"
+
+    - os: linux
+      compiler: gcc
+      name: ubuntu 14.04 - gcc@4.9
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.9
+            - libeigen3-dev
+      env:
+        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+
+    - os: linux
+      compiler: gcc
+      name: ubuntu 14.04 - gcc@5.0
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-5
+            - libeigen3-dev
+      env:
+        - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
+
+    - os: linux
+      compiler: gcc
+      name: ubuntu 14.04 - gcc@6.0
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-6
+            - libeigen3-dev
+      env:
+        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+
+    - os: linux
+      compiler: gcc
+      name: ubuntu 14.04 - gcc@7.0
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+            - libeigen3-dev
+      env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+
+    - os: linux
+      compiler: gcc
+      name: ubuntu 14.04 - gcc@8.0
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-8
+            - libeigen3-dev
+      env:
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+
+# linux + clang
+
+    - os: linux
+      compiler: clang
+      name: ubuntu 14.04 - clang@3.6
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise-3.8
+          packages:
+            - g++-7
+            - clang-3.6
+            - libstdc++-4.8-dev
+            - libclang-3.6-dev
+            - libeigen3-dev
+      env:
+        - MATRIX_EVAL="CC=clang-3.6 && CXX=clang++-3.6"
+        - LINKER_FLAGS="-stdlib=libstdc++ -lc++abi"
+
+    - os: linux
+      compiler: clang
+      name: ubuntu 14.04 - clang@3.8
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise-3.8
+          packages:
+            - g++-7
+            - clang-3.8
+            - libstdc++-4.8-dev
+            - libclang-3.8-dev
+            - libeigen3-dev
+      env:
+        - MATRIX_EVAL="CC=clang-3.8 && CXX=clang++-3.8"
+        - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
+
+
+    - os: linux
+      compiler: clang
+      name: ubuntu 14.04 - clang@3.9
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-3.9
+          packages:
+            - g++-7
+            - clang-3.9
+            - libstdc++-4.8-dev
+            - libclang-3.9-dev
+            - libeigen3-dev
+      env:
+        - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"
+        - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
+
+    - os: linux
+      compiler: clang
+      name: ubuntu 14.04 - clang@4.0
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-4.0
+          packages:
+            - g++-7
+            - clang-4.0
+            - libstdc++-4.8-dev
+            - libclang-4.0-dev
+            - llvm-4.0-dev
+            - libeigen3-dev
+
+      env:
+        - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
+        - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
+
+    - os: linux
+      compiler: clang
+      name: ubuntu 14.04 - clang@5.0
+      dist: trusty
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - clang-5.0
+            - libstdc++-7-dev
+            - libclang-5.0-dev
+            - libeigen3-dev
+
+      env:
+        - MATRIX_EVAL="sudo apt install libjsoncpp0 && CC=clang-5.0 && CXX=clang++-5.0"
+        - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
+
+    - os: linux
+      compiler: clang
+      name: ubuntu 14.04 - clang@6.0
+      dist: trusty
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-6.0
+            - sourceline: 'ppa:ubuntu-toolchain-r/test'
+          packages:
+            - clang-6.0
+            - libstdc++-7-dev
+            - libclang-6.0-dev
+            - libeigen3-dev
+
+      env:
+        - MATRIX_EVAL="sudo apt install libjsoncpp0 && CC=clang-6.0 && CXX=clang++-6.0"
+        - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
+
+    - os: linux
+      compiler: clang
+      name: ubuntu 14.04 - clang@7.0
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-6.0
+            - llvm-toolchain-trusty-7
+            - sourceline: 'ppa:ubuntu-toolchain-r/test'
+          packages:
+            - clang-7
+            - libstdc++-7-dev
+            - libclang-7-dev
+            - libeigen3-dev
+
+      env:
+        - MATRIX_EVAL="CC=clang-7 && CXX=clang++-7"
+        - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
+
+# osx + gcc
+
+    - os: osx
+      osx_image: xcode10.1
+      compiler: gcc
+      name: macOS - g++-7
+      addons:
+        apt:
+          update: true
+          packages:
+            - libeigen3-dev
+      env:
+        - MATRIX_EVAL="brew update && brew reinstall gcc@7 gcc && CC=gcc-7 && CXX=g++-7"
+        - COMPILER_ID="gcc"
+
+    - os: osx
+      osx_image: xcode10.1
+      compiler: gcc
+      name: macOS - g++-8
+      addons:
+        apt:
+          update: true
+          packages:
+            - libeigen3-dev
+      env:
+        - MATRIX_EVAL="brew update && brew reinstall gcc@8 gcc && CC=gcc-8 && CXX=g++-8"
+
+# osx + clang
+    - os: osx
+      osx_image: xcode10.1
+      compiler: clang
+      name: macOS - native clang (llvm backend)
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-7
+          packages:
+            - libc++-dev
+            - libc++abi-dev
+            - libeigen3-dev
+      env:
+        - MATRIX_EVAL=""
+        - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
+
+    - os: osx
+      osx_image: xcode10.2
+      compiler: clang
+      name: macOS - clang@7.0
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-7
+          packages:
+            - clang-7.0
+            - libeigen3-dev
+      env:
+        - MATRIX_EVAL="brew update && brew install llvm && CC=clang-7.0 && CXX=clang++-7.0"
+        - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
+
+    - os: linux
+      compiler: gcc
+      python: 3.5
+      name: ubuntu 14.04 - gcc@8.0 & native python@3
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-8
+            - python3-pip
+            - python3-setuptools
+            - libeigen3-dev
+      env:
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+        - WITH_PYTHON=ON
+
+    - os: linux
+      compiler: gcc
+      python: 3.5
+      name: ubuntu 14.04 - gcc@8.0 & python@3.5
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-8
+            - python3.5
+            - python3-pip
+            - python3-setuptools
+            - libeigen3-dev
+      env:
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+        - WITH_PYTHON=ON
+
+  allow_failures:
+    - name: ubuntu 14.04 - clang@3.8
+    - name: macOS - clang@7.0
+
+
+before_install:
+  - travis_retry eval "${MATRIX_EVAL}"
+  - if [[ "$WITH_PYTHON" == "ON" ]]; then python3 -m pip install --upgrade pip --user                                                         ;fi
+
+  # temporary solution for setuptools error (https://stackoverflow.com/questions/63663362/django-python3-on-install-i-get-parent-module-setuptools-not-loaded)
+  - if [[ "$WITH_PYTHON" == "ON" ]]; then python3 -m pip install --user pip==20.2.1                                                           ;fi
+  - if [[ "$WITH_PYTHON" == "ON" ]]; then python3 -m pip install --user setuptools==49.3.0                                                    ;fi
+
+  # install python packages
+  - python3 --version
+  - if [[ "$WITH_PYTHON" == "ON" ]]; then python3 -m pip install --user numpy==1.16.0                                                         ;fi
+  - if [[ "$WITH_PYTHON" == "ON" ]]; then python3 -m pip install --user cython==0.29                                                          ;fi
+  - if [[ "$WITH_PYTHON" == "ON" ]]; then python3 -m pip install --user scikit-learn==0.20.3                                                  ;fi
+
+  # testing libraries
+  - if [[ "$WITH_PYTHON" == "ON" ]]; then python3 -m pip install --user pytest==3.0.7                                                         ;fi
+  - if [[ "$WITH_PYTHON" == "ON" ]]; then python3 -m pip install --user pytest-cov                                                            ;fi
+  - if [[ "$WITH_PYTHON" == "ON" ]]; then python3 -m pip install --user codecov                                                               ;fi
+
+install:
+  # CMake upgrade
+
+  - if [[ "$TRAVIS_OS_NAME" == "osx"   ]]; then wget --no-check-certificate https://cmake.org/files/v3.13/cmake-3.13.1-Darwin-x86_64.tar.gz   ;fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx"   ]]; then tar -xzf cmake-3.13.1-Darwin-x86_64.tar.gz                                                    ;fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx"   ]]; then export PATH=$PWD/cmake-3.13.1-Darwin-x86_64/CMake.app/Contents/bin:$PATH                      ;fi
+
+  ###############################################################################################################################################
+
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget --no-check-certificate https://cmake.org/files/v3.13/cmake-3.13.1-Linux-x86_64.tar.gz    ;fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar -xzf cmake-3.13.1-Linux-x86_64.tar.gz                                                     ;fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export PATH=$PWD/cmake-3.13.1-Linux-x86_64/bin:$PATH                                          ;fi
+
+
+script:
+  - chmod 777 ./build.sh
+  - if [[ "$TRAVIS_COMPILER" == "clang" ]]; then bash ./build.sh "" OFF                                                                       ;fi
+  - if [[ "$TRAVIS_COMPILER" == "gcc"   ]]; then bash ./build.sh "" OFF                                                                       ;fi
+  # python version
+  - if [[ "$WITH_PYTHON" == "ON" ]]; then python3 setup.py develop --user                                                                     ;fi
+
+#  # python testing
+#  - if [[ "$WITH_PYTHON" == "ON" ]]; then python3 -m pytest --cov=plasticity --cov-config=.coveragerc                                         ;fi
+#
+#after_succes:
+#  - if [[ "$WITH_PYTHON" == "ON" ]]; then codecov                                                                                             ;fi

@@ -1,0 +1,227 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classdata__dispatcher" kind="class" language="C++" prot="public">
+    <compoundname>data_dispatcher</compoundname>
+    <includes refid="data__dispatcher_8h" local="no">data_dispatcher.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdata__dispatcher_1ae09bb2f3e4d0b097efcc0d9748339336" prot="private" static="no" mutable="no">
+        <type>float **</type>
+        <definition>float** data_dispatcher::batch</definition>
+        <argsstring></argsstring>
+        <name>batch</name>
+        <briefdescription>
+<para>pointer matrix to the original data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="23" column="10" bodyfile="/home/nico/Code/plasticity/include/data_dispatcher.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdata__dispatcher_1ac554125a64fe13dd309a601f26a6be8d" prot="private" static="no" mutable="no">
+        <type>std ::unique_ptr&lt; int[] &gt;</type>
+        <definition>std :: unique_ptr&lt; int[] &gt; data_dispatcher::indices</definition>
+        <argsstring></argsstring>
+        <name>indices</name>
+        <briefdescription>
+<para>array of indices (it is necessary if shuffle is enabled) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="25" column="22" bodyfile="/home/nico/Code/plasticity/include/data_dispatcher.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classdata__dispatcher_1af724ea38d5403cde7717460f59a54482" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int data_dispatcher::num_batches</definition>
+        <argsstring></argsstring>
+        <name>num_batches</name>
+        <briefdescription>
+<para>number of batches </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="29" column="7" bodyfile="/home/nico/Code/plasticity/include/data_dispatcher.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdata__dispatcher_1a4534481c56bb11ba842d11c49b601663" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int data_dispatcher::batch_dimension</definition>
+        <argsstring></argsstring>
+        <name>batch_dimension</name>
+        <briefdescription>
+<para>Dimension of the batch array (aka the lenght of the array returned by get_batch function). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="30" column="7" bodyfile="/home/nico/Code/plasticity/include/data_dispatcher.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdata__dispatcher_1aa78476c02bdbbfb8f79c1159e9c409fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>data_dispatcher::data_dispatcher</definition>
+        <argsstring>(float *buffer, const int &amp;batch_size, const int &amp;N_rows, const int &amp;N_cols, bool shuffle=true)</argsstring>
+        <name>data_dispatcher</name>
+        <param>
+          <type>float *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>const int &amp;</type>
+          <declname>batch_size</declname>
+        </param>
+        <param>
+          <type>const int &amp;</type>
+          <declname>N_rows</declname>
+        </param>
+        <param>
+          <type>const int &amp;</type>
+          <declname>N_cols</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>shuffle</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Construct the data dispatcher. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The constructor computes the data subdivisions and it allocates the batches.</para>
+<para><simplesect kind="note"><para>The input data are not copied but the batch matrix points to the positions of the original data.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input array matrix in flatten format </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>batch_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Dimension of the batch </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>N_rows</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Original number of rows in the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>N_cols</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Original number of cols in the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>shuffle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Enable/Disable the random shuffle of the input data </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="50" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classdata__dispatcher_1a0f15d139d58173887861aa5d28cf3280" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>data_dispatcher::~data_dispatcher</definition>
+        <argsstring>()</argsstring>
+        <name>~data_dispatcher</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Completely delete the object and release the memory of the arrays. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="63" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classdata__dispatcher_1a10585190c2f35014a789081f0b08ee0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float *</type>
+        <definition>float* data_dispatcher::get_batch</definition>
+        <argsstring>(const int &amp;idx)</argsstring>
+        <name>get_batch</name>
+        <param>
+          <type>const int &amp;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Get the required batch array. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Return a reference to the original data matrix corresponding to the required batch.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Batch position.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The subset of data in ravel format. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="76" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdata__dispatcher_1a1fc9b0f2b18e75a74d7aba81273df143" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void data_dispatcher::randomize</definition>
+        <argsstring>()</argsstring>
+        <name>randomize</name>
+        <briefdescription>
+<para>Apply a randomization of the batches. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function applies the same procedure of the constructor in case of shuffle=true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="85" column="8"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Utility class for the subdivition of a matrix of data (stored in ravel format) into a series of batches. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The object simply points to the original buffer of data without any copy. In this way the member function get_batch can return a portion of the original data according to the size given by the batch_dimensions member. The batches can be randomized and returned into a shuffle order using the variable shuffle in the constructor. </para>
+    </detaileddescription>
+    <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="22" column="1" bodyfile="/home/nico/Code/plasticity/include/data_dispatcher.h" bodystart="21" bodyend="87"/>
+    <listofallmembers>
+      <member refid="classdata__dispatcher_1ae09bb2f3e4d0b097efcc0d9748339336" prot="private" virt="non-virtual"><scope>data_dispatcher</scope><name>batch</name></member>
+      <member refid="classdata__dispatcher_1a4534481c56bb11ba842d11c49b601663" prot="public" virt="non-virtual"><scope>data_dispatcher</scope><name>batch_dimension</name></member>
+      <member refid="classdata__dispatcher_1aa78476c02bdbbfb8f79c1159e9c409fa" prot="public" virt="non-virtual"><scope>data_dispatcher</scope><name>data_dispatcher</name></member>
+      <member refid="classdata__dispatcher_1a10585190c2f35014a789081f0b08ee0a" prot="public" virt="non-virtual"><scope>data_dispatcher</scope><name>get_batch</name></member>
+      <member refid="classdata__dispatcher_1ac554125a64fe13dd309a601f26a6be8d" prot="private" virt="non-virtual"><scope>data_dispatcher</scope><name>indices</name></member>
+      <member refid="classdata__dispatcher_1af724ea38d5403cde7717460f59a54482" prot="public" virt="non-virtual"><scope>data_dispatcher</scope><name>num_batches</name></member>
+      <member refid="classdata__dispatcher_1a1fc9b0f2b18e75a74d7aba81273df143" prot="public" virt="non-virtual"><scope>data_dispatcher</scope><name>randomize</name></member>
+      <member refid="classdata__dispatcher_1a0f15d139d58173887861aa5d28cf3280" prot="public" virt="non-virtual"><scope>data_dispatcher</scope><name>~data_dispatcher</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

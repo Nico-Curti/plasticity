@@ -1,0 +1,370 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classBCM" kind="class" language="C++" prot="public">
+    <compoundname>BCM</compoundname>
+    <basecompoundref refid="classBasePlasticity" prot="public" virt="non-virtual">BasePlasticity</basecompoundref>
+    <includes refid="bcm_8h" local="no">bcm.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classBCM_1a09d3456546b0f80ebcda02fa4f803870" prot="private" static="no" mutable="no">
+        <type>std ::unique_ptr&lt; float[] &gt;</type>
+        <definition>std :: unique_ptr&lt; float[] &gt; BCM::interaction_matrix</definition>
+        <argsstring></argsstring>
+        <name>interaction_matrix</name>
+        <briefdescription>
+<para>interaction matrix between weights </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/bcm.h" line="23" column="22" bodyfile="/home/nico/Code/plasticity/include/bcm.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classBCM_1ad407a3e2ebf8c89ec3e24dc441daff4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BCM::BCM</definition>
+        <argsstring>(const int &amp;outputs, const int &amp;batch_size, int activation=transfer ::_logistic_, float mu=0.f, float sigma=1.f, float epsilon=2e-2f, float interaction_strenght=0.f, int seed=42)</argsstring>
+        <name>BCM</name>
+        <param>
+          <type>const int &amp;</type>
+          <declname>outputs</declname>
+        </param>
+        <param>
+          <type>const int &amp;</type>
+          <declname>batch_size</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>activation</declname>
+          <defval>transfer ::_logistic_</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>mu</declname>
+          <defval>0.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>sigma</declname>
+          <defval>1.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>epsilon</declname>
+          <defval>2e-2f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>interaction_strenght</declname>
+          <defval>0.f</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>seed</declname>
+          <defval>42</defval>
+        </param>
+        <briefdescription>
+<para>Construct the object using the list of training parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The constructor follows the same nomenclature of the Python counterpart.</para>
+<para><simplesect kind="note"><para></para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>outputs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of hidden units. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>batch_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of the minibatch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>activation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of the activation function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mean of the gaussian distribution that initializes the weights. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sigma</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Standard deviation of the gaussian distribution that initializes the weights. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>epsilon</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Starting learning rate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>interaction_strenght</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set the lateral interaction strenght between weights. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>seed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Random number generator seed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/bcm.h" line="47" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classBCM_1aacec2c922e994d7f4b6d33aa59667429" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BCM::BCM</definition>
+        <argsstring>(const BCM &amp;b)</argsstring>
+        <name>BCM</name>
+        <param>
+          <type>const <ref refid="classBCM" kindref="compound">BCM</ref> &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The copy constructor provides a deep copy of the object, i.e. all the arrays are copied and not moved.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classBCM" kindref="compound">BCM</ref> object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/bcm.h" line="61" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classBCM_1a9f89c34dc96cc5bb74cc9b3b8f6c454c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classBCM" kindref="compound">BCM</ref> &amp;</type>
+        <definition>BCM&amp; BCM::operator=</definition>
+        <argsstring>(const BCM &amp;b)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classBCM" kindref="compound">BCM</ref> &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Copy operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The operator performs a deep copy of the object and if there are buffers already allocated, the operatore deletes them and then re-allocates an appropriated portion of memory.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classBCM" kindref="compound">BCM</ref> object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/bcm.h" line="73" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classBCM_1add33374e61bfea8b6331cad75acb8eac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BCM::~BCM</definition>
+        <argsstring>()=default</argsstring>
+        <name>~BCM</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Completely delete the object and release the memory of the arrays. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/bcm.h" line="83" column="3"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classBCM_1aa13af88336fddb68d60c7a007c63879a" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void BCM::weights_update</definition>
+        <argsstring>(float *X, const int &amp;n_features, float *weights_update)</argsstring>
+        <name>weights_update</name>
+        <reimplements refid="classBasePlasticity_1a3ceca70b3099d2a4beebf28f6a48a1c2">weights_update</reimplements>
+        <param>
+          <type>float *</type>
+          <declname>X</declname>
+        </param>
+        <param>
+          <type>const int &amp;</type>
+          <declname>n_features</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>weights_update</declname>
+        </param>
+        <briefdescription>
+<para>Compute the weights update using the <ref refid="classBCM" kindref="compound">BCM</ref> learning rule. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para></para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>X</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>array in ravel format of the input variables/features. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n_features</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>dimension of the X matrix, i.e. the number of cols. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>weights_update</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array/matrix of updates for weights. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/bcm.h" line="98" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classBCM_1aa33368c82222851cb8403566f30d1eca" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BCM::init_interaction_matrix</definition>
+        <argsstring>(const float &amp;interaction_strenght)</argsstring>
+        <name>init_interaction_matrix</name>
+        <param>
+          <type>const float &amp;</type>
+          <declname>interaction_strenght</declname>
+        </param>
+        <briefdescription>
+<para>Initialize the weights interaction matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This function is the only one which requires the Eigen library support. The Eigen library is used in the evaluation of the inverse matrix.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>interaction_strenght</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set the lateral interaction strenght between weights. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/bcm.h" line="109" column="8"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Bienenstock, Cooper and Munro algorithm (<ref refid="classBCM" kindref="compound">BCM</ref>). </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The idea of <ref refid="classBCM" kindref="compound">BCM</ref> theory is that for a random sequence of input patterns a synapse is learning to differentiate between those stimuli that excite the postsynaptic neuron strongly and those stimuli that excite that neuron weakly. Learned <ref refid="classBCM" kindref="compound">BCM</ref> feature detectors cannot, however, be simply used as the lowest layer of a feedforward network so that the entire network is competitive to a network of the same size trained with backpropagation algorithm end-to-end. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>BasePlasticity</label>
+        <link refid="classBasePlasticity"/>
+      </node>
+      <node id="1">
+        <label>BCM</label>
+        <link refid="classBCM"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>BasePlasticity</label>
+        <link refid="classBasePlasticity"/>
+      </node>
+      <node id="1">
+        <label>BCM</label>
+        <link refid="classBCM"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/nico/Code/plasticity/include/bcm.h" line="21" column="1" bodyfile="/home/nico/Code/plasticity/include/bcm.h" bodystart="20" bodyend="111"/>
+    <listofallmembers>
+      <member refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" prot="protected" virt="non-virtual"><scope>BCM</scope><name>activation</name></member>
+      <member refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" prot="public" virt="non-virtual"><scope>BCM</scope><name>BasePlasticity</name></member>
+      <member refid="classBasePlasticity_1a6095d857e3d72d44ab14e707d4f1c97d" prot="public" virt="non-virtual"><scope>BCM</scope><name>BasePlasticity</name></member>
+      <member refid="classBasePlasticity_1a36aafa34a7d39721930afd46d2ccc5cd" prot="public" virt="non-virtual"><scope>BCM</scope><name>BasePlasticity</name></member>
+      <member refid="classBasePlasticity_1a4a6ecb6e802bdfc043346c41b2682ca1" prot="protected" virt="non-virtual"><scope>BCM</scope><name>batch</name></member>
+      <member refid="classBCM_1ad407a3e2ebf8c89ec3e24dc441daff4d" prot="public" virt="non-virtual"><scope>BCM</scope><name>BCM</name></member>
+      <member refid="classBCM_1aacec2c922e994d7f4b6d33aa59667429" prot="public" virt="non-virtual"><scope>BCM</scope><name>BCM</name></member>
+      <member refid="classBasePlasticity_1a9bc89cbc53982004dddd6c05a6f8c78b" prot="public" virt="non-virtual"><scope>BCM</scope><name>engine</name></member>
+      <member refid="classBasePlasticity_1a6261a44333fc063f8a0c96f24e52bf9b" prot="protected" virt="non-virtual"><scope>BCM</scope><name>epsilon</name></member>
+      <member refid="classBasePlasticity_1a1adfa1440172822a6e3280e0142fb80e" prot="public" virt="non-virtual"><scope>BCM</scope><name>fit</name></member>
+      <member refid="classBasePlasticity_1a35be8a52e26ce61050f1408d2f69fa66" prot="public" virt="non-virtual"><scope>BCM</scope><name>get_weights</name></member>
+      <member refid="classBasePlasticity_1adf83370e29d977f79690bf17ed3668bf" prot="protected" virt="non-virtual"><scope>BCM</scope><name>gradient</name></member>
+      <member refid="classBCM_1aa33368c82222851cb8403566f30d1eca" prot="private" virt="non-virtual"><scope>BCM</scope><name>init_interaction_matrix</name></member>
+      <member refid="classBCM_1a09d3456546b0f80ebcda02fa4f803870" prot="private" virt="non-virtual"><scope>BCM</scope><name>interaction_matrix</name></member>
+      <member refid="classBasePlasticity_1a05b0d33b49372359fb6c96e80013ee78" prot="public" virt="non-virtual"><scope>BCM</scope><name>load_weights</name></member>
+      <member refid="classBasePlasticity_1a974bdeec773185818312b6c82f7a764b" prot="protected" virt="non-virtual"><scope>BCM</scope><name>mu</name></member>
+      <member refid="classBasePlasticity_1a6a98b64e6ab4ff78982b15e8f74ecb2f" prot="protected" virt="non-virtual"><scope>BCM</scope><name>nweights</name></member>
+      <member refid="classBCM_1a9f89c34dc96cc5bb74cc9b3b8f6c454c" prot="public" virt="non-virtual"><scope>BCM</scope><name>operator=</name></member>
+      <member refid="classBasePlasticity_1a8fd48d4e055c774a6add951156790041" prot="public" virt="non-virtual" ambiguityscope="BasePlasticity::"><scope>BCM</scope><name>operator=</name></member>
+      <member refid="classBasePlasticity_1a427d9ff731f3db65bf5474e078b36467" prot="protected" virt="non-virtual"><scope>BCM</scope><name>output</name></member>
+      <member refid="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" prot="protected" virt="non-virtual"><scope>BCM</scope><name>outputs</name></member>
+      <member refid="classBasePlasticity_1ac3b0a942271707d1ac30cfb495fa91b6" prot="protected" virt="non-virtual"><scope>BCM</scope><name>precision</name></member>
+      <member refid="classBasePlasticity_1a4104d12babea679995d21a5de08d7129" prot="public" virt="non-virtual"><scope>BCM</scope><name>predict</name></member>
+      <member refid="classBasePlasticity_1ad5bfcab20dd11a25024d8fb83c0e4c23" prot="public" virt="non-virtual"><scope>BCM</scope><name>save_weights</name></member>
+      <member refid="classBasePlasticity_1a45ee1f1803e06f09d9044e9252852631" prot="protected" virt="non-virtual"><scope>BCM</scope><name>sigma</name></member>
+      <member refid="classBasePlasticity_1a1b218e7e7c6f5494aee2a8f8e603cbec" prot="protected" virt="non-virtual"><scope>BCM</scope><name>theta</name></member>
+      <member refid="classBasePlasticity_1ac85dc18520a49febfcffd6646b0ab9b6" prot="protected" virt="non-virtual"><scope>BCM</scope><name>weights</name></member>
+      <member refid="classBCM_1aa13af88336fddb68d60c7a007c63879a" prot="private" virt="virtual"><scope>BCM</scope><name>weights_update</name></member>
+      <member refid="classBasePlasticity_1a4f812c1d906aa5e828bfcc65ce4e510a" prot="public" virt="non-virtual"><scope>BCM</scope><name>~BasePlasticity</name></member>
+      <member refid="classBCM_1add33374e61bfea8b6331cad75acb8eac" prot="public" virt="non-virtual"><scope>BCM</scope><name>~BCM</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
