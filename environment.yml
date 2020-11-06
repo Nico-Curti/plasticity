@@ -1,0 +1,26 @@
+name: plasticity-dev
+channels:
+  - conda-forge
+  - omnia
+
+dependencies:
+  # required
+  - numpy>=1.15
+  - python=3
+  - scikit-learn>=0.20.3
+
+  # building
+  - cython>=0.29
+  - eigen3
+
+  # documentation
+  - gitpython  # obtain contributors from git for whatsnew
+  - gitdb
+  - breathe<4.13.0
+  - sphinx==1.8
+  - sphinx-rtd-theme
+  - sphinxcontrib-napoleon
+  - sphinxcontrib-programoutput
+
+  # unused (required indirectly may be?)
+  - pip

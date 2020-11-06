@@ -111,10 +111,10 @@ else()
 endif()
 
 
-find_package (Eigen3 3.3 REQUIRED NO_MODULE)
-if (TARGET Eigen3::Eigen)
+find_package (Eigen3 REQUIRED NO_MODULE)
+if (EIGEN3_FOUND)
   message(STATUS "Eigen found")
-  list(APPEND linked_libs Eigen3::Eigen)
+  include_directories(${EIGEN3_INCLUDE_DIR})
 else ()
   message(FATAL_ERROR "Eigen not found")
 endif ()

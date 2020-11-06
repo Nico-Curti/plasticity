@@ -8,6 +8,9 @@ matrix:
     - os: linux
       compiler: gcc
       name: ubuntu 14.04 - native gcc
+      addons:
+        apt:
+          update: true
       env:
         - MATRIX_EVAL="sudo apt install libeigen3-dev"
 
@@ -231,6 +234,9 @@ matrix:
       osx_image: xcode10.1
       compiler: gcc
       name: macOS - g++-7
+      addons:
+        apt:
+          update: true
       env:
         - MATRIX_EVAL="brew update && brew reinstall gcc@7 gcc && CC=gcc-7 && CXX=g++-7 && brew install eigen"
         - COMPILER_ID="gcc"
@@ -239,6 +245,9 @@ matrix:
       osx_image: xcode10.1
       compiler: gcc
       name: macOS - g++-8
+      addons:
+        apt:
+          update: true
       env:
         - MATRIX_EVAL="brew update && brew reinstall gcc@8 gcc && CC=gcc-8 && CXX=g++-8 && brew install eigen"
 
@@ -255,7 +264,7 @@ matrix:
             - libc++-dev
             - libc++abi-dev
       env:
-        - MATRIX_EVAL="brew install eigen"
+        - MATRIX_EVAL=""
         - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
 
     - os: osx

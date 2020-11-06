@@ -92,6 +92,7 @@ install:
   - if [%COMPILER%]==[vs] powershell -exec bypass scripts\bootstrap.ps1
   - if [%COMPILER%]==[vs] vcpkg integrate install
   - if [%COMPILER%]==[vs] vcpkg install eigen3
+  - set VCPKG_DEFINES="-DCMAKE_TOOLCHAIN_FILE=$PWD/scripts/buildsystems/vcpkg.cmake"
 
   - git submodule -q update --init --recursive
 
@@ -101,11 +102,11 @@ before_build:
   - cd build
 
 build_script:
-  - if [%MSVC_SETUP_ARG%]==[x64] if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" cmake .. -G "Visual Studio 15 2017 Win64" "-DCMAKE_BUILD_TYPE=Release" "-DOMP=OFF"
-  - if [%MSVC_SETUP_ARG%]==[x86] if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" cmake .. -G "Visual Studio 15 2017" "-DCMAKE_BUILD_TYPE=Release" "-DOMP=OFF"
+  - if [%MSVC_SETUP_ARG%]==[x64] if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" cmake .. -G "Visual Studio 15 2017 Win64" "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" "-DVCPKG_TARGET_TRIPLET=$env:VCPKG_DEFAULT_TRIPLET" "-DCMAKE_BUILD_TYPE=Release" "-DOMP=OFF"
+  - if [%MSVC_SETUP_ARG%]==[x86] if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" cmake .. -G "Visual Studio 15 2017" "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" "-DVCPKG_TARGET_TRIPLET=$env:VCPKG_DEFAULT_TRIPLET" "-DCMAKE_BUILD_TYPE=Release" "-DOMP=OFF"
 
-  - if [%MSVC_SETUP_ARG%]==[x64] if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" cmake .. -G "Visual Studio 16 2019" -T "host=x64" -A "x64" "-DCMAKE_BUILD_TYPE=Release" "-DOMP=OFF"
-  - if [%MSVC_SETUP_ARG%]==[x86] if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" cmake .. -G "Visual Studio 16 2019" "-DCMAKE_BUILD_TYPE=Release" "-DOMP=OFF"
+  - if [%MSVC_SETUP_ARG%]==[x64] if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" cmake .. -G "Visual Studio 16 2019" -T "host=x64" -A "x64" "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" "-DVCPKG_TARGET_TRIPLET=$env:VCPKG_DEFAULT_TRIPLET" "-DCMAKE_BUILD_TYPE=Release" "-DOMP=OFF"
+  - if [%MSVC_SETUP_ARG%]==[x86] if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" cmake .. -G "Visual Studio 16 2019" "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" "-DVCPKG_TARGET_TRIPLET=$env:VCPKG_DEFAULT_TRIPLET" "-DCMAKE_BUILD_TYPE=Release" "-DOMP=OFF"
 
   - cmake --build . --config Release
 
