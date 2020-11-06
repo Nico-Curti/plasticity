@@ -1,5 +1,6 @@
 name: plasticity-dev
 channels:
+  - default
   - anaconda
   - conda-forge
 
@@ -10,6 +11,7 @@ dependencies:
   - scikit-learn>=0.20.3
 
   # building
+  - pkgconfig
   - cython>=0.29
   - eigen
 

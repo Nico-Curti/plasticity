@@ -13,7 +13,6 @@
 import os
 import re
 import sys
-import subprocess
 
 sys.path.insert(0, os.path.abspath('../../plasticity/'))
 
@@ -107,10 +106,3 @@ breathe_projects = {
   #'Hopfield' : './doxydoc/',
   'data_dispatcher' : './doxydoc/',
   }
-
-# Check if we're running on Read the Docs' servers
-read_the_docs_build = os.environ.get('READTHEDOCS', None) == 'True'
-
-if read_the_docs_build:
-
-  subprocess.call('sudo apt install libeigen3-dev', shell=True)

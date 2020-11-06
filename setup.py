@@ -133,31 +133,24 @@ def get_eigen_link_flags ():
   # A possible workaround is given by scikit-build!
   # I will move the setup to scikit-build ASAP
 
-  eigen_lib_link = subprocess.run('echo `pkg-config --libs eigen3`',
-                                   shell=True,
-                                   stdout=subprocess.PIPE,
-                                   universal_newlines=True
-                                   )
-  if eigen_lib_link.stderr:
-    raise OSError('Package eigen3 was not found in the pkg-config search path.')
-  else:
-    eigen_lib_link = eigen_lib_link.stdout[:-1]
-
-  eigen_lib_link = [ i[2:] for i in eigen_lib_link.split(' ')
-                      if not i.endswith('.so') ]
-
-
   eigen_lib_flags = subprocess.run('echo `pkg-config --cflags eigen3`',
                                     shell=True,
                                     stdout=subprocess.PIPE,
                                     universal_newlines=True
                                     )
   if eigen_lib_flags.stderr:
-    raise OSError('Package eigen3 was not found in the pkg-config search path.')
+
+    # Check if we're running on Read the Docs' servers
+    read_the_docs_build = os.environ.get('READTHEDOCS', None) == 'True'
+
+    if read_the_docs_build:
+      eigen_lib_flags = '-I/include/eigen3/'
+    else:
+      raise OSError('Package eigen3 was not found in the pkg-config search path.')
   else:
     eigen_lib_flags = eigen_lib_flags.stdout[:-1]
 
-  return ( eigen_lib_link, eigen_lib_flags )
+  return eigen_lib_flags
 
 
 def read_version (CMakeLists):
@@ -261,7 +254,7 @@ else:
 Version = about['__version__'].split('.')
 
 # link to OpenCV libraries
-eigen_link, eigen_flags = get_eigen_link_flags()
+eigen_flags = get_eigen_link_flags()
 
 define_args = [ '-DMAJOR={}'.format(Version[0]),
                 '-DMINOR={}'.format(Version[1]),
