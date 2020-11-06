@@ -41,7 +41,7 @@ BasePlasticity :: BasePlasticity (const BasePlasticity & b)
   std :: copy_n (b.weights.get(), b.nweights, this->weights.get());
 
   this->theta.reset(new float[b.outputs]);
-  std :: copy_n (b.theta.get(), b.outputs, this->theta.get());
+  //std :: copy_n (b.theta.get(), b.outputs, this->theta.get()); // it is useless
 }
 
 BasePlasticity & BasePlasticity :: operator = (const BasePlasticity & b)
@@ -62,7 +62,7 @@ BasePlasticity & BasePlasticity :: operator = (const BasePlasticity & b)
   std :: copy_n (b.weights.get(), b.nweights, this->weights.get());
 
   this->theta.reset(new float[b.outputs]);
-  std :: copy_n (b.theta.get(), b.outputs, this->theta.get());
+  //std :: copy_n (b.theta.get(), b.outputs, this->theta.get()); // it is useless
 
   return *this;
 }

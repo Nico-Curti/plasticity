@@ -1,6 +1,8 @@
 numpy>=1.15
 cython>=0.29
 scikit-learn>=0.20.3
+tqdm
+matplotlib
 
 breathe<4.13.0
 sphinx==1.8

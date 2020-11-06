@@ -7,11 +7,9 @@ Hopfield :: Hopfield (const int & outputs, const int & batch_size,
                       ) : BasePlasticity (outputs, batch_size, transfer :: _linear_, mu, sigma, epsilon, seed),
                           k (k), delta (delta), p (p)
 {
-  this->fire_indices.reset(new int[this->batch]);
-  this->delta_indices.reset(new int[this->batch]);
-
-  std :: iota(fire_indices.get(), fire_indices.get() + this->batch, 0);
-  std :: iota(delta_indices.get(), delta_indices.get() + this->batch, 0);
+  this->fire_indices.reset(new int[this->outputs]);
+  this->delta_indices.reset(new int[this->outputs]);
+  this->yl.reset(new float[this->outputs * this->batch]);
 
   this->check_params();
 }
@@ -19,10 +17,8 @@ Hopfield :: Hopfield (const int & outputs, const int & batch_size,
 
 Hopfield :: Hopfield (const Hopfield & b) : BasePlasticity (b)
 {
-  this->fire_indices.reset(new int[b.batch]);
-  std :: copy_n (b.fire_indices.get(), b.batch, this->fire_indices.get());
-  this->delta_indices.reset(new int[b.batch]);
-  std :: copy_n (b.delta_indices.get(), b.batch, this->delta_indices.get());
+  this->fire_indices.reset(new int[b.outputs]);
+  this->delta_indices.reset(new int[b.outputs]);
 
   this->k = b.k;
   this->delta = b.delta;
@@ -33,10 +29,8 @@ Hopfield & Hopfield :: operator = (const Hopfield & b)
 {
   BasePlasticity :: operator = (b);
 
-  this->fire_indices.reset(new int[b.batch]);
-  std :: copy_n (b.fire_indices.get(), b.batch, this->fire_indices.get());
-  this->delta_indices.reset(new int[b.batch]);
-  std :: copy_n (b.delta_indices.get(), b.batch, this->delta_indices.get());
+  this->fire_indices.reset(new int[b.outputs]);
+  this->delta_indices.reset(new int[b.outputs]);
 
   this->k = b.k;
   this->delta = b.delta;
@@ -55,44 +49,41 @@ void Hopfield :: check_params ()
   }
 }
 
-void Hopfield :: fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs)
-{
-  this->nweights = this->outputs * n_features;
-  this->yl.reset(new float[this->nweights]);
-
-  BasePlasticity :: fit(X, n_samples, n_features, num_epochs);
-}
-
 void Hopfield :: weights_update (float * X, const int & n_features, float * weights_update)
 {
+
+#ifdef _OPENMP
+  #pragma omp for
+#endif
+  for (int i = 0; i < outputs; ++i)
+  {
+    const int idx = i * this->batch;
+    fire_indices[i]  = idx + this->batch - 1;
+    delta_indices[i] = idx + this->batch - this->k;
+
+    std :: fill_n(this->yl.get() + idx, this->yl.get() + idx + this->batch, 0.f);
+  }
 
 #ifdef _OPENMP
   #pragma omp single
   {
 #endif
 
-    int idx = -1;
-
-    std :: sort(this->fire_indices.get(), this->fire_indices.get() + this->batch,
+    std :: sort(this->fire_indices.get(), this->fire_indices.get() + this->outputs,
                 [&](const int & i, const int & j)
                 {
-                  idx = (++ idx) * this->outputs + this->batch - 1;
-                  return this->output[idx] > this->output[idx + this->outputs];
+                  return this->output[i] < this->output[j];
                 });
 
-    idx = -1;
-    std :: sort(this->delta_indices.get(), this->delta_indices.get() + this->batch,
+    std :: sort(this->delta_indices.get(), this->delta_indices.get() + this->outputs,
                 [&](const int & i, const int & j)
                 {
-                  idx = (++ idx) * this->outputs + this->batch - this->k;
-                  return this->output[idx] > this->output[idx + this->outputs];
+                  return this->output[i] < this->output[j];
                 });
 
 #ifdef _OPENMP
   } // end single section
 #endif
-
-  // TODO: theta is an array of
 
   static float nc;
 
@@ -101,19 +92,21 @@ void Hopfield :: weights_update (float * X, const int & n_features, float * weig
 #ifdef _OPENMP
   #pragma omp for
 #endif
-  for (int i = 0; i < this->batch; ++i)
+  for (int i = 0; i < this->outputs; ++i)
   {
-    const int up_idx = fire_indices[i] * this->batch + i;
-    const int rest_idx = delta_indices[i] * this->batch + i;
-    yl[up_idx] = 1.
-    yl[rest_idx] = -this->delta;
+    const int up_idx = fire_indices[i];
+    const int rest_idx = delta_indices[i];
+    this->yl[up_idx] = 1.
+    this->yl[rest_idx] = -this->delta;
 
-    theta += yl[up_idx] * this->output[up_idx];
-    theta += yl[rest_idx] * this->output[rest_idx];
+    this->theta[i] += this->yl[up_idx] * this->output[up_idx];
+    this->theta[i] += this->yl[rest_idx] * this->output[rest_idx];
   }
 
   // MISS gemm_nn  yl @ X - theta * self.weights
   // weights (outputs, n_features)
+  // this->nweights = this->outputs * n_features;
+  //
 
 #ifdef _OPENMP
   #pragma omp for reduction (max : nc)

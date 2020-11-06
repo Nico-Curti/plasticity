@@ -88,28 +88,6 @@ public:
   */
   ~Hopfield () = default;
 
-  /**
-  * @brief Train the model/encoder
-  *
-  * @details The model computes the weights and thus the encoded features
-  * using the given plasticity rule.
-  * The signature of the function is totally equivalent to the the Python counterpart
-  * except by the pointer arrays which require the dimension size as extra parameters.
-  *
-  * @note This function must be called before the predict member-function.
-  * A check is performed internally to ensure it.
-  * We override the base method to pre-allocate the arrays required by the current
-  * specialization (in particular the array yl).
-  *
-  * @param X array in ravel format of the input variables/features
-  * @param n_samples dimension of the X matrix, i.e. the number of rows
-  * @param n_features dimension of the X matrix, i.e. the number of cols
-  * @param num_epochs Number of epochs for model convergency.
-  *
-  */
-  void fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs);
-
-
 private:
 
   /**
