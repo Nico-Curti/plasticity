@@ -111,7 +111,7 @@ else()
 endif()
 
 
-find_package (Eigen3 CONFIG REQUIRED)
+find_package (Eigen3 3.3 REQUIRED NO_MODULE)
 if (TARGET Eigen3::Eigen)
   message(STATUS "Eigen found")
   list(APPEND linked_libs Eigen3::Eigen)
