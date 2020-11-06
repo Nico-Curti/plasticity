@@ -2,6 +2,7 @@ name: plasticity-dev
 channels:
   - anaconda
   - conda-forge
+  - omnia
 
 dependencies:
   # required

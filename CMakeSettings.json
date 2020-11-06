@@ -11,11 +11,15 @@
       "variables": [
         {
           "name": "CMAKE_TOOLCHAIN_FILE",
-          "value": "${env.WORKSPACE}\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake"
+          "value": "${env.VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake"
         },
         {
           "name": "VCPKG_TARGET_TRIPLET",
           "value": "${env.VCPKG_DEFAULT_TRIPLET}"
+        },
+        {
+          "name": "CMAKE_BIULD_TYPE",
+          "value": "Debug"
         }
       ]
     },
@@ -29,11 +33,15 @@
       "variables": [
         {
           "name": "CMAKE_TOOLCHAIN_FILE",
-          "value": "${env.WORKSPACE}\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake"
+          "value": "${env.VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake"
         },
         {
           "name": "VCPKG_TARGET_TRIPLET",
           "value": "${env.VCPKG_DEFAULT_TRIPLET}"
+        },
+        {
+          "name": "CMAKE_BIULD_TYPE",
+          "value": "Release"
         }
       ]
     }
