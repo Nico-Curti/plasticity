@@ -90,7 +90,6 @@ install:
   # install vcpkg for dependecy libraries
   - cd C:\projects\
   - git clone https://github.com/Microsoft/vcpkg
-  - if [%COMPILER%]==[vs] copy %WORKSPACE%\sysconfig\cmake\%VCPKG_DEFAULT_TRIPLET%.cmake %WORKSPACE%\vcpkg\triplets\
   - if [%COMPILER%]==[vs] cd %VCPKG_ROOT%
   - if [%COMPILER%]==[vs] powershell -exec bypass scripts\bootstrap.ps1
   - if [%COMPILER%]==[vs] vcpkg integrate install

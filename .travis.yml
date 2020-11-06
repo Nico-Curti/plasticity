@@ -172,17 +172,19 @@ matrix:
     - os: linux
       compiler: clang
       name: ubuntu 14.04 - clang@5.0
-      #dist: trusty
+      dist: xenial
       addons:
         apt:
           update: true
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-5.0
+            #- llvm-toolchain-trusty-5.0
           packages:
             - clang-5.0
-            - libstdc++-7-dev
+            #- libstdc++-7-dev
             - libclang-5.0-dev
+            - libstdc++-9-dev
+            - libstdc++5
 
       env:
         - MATRIX_EVAL="sudo apt install libjsoncpp0 && CC=clang-5.0 && CXX=clang++-5.0 && sudo apt install libeigen3-dev"
@@ -191,18 +193,20 @@ matrix:
     - os: linux
       compiler: clang
       name: ubuntu 14.04 - clang@6.0
-      #dist: trusty
+      dist: xenial
       addons:
         apt:
           update: true
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-6.0
-            - sourceline: 'ppa:ubuntu-toolchain-r/test'
+            #- llvm-toolchain-trusty-6.0
+            #- sourceline: 'ppa:ubuntu-toolchain-r/test'
           packages:
             - clang-6.0
-            - libstdc++-7-dev
+            #- libstdc++-7-dev
             - libclang-6.0-dev
+            - libstdc++-9-dev
+            - libstdc++6
 
       env:
         - MATRIX_EVAL="sudo apt install libjsoncpp0 && CC=clang-6.0 && CXX=clang++-6.0 && sudo apt install libeigen3-dev"
