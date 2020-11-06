@@ -8,6 +8,8 @@ image:
 environment:
 
   WORKSPACE: C:\projects
+  VCPKG_ROOT: C:\projects\vcpkg
+  VCPKG_DEFAULT_TRIPLET: x64-windows
   # MSVC v2017
   matrix:
   - platform: Win32
@@ -88,7 +90,8 @@ install:
   # install vcpkg for dependecy libraries
   - cd C:\projects\
   - git clone https://github.com/Microsoft/vcpkg
-  - cd vcpkg
+  - if [%COMPILER%]==[vs] copy %WORKSPACE%\sysconfig\cmake\%VCPKG_DEFAULT_TRIPLET%.cmake %WORKSPACE%\vcpkg\triplets\
+  - if [%COMPILER%]==[vs] cd %VCPKG_ROOT%
   - if [%COMPILER%]==[vs] powershell -exec bypass scripts\bootstrap.ps1
   - if [%COMPILER%]==[vs] vcpkg integrate install
   - if [%COMPILER%]==[vs] vcpkg install eigen3
