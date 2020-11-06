@@ -16,6 +16,7 @@ __email__ = ['nico.curit2@unibo.it', 'simone.gasperini2@studio.unibo.it']
 
 
 class BasePlasticity (BaseEstimator, TransformerMixin):
+
   '''
   Abstract base class for plasticity models
 

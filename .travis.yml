@@ -8,13 +8,8 @@ matrix:
     - os: linux
       compiler: gcc
       name: ubuntu 14.04 - native gcc
-      addons:
-        apt:
-          update: true
-          packages:
-            - libeigen3-dev
       env:
-        - MATRIX_EVAL=""
+        - MATRIX_EVAL="sudo apt install libeigen3-dev"
 
     - os: linux
       compiler: gcc
@@ -26,9 +21,8 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-4.8
-            - libeigen3-dev
       env:
-        - MATRIX_EVAL="CC=gcc-4.8 && CXX=g++-4.8"
+        - MATRIX_EVAL="CC=gcc-4.8 && CXX=g++-4.8 && sudo apt install libeigen3-dev"
 
     - os: linux
       compiler: gcc
@@ -40,9 +34,8 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-4.9
-            - libeigen3-dev
       env:
-        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9 && sudo apt install libeigen3-dev"
 
     - os: linux
       compiler: gcc
@@ -54,9 +47,8 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-5
-            - libeigen3-dev
       env:
-        - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
+        - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5 && sudo apt install libeigen3-dev"
 
     - os: linux
       compiler: gcc
@@ -68,9 +60,8 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-6
-            - libeigen3-dev
       env:
-        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6 && sudo apt install libeigen3-dev"
 
     - os: linux
       compiler: gcc
@@ -82,9 +73,8 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-7
-            - libeigen3-dev
       env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7 && sudo apt install libeigen3-dev"
 
     - os: linux
       compiler: gcc
@@ -96,9 +86,8 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-8
-            - libeigen3-dev
       env:
-        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8 && sudo apt install libeigen3-dev"
 
 # linux + clang
 
@@ -116,9 +105,8 @@ matrix:
             - clang-3.6
             - libstdc++-4.8-dev
             - libclang-3.6-dev
-            - libeigen3-dev
       env:
-        - MATRIX_EVAL="CC=clang-3.6 && CXX=clang++-3.6"
+        - MATRIX_EVAL="CC=clang-3.6 && CXX=clang++-3.6 && sudo apt install libeigen3-dev"
         - LINKER_FLAGS="-stdlib=libstdc++ -lc++abi"
 
     - os: linux
@@ -135,9 +123,8 @@ matrix:
             - clang-3.8
             - libstdc++-4.8-dev
             - libclang-3.8-dev
-            - libeigen3-dev
       env:
-        - MATRIX_EVAL="CC=clang-3.8 && CXX=clang++-3.8"
+        - MATRIX_EVAL="CC=clang-3.8 && CXX=clang++-3.8 && sudo apt install libeigen3-dev"
         - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
 
 
@@ -155,9 +142,8 @@ matrix:
             - clang-3.9
             - libstdc++-4.8-dev
             - libclang-3.9-dev
-            - libeigen3-dev
       env:
-        - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"
+        - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9 && sudo apt install libeigen3-dev"
         - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
 
     - os: linux
@@ -175,10 +161,9 @@ matrix:
             - libstdc++-4.8-dev
             - libclang-4.0-dev
             - llvm-4.0-dev
-            - libeigen3-dev
 
       env:
-        - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
+        - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0 && sudo apt install libeigen3-dev"
         - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
 
     - os: linux
@@ -195,10 +180,9 @@ matrix:
             - clang-5.0
             - libstdc++-7-dev
             - libclang-5.0-dev
-            - libeigen3-dev
 
       env:
-        - MATRIX_EVAL="sudo apt install libjsoncpp0 && CC=clang-5.0 && CXX=clang++-5.0"
+        - MATRIX_EVAL="sudo apt install libjsoncpp0 && CC=clang-5.0 && CXX=clang++-5.0 && sudo apt install libeigen3-dev"
         - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
 
     - os: linux
@@ -216,10 +200,9 @@ matrix:
             - clang-6.0
             - libstdc++-7-dev
             - libclang-6.0-dev
-            - libeigen3-dev
 
       env:
-        - MATRIX_EVAL="sudo apt install libjsoncpp0 && CC=clang-6.0 && CXX=clang++-6.0"
+        - MATRIX_EVAL="sudo apt install libjsoncpp0 && CC=clang-6.0 && CXX=clang++-6.0 && sudo apt install libeigen3-dev"
         - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
 
     - os: linux
@@ -237,10 +220,9 @@ matrix:
             - clang-7
             - libstdc++-7-dev
             - libclang-7-dev
-            - libeigen3-dev
 
       env:
-        - MATRIX_EVAL="CC=clang-7 && CXX=clang++-7"
+        - MATRIX_EVAL="CC=clang-7 && CXX=clang++-7 && sudo apt install libeigen3-dev"
         - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
 
 # osx + gcc
@@ -249,26 +231,16 @@ matrix:
       osx_image: xcode10.1
       compiler: gcc
       name: macOS - g++-7
-      addons:
-        apt:
-          update: true
-          packages:
-            - libeigen3-dev
       env:
-        - MATRIX_EVAL="brew update && brew reinstall gcc@7 gcc && CC=gcc-7 && CXX=g++-7"
+        - MATRIX_EVAL="brew update && brew reinstall gcc@7 gcc && CC=gcc-7 && CXX=g++-7 && brew install eigen"
         - COMPILER_ID="gcc"
 
     - os: osx
       osx_image: xcode10.1
       compiler: gcc
       name: macOS - g++-8
-      addons:
-        apt:
-          update: true
-          packages:
-            - libeigen3-dev
       env:
-        - MATRIX_EVAL="brew update && brew reinstall gcc@8 gcc && CC=gcc-8 && CXX=g++-8"
+        - MATRIX_EVAL="brew update && brew reinstall gcc@8 gcc && CC=gcc-8 && CXX=g++-8 && brew install eigen"
 
 # osx + clang
     - os: osx
@@ -282,9 +254,8 @@ matrix:
           packages:
             - libc++-dev
             - libc++abi-dev
-            - libeigen3-dev
       env:
-        - MATRIX_EVAL=""
+        - MATRIX_EVAL="brew install eigen"
         - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
 
     - os: osx
@@ -298,9 +269,8 @@ matrix:
             - llvm-toolchain-trusty-7
           packages:
             - clang-7.0
-            - libeigen3-dev
       env:
-        - MATRIX_EVAL="brew update && brew install llvm && CC=clang-7.0 && CXX=clang++-7.0"
+        - MATRIX_EVAL="brew update && brew install llvm && CC=clang-7.0 && CXX=clang++-7.0 && brew install eigen"
         - LINKER_FLAGS="-stdlib=libc++ -lc++abi"
 
     - os: linux
@@ -316,9 +286,8 @@ matrix:
             - g++-8
             - python3-pip
             - python3-setuptools
-            - libeigen3-dev
       env:
-        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8 && sudo apt install libeigen3-dev"
         - WITH_PYTHON=ON
 
     - os: linux
@@ -335,9 +304,8 @@ matrix:
             - python3.5
             - python3-pip
             - python3-setuptools
-            - libeigen3-dev
       env:
-        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8 && sudo apt install libeigen3-dev"
         - WITH_PYTHON=ON
 
   allow_failures:

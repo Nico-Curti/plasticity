@@ -64,6 +64,3 @@ else
   exit 1
 
 fi
-
-echo "${green}Downloading atanherf interpolation coefficients...${reset}"
-cd scripts && python3 download_atanherf.py && cd ..

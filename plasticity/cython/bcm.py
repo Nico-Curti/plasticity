@@ -9,6 +9,7 @@ __email__ = ['nico.curit2@unibo.it']
 
 
 class BCM (BasePlasticity):
+
   '''
   Bienenstock, Cooper and Munro algorithm (BCM).
 
@@ -50,7 +51,6 @@ class BCM (BasePlasticity):
 
   Examples
   --------
-
   >>> from sklearn.datasets import fetch_openml
   >>> import pylab as plt
   >>> from plasticity.model import BCM
@@ -74,11 +74,9 @@ class BCM (BasePlasticity):
 
   References
   ----------
-
-  [0] Castellani G., Intrator N., Shouval H.Z., Cooper L.N. Solutions of the BCM learning
-  rule in a network of lateral interacting nonlinear neurons, Network Computation in Neural Systems,
-  10.1088/0954-898X/10/2/001
-
+  - Castellani G., Intrator N., Shouval H.Z., Cooper L.N. Solutions of the BCM learning
+    rule in a network of lateral interacting nonlinear neurons, Network Computation in Neural Systems,
+    10.1088/0954-898X/10/2/001
   '''
 
   def __init__(self, outputs=100, num_epochs=100,

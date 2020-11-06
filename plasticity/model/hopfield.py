@@ -10,8 +10,9 @@ __email__ = ['nico.curit2@unibo.it', 'simone.gasperini2@studio.unibo.it']
 
 
 class Hopfield (BasePlasticity):
+
   '''
-  # TODO
+  Hopfield and Krotov implementation of the BCM algorithm.
 
   Parameters
   ----------
@@ -50,7 +51,6 @@ class Hopfield (BasePlasticity):
 
   Examples
   --------
-
   >>> from sklearn.datasets import fetch_openml
   >>> import pylab as plt
   >>> from plasticity.model import Hopfield
@@ -74,10 +74,8 @@ class Hopfield (BasePlasticity):
 
   References
   ----------
-
   - Dmitry Krotov, and John J. Hopfield. Unsupervised learning by competing hidden units,
     PNAS, 2019, www.pnas.org/cgi/doi/10.1073/pnas.1820458116
-
   '''
 
   def __init__(self, outputs=100, num_epochs=100,

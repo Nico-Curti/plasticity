@@ -34,7 +34,7 @@ else {
 Remove-Item .\build_win_debug -Force -Recurse -ErrorAction SilentlyContinue
 New-Item -Path .\build_win_debug -ItemType directory -Force
 Set-Location build_win_debug
-cmake -G "Visual Studio 16 2019" -T "host=x64" -A "x64" "-DCMAKE_BUILD_TYPE=Debug" ..
+cmake -G "Visual Studio 16 2019" -T "host=x64" -A "x64" "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" "-DVCPKG_TARGET_TRIPLET=$env:VCPKG_DEFAULT_TRIPLET" "-DCMAKE_BUILD_TYPE=Debug" ..
 cmake --build . --config Debug --parallel ${number_of_build_workers} --target install
 Set-Location ..
 
@@ -42,12 +42,7 @@ Set-Location ..
 Remove-Item .\build_win_release -Force -Recurse -ErrorAction SilentlyContinue
 New-Item -Path .\build_win_release -ItemType directory -Force
 Set-Location build_win_release
-cmake -G "Visual Studio 16 2019" -T "host=x64" -A "x64" "-DCMAKE_BUILD_TYPE=Release" ..
+cmake -G "Visual Studio 16 2019" -T "host=x64" -A "x64" "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" "-DVCPKG_TARGET_TRIPLET=$env:VCPKG_DEFAULT_TRIPLET" "-DCMAKE_BUILD_TYPE=Release" ..
 cmake --build . --config Release --parallel ${number_of_build_workers} --target install
 Set-Location ..
 
-# Download atanherf file
-Write-Host "Downloading atanherf interpolation coefficients..." -ForegroundColor Yellow
-Set-Location scripts
-python3 download_atanherf.py
-Set-Location ..

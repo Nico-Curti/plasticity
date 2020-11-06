@@ -116,7 +116,7 @@ if (TARGET Eigen3::Eigen)
   message(STATUS "Eigen found")
   list(APPEND linked_libs Eigen3::Eigen)
 else ()
-  message(STATUS "Eigen not found")
+  message(FATAL_ERROR "Eigen not found")
 endif ()
 
 #################################################################

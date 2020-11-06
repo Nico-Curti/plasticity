@@ -24,6 +24,7 @@ __email__   = ['nico.curti2@unibo.it']
 # variables but only the cython wrap is used as private member!
 
 class BasePlasticity (BaseEstimator, TransformerMixin):
+
   '''
   Abstract base class for plasticity models
 

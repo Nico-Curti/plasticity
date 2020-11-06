@@ -70,8 +70,5 @@ jobs:
     - name: Build Python API
       run: |
         cd docs
-        cd sphinxtext
-        make clean
         make html
-        cd ..
         cd ..
