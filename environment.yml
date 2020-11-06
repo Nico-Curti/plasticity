@@ -16,3 +16,4 @@ dependencies:
 
   # documentation
   - breathe<4.13.0
+  - sphinx==1.8
