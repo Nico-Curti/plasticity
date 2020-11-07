@@ -4,11 +4,11 @@
 from libcpp.memory cimport unique_ptr
 from libcpp.string cimport string
 
-cdef extern from "bcm.h" nogil:
+cdef extern from "hopfield.h" nogil:
 
-  cppclass BCM:
+  cppclass Hopfield:
 
-    BCM (const int & outputs, const int & batch_size, const int & activation, float mu, float sigma, float epsilon, float interaction_strength, int seed) except +
+    Hopfield (const int & outputs, const int & batch_size, float mu, float sigma, float epsilon, float delta, float p, int k, int seed) except +
 
     ## Attributes
 
@@ -24,11 +24,11 @@ cdef extern from "bcm.h" nogil:
 
 cdef extern from "<utility>" namespace "std" nogil:
 
-  cdef unique_ptr[BCM] move(unique_ptr[BCM])
+  cdef unique_ptr[Hopfield] move(unique_ptr[Hopfield])
 
-cdef class _BCM:
+cdef class _Hopfield:
 
-  cdef unique_ptr[BCM] thisptr
+  cdef unique_ptr[Hopfield] thisptr
 
   cdef public:
     int outputs

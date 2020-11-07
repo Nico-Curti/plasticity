@@ -378,27 +378,27 @@ setup(
                                               language='c++'
                                               ),
 
-                                    #Extension(name='.'.join(['plasticity', 'lib', 'hopfield']),
-                                    #          sources=['./plasticity/source/hopfield.pyx',
-                                    #                   './src/hopfield.cpp',
-                                    #                   './src/base.cpp',
-                                    #                   './src/data_dispatcher.cpp'
-                                    #                   './src/progress_bar.cpp'
-                                    #                   './src/utils.cpp'
-                                    #          ],
-                                    #          include_dirs=['./plasticity/lib/',
-                                    #                        './hpp/',
-                                    #                        './include/'
-                                    #          ],
-                                    #          libraries=[],
-                                    #          library_dirs=[
-                                    #                        os.path.join(here, 'lib'),
-                                    #                        os.path.join('usr', 'lib'),
-                                    #                        os.path.join('usr', 'local', 'lib'),
-                                    #          ],  # path to .a or .so file(s)
-                                    #          extra_compile_args = whole_compiler_args,
-                                    #          extra_link_args = linker_args,
-                                    #          language='c++'
-                                    #          ),
+                                    Extension(name='.'.join(['plasticity', 'lib', 'hopfield']),
+                                              sources=['./plasticity/source/hopfield.pyx',
+                                                       './src/activations.cpp',
+                                                       './src/base.cpp',
+                                                       './src/fmath.cpp',
+                                                       './src/hopfield.cpp',
+                                                       './src/utils.cpp'
+                                              ],
+                                              include_dirs=['./plasticity/lib/',
+                                                            './hpp/',
+                                                            './include/'
+                                              ],
+                                              libraries=[],
+                                              library_dirs=[
+                                                            os.path.join(here, 'lib'),
+                                                            os.path.join('usr', 'lib'),
+                                                            os.path.join('usr', 'local', 'lib'),
+                                              ],  # path to .a or .so file(s)
+                                              extra_compile_args = whole_compiler_args,
+                                              extra_link_args = linker_args,
+                                              language='c++'
+                                              ),
   ],
 )

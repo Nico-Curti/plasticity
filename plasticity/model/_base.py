@@ -115,7 +115,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       print('Epoch {:d}/{:d}'.format(epoch + 1, self.num_epochs))
 
       # random shuffle the input
-      np.random.shuffle(X)
+      np.random.shuffle(indices)
 
       batches = np.lib.stride_tricks.as_strided(indices, shape=(num_batches, self.batch_size), strides=(self.batch_size * 8, 8))
 

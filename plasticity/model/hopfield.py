@@ -110,8 +110,8 @@ class Hopfield (BasePlasticity):
 
     order = np.argsort(output, axis=0)
     yl = np.zeros_like(output, dtype=float)
-    yl[order[self.outputs - 1, :], range(self.batch_size)] = 1.
-    yl[order[self.outputs - self.k, :], range(self.batch_size)] = - self.delta
+    yl[order[-1, :], range(self.batch_size)] = 1.
+    yl[order[-self.k, :], range(self.batch_size)] = - self.delta
 
     xx = np.sum(yl * output, axis=1, keepdims=True)
     #ds = yl @ X - xx * self.weights # TODO: convert to einsum

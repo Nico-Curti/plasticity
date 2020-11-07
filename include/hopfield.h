@@ -1,5 +1,3 @@
-#ifdef HOPFIELD
-
 #ifndef __hopfield_h__
 #define __hopfield_h__
 
@@ -16,9 +14,8 @@
 class Hopfield : public BasePlasticity
 {
 
-  std :: unique_ptr < float[] > yl; ///< matrix of updates
+  std :: unique_ptr < float[] > yl;          ///< matrix of updates
   std :: unique_ptr < int[] > fire_indices;  ///< array of indices related to the maximum output
-  std :: unique_ptr < int[] > delta_indices; ///< array-of indices related to the k-th maximum output
 
   int k; ///< ranking parameter
 
@@ -127,5 +124,3 @@ private:
 
 
 #endif // __hopfield_h__
-
-#endif

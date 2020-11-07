@@ -1,10 +1,10 @@
 #include <bcm.h>
 
 BCM :: BCM (const int & outputs, const int & batch_size,
-            int activation, float mu, float sigma, float epsilon, float interaction_strenght, int seed
+            int activation, float mu, float sigma, float epsilon, float interaction_strength, int seed
             ) : BasePlasticity (outputs, batch_size, activation, mu, sigma, epsilon, seed)
 {
-  this->init_interaction_matrix(interaction_strenght);
+  this->init_interaction_matrix(interaction_strength);
 }
 
 
@@ -20,17 +20,17 @@ BCM & BCM :: operator = (const BCM & b)
 }
 
 
-void BCM :: init_interaction_matrix (const float & interaction_strenght)
+void BCM :: init_interaction_matrix (const float & interaction_strength)
 {
   this->interaction_matrix.reset(new float[this->outputs * this->outputs]);
 
-  if (interaction_strenght != 0.f)
+  if (interaction_strength != 0.f)
   {
     for (int i = 0; i < this->outputs; ++i)
       for (int j = 0; j < this->outputs; ++j)
       {
         const int idx = i * this->outputs + j;
-        this->interaction_matrix[idx] = i == j ? 1.f : -interaction_strenght;
+        this->interaction_matrix[idx] = i == j ? 1.f : -interaction_strength;
       }
 
     // map the matrix to the eigen format
@@ -80,6 +80,10 @@ void BCM :: weights_update (float * X, const int & n_features, float * weights_u
                                        }) / this->batch;
   }
 
+  // MISS interaction matrix gemm
+  // interaction_matrix (outputs, outputs)
+  // output (outputs, batch)
+
 #ifdef _OPENMP
   #pragma omp for collapse (2)
 #endif
@@ -87,13 +91,17 @@ void BCM :: weights_update (float * X, const int & n_features, float * weights_u
     for (int j = 0; j < this->batch; ++j)
     {
       const int idx = i * this->batch + j;
-      const float out = this->output[idx];
-      const float phi = out * (out - this->theta[i]);
-      this->output[idx] = phi * this->gradient(this->activation(out));
+      const float out_old = this->output[idx];
+      const float phi = out_old * (out_old - this->theta[i]);
+      const float out_new = phi * this->gradient(this->activation(out_old));
 
-      const float A_PART = this->output[idx];
+      float * xi = X + j * n_features;
+      float * wi = weights_update + i * n_features;
+
       for (int k = 0; k < n_features; ++k)
-        weights_update[i * n_features + k] += A_PART * X[j * n_features + k];
+        wi[k] += out_new * xi[k];
+
+      this->output[idx] = out_new;
     }
 
 #ifdef _OPENMP

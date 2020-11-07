@@ -24,7 +24,7 @@
       <memberdef kind="function" id="classBCM_1ad407a3e2ebf8c89ec3e24dc441daff4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>BCM::BCM</definition>
-        <argsstring>(const int &amp;outputs, const int &amp;batch_size, int activation=transfer ::_logistic_, float mu=0.f, float sigma=1.f, float epsilon=2e-2f, float interaction_strenght=0.f, int seed=42)</argsstring>
+        <argsstring>(const int &amp;outputs, const int &amp;batch_size, int activation=transfer ::_logistic_, float mu=0.f, float sigma=1.f, float epsilon=2e-2f, float interaction_strength=0.f, int seed=42)</argsstring>
         <name>BCM</name>
         <param>
           <type>const int &amp;</type>
@@ -56,7 +56,7 @@
         </param>
         <param>
           <type>float</type>
-          <declname>interaction_strenght</declname>
+          <declname>interaction_strength</declname>
           <defval>0.f</defval>
         </param>
         <param>
@@ -121,7 +121,7 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>interaction_strenght</parametername>
+<parametername>interaction_strength</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>Set the lateral interaction strenght between weights. </para>
@@ -275,11 +275,11 @@
       <memberdef kind="function" id="classBCM_1aa33368c82222851cb8403566f30d1eca" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void BCM::init_interaction_matrix</definition>
-        <argsstring>(const float &amp;interaction_strenght)</argsstring>
+        <argsstring>(const float &amp;interaction_strength)</argsstring>
         <name>init_interaction_matrix</name>
         <param>
           <type>const float &amp;</type>
-          <declname>interaction_strenght</declname>
+          <declname>interaction_strength</declname>
         </param>
         <briefdescription>
 <para>Initialize the weights interaction matrix. </para>
@@ -289,7 +289,7 @@
 </simplesect>
 <parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>interaction_strenght</parametername>
+<parametername>interaction_strength</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>Set the lateral interaction strenght between weights. </para>

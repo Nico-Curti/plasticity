@@ -127,11 +127,12 @@ set(SRC_DIR  ${CMAKE_SOURCE_DIR}/src                                 CACHE PATH 
 set(INC_DIR  ${CMAKE_SOURCE_DIR}/include                             CACHE PATH "Path where find header files"                     )
 set(HPP_DIR  ${CMAKE_SOURCE_DIR}/hpp                                 CACHE PATH "Path where find hpp files"                        )
 set(EXAMPLE  ${CMAKE_SOURCE_DIR}/example                             CACHE PATH "Path where find main files"                       )
+set(TEST_DIR ${CMAKE_SOURCE_DIR}/testing                             CACHE PATH "Path where find test files"                       )
 set(PYC_DIR  ${CMAKE_SOURCE_DIR}/plasticity                          CACHE PATH "Path where find cython files"                     )         # cython directory
 set(LIB_DIR  ${CMAKE_SOURCE_DIR}/lib                                 CACHE PATH "Path where lib will be installed"            FORCE)
 set(INST_DIR ${CMAKE_SOURCE_DIR}/share/plasticity                    CACHE PATH "Path where cmake configs will be installed"  FORCE)
 set(OUT_DIR  ${CMAKE_SOURCE_DIR}/bin                                 CACHE PATH "Path where outputs will be installed"        FORCE)
-set(OUT_TEST ${CMAKE_SOURCE_DIR}/test/bin                            CACHE PATH "Path where test outputs will be installed"   FORCE)
+set(OUT_TEST ${TEST_DIR}/bin                                         CACHE PATH "Path where test outputs will be installed"   FORCE)
 
 set(INSTALL_INCLUDE_DIR  "${CMAKE_CURRENT_LIST_DIR}/share/include/plasticity"  CACHE PATH "Path where headers will be installed")
 set(INSTALL_CMAKE_DIR    "${CMAKE_CURRENT_LIST_DIR}/share/plasticity"          CACHE PATH "Path where cmake configs will be installed")
@@ -206,7 +207,7 @@ if (PYWRAP)
   add_subdirectory(${PYC_DIR}/source)
 endif()
 
-add_library(${plasticitylib} SHARED ${SRC} ${HEADER} ${HPP} ${SCORER_HEADER})
+add_library(${plasticitylib} SHARED ${SRC} ${HEADER} ${HPP})
 set_property(TARGET ${plasticitylib} PROPERTY POSITION_INDEPENDENT_CODE ON)
 target_include_directories(${plasticitylib} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include> $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/hpp> $<INSTALL_INTERFACE:${rFBP_INSTALL_INCLUDE_DIR}>)
 target_link_libraries(${plasticitylib} ${linked_libs})
@@ -219,6 +220,9 @@ set_target_properties(${plasticitylib} PROPERTIES PUBLIC_HEADER "${ALL_HEADER}")
 
 add_executable(example_bcm ${EXAMPLE}/run_bcm.cpp)
 target_link_libraries(example_bcm ${linked_libs} ${plasticitylib})
+
+add_executable(example_hopfield ${EXAMPLE}/run_hopfield.cpp)
+target_link_libraries(example_hopfield ${linked_libs} ${plasticitylib})
 
 if (BUILD_TEST)
   add_subdirectory(${TEST_DIR})
@@ -236,4 +240,5 @@ install(TARGETS ${plasticitylib}    EXPORT plasticityTargets
                                     COMPONENT dev
                                     )
 
-install(TARGETS example_bcm   DESTINATION ${OUT_DIR})
+install(TARGETS example_bcm        DESTINATION ${OUT_DIR})
+install(TARGETS example_hopfield   DESTINATION ${OUT_DIR})

@@ -41,7 +41,7 @@ class BCM (BasePlasticity):
     sigma : float, default=1.
       Standard deviation of the gaussian distribution that initializes the weights
 
-    interaction_strenght : float, default=0.
+    interaction_strength : float, default=0.
       Set the lateral interaction strenght between weights
 
     epsilon : float, default=2e-2
@@ -84,12 +84,12 @@ class BCM (BasePlasticity):
 
   def __init__(self, outputs=100, num_epochs=100,
       batch_size=100, activation='Logistic',
-      mu=0., sigma=1., interaction_strenght=0.,
+      mu=0., sigma=1., interaction_strength=0.,
       epsilon=2e-2, precision=1e-30,
       seed=42):
 
-    self._interaction_matrix = self._weights_interaction(interaction_strenght, outputs)
-    self.interaction_strenght = interaction_strenght
+    self._interaction_matrix = self._weights_interaction(interaction_strength, outputs)
+    self.interaction_strength = interaction_strength
 
     super (BCM, self).__init__(outputs=outputs, num_epochs=num_epochs,
                                batch_size=batch_size, activation=activation,
@@ -97,14 +97,14 @@ class BCM (BasePlasticity):
                                epsilon=epsilon, precision=precision,
                                seed=seed)
 
-  def _weights_interaction (self, strenght, outputs):
+  def _weights_interaction (self, strength, outputs):
     '''
     Set the interaction matrix between weights' connections
 
     Parameters
     ----------
-      strenght : float
-        Interaction strenght between weights
+      strength : float
+        Interaction strength between weights
 
       outputs : int
         Number of hidden units
@@ -115,8 +115,8 @@ class BCM (BasePlasticity):
         Matrix of interactions between weights
     '''
 
-    if strenght != 0.:
-      L = np.full(fill_value=-strenght, shape=(outputs, outputs))
+    if strngth != 0.:
+      L = np.full(fill_value=-strenstrngthght, shape=(outputs, outputs))
       L[np.eye(*L.shape, dtype=bool)] = 1
 
       return np.linalg.inv(L)

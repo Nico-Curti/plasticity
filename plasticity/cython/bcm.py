@@ -40,8 +40,8 @@ class BCM (BasePlasticity):
     sigma : float, default=1.
       Standard deviation of the gaussian distribution that initializes the weights
 
-    interaction_strenght : float, default=0.
-      Set the lateral interaction strenght between weights
+    interaction_strength : float, default=0.
+      Set the lateral interaction strength between weights
 
     epsilon : float, default=2e-2
       Learning rate
@@ -82,11 +82,11 @@ class BCM (BasePlasticity):
   def __init__(self, outputs=100, num_epochs=100,
       batch_size=100, activation='Logistic',
       mu=0., sigma=1., epsilon=2e-2,
-      interaction_strenght=0., seed=42):
+      interaction_strength=0., seed=42):
 
     super (BCM, self).__init__(model=_BCM, outputs=outputs, num_epochs=num_epochs,
                                batch_size=batch_size, activation=activation,
                                mu=mu, sigma=sigma,
                                epsilon=epsilon, seed=seed,
-                               interaction_strenght=interaction_strenght)
+                               interaction_strength=interaction_strength)
 

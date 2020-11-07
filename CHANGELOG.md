@@ -34,7 +34,7 @@ The starting point of this project is given by the https://github.com/SimoneGasp
 ### TODO
 
 - Improve the compatibility of the setup script for multiple OS (maybe using scikit-build)
-- End and fix the Hopfield model in C++
+- Add the interaction_matrix GEMM in the C++ version of the BCM
 - Implement the setup run into the CMake installation
 - Implement a series of tests for the package CI (see coverage)
 - Upload the package to PyPi at the first release

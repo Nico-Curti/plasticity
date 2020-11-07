@@ -2,4 +2,4 @@
 # cython: language_level=2
 
 cimport bcm
-#cimport hopfield
+cimport hopfield

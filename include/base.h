@@ -37,7 +37,17 @@ class BasePlasticity
 protected:
 
   std :: unique_ptr < float[] > output;  ///< array of outputs
+
+#ifdef __testing__
+public:
+#endif
+
   std :: unique_ptr < float[] > weights; ///< array-matrix of weights
+
+#ifdef __testing__
+protected:
+#endif
+
   std :: unique_ptr < float[] > theta; ///< array of means
 
   std :: function < float(const float &) > activation; ///< pointer to activation function

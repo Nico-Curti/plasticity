@@ -102,7 +102,7 @@ float * BasePlasticity :: predict (const float * X, const int & n_samples, const
 
 #endif
 
-    this->_predict (this->weights.get(), X, this->output.get(), this->outputs, n_features, n_samples);
+    this->_predict (this->weights.get(), X, this->output.get(), n_samples, this->outputs, n_features);
 
 #ifdef _OPENMP
 
@@ -131,7 +131,7 @@ void BasePlasticity :: load_weights (const std :: string & filename)
   if ( ! utils :: file_exists(filename) )
   {
     std :: cerr << "File not found. Given : " << filename << std :: endl;
-    std :: exit(1);
+    throw 1;
   }
 
   std :: ifstream is(filename, std :: ios :: in | std :: ios :: binary);
@@ -157,7 +157,7 @@ void BasePlasticity :: check_dims (const int & n_features)
   if ( this->outputs * n_features != this->nweights )
   {
     std :: cerr << "Invalid dimensions found. The input (n_samples, n_features) shape is inconsistent with the number of weights (" << this->nweights << ")" << std :: endl;
-    std :: exit(ERROR_DIMENSIONS);
+    throw ERROR_DIMENSIONS;
   }
 }
 
@@ -167,7 +167,7 @@ void BasePlasticity :: check_is_fitted ()
   {
     std :: cerr << "Fitted error. The model is not fitted yet." << std :: endl
                 << "Please call the fit function before using the predict member." << std :: endl;
-    std :: exit(ERROR_FITTED);
+    throw ERROR_FITTED;
   }
 }
 

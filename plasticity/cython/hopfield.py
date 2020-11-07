@@ -81,4 +81,5 @@ class Hopfield (BasePlasticity):
 
     super (Hopfield, self).__init__(model=_Hopfield, outputs=outputs, num_epochs=num_epochs,
                                     batch_size=batch_size, activation='Linear',
-                                    mu=mu, sigma=sigma, epsilon=epsilon, seed=seed)
+                                    mu=mu, sigma=sigma, epsilon=epsilon, seed=seed,
+                                    delta=delta, p=p, k=k)
