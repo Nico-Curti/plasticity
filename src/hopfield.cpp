@@ -185,7 +185,7 @@ void Hopfield :: normalize_weights ()
     #pragma omp for
     for (int i = 0; i < this->nweights; ++i)
     {
-      wi = this->weights[i];
+      const float wi = this->weights[i];
       this->weights[i] = std :: copysign( std :: pow(std :: fabs(wi), p - 1), wi );
     }
 

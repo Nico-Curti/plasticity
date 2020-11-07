@@ -115,8 +115,8 @@ class BCM (BasePlasticity):
         Matrix of interactions between weights
     '''
 
-    if strngth != 0.:
-      L = np.full(fill_value=-strenstrngthght, shape=(outputs, outputs))
+    if strength != 0.:
+      L = np.full(fill_value=-strength, shape=(outputs, outputs))
       L[np.eye(*L.shape, dtype=bool)] = 1
 
       return np.linalg.inv(L)
