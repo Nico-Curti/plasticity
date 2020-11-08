@@ -35,10 +35,6 @@ cdef class _update_args:
     return deref(self.thisptr).rho
 
   @property
-  def get_iteration(self):
-    return deref(self.thisptr).iteration
-
-  @property
   def get_l2norm(self):
     return deref(self.thisptr).l2norm
 
@@ -46,5 +42,5 @@ cdef class _update_args:
   def get_clip(self):
     return deref(self.thisptr).clip
 
-  def update(self, float[::1] weights, float[::1] weights_update, int nweights):
-    deref(self.thisptr).update(&weights[0], &weights_update[0], nweights)
+  def update(self, int iteration, float[::1] weights, float[::1] weights_update, int nweights):
+    deref(self.thisptr).update(iteration, &weights[0], &weights_update[0], nweights)

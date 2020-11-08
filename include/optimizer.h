@@ -4,6 +4,7 @@
 #include <utils.hpp> // useful macros
 
 #include <unordered_map> // std :: unordered_map
+#include <numeric>       // std :: inner_product
 
 #define ERROR_NWEIGHTS 201
 
@@ -62,7 +63,6 @@ public://protected:
 public:
 
   int type;            ///< Optimization type to use
-  int iteration;       ///< Maximum number of iterations
 
   float learning_rate; ///< Learning rate value
   float momentum;      ///< Momentum parameter
@@ -155,23 +155,25 @@ public:
   *
   * @details This is the core functio of the object.
   *
+  * @param iteration Current iteration number
   * @param weights Array of input parameters
   * @param weights_update Array of input gradients.
   * @param nweights Size of the given arrays.
   *
   */
-  void update ( float * weights, float * weights_update, const int & nweights );
+  void update ( const int & iteration, float * weights, float * weights_update, const int & nweights );
 
 private:
 
   /**
   * @brief Adam optimization step
   *
+  * @param iteration Current iteration number
   * @param weights Array of input parameters
   * @param weights_update Array of input gradients.
   *
   */
-  void adam_update ( float * weights, float * weights_update );
+  void adam_update ( const int & iteration, float * weights, float * weights_update );
 
   /**
   * @brief Stochastic Gradient Descent optimization step
@@ -230,11 +232,12 @@ private:
   /**
   * @brief AdaMax optimization step
   *
+  * @param iteration Current iteration number
   * @param weights Array of input parameters
   * @param weights_update Array of input gradients.
   *
   */
-  void adamax_update ( float * weights, float * weights_update );
+  void adamax_update ( const int & iteration, float * weights, float * weights_update );
 
   /**
   * @brief Normalize the array with l2 norm

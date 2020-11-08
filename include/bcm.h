@@ -20,6 +20,7 @@
 class BCM : public BasePlasticity
 {
 
+  //std :: unique_ptr < float[] > yl;                 ///< matrix of updates
   std :: unique_ptr < float[] > interaction_matrix; ///< interaction matrix between weights
 
 public:

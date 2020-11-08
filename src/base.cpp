@@ -211,7 +211,10 @@ void BasePlasticity :: _fit (float * X, const int & num_epochs, const int & n_fe
 
         // update weights
 
-        this->optimizer.update(this->weights.get(), weights_update.get(), this->nweights);
+        //const float epsil = 2e-2f * (1.f - epoch / num_epochs);
+        //for (int i = 0; i < this->nweights; ++i)
+        //  this->weights[i] += epsil * weights_update[i];
+        this->optimizer.update(epoch + 1, this->weights.get(), weights_update.get(), this->nweights);
 
 #ifdef _OPENMP
 

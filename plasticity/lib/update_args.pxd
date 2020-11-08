@@ -14,7 +14,6 @@ cdef extern from "optimizer.h" nogil:
     ## Attributes
 
     int type;
-    int iteration;
 
     float learning_rate;
     float momentum;
@@ -29,7 +28,7 @@ cdef extern from "optimizer.h" nogil:
     ## Methods
 
     void init_arrays (const int & nweights)
-    void update (float * weights, float * weights_update, const int & nweights)
+    void update (const int & iteration, float * weights, float * weights_update, const int & nweights)
 
 
 cdef extern from "<utility>" namespace "std" nogil:

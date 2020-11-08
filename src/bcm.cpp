@@ -5,6 +5,9 @@ BCM :: BCM (const int & outputs, const int & batch_size,
             ) : BasePlasticity (outputs, batch_size, activation, optimizer, mu, sigma, seed)
 {
   this->init_interaction_matrix(interaction_strength);
+
+  //const int size = this->outputs * this->batch;
+  //this->yl.reset(new float[size]);
 }
 
 
@@ -83,7 +86,21 @@ void BCM :: weights_update (float * X, const int & n_features, float * weights_u
   // MISS interaction matrix gemm
   // interaction_matrix (outputs, outputs)
   // output (outputs, batch)
+/*
+  for (int i = 0; i < this->outputs; ++i)
+    for (int j = 0; j < this->batch; ++j)
+    {
+      const int idx = i * this->batch + j;
+      this->yl[idx] = 0.f;
 
+      for (int k = 0; k < this->outputs; ++k)
+      {
+        const float out_old = this->output[k * this->batch + j];
+        const float phi = out_old * (out_old - this->theta[k]);
+        this->yl[idx] += this->interaction_matrix[i * this->outputs + k] * phi;
+      }
+    }
+*/
 #ifdef _OPENMP
   #pragma omp for collapse (2)
 #endif

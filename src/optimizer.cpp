@@ -2,12 +2,12 @@
 
 float update_args :: epsil = 1e-6f;
 
-update_args :: update_args () : m (nullptr), v (nullptr), nweights (0), type (-1), iteration (0), learning_rate (0.f), momentum (0.f), decay (0.f), B1 (0.f), B2 (0.f), rho (0.f), l2norm (false), clip (false)
+update_args :: update_args () : m (nullptr), v (nullptr), nweights (0), type (-1), learning_rate (0.f), momentum (0.f), decay (0.f), B1 (0.f), B2 (0.f), rho (0.f), l2norm (false), clip (false)
 {
 }
 
 update_args :: update_args (const int & type, float learning_rate, float momentum, float decay, float B1, float B2, float rho, bool l2norm, bool clip)
-                           : m (nullptr), v (nullptr), nweights (0), type (type), iteration (0), learning_rate (learning_rate), momentum (momentum), decay (decay), B1 (B1), B2 (B2), rho (rho), l2norm (l2norm), clip (clip)
+                           : m (nullptr), v (nullptr), nweights (0), type (type), learning_rate (learning_rate), momentum (momentum), decay (decay), B1 (B1), B2 (B2), rho (rho), l2norm (l2norm), clip (clip)
 {
 #ifdef DEBUG
 
@@ -33,7 +33,6 @@ update_args & update_args :: operator = (const update_args & args)
 {
   nweights = args.nweights;
   type = args.type;
-  iteration = args.iteration;
 
   learning_rate = args.learning_rate;
   momentum = args.momentum;
@@ -53,7 +52,7 @@ update_args & update_args :: operator = (const update_args & args)
   return *this;
 }
 
-update_args :: update_args (const update_args & args) : nweights (args.nweights), type (args.type), iteration (args.iteration), learning_rate (args.learning_rate), momentum (args.momentum), decay (args.decay), B1 (args.B1), B2 (args.B2), rho (args.rho), l2norm (args.l2norm), clip (args.clip)
+update_args :: update_args (const update_args & args) : nweights (args.nweights), type (args.type), learning_rate (args.learning_rate), momentum (args.momentum), decay (args.decay), B1 (args.B1), B2 (args.B2), rho (args.rho), l2norm (args.l2norm), clip (args.clip)
 {
   m.reset(new float[nweights]);
   v.reset(new float[nweights]);
@@ -63,7 +62,7 @@ update_args :: update_args (const update_args & args) : nweights (args.nweights)
 
 }
 
-void update_args :: update ( float * weights, float * weights_update, const int & nweights )
+void update_args :: update ( const int & iteration, float * weights, float * weights_update, const int & nweights )
 {
 
   if ( this->nweights != nweights )
@@ -78,11 +77,9 @@ void update_args :: update ( float * weights, float * weights_update, const int 
   if ( this->clip )
     this->clip_value(weights_update, nweights);
 
-  this->iteration += 1;
-
   switch ( this->type )
   {
-    case optimizer_t :: _adam:              adam_update(weights, weights_update);
+    case optimizer_t :: _adam:              adam_update(iteration, weights, weights_update);
     break;
     case optimizer_t :: _momentum:          momentum_update(weights, weights_update);
     break;
@@ -94,21 +91,20 @@ void update_args :: update ( float * weights, float * weights_update, const int 
     break;
     case optimizer_t :: _adadelta:          adadelta_update(weights, weights_update);
     break;
-    case optimizer_t :: _adamax:            adamax_update(weights, weights_update);
+    case optimizer_t :: _adamax:            adamax_update(iteration, weights, weights_update);
     break;
     case optimizer_t :: _sgd:               sgd_update(weights, weights_update);
     break;
 
   }
-
-  this->learning_rate *= 1.f / (this->decay * this->iteration + 1.f);
+  this->learning_rate *= 1.f / (this->decay * iteration + 1.f);
   this->learning_rate  = this->learning_rate < 0.f ? 0.f : this->learning_rate;
 }
 
 
-void update_args :: adam_update (float * weights, float * weights_update)
+void update_args :: adam_update (const int & iteration, float * weights, float * weights_update)
 {
-  const float a_t = this->learning_rate * math :: sqrt(1.f - math :: pow(this->B2, this->iteration)) / (1.f - math :: pow(this->B1, this->iteration));
+  const float a_t = this->learning_rate * math :: sqrt(1.f - math :: pow(this->B2, iteration)) / (1.f - math :: pow(this->B1, iteration));
 
 #ifdef _OPENMP
   #pragma omp for
@@ -206,9 +202,9 @@ void update_args :: adadelta_update (float * weights, float * weights_update)
 
 
 
-void update_args :: adamax_update (float * weights, float * weights_update)
+void update_args :: adamax_update (const int & iteration, float * weights, float * weights_update)
 {
-  const float a_t = this->learning_rate / (1.f - math :: pow(this->B1, this->iteration));
+  const float a_t = this->learning_rate / (1.f - math :: pow(this->B1, iteration));
 
 #ifdef _OPENMP
   #pragma omp for

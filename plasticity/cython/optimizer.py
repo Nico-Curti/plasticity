@@ -93,13 +93,6 @@ class Optimizer:
     return self._object.get_rho
 
   @property
-  def iteration (self):
-    '''
-    Return the current iteration parameter
-    '''
-    return self._object.get_iteration
-
-  @property
   def is_norm (self):
     '''
     Return True if the gradient normalization is enabled
@@ -117,8 +110,8 @@ class Optimizer:
     '''
     Printer of Optimizer informations
     '''
-    return '{0} (iteration={1:d}, learning_rate={2:.3f}, momentum={3:.3f}, decay={4:.3f}, B1={5:.3f}, B2={6:.3f}, rho={7:.3f}, l2norm={8}, clip_value={9})'.format(
-            self.update_type, self.iteration, self.learning_rate, self.momentum, self.decay, self.B1, self.B2, self.rho, self.is_norm, self.is_clip
+    return '{0} (learning_rate={2:.3f}, momentum={3:.3f}, decay={4:.3f}, B1={5:.3f}, B2={6:.3f}, rho={7:.3f}, l2norm={8}, clip_value={9})'.format(
+            self.update_type, self.learning_rate, self.momentum, self.decay, self.B1, self.B2, self.rho, self.is_norm, self.is_clip
             )
 
 class SGD (Optimizer):

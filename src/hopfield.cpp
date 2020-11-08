@@ -25,6 +25,8 @@ Hopfield :: Hopfield (const Hopfield & b) : BasePlasticity (b)
   const int size = b.outputs * b.batch;
   this->fire_indices.reset(new int[size]);
 
+  this->yl.reset(new float[size]);
+
   for (int i = 0; i < this->batch; ++i)
     for (int j = 0; j < this->outputs; ++j)
     {
