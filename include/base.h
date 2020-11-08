@@ -2,6 +2,7 @@
 #define __base_h__
 
 #include <activations.h>
+#include <optimizer.h>
 #include <utils.hpp>
 
 #include <memory>
@@ -36,6 +37,8 @@ class BasePlasticity
 
 protected:
 
+  update_args optimizer;                 ///< optimizer object
+
   std :: unique_ptr < float[] > output;  ///< array of outputs
 
 #ifdef __testing__
@@ -67,7 +70,6 @@ protected:
 
   float mu;      ///< Mean of the gaussian distribution that initializes the weights
   float sigma;   ///< Standard deviation of the gaussian distribution that initializes the weights
-  float epsilon; ///< Starting learning rate
 
 
 public:
@@ -92,14 +94,15 @@ public:
   * @param outputs Number of hidden units.
   * @param batch_size Size of the minibatch.
   * @param activation Index of the activation function.
+  * @param optimizer update_args Optimizer object.
   * @param mu Mean of the gaussian distribution that initializes the weights.
   * @param sigma Standard deviation of the gaussian distribution that initializes the weights.
-  * @param epsilon Starting learning rate.
   * @param seed Random number generator seed.
   *
   */
   BasePlasticity (const int & outputs, const int & batch_size, int activation=transfer :: _linear_,
-                  float mu=0.f, float sigma=1.f, float epsilon=2e-2f, int seed=42);
+                  update_args optimizer=update_args(optimizer_t :: _sgd),
+                  float mu=0.f, float sigma=1.f, int seed=42);
 
 
   // Copy Operator and Copy Constructor

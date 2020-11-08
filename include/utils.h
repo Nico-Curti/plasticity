@@ -180,8 +180,25 @@ namespace utils
 namespace std
 {
 
-#if ( ( __cplusplus < 201100 && !(_MSC_VER) ) || ( __GNUC__ == 4 && __GNUC_MINOR__ < 9) && !(__clang__) )
 
+/**
+* @brief Clamp the given value between the two extrema
+*
+* @details C++11 compatible implementation of clap function with template
+* values.
+*
+* @tparam type Value data type
+* @param v Input value.
+* @param lo Low value of the domain.
+* @param hi High value of the domain.
+*
+* @return Value clamped between the two extrema.
+*
+*/
+template < class type >
+const type & clamp ( const type & v, const type & lo, const type & hi );
+
+#if ( ( __cplusplus < 201100 && !(_MSC_VER) ) || ( __GNUC__ == 4 && __GNUC_MINOR__ < 9) && !(__clang__) )
 /**
 * @brief Retro-compatibility solution for smart-pointers.
 *

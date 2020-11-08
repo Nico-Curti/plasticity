@@ -19,6 +19,8 @@ The only requirements are the following:
 * numpy >= 1.16.0
 * cython >= 0.29
 * scikit -learn >= 0.19.1
+* tqdm
+* matplotlib
 
 The `Cython` version can be built and installed via `CMake` enabling the `-DPYWRAP` variable.
 You can use also the `plasticity` package in `Python` using the `Cython` wrap provided inside this project.

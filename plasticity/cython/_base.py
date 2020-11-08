@@ -6,6 +6,7 @@ from __future__ import print_function
 
 from plasticity.utils import _check_activation
 from plasticity.utils import _check_string
+from .optimizer import Optimizer
 
 from sklearn.base import BaseEstimator
 from sklearn.base import TransformerMixin
@@ -33,28 +34,28 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     model : type
       Cython model type
 
-    outputs : int, default=100
+    outputs : int (default=100)
       Number of hidden units
 
-    num_epochs : int, default=100
+    num_epochs : int (default=100)
       Number of epochs for model convergency
 
-    batch_size : int, default=100
+    batch_size : int (default=100)
       Size of the minibatch
 
-    activation : str, default="linear"
+    activation : str (default="linear")
       Name of the activation function
 
-    mu : float, default=0.
+    optimizer : Optimizer object
+      The optimization algorithm to use during the training
+
+    mu : float (default=0.)
       Mean of the gaussian distribution that initializes the weights
 
-    sigma : float, default=1.
+    sigma : float (default=1.)
       Standard deviation of the gaussian distribution that initializes the weights
 
-    epsilon : float, default=2e-2
-      Starting learning rate
-
-    seed : int, default=42
+    seed : int (default=42)
       Random seed for weights generation
 
     **kwargs :
@@ -62,14 +63,15 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
   '''
 
   def __init__ (self, model, outputs=100, num_epochs=100,
-      batch_size=100, activation='linear', mu=0., sigma=1.,
-      epsilon=2e-2, seed=42, **kwargs):
+      batch_size=100, activation='linear', optimizer=Optimizer(update_type='SGD'),
+      mu=0., sigma=1.,
+      seed=42, **kwargs):
 
     activation, _ = _check_activation(self, activation)
     self.num_epochs = num_epochs
 
-    self._obj = model(outputs, batch_size, activation,
-                      mu, sigma, epsilon, seed, *kwargs.values())
+    self._obj = model(outputs, batch_size, activation, optimizer._object,
+                      mu, sigma, seed, *kwargs.values())
 
   def fit (self, X, y=None):
     '''
@@ -80,7 +82,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       X : array-like of shape (n_samples, n_features)
         The training input samples
 
-      y : array-like, default=None
+      y : array-like (default=None)
         The array of labels
 
       view : bool
@@ -110,6 +112,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     self.weights, shape = self._obj.get_weights()
     self.weights = np.asarray(self.weights).reshape(shape)
 
+    #return self
+
   def predict (self, X, y=None):
     '''
     Reduce X applying the Plasticity encoding.
@@ -119,7 +123,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       X : array of shape (n_samples, n_features)
         The input samples
 
-      y : array-like, default=None
+      y : array-like (default=None)
         The array of labels
 
     Returns

@@ -361,6 +361,7 @@ setup(
                                                        './src/fmath.cpp',
                                                        './src/bcm.cpp',
                                                        './src/base.cpp',
+                                                       './src/optimizer.cpp',
                                                        './src/utils.cpp',
                                               ],
                                               include_dirs=['./plasticity/lib/',
@@ -384,6 +385,27 @@ setup(
                                                        './src/base.cpp',
                                                        './src/fmath.cpp',
                                                        './src/hopfield.cpp',
+                                                       './src/optimizer.cpp',
+                                                       './src/utils.cpp'
+                                              ],
+                                              include_dirs=['./plasticity/lib/',
+                                                            './hpp/',
+                                                            './include/'
+                                              ],
+                                              libraries=[],
+                                              library_dirs=[
+                                                            os.path.join(here, 'lib'),
+                                                            os.path.join('usr', 'lib'),
+                                                            os.path.join('usr', 'local', 'lib'),
+                                              ],  # path to .a or .so file(s)
+                                              extra_compile_args = whole_compiler_args,
+                                              extra_link_args = linker_args,
+                                              language='c++'
+                                              ),
+                                    Extension(name='.'.join(['plasticity', 'lib', 'update_args']),
+                                              sources=['./plasticity/source/update_args.pyx',
+                                                       './src/fmath.cpp',
+                                                       './src/optimizer.cpp',
                                                        './src/utils.cpp'
                                               ],
                                               include_dirs=['./plasticity/lib/',

@@ -3,17 +3,16 @@
 std :: mt19937 BasePlasticity :: engine = std :: mt19937(0);
 float BasePlasticity :: precision = 1e-30f;
 
-BasePlasticity :: BasePlasticity () : output (nullptr), weights (nullptr), activation (nullptr), gradient (nullptr),
-                                      batch (100), outputs (100), nweights (0), mu (0.f), sigma (1.f),
-                                      epsilon (2e-2f)
+BasePlasticity :: BasePlasticity () : optimizer (), output (nullptr), weights (nullptr), activation (nullptr), gradient (nullptr),
+                                      batch (100), outputs (100), nweights (0), mu (0.f), sigma (1.f)
 {
 }
 
 BasePlasticity :: BasePlasticity (const int & outputs, const int & batch_size, int activation,
-                                  float mu, float sigma, float epsilon, int seed
-                                  ) : output (nullptr), weights (nullptr), activation (nullptr), gradient (nullptr),
-                                      batch (batch_size), outputs (outputs), nweights (0), mu (mu), sigma (sigma),
-                                      epsilon (epsilon)
+                                  update_args optimizer,
+                                  float mu, float sigma, int seed
+                                  ) : optimizer (optimizer), output (nullptr), weights (nullptr), activation (nullptr), gradient (nullptr),
+                                      batch (batch_size), outputs (outputs), nweights (0), mu (mu), sigma (sigma)
 {
   this->activation = transfer :: activate( activation );
   this->gradient   = transfer :: gradient( activation );
@@ -35,7 +34,8 @@ BasePlasticity :: BasePlasticity (const BasePlasticity & b)
 
   this->mu      = b.mu;
   this->sigma   = b.sigma;
-  this->epsilon = b.epsilon;
+
+  this->optimizer = b.optimizer;
 
   this->weights.reset(new float[b.nweights]);
   std :: copy_n (b.weights.get(), b.nweights, this->weights.get());
@@ -56,7 +56,8 @@ BasePlasticity & BasePlasticity :: operator = (const BasePlasticity & b)
 
   this->mu      = b.mu;
   this->sigma   = b.sigma;
-  this->epsilon = b.epsilon;
+
+  this->optimizer = b.optimizer;
 
   this->weights.reset(new float[b.nweights]);
   std :: copy_n (b.weights.get(), b.nweights, this->weights.get());
@@ -83,6 +84,8 @@ void BasePlasticity :: fit (float * X, const int & n_samples, const int & n_feat
                      {
                        return random_normal(BasePlasticity :: engine);
                      });
+
+  this->optimizer.init_arrays(this->nweights);
 
   this->_fit (X, num_epochs, n_features, n_samples);
 }
@@ -186,8 +189,6 @@ void BasePlasticity :: _fit (float * X, const int & num_epochs, const int & n_fe
 
   for (int epoch = 0; epoch < num_epochs; ++epoch)
   {
-    const float epsil = this->epsilon * (1.f - epoch / num_epochs);
-
     std :: shuffle(batch_indices.get(), batch_indices.get() + num_batches, BasePlasticity :: engine);
 
     std :: cout << RESET_COUT << "Epoch " << epoch << "/" << num_epochs << std :: endl;
@@ -210,11 +211,7 @@ void BasePlasticity :: _fit (float * X, const int & num_epochs, const int & n_fe
 
         // update weights
 
-#ifdef _OPENMP
-        #pragma omp for
-#endif
-        for (int j = 0; j < this->nweights; ++j)
-          this->weights[j] += epsil * weights_update[j];
+        this->optimizer.update(this->weights.get(), weights_update.get(), this->nweights);
 
 #ifdef _OPENMP
 

@@ -103,6 +103,58 @@ def _check_string (string, exist=True):
 
   return string.encode('utf-8') if isinstance(string, str) else string
 
+def _check_update (upd_type):
+  '''
+  Check if the update function is valid.
+
+  Parameters
+  ----------
+  upd_type : string or int
+    update function to check.
+
+  Returns
+  -------
+  update_type : str
+    Name of the update function
+
+  update_num : int
+    Byron update function index
+
+  Notes
+  -----
+  You can use this function to verify if the given update function is valid.
+  The function can be passed either as a string either as integer.
+
+  Examples
+  --------
+
+  >>> name, type = _check_update('Adam')
+  >>> print(name, type)
+      ('Adam', 0)
+  >>> print(_check_update(2))
+      ('Nesterov-Momentum', 2)
+  '''
+
+  allowed_upd = ('Adam', 'Momentum', 'NesterovMomentum', 'Adagrad', 'RMSprop', 'Adadelta', 'Adamax', 'SGD')
+
+  if isinstance(upd_type, str):
+
+    if upd_type not in allowed_upd:
+      raise ValueError('Optimizer: incorrect value of Update Function given. Possible values are ({})'.format(', '.join(allowed_upd)))
+
+    update_type = upd_type
+    update_num = allowed_upd.index(update_type)
+
+  elif isinstance(upd_type, int) and upd_type < len(allowed_upd):
+    update_type = allowed_upd[upd_type]
+    update_num = upd_type
+
+  else:
+    raise ValueError('Optimizer: incorrect value of Update Function given. Possible values are ({})'.format(', '.join(allowed_upd)))
+
+  return (update_type, update_num)
+
+
 
 def view_weights (weights, dims):
   '''

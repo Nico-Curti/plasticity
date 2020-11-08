@@ -37,15 +37,16 @@ public:
   * @param outputs Number of hidden units.
   * @param batch_size Size of the minibatch.
   * @param activation Index of the activation function.
+  * @param optimizer update_args Optimizer object.
   * @param mu Mean of the gaussian distribution that initializes the weights.
   * @param sigma Standard deviation of the gaussian distribution that initializes the weights.
-  * @param epsilon Starting learning rate.
   * @param interaction_strength Set the lateral interaction strength between weights.
   * @param seed Random number generator seed.
   *
   */
   BCM (const int & outputs, const int & batch_size, int activation=transfer :: _logistic_,
-       float mu=0.f, float sigma=1.f, float epsilon=2e-2f, float interaction_strength=0.f, int seed=42);
+       update_args optimizer=update_args(optimizer_t :: _sgd),
+       float mu=0.f, float sigma=1.f, float interaction_strength=0.f, int seed=42);
 
   // Copy Operator and Copy Constructor
 

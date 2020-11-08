@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from ._base import BasePlasticity
+from .optimizer import Optimizer
 from plasticity.lib.hopfield import _Hopfield
 
 __author__  = ['Nico Curti']
@@ -15,34 +16,31 @@ class Hopfield (BasePlasticity):
 
   Parameters
   ----------
-    outputs : int, default=100
+    outputs : int (default=100)
       Number of hidden units
 
-    num_epochs : int, default=100
+    num_epochs : int (default=100)
       Number of epochs for model convergency
 
-    batch_size : int, default=10
+    batch_size : int (default=10)
       Size of the minibatch
 
-    delta : float, default=0.4
+    delta : float (default=0.4)
       Strength of the anti-hebbian learning
 
-    mu : float, default=0.
+    mu : float (default=0.)
       Mean of the gaussian distribution that initializes the weights
 
-    sigma : float, default=1.
+    sigma : float (default=1.)
       Standard deviation of the gaussian distribution that initializes the weights
 
-    p : float, default=2.
+    p : float (default=2.)
       Lebesgue norm of the weights
 
-    k : int, default=2
+    k : int (default=2)
       Ranking parameter, must be integer that is bigger or equal than 2
 
-    epsilon : float, default=2e-2
-      Learning rate
-
-    seed : int, default=42
+    seed : int (default=42)
       Random seed for weights generation
 
   Examples
@@ -75,11 +73,12 @@ class Hopfield (BasePlasticity):
   '''
 
   def __init__(self, outputs=100, num_epochs=100,
-      batch_size=100, delta=.4,
-      mu=0., sigma=1.,
-      p=2., k=2, epsilon=2e-2, seed=42):
+      batch_size=100, optimizer=Optimizer(update_type='SGD'),
+      delta=.4, mu=0., sigma=1.,
+      p=2., k=2, seed=42):
 
     super (Hopfield, self).__init__(model=_Hopfield, outputs=outputs, num_epochs=num_epochs,
                                     batch_size=batch_size, activation='Linear',
-                                    mu=mu, sigma=sigma, epsilon=epsilon, seed=seed,
+                                    optimizer=optimizer,
+                                    mu=mu, sigma=sigma, seed=seed,
                                     delta=delta, p=p, k=k)

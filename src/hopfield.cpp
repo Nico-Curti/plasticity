@@ -1,8 +1,8 @@
 #include <hopfield.h>
 
-Hopfield :: Hopfield (const int & outputs, const int & batch_size,
-                      float mu, float sigma, float epsilon, float delta, float p, int k, int seed
-                      ) : BasePlasticity (outputs, batch_size, transfer :: _linear_, mu, sigma, epsilon, seed),
+Hopfield :: Hopfield (const int & outputs, const int & batch_size, update_args optimizer,
+                      float mu, float sigma, float delta, float p, int k, int seed
+                      ) : BasePlasticity (outputs, batch_size, transfer :: _linear_, optimizer, mu, sigma, seed),
                           k (k), delta (delta), p (p)
 {
   const int size = this->outputs * this->batch;
@@ -168,7 +168,8 @@ void Hopfield :: weights_update (float * X, const int & n_features, float * weig
   #pragma omp for
 #endif
   for (int i = 0; i < this->nweights; ++i)
-    weights_update[i] *= nc;
+    //weights_update[i] *= nc;
+    weights_update[i] *= - nc; // Add the minus for compatibility with optimization algorithms
 
 }
 

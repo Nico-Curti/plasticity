@@ -1,8 +1,8 @@
 #include <bcm.h>
 
 BCM :: BCM (const int & outputs, const int & batch_size,
-            int activation, float mu, float sigma, float epsilon, float interaction_strength, int seed
-            ) : BasePlasticity (outputs, batch_size, activation, mu, sigma, epsilon, seed)
+            int activation, update_args optimizer, float mu, float sigma, float interaction_strength, int seed
+            ) : BasePlasticity (outputs, batch_size, activation, optimizer, mu, sigma, seed)
 {
   this->init_interaction_matrix(interaction_strength);
 }
@@ -119,6 +119,7 @@ void BCM :: weights_update (float * X, const int & n_features, float * weights_u
   #pragma omp for
 #endif
   for (int i = 0; i < this->nweights; ++i)
-    weights_update[i] *= nc;
+    //weights_update[i] *= nc;
+    weights_update[i] *= - nc; // Add the minus for compatibility with optimization algorithms
 }
 

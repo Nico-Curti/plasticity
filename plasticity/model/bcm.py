@@ -4,6 +4,7 @@
 import numpy as np
 
 from plasticity.model._base import BasePlasticity
+from plasticity.utils.optimizer import SGD
 
 __author__  = ['Nico Curti', 'SimoneGasperini']
 __email__ = ['nico.curit2@unibo.it', 'simone.gasperini2@studio.unibo.it']
@@ -23,34 +24,34 @@ class BCM (BasePlasticity):
 
   Parameters
   ----------
-    outputs : int, default=100
+    outputs : int (default=100)
       Number of hidden units
 
-    num_epochs : int, default=100
+    num_epochs : int (default=100)
       Number of epochs for model convergency
 
-    batch_size : int, default=10
+    batch_size : int (default=10)
       Size of the minibatch
 
-    activation : string or Activations object, default='Logistic'
+    activation : string or Activations object (default='Logistic')
       Activation function to apply
 
-    mu : float, default=0.
+    optimizer : Optimizer (default=SGD)
+      Optimizer object (derived by the base class Optimizer)
+
+    mu : float (default=0.)
       Mean of the gaussian distribution that initializes the weights
 
-    sigma : float, default=1.
+    sigma : float (default=1.)
       Standard deviation of the gaussian distribution that initializes the weights
 
-    interaction_strength : float, default=0.
+    interaction_strength : float (default=0.)
       Set the lateral interaction strenght between weights
 
-    epsilon : float, default=2e-2
-      Learning rate
-
-    precision : float, default=1e-30
+    precision : float (default=1e-30)
       Parameter that controls numerical precision of the weight updates
 
-    seed : int, default=42
+    seed : int (default=42)
       Random seed for weights generation
 
   Examples
@@ -84,8 +85,9 @@ class BCM (BasePlasticity):
 
   def __init__(self, outputs=100, num_epochs=100,
       batch_size=100, activation='Logistic',
+      optimizer=SGD(lr=2e-2),
       mu=0., sigma=1., interaction_strength=0.,
-      epsilon=2e-2, precision=1e-30,
+      precision=1e-30,
       seed=42):
 
     self._interaction_matrix = self._weights_interaction(interaction_strength, outputs)
@@ -93,8 +95,9 @@ class BCM (BasePlasticity):
 
     super (BCM, self).__init__(outputs=outputs, num_epochs=num_epochs,
                                batch_size=batch_size, activation=activation,
+                               optimizer=optimizer,
                                mu=mu, sigma=sigma,
-                               epsilon=epsilon, precision=precision,
+                               precision=precision,
                                seed=seed)
 
   def _weights_interaction (self, strength, outputs):

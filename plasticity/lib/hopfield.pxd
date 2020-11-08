@@ -3,12 +3,13 @@
 
 from libcpp.memory cimport unique_ptr
 from libcpp.string cimport string
+from update_args cimport update_args
 
 cdef extern from "hopfield.h" nogil:
 
   cppclass Hopfield:
 
-    Hopfield (const int & outputs, const int & batch_size, float mu, float sigma, float epsilon, float delta, float p, int k, int seed) except +
+    Hopfield (const int & outputs, const int & batch_size, update_args optimizer, float mu, float sigma, float delta, float p, int k, int seed) except +
 
     ## Attributes
 

@@ -19,6 +19,7 @@ The starting point of this project is given by the https://github.com/SimoneGasp
 - Add setup installation of the package (serial)
 - Add first version of CI using travis and appveyor
 - Add first version of code evaluation with codebeat and codacy
+- Add optimizer object for the convergency of the training
 
 ### Changed
 
@@ -33,6 +34,7 @@ The starting point of this project is given by the https://github.com/SimoneGasp
 
 ### TODO
 
+- Fix the optimizer for the C++ version!!
 - Improve the compatibility of the setup script for multiple OS (maybe using scikit-build)
 - Add the interaction_matrix GEMM in the C++ version of the BCM
 - Implement the setup run into the CMake installation

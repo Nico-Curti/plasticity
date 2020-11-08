@@ -18,6 +18,7 @@ cython_add_module( bcm  ${PYC_SRC_DIR}/bcm.pyx
                                                                 ${SRC_DIR}/bcm.cpp
                                                                 ${SRC_DIR}/base.cpp
                                                                 ${SRC_DIR}/fmath.cpp
+                                                                ${SRC_DIR}/optimizer.cpp
                                                                 ${SRC_DIR}/utils.cpp
                                                                 )
 target_link_libraries(bcm ${linked_libs})
@@ -27,17 +28,27 @@ cython_add_module( hopfield  ${PYC_SRC_DIR}/hopfield.pyx
                                                                 ${SRC_DIR}/base.cpp
                                                                 ${SRC_DIR}/fmath.cpp
                                                                 ${SRC_DIR}/hopfield.cpp
+                                                                ${SRC_DIR}/optimizer.cpp
                                                                 ${SRC_DIR}/utils.cpp
                                                                 )
 target_link_libraries(hopfield ${linked_libs})
 
-add_dependencies(PyPlasticity bcm) # hopfield
+cython_add_module( update_args  ${PYC_SRC_DIR}/update_args.pyx
+                                                                ${SRC_DIR}/fmath.cpp
+                                                                ${SRC_DIR}/optimizer.cpp
+                                                                ${SRC_DIR}/utils.cpp
+                                                                )
+target_link_libraries(update_args ${linked_libs})
+
+add_dependencies(PyPlasticity bcm hopfield update_args)
 
 # Installation of targets
 install(TARGETS bcm                                        DESTINATION ${PYC_INC_DIR}/)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/bcm.cpp          DESTINATION ${PYC_SRC_DIR})
-install(TARGETS hopfield                                DESTINATION ${PYC_INC_DIR}/)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/hopfield.cpp  DESTINATION ${PYC_SRC_DIR})
+install(TARGETS hopfield                                   DESTINATION ${PYC_INC_DIR}/)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/hopfield.cpp     DESTINATION ${PYC_SRC_DIR})
+install(TARGETS update_args                                DESTINATION ${PYC_INC_DIR}/)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/update_args.cpp  DESTINATION ${PYC_SRC_DIR})
 
 
 # setup installation

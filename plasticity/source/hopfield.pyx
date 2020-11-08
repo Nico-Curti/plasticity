@@ -5,13 +5,14 @@ from cython.operator cimport dereference as deref
 from libcpp.string cimport string
 
 from hopfield cimport Hopfield
+from update_args cimport _update_args
 
 
 cdef class _Hopfield:
 
-  def __init__ (self, int outputs, int batch_size, int activation, float mu, float sigma, float epsilon, int seed, float delta, float p, int k):
+  def __init__ (self, int outputs, int batch_size, int activation, _update_args optimizer, float mu, float sigma, int seed, float delta, float p, int k):
 
-    self.thisptr.reset(new Hopfield(outputs, batch_size, mu, sigma, epsilon, delta, p, k, seed))
+    self.thisptr.reset(new Hopfield(outputs, batch_size, deref(optimizer.thisptr.get()), mu, sigma, delta, p, k, seed))
     self.outputs = outputs
     self.n_features = 0
 

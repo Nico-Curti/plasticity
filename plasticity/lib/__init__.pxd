@@ -3,3 +3,4 @@
 
 cimport bcm
 cimport hopfield
+cimport update_args

@@ -5,6 +5,7 @@ import numpy as np
 from tqdm import tqdm
 
 from plasticity.utils import _check_activation
+from plasticity.utils.optimizer import Optimizer
 
 from sklearn.base import BaseEstimator
 from sklearn.base import TransformerMixin
@@ -22,37 +23,38 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
   Parameters
   ----------
-    outputs : int, default=100
+    outputs : int (default=100)
       Number of hidden units
 
-    num_epochs : int, default=100
+    num_epochs : int (default=100)
       Number of epochs for model convergency
 
-    batch_size : int, default=100
+    batch_size : int (default=100)
       Size of the minibatch
 
-    activation : str, default="linear"
+    activation : str (default="linear")
       Name of the activation function
 
-    mu : float, default=0.
+    optimizer : Optimizer (default=SGD)
+      Optimizer object (derived by the base class Optimizer)
+
+    mu : float (default=0.)
       Mean of the gaussian distribution that initializes the weights
 
-    sigma : float, default=1.
+    sigma : float (default=1.)
       Standard deviation of the gaussian distribution that initializes the weights
 
-    epsilon : float, default=2e-2
-      Starting learning rate
-
-    precision : float, default=1e-30
+    precision : float (default=1e-30)
       Parameter that controls numerical precision of the weight updates
 
-    seed : int, default=42
+    seed : int (default=42)
       Random seed for weights generation
   '''
 
   def __init__ (self, outputs=100, num_epochs=100,
-      activation='linear', batch_size=100, mu=0., sigma=1.,
-      epsilon=2e-2, precision=1e-30, seed=42):
+      activation='linear', optimizer=Optimizer,
+      batch_size=100, mu=0., sigma=1.,
+      precision=1e-30, seed=42):
 
     _, activation = _check_activation(self, activation)
 
@@ -60,10 +62,10 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     self.num_epochs = num_epochs
     self.batch_size = batch_size
     self.activation = activation.activate
+    self.optimizer = optimizer
     self.gradient = activation.gradient
     self.mu = mu
     self.sigma = sigma
-    self.epsilon = epsilon
     self.precision = precision
     self.seed = seed
 
@@ -81,7 +83,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       sign = np.sign(self.weights)
       self.weights = sign * np.absolute(self.weights)**(self.p - 1)
 
-  def _fit_step (self, X, norm, epsilon):
+  def _fit_step (self, X, norm):
     '''
     Core function of fit step (forward + backward + updates).
     We divide the step into a function to allow an easier visualization
@@ -97,7 +99,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     # update weights
     w_update = self._weights_update(X, output)
 
-    self.weights[:] += epsilon * w_update
+    #self.weights[:] += epsilon * w_update
+    self.weights, = self.optimizer.update(params=[self.weights], gradients=[-w_update]) # -update for compatibility with optimizers
 
 
   def _fit (self, X, norm=False, view=False):
@@ -105,13 +108,13 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     Core function for the fit member
     '''
 
-    epsilon = np.linspace(start=self.epsilon, stop=self.epsilon*(1. - (self.num_epochs - 1) / self.num_epochs), num=self.num_epochs)
+    #epsilon = np.linspace(start=self.epsilon, stop=self.epsilon*(1. - (self.num_epochs - 1) / self.num_epochs), num=self.num_epochs)
 
     num_samples, _ = X.shape
     indices = np.arange(0, num_samples).astype('int64')
     num_batches = num_samples // self.batch_size
 
-    for epoch, epsil in enumerate(epsilon):
+    for epoch in range(self.num_epochs):
       print('Epoch {:d}/{:d}'.format(epoch + 1, self.num_epochs))
 
       # random shuffle the input
@@ -123,7 +126,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
         batch_data = X[batch, ...]
 
-        self._fit_step(X=batch_data, norm=norm, epsilon=epsil)
+        self._fit_step(X=batch_data, norm=norm)
 
 
     return self

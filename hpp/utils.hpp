@@ -184,6 +184,19 @@ void argsort (const float * a, int * indexes, const int & start, const int & end
 namespace std
 {
 
+
+template < class type >
+const type & clamp ( const type & v, const type & lo, const type & hi )
+{
+#ifdef DEBUG
+
+  assert( ! (hi < lo) );
+
+#endif
+
+  return v < lo ? lo : hi > v ? hi : v;
+}
+
 #if ( ( __cplusplus < 201100 && !(_MSC_VER) ) || ( __GNUC__ == 4 && __GNUC_MINOR__ < 9) && !(__clang__) )
 
 template < typename type >

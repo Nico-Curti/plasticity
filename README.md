@@ -71,6 +71,8 @@ The only requirements are the following:
 * numpy >= 1.15
 * cython >= 0.29
 * scikit-learn >= 0.20.3
+* tqdm
+* matplotlib
 
 The `Cython` version can be built and installed via `CMake` enabling the `-DPYWRAP` variable.
 The `Python` wrap guarantees also a good integration with the other common Machine Learning tools provided by `scikit-learn` `Python` package; in this way you can use the `plasticity` algorithm as an equivalent alternative also in other pipelines.

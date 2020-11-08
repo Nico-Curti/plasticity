@@ -3,12 +3,13 @@
 
 from libcpp.memory cimport unique_ptr
 from libcpp.string cimport string
+from update_args cimport update_args
 
 cdef extern from "bcm.h" nogil:
 
   cppclass BCM:
 
-    BCM (const int & outputs, const int & batch_size, const int & activation, float mu, float sigma, float epsilon, float interaction_strength, int seed) except +
+    BCM (const int & outputs, const int & batch_size, const int & activation, update_args optimizer, float mu, float sigma, float interaction_strength, int seed) except +
 
     ## Attributes
 
