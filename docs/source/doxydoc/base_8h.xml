@@ -3,6 +3,7 @@
   <compounddef id="base_8h" kind="file" language="C++">
     <compoundname>base.h</compoundname>
     <includes refid="activations_8h" local="no">activations.h</includes>
+    <includes refid="optimizer_8h" local="no">optimizer.h</includes>
     <includes local="no">utils.hpp</includes>
     <includes local="no">memory</includes>
     <includes local="no">fstream</includes>
@@ -11,6 +12,7 @@
     <includes local="no">utility</includes>
     <includes local="no">iostream</includes>
     <includedby refid="bcm_8h" local="no">/home/nico/Code/plasticity/include/bcm.h</includedby>
+    <includedby refid="hopfield_8h" local="no">/home/nico/Code/plasticity/include/hopfield.h</includedby>
     <incdepgraph>
       <node id="15">
         <label>functional</label>
@@ -24,19 +26,29 @@
       <node id="19">
         <label>numeric</label>
       </node>
+      <node id="17">
+        <label>optimizer.h</label>
+        <link refid="optimizer_8h"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
       <node id="12">
         <label>string</label>
       </node>
       <node id="13">
         <label>omp.h</label>
       </node>
-      <node id="18">
+      <node id="20">
         <label>fstream</label>
       </node>
       <node id="7">
         <label>random</label>
       </node>
-      <node id="17">
+      <node id="18">
         <label>utils.hpp</label>
       </node>
       <node id="4">
@@ -94,9 +106,11 @@
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
@@ -125,6 +139,10 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
+      <node id="3">
+        <label>/home/nico/Code/plasticity/include/hopfield.h</label>
+        <link refid="hopfield_8h"/>
+      </node>
       <node id="2">
         <label>/home/nico/Code/plasticity/include/bcm.h</label>
         <link refid="bcm_8h"/>
@@ -133,6 +151,8 @@
         <label>/home/nico/Code/plasticity/include/base.h</label>
         <link refid="base_8h"/>
         <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -147,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="15" column="9" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="15" bodyend="-1"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="16" column="9" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="base_8h_1ac2c86502e66f2307ca9396dd8c77174e" prot="public" static="no">
         <name>ERROR_FITTED</name>
@@ -158,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="16" column="9" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="16" bodyend="-1"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="17" column="9" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="17" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="base_8h_1a6103a7d0f62795c68e45eae3d7d4fdf6" prot="public" static="no">
         <name>ERROR_DIMENSIONS</name>
@@ -169,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="17" column="9" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="17" bodyend="-1"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="18" column="9" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="18" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -181,100 +201,113 @@
 <codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__base_h__</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
 <codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="activations_8h" kindref="compound">activations.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utils.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="6"><highlight class="normal"></highlight></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fstream&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;algorithm&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;numeric&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight></codeline>
-<codeline lineno="15" refid="base_8h_1a80a8b1aec81995e16eb50277831747ad" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ERROR_K_POSITIVE<sp/>101</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="16" refid="base_8h_1ac2c86502e66f2307ca9396dd8c77174e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ERROR_FITTED<sp/><sp/><sp/><sp/><sp/>102</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="17" refid="base_8h_1a6103a7d0f62795c68e45eae3d7d4fdf6" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ERROR_DIMENSIONS<sp/>103</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="18"><highlight class="normal"></highlight></codeline>
-<codeline lineno="34" refid="classBasePlasticity" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classBasePlasticity" kindref="compound">BasePlasticity</ref></highlight></codeline>
-<codeline lineno="35"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"></highlight></codeline>
-<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"></highlight></codeline>
-<codeline lineno="39" refid="classBasePlasticity_1a427d9ff731f3db65bf5474e078b36467" refkind="member"><highlight class="normal"><sp/><sp/>std<sp/>::<sp/>unique_ptr<sp/>&lt;<sp/>float[]<sp/>&gt;<sp/><ref refid="classBasePlasticity_1a427d9ff731f3db65bf5474e078b36467" kindref="member">output</ref>;<sp/><sp/></highlight></codeline>
-<codeline lineno="40" refid="classBasePlasticity_1ac85dc18520a49febfcffd6646b0ab9b6" refkind="member"><highlight class="normal"><sp/><sp/>std<sp/>::<sp/>unique_ptr<sp/>&lt;<sp/>float[]<sp/>&gt;<sp/><ref refid="classBasePlasticity_1ac85dc18520a49febfcffd6646b0ab9b6" kindref="member">weights</ref>;<sp/></highlight></codeline>
-<codeline lineno="41" refid="classBasePlasticity_1a1b218e7e7c6f5494aee2a8f8e603cbec" refkind="member"><highlight class="normal"><sp/><sp/>std<sp/>::<sp/>unique_ptr<sp/>&lt;<sp/>float[]<sp/>&gt;<sp/><ref refid="classBasePlasticity_1a1b218e7e7c6f5494aee2a8f8e603cbec" kindref="member">theta</ref>;<sp/></highlight></codeline>
-<codeline lineno="42"><highlight class="normal"></highlight></codeline>
-<codeline lineno="43" refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" refkind="member"><highlight class="normal"><sp/><sp/>std<sp/>::<sp/>function<sp/>&lt;<sp/>float(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>&amp;)<sp/>&gt;<sp/><ref refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" kindref="member">activation</ref>;<sp/></highlight></codeline>
-<codeline lineno="44" refid="classBasePlasticity_1adf83370e29d977f79690bf17ed3668bf" refkind="member"><highlight class="normal"><sp/><sp/>std<sp/>::<sp/>function<sp/>&lt;<sp/>float(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>&amp;)<sp/>&gt;<sp/><ref refid="classBasePlasticity_1adf83370e29d977f79690bf17ed3668bf" kindref="member">gradient</ref>;<sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"></highlight></codeline>
-<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="optimizer_8h" kindref="compound">optimizer.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utils.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fstream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;algorithm&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;numeric&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="base_8h_1a80a8b1aec81995e16eb50277831747ad" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ERROR_K_POSITIVE<sp/>101</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="base_8h_1ac2c86502e66f2307ca9396dd8c77174e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ERROR_FITTED<sp/><sp/><sp/><sp/><sp/>102</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="base_8h_1a6103a7d0f62795c68e45eae3d7d4fdf6" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ERROR_DIMENSIONS<sp/>103</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="classBasePlasticity" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classBasePlasticity" kindref="compound">BasePlasticity</ref></highlight></codeline>
+<codeline lineno="36"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="classBasePlasticity_1a5c440b00a49873031e5d0510f377f791" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classupdate__args" kindref="compound">update_args</ref><sp/><ref refid="classBasePlasticity_1a5c440b00a49873031e5d0510f377f791" kindref="member">optimizer</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="classBasePlasticity_1a427d9ff731f3db65bf5474e078b36467" refkind="member"><highlight class="normal"><sp/><sp/>std<sp/>::<sp/>unique_ptr<sp/>&lt;<sp/>float[]<sp/>&gt;<sp/><ref refid="classBasePlasticity_1a427d9ff731f3db65bf5474e078b36467" kindref="member">output</ref>;<sp/><sp/></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__testing__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
-<codeline lineno="48" refid="classBasePlasticity_1a9bc89cbc53982004dddd6c05a6f8c78b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std<sp/>::<sp/>mt19937<sp/><ref refid="classBasePlasticity_1a9bc89cbc53982004dddd6c05a6f8c78b" kindref="member">engine</ref>;<sp/></highlight></codeline>
+<codeline lineno="48" refid="classBasePlasticity_1ac85dc18520a49febfcffd6646b0ab9b6" refkind="member"><highlight class="normal"><sp/><sp/>std<sp/>::<sp/>unique_ptr<sp/>&lt;<sp/>float[]<sp/>&gt;<sp/><ref refid="classBasePlasticity_1ac85dc18520a49febfcffd6646b0ab9b6" kindref="member">weights</ref>;<sp/></highlight></codeline>
 <codeline lineno="49"><highlight class="normal"></highlight></codeline>
-<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52" refid="classBasePlasticity_1ac3b0a942271707d1ac30cfb495fa91b6" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1ac3b0a942271707d1ac30cfb495fa91b6" kindref="member">precision</ref>;<sp/></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__testing__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight></codeline>
-<codeline lineno="54" refid="classBasePlasticity_1a4a6ecb6e802bdfc043346c41b2682ca1" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a4a6ecb6e802bdfc043346c41b2682ca1" kindref="member">batch</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="55" refid="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" kindref="member">outputs</ref>;<sp/><sp/></highlight></codeline>
-<codeline lineno="56" refid="classBasePlasticity_1a6a98b64e6ab4ff78982b15e8f74ecb2f" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a6a98b64e6ab4ff78982b15e8f74ecb2f" kindref="member">nweights</ref>;<sp/></highlight></codeline>
-<codeline lineno="57"><highlight class="normal"></highlight></codeline>
-<codeline lineno="58" refid="classBasePlasticity_1a974bdeec773185818312b6c82f7a764b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a974bdeec773185818312b6c82f7a764b" kindref="member">mu</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="59" refid="classBasePlasticity_1a45ee1f1803e06f09d9044e9252852631" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a45ee1f1803e06f09d9044e9252852631" kindref="member">sigma</ref>;<sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="60" refid="classBasePlasticity_1a6261a44333fc063f8a0c96f24e52bf9b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a6261a44333fc063f8a0c96f24e52bf9b" kindref="member">epsilon</ref>;<sp/></highlight></codeline>
-<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="classBasePlasticity_1a1b218e7e7c6f5494aee2a8f8e603cbec" refkind="member"><highlight class="normal"><sp/><sp/>std<sp/>::<sp/>unique_ptr<sp/>&lt;<sp/>float[]<sp/>&gt;<sp/><ref refid="classBasePlasticity_1a1b218e7e7c6f5494aee2a8f8e603cbec" kindref="member">theta</ref>;<sp/></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56" refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" refkind="member"><highlight class="normal"><sp/><sp/>std<sp/>::<sp/>function<sp/>&lt;<sp/>float(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>&amp;)<sp/>&gt;<sp/><ref refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" kindref="member">activation</ref>;<sp/></highlight></codeline>
+<codeline lineno="57" refid="classBasePlasticity_1adf83370e29d977f79690bf17ed3668bf" refkind="member"><highlight class="normal"><sp/><sp/>std<sp/>::<sp/>function<sp/>&lt;<sp/>float(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>&amp;)<sp/>&gt;<sp/><ref refid="classBasePlasticity_1adf83370e29d977f79690bf17ed3668bf" kindref="member">gradient</ref>;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="classBasePlasticity_1a9bc89cbc53982004dddd6c05a6f8c78b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std<sp/>::<sp/>mt19937<sp/><ref refid="classBasePlasticity_1a9bc89cbc53982004dddd6c05a6f8c78b" kindref="member">engine</ref>;<sp/></highlight></codeline>
 <codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"></highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Constructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65" refid="classBasePlasticity_1ac3b0a942271707d1ac30cfb495fa91b6" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1ac3b0a942271707d1ac30cfb495fa91b6" kindref="member">precision</ref>;<sp/></highlight></codeline>
 <codeline lineno="66"><highlight class="normal"></highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><ref refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" kindref="member">BasePlasticity</ref><sp/>();</highlight></codeline>
+<codeline lineno="67" refid="classBasePlasticity_1a4a6ecb6e802bdfc043346c41b2682ca1" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a4a6ecb6e802bdfc043346c41b2682ca1" kindref="member">batch</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="68" refid="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" kindref="member">outputs</ref>;<sp/><sp/></highlight></codeline>
+<codeline lineno="69" refid="classBasePlasticity_1a6a98b64e6ab4ff78982b15e8f74ecb2f" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a6a98b64e6ab4ff78982b15e8f74ecb2f" kindref="member">nweights</ref>;<sp/></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="classBasePlasticity_1a974bdeec773185818312b6c82f7a764b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a974bdeec773185818312b6c82f7a764b" kindref="member">mu</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="72" refid="classBasePlasticity_1a45ee1f1803e06f09d9044e9252852631" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a45ee1f1803e06f09d9044e9252852631" kindref="member">sigma</ref>;<sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="73"><highlight class="normal"></highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><ref refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" kindref="member">BasePlasticity</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" kindref="member">outputs</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>batch_size,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" kindref="member">activation</ref>=<ref refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a7cdc24596da1fe3fa1d5453ee7989fee" kindref="member">transfer :: _linear_</ref>,</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a974bdeec773185818312b6c82f7a764b" kindref="member">mu</ref>=0.f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a45ee1f1803e06f09d9044e9252852631" kindref="member">sigma</ref>=1.f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a6261a44333fc063f8a0c96f24e52bf9b" kindref="member">epsilon</ref>=2e-2f,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>seed=42);</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"></highlight></codeline>
-<codeline lineno="94"><highlight class="normal"></highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Copy<sp/>Operator<sp/>and<sp/>Copy<sp/>Constructor</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="96"><highlight class="normal"></highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><ref refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" kindref="member">BasePlasticity</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity" kindref="compound">BasePlasticity</ref><sp/>&amp;<sp/>b);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Constructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><ref refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" kindref="member">BasePlasticity</ref><sp/>();</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><ref refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" kindref="member">BasePlasticity</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" kindref="member">outputs</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>batch_size,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" kindref="member">activation</ref>=<ref refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a7cdc24596da1fe3fa1d5453ee7989fee" kindref="member">transfer :: _linear_</ref>,</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classupdate__args" kindref="compound">update_args</ref><sp/><ref refid="namespaceoptimizer" kindref="compound">optimizer</ref>=<ref refid="classupdate__args" kindref="compound">update_args</ref>(<ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a4b7fa459df18d4bf2eaa7955899b3b03" kindref="member">optimizer_t :: _sgd</ref>),</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a974bdeec773185818312b6c82f7a764b" kindref="member">mu</ref>=0.f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a45ee1f1803e06f09d9044e9252852631" kindref="member">sigma</ref>=1.f,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>seed=42);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
 <codeline lineno="107"><highlight class="normal"></highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><ref refid="classBasePlasticity" kindref="compound">BasePlasticity</ref><sp/>&amp;<sp/><ref refid="classBasePlasticity_1a8fd48d4e055c774a6add951156790041" kindref="member">operator = </ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity" kindref="compound">BasePlasticity</ref><sp/>&amp;<sp/>b);</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"></highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Destructor</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="121"><highlight class="normal"></highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><ref refid="classBasePlasticity_1a4f812c1d906aa5e828bfcc65ce4e510a" kindref="member">~BasePlasticity</ref><sp/>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"></highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Public<sp/>members</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="131"><highlight class="normal"></highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a1adfa1440172822a6e3280e0142fb80e" kindref="member">fit</ref><sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>X,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_samples,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_features,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>num_epochs);</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"></highlight></codeline>
-<codeline lineno="169"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/><ref refid="classBasePlasticity_1a4104d12babea679995d21a5de08d7129" kindref="member">predict</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>X,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_samples,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_features);</highlight></codeline>
-<codeline lineno="170"><highlight class="normal"></highlight></codeline>
-<codeline lineno="182"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1ad5bfcab20dd11a25024d8fb83c0e4c23" kindref="member">save_weights</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std<sp/>::<sp/>string<sp/>&amp;<sp/>filename);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Copy<sp/>Operator<sp/>and<sp/>Copy<sp/>Constructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><ref refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" kindref="member">BasePlasticity</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity" kindref="compound">BasePlasticity</ref><sp/>&amp;<sp/>b);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><ref refid="classBasePlasticity" kindref="compound">BasePlasticity</ref><sp/>&amp;<sp/><ref refid="classBasePlasticity_1a8fd48d4e055c774a6add951156790041" kindref="member">operator = </ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity" kindref="compound">BasePlasticity</ref><sp/>&amp;<sp/>b);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Destructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><ref refid="classBasePlasticity_1a4f812c1d906aa5e828bfcc65ce4e510a" kindref="member">~BasePlasticity</ref><sp/>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Public<sp/>members</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a1adfa1440172822a6e3280e0142fb80e" kindref="member">fit</ref><sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>X,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_samples,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_features,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>num_epochs);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/><ref refid="classBasePlasticity_1a4104d12babea679995d21a5de08d7129" kindref="member">predict</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>X,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_samples,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_features);</highlight></codeline>
 <codeline lineno="183"><highlight class="normal"></highlight></codeline>
-<codeline lineno="195"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a05b0d33b49372359fb6c96e80013ee78" kindref="member">load_weights</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std<sp/>::<sp/>string<sp/>&amp;<sp/>filename);</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1ad5bfcab20dd11a25024d8fb83c0e4c23" kindref="member">save_weights</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std<sp/>::<sp/>string<sp/>&amp;<sp/>filename);</highlight></codeline>
 <codeline lineno="196"><highlight class="normal"></highlight></codeline>
-<codeline lineno="205"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/><ref refid="classBasePlasticity_1a35be8a52e26ce61050f1408d2f69fa66" kindref="member">get_weights</ref><sp/>();</highlight></codeline>
-<codeline lineno="206"><highlight class="normal"></highlight></codeline>
-<codeline lineno="207"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="208"><highlight class="normal"></highlight></codeline>
-<codeline lineno="219"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>weights_update<sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>X,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_features,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights_update)<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="220"><highlight class="normal"></highlight></codeline>
-<codeline lineno="229"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>check_dims<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_features);</highlight></codeline>
-<codeline lineno="230"><highlight class="normal"></highlight></codeline>
-<codeline lineno="238"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>check_is_fitted<sp/>();</highlight></codeline>
-<codeline lineno="239"><highlight class="normal"></highlight></codeline>
-<codeline lineno="246"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>normalize_weights<sp/>();</highlight></codeline>
-<codeline lineno="247"><highlight class="normal"></highlight></codeline>
-<codeline lineno="259"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>_fit<sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>X,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>num_epochs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_features,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_samples);</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a05b0d33b49372359fb6c96e80013ee78" kindref="member">load_weights</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std<sp/>::<sp/>string<sp/>&amp;<sp/>filename);</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/><ref refid="classBasePlasticity_1a35be8a52e26ce61050f1408d2f69fa66" kindref="member">get_weights</ref><sp/>();</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>weights_update<sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>X,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_features,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights_update)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>check_dims<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_features);</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>check_is_fitted<sp/>();</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>normalize_weights<sp/>();</highlight></codeline>
 <codeline lineno="260"><highlight class="normal"></highlight></codeline>
-<codeline lineno="275"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>_predict<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>A,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>B,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>C,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>N,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>M,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>K);</highlight></codeline>
-<codeline lineno="276"><highlight class="normal"></highlight></codeline>
-<codeline lineno="277"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="278"><highlight class="normal"></highlight></codeline>
-<codeline lineno="279"><highlight class="normal"></highlight></codeline>
-<codeline lineno="280"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>__base_h__</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>_fit<sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>X,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>num_epochs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_features,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_samples);</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>_predict<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>A,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>B,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>C,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>N,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>M,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>K);</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"></highlight></codeline>
+<codeline lineno="290"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"></highlight></codeline>
+<codeline lineno="292"><highlight class="normal"></highlight></codeline>
+<codeline lineno="293"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>__base_h__</highlight></codeline>
     </programlisting>
     <location file="/home/nico/Code/plasticity/include/base.h"/>
   </compounddef>

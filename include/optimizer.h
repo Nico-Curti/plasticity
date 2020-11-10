@@ -6,10 +6,10 @@
 #include <unordered_map> // std :: unordered_map
 #include <numeric>       // std :: inner_product
 
-#define ERROR_NWEIGHTS 201
+#define ERROR_NWEIGHTS 201 ///< The weights dimension is incorrect
 
 enum optimizer_t { _adam = 0, _momentum, _nesterov_momentum, _adagrad, _rmsprop, _adadelta, _adamax, _sgd
-};
+}; ///< optimizer types
 
 namespace optimizer
 {
@@ -23,7 +23,7 @@ static const std :: unordered_map < std :: string, int > get_optimizer {
                                                                           {"adadelta"          , _adadelta},
                                                                           {"adamax"            , _adamax},
                                                                           {"sgd"               , _sgd},
-                                                                        };
+                                                                        }; ///< Utility for the optimizer management
 
 }
 
@@ -53,7 +53,7 @@ class update_args
 
   static float epsil; ///< Numerical precision
 
-public://protected:
+protected:
 
   std :: unique_ptr < float [] > m; ///< Adam supporting array
   std :: unique_ptr < float [] > v; ///< Adam supporting array

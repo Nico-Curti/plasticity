@@ -33,6 +33,8 @@ void print_progress (const int & i, const int & num_batches, Time & timer)
 
   int lpad = static_cast < int >(std :: floor(perc * PBWIDTH));
   lpad     = lpad > PBWIDTH ? PBWIDTH : lpad;
+  int null_size = (PBWIDTH - 1 - lpad);
+  null_size = null_size < 0 ? 0 : null_size;
 
   auto _it = utils :: elapsed_time(timer);
   timer = utils :: what_time_is_it_now();
@@ -48,7 +50,7 @@ void print_progress (const int & i, const int & num_batches, Time & timer)
               << std :: left  << num_batches
               << " |"
               << std :: setw(PBWIDTH)
-              << FILL_VALUE * lpad + NULL_VALUE * (PBWIDTH - 1 - lpad)
+              << FILL_VALUE * lpad + NULL_VALUE * null_size
               << "|  ["
               << std :: right << c_it << ":00"
               << "<"
@@ -59,11 +61,13 @@ void print_progress (const int & i, const int & num_batches, Time & timer)
   std :: cout << std :: flush;
 }
 
+} // end namespace utils
+
 
 template < typename Char, typename Traits, typename Allocator >
 std :: basic_string < Char, Traits, Allocator > operator * (const std :: basic_string < Char, Traits, Allocator > & s, std :: size_t n)
 {
-  std :: basic_string < Char, Traits, Allocator > tmp = s;
+  std :: basic_string < Char, Traits, Allocator > tmp;
   for (std :: size_t i = 0; i < n; ++i) tmp += s;
   return tmp;
 }
@@ -74,109 +78,6 @@ std :: basic_string < Char, Traits, Allocator > operator * (std :: size_t n, con
   return s * n;
 }
 
-
-#ifdef _OPENMP
-
-#define __minimum_sort_size__ 1000
-
-// parallel merge argsort
-
-template < typename Order >
-void mergeargsort_serial ( std :: pair < float, int > * array, const float * a, const int & start, const int & end, Order ord)
-{
-  if ( (end - start) == 2 )
-  {
-    if ( ord(array[start], array[end - 1]) )
-      return;
-    else
-    {
-      std :: swap(array[start], array[end - 1]);
-      return;
-    }
-  }
-
-  const int pivot = start + ((end - start) >> 1);
-
-  if ((end - start) < __minimum_sort_size__)
-    std :: sort(array + start, array + end, ord);
-  else
-  {
-    mergeargsort_serial(array, a, start, pivot, ord);
-    mergeargsort_serial(array, a, pivot, end, ord);
-  }
-
-  std :: inplace_merge(array + start, array + pivot, array + end, ord);
-
-  return;
-}
-
-template < typename Order >
-void mergeargsort_parallel_omp ( std :: pair < float, int > * array, const float * a, const int & start, const int & end, const int & threads, Order ord)
-{
-  const int pivot = start + ((end - start) >> 1);
-
-  if (threads <= 1)
-  {
-    mergeargsort_serial(array, a, start, end, ord);
-    return;
-  }
-  else
-  {
-#pragma omp task shared(start, end, threads)
-    {
-      mergeargsort_parallel_omp(array, a, start, pivot, threads >> 1, ord);
-    }
-#pragma omp task shared(start, end, threads)
-    {
-      mergeargsort_parallel_omp(array, a, pivot, end, threads - (threads >> 1), ord);
-    }
-#pragma omp taskwait
-  }
-
-  std :: inplace_merge(array + start, array + pivot, array + end, ord);
-
-  return;
-}
-
-template < typename Order >
-void argsort (const float * a, int * indexes, const int & start, const int & end, Order ord)
-{
-  // TODO: better testing!
-  static std :: unique_ptr < std :: pair < float, int > [] > array;
-
-  #pragma omp single
-  array = std :: make_unique < std :: pair < float, int > [] >(end - start);
-
-  #pragma omp for
-  for (int i = 0; i < end - start; ++i)
-    array[i] = std :: make_pair(a[i + start], i + start);
-
-  const int nth = (omp_get_num_threads() % 2) ? omp_get_num_threads() - 1 : omp_get_num_threads();
-  const int diff = end % nth;
-  const int size = diff ? end - diff : end;
-
-  #pragma omp single
-  #pragma omp taskgroup
-  {
-
-    mergeargsort_parallel_omp(array.get(), a, start, size, nth, ord);
-
-  } // end single section
-
-  if (diff)
-  {
-    std :: sort(array.get() + size, array.get() + end, ord);
-    std :: inplace_merge(array.get() + start, array.get() + size, array.get() + end, ord);
-  }
-
-  #pragma omp for
-  for (int i = 0; i < end - start; ++i)
-    indexes[i] = std :: get < 1 >(array[i]);
-}
-
-#endif
-
-} // end namespace utils
 
 
 #if __cplusplus < 201700 && !defined _MSC_VER // no std=c++17 support

@@ -2,6 +2,7 @@
 #include <catch.hpp>
 
 #include <bcm.h>
+#include <optimizer.h>
 #include <Eigen/Dense>
 
 
@@ -19,11 +20,12 @@ TEST_CASE ( "Test fit" )
   const int activation = transfer :: _linear_;
   const float mu = 1.f;
   const float sigma = 2.5f;
-  const float epsilon = 2e-2f;
   const float strenght = 0.f;
   const int seed = SEED;
 
-  BCM model(outputs, batch_size, activation, mu, sigma, epsilon, strenght, seed);
+  update_args optimizer(optimizer_t :: _sgd);
+
+  BCM model(outputs, batch_size, activation, optimizer, mu, sigma, strenght, seed);
 
   const int num_epochs = 1;
   const int num_samples = batch_size;

@@ -10,40 +10,40 @@ from plasticity.utils import activations
 __author__ = ['Mattia Ceccarelli', 'Nico Curti']
 __email__ = ['mattia.ceccarelli5@unibo.it', 'nico.curti2@unibo.it']
 
-def _check_activation (layer, activation_func):
+def _check_activation (obj, activation_func):
   '''
   Check if the activation function is valid.
 
   Parameters
   ----------
-  layer : object
-    Layer object (ex. Activation_layer)
+    obj : object
+      Object type which call this function
 
-  activation_func : string or Activations object
-    activation function to check. If the Activations object is not created yet
-    the 'eval' is done on the object.
+    activation_func : string or Activations object
+      activation function to check. If the Activations object is not created yet
+      the 'eval' is done on the object.
 
   Returns
   -------
-  index : int
-    C++ activation function index
-  name : str
-    Activation function name
+    index : int
+      C++ activation function index
+    name : str
+      Activation function name
 
   Notes
   -----
-  You can use this function to verify if the given activation function is valid.
-  The function can be passed either as a string either as object or simply as class object.
+  .. note::
+    You can use this function to verify if the given activation function is valid.
+    The function can be passed either as a string either as object or simply as class object.
 
   Examples
   --------
-
-  >>> layer = Activation_layer(input_shape=(1,2,3))
-  >>> print(_check_activation(layer, 'Linear'))
+  >>> obj = BCM()
+  >>> print(_check_activation(obj, 'Linear'))
       (6, 'Linear')
-  >>> print(_check_activation(layer, Activations.Relu))
+  >>> print(_check_activation(obj, Activations.Relu))
       (2, 'Relu')
-  >>> print(_check_activation(layer, Activations.Linear()))
+  >>> print(_check_activation(obj, Activations.Linear()))
       (6, 'Linear')
   '''
 
@@ -51,7 +51,7 @@ def _check_activation (layer, activation_func):
     allowed_activation_func = [f.lower() for f in dir(activations) if isclass(getattr(activations, f)) and f != 'Activations']
 
     if activation_func.lower() not in allowed_activation_func:
-      class_name = layer.__class__.__name__
+      class_name = obj.__class__.__name__
       raise ValueError('{0}: incorrect value of Activation Function given'.format(class_name))
     else:
       activation_func = activation_func.lower()
@@ -64,7 +64,7 @@ def _check_activation (layer, activation_func):
     activation = activation_func.ACTIVATION_INDEX
 
   else:
-    class_name = layer.__class__.__name__
+    class_name = obj.__class__.__name__
     raise ValueError('{0}: incorrect value of Activation Function given'.format(class_name))
 
   # temporary solution to avoid not implemented activation function
@@ -79,15 +79,16 @@ def _check_string (string, exist=True):
 
   Parameters
   ----------
-  string : string or bytes
-    string to convert / verify
+    string : string or bytes
+      string to convert / verify
 
-  exist : bool (default = True)
-    If the string identify a filename check if it exist
+    exist : bool (default = True)
+      If the string identify a filename check if it exist
 
   Returns
   -------
-  Encoded string (utf-8)
+    res: bytes
+      Encoded string (utf-8)
 
   Notes
   -----
@@ -109,25 +110,25 @@ def _check_update (upd_type):
 
   Parameters
   ----------
-  upd_type : string or int
-    update function to check.
+    upd_type : string or int
+      update function to check.
 
   Returns
   -------
-  update_type : str
-    Name of the update function
+    update_type : str
+      Name of the update function
 
-  update_num : int
-    Byron update function index
+    update_num : int
+      Byron update function index
 
   Notes
   -----
-  You can use this function to verify if the given update function is valid.
-  The function can be passed either as a string either as integer.
+  .. note::
+    You can use this function to verify if the given update function is valid.
+    The function can be passed either as a string either as integer.
 
   Examples
   --------
-
   >>> name, type = _check_update('Adam')
   >>> print(name, type)
       ('Adam', 0)
@@ -171,6 +172,16 @@ def view_weights (weights, dims):
   Returns
   -------
     None
+
+  Example
+  -------
+  >>> from plasiticy.model import BCM
+  >>> from plasticity.utils import view_weights
+  >>>
+  >>> model = BCM(outputs=100, num_epochs=10, batch_size=100, activation='relu',
+                  optimizer=Adam(lr=2e-2), interaction_strength=0.)
+  >>> model.fit(X)
+  >>> view_weights (model.weights, dims=(28, 28))
   '''
 
   num_images = int(np.sqrt(weights.shape[0]))

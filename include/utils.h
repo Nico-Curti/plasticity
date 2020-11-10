@@ -37,6 +37,7 @@
 
 // Usefull macro
 
+/// @cond DEF
 #ifdef _MSC_VER
 
   #ifndef __unused
@@ -58,18 +59,18 @@
   #define DLLSPEC
 
 #endif
-
+/// @endcond
 
 // Usefull variables
 
-#define PBWIDTH 20
-static const std :: string FILL_VALUE = "█";
-static const std :: string NULL_VALUE = " ";
+#define PBWIDTH 20                           ///< Width of the progress bar
+static const std :: string FILL_VALUE = "█"; ///< fill value for the progress bar
+static const std :: string NULL_VALUE = " "; ///< empty value for the progress bar
 
 #ifdef _WIN32
-  #define RESET_COUT '\r'
+  #define RESET_COUT '\r'       ///< Return carriage value in Window OS
 #else
-  #define RESET_COUT "\r\x1B[K"
+  #define RESET_COUT "\r\x1B[K" ///< Return carriage value in Unix OS
 #endif
 
 
@@ -133,12 +134,18 @@ namespace utils
   template < typename Time >
   double elapsed_time (const Time & start_time);
 
-  template < typename Char, typename Traits, typename Allocator >
-  std :: basic_string < Char, Traits, Allocator > operator * (const std :: basic_string < Char, Traits, Allocator > & s, std :: size_t n);
-
-  template < typename Char, typename Traits, typename Allocator >
-  std :: basic_string < Char, Traits, Allocator > operator * (std :: size_t n, const std :: basic_string < Char, Traits, Allocator > & s);
-
+  /**
+  * @brief Print progress bar
+  *
+  * @details This function is used to progressively print a progress bar
+  * with timer.
+  *
+  * @tparam Time Timer type returned by the what_time_is_it_now function
+  * @param i Current iteration value.
+  * @param num_batches Maximum number of iterations, i.e the width of the progress bar.
+  * @param timer Start time (the timer is reset at the end of the function).
+  *
+  */
   template < typename Time >
   void print_progress (const int & i, const int & num_batches, Time & timer);
 
@@ -157,22 +164,45 @@ namespace utils
   */
   bool file_exists (const std :: string & filename);
 
-#ifdef _OPENMP
-
-  // parallel merge argsort
-
-  template < typename lambda >
-  void mergeargsort_serial ( std :: pair < float, int > * array, const float * a, const int & start, const int & end, lambda ord);
-
-  template < typename lambda >
-  void mergeargsort_parallel_omp ( std :: pair < float, int > * array, const float * a, const int & start, const int & end, const int & threads, lambda ord);
-
-  template < typename lambda >
-  void argsort (const float * a, int * indexes, const int & start, const int & end, lambda ord);
-
-#endif
-
 } // end namespace utils
+
+
+/**
+* @brief Overload operator * between strings and integers
+*
+* @details This overload allows to multiply and thus replicate a string
+* for a fixed number of times.
+*
+* @tparam Char string data type
+* @tparam Traits Second general-string template type
+* @tparam Allocator Third general-string template type
+* @param s Input string to multiply.
+* @param n Number of times to repeat the string.
+*
+* @return A string repeated n times.
+*
+*/
+template < typename Char, typename Traits, typename Allocator >
+std :: basic_string < Char, Traits, Allocator > operator * (const std :: basic_string < Char, Traits, Allocator > & s, std :: size_t n);
+
+/**
+* @brief Overload operator * between integers and strings
+*
+* @details This overload allows to multiply and thus replicate a string
+* for a fixed number of times.
+*
+* @tparam Char string data type
+* @tparam Traits Second general-string template type
+* @tparam Allocator Third general-string template type
+* @param n Number of times to repeat the string.
+* @param s Input string to multiply.
+*
+* @return A string repeated n times.
+*
+*/
+template < typename Char, typename Traits, typename Allocator >
+std :: basic_string < Char, Traits, Allocator > operator * (std :: size_t n, const std :: basic_string < Char, Traits, Allocator > & s);
+
 
 
 #if __cplusplus < 201700 && !defined _MSC_VER // no std=c++17 support

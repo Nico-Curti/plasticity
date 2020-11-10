@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.17">
   <compound refid="classBasePlasticity" kind="class"><name>BasePlasticity</name>
+    <member refid="classBasePlasticity_1a5c440b00a49873031e5d0510f377f791" kind="variable"><name>optimizer</name></member>
     <member refid="classBasePlasticity_1a427d9ff731f3db65bf5474e078b36467" kind="variable"><name>output</name></member>
     <member refid="classBasePlasticity_1ac85dc18520a49febfcffd6646b0ab9b6" kind="variable"><name>weights</name></member>
     <member refid="classBasePlasticity_1a1b218e7e7c6f5494aee2a8f8e603cbec" kind="variable"><name>theta</name></member>
@@ -11,11 +12,10 @@
     <member refid="classBasePlasticity_1a6a98b64e6ab4ff78982b15e8f74ecb2f" kind="variable"><name>nweights</name></member>
     <member refid="classBasePlasticity_1a974bdeec773185818312b6c82f7a764b" kind="variable"><name>mu</name></member>
     <member refid="classBasePlasticity_1a45ee1f1803e06f09d9044e9252852631" kind="variable"><name>sigma</name></member>
-    <member refid="classBasePlasticity_1a6261a44333fc063f8a0c96f24e52bf9b" kind="variable"><name>epsilon</name></member>
     <member refid="classBasePlasticity_1a9bc89cbc53982004dddd6c05a6f8c78b" kind="variable"><name>engine</name></member>
     <member refid="classBasePlasticity_1ac3b0a942271707d1ac30cfb495fa91b6" kind="variable"><name>precision</name></member>
     <member refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" kind="function"><name>BasePlasticity</name></member>
-    <member refid="classBasePlasticity_1a6095d857e3d72d44ab14e707d4f1c97d" kind="function"><name>BasePlasticity</name></member>
+    <member refid="classBasePlasticity_1a4083fb0c002e37a0bf717e40f26d543b" kind="function"><name>BasePlasticity</name></member>
     <member refid="classBasePlasticity_1a36aafa34a7d39721930afd46d2ccc5cd" kind="function"><name>BasePlasticity</name></member>
     <member refid="classBasePlasticity_1a8fd48d4e055c774a6add951156790041" kind="function"><name>operator=</name></member>
     <member refid="classBasePlasticity_1a4f812c1d906aa5e828bfcc65ce4e510a" kind="function"><name>~BasePlasticity</name></member>
@@ -33,7 +33,7 @@
   </compound>
   <compound refid="classBCM" kind="class"><name>BCM</name>
     <member refid="classBCM_1a09d3456546b0f80ebcda02fa4f803870" kind="variable"><name>interaction_matrix</name></member>
-    <member refid="classBCM_1ad407a3e2ebf8c89ec3e24dc441daff4d" kind="function"><name>BCM</name></member>
+    <member refid="classBCM_1ae515c4c9647cbe22e28a936373afde00" kind="function"><name>BCM</name></member>
     <member refid="classBCM_1aacec2c922e994d7f4b6d33aa59667429" kind="function"><name>BCM</name></member>
     <member refid="classBCM_1a9f89c34dc96cc5bb74cc9b3b8f6c454c" kind="function"><name>operator=</name></member>
     <member refid="classBCM_1add33374e61bfea8b6331cad75acb8eac" kind="function"><name>~BCM</name></member>
@@ -49,6 +49,52 @@
     <member refid="classdata__dispatcher_1a0f15d139d58173887861aa5d28cf3280" kind="function"><name>~data_dispatcher</name></member>
     <member refid="classdata__dispatcher_1a10585190c2f35014a789081f0b08ee0a" kind="function"><name>get_batch</name></member>
     <member refid="classdata__dispatcher_1a1fc9b0f2b18e75a74d7aba81273df143" kind="function"><name>randomize</name></member>
+  </compound>
+  <compound refid="classHopfield" kind="class"><name>Hopfield</name>
+    <member refid="classHopfield_1a79299a585fd41c7d818c67b2bd9a8252" kind="variable"><name>yl</name></member>
+    <member refid="classHopfield_1a291c5bbab5b6c688d747cf886904f428" kind="variable"><name>fire_indices</name></member>
+    <member refid="classHopfield_1ab85568f1dab9bcd1063de42a93082b99" kind="variable"><name>k</name></member>
+    <member refid="classHopfield_1a855d7f0ebd15856d4fd5bbb5d24f74d8" kind="variable"><name>delta</name></member>
+    <member refid="classHopfield_1a22793a5daf2aeef71c8fb186bcd3b94c" kind="variable"><name>p</name></member>
+    <member refid="classHopfield_1a5a4cbce90b0684bfe2fd21a4ea280a5c" kind="function"><name>Hopfield</name></member>
+    <member refid="classHopfield_1a2478b5f9b8f627d47a2994a34a55b598" kind="function"><name>Hopfield</name></member>
+    <member refid="classHopfield_1a2e19f875428328622c15d6cf8fe603da" kind="function"><name>operator=</name></member>
+    <member refid="classHopfield_1a94c62a20249a3440ebacea0d61ea57c7" kind="function"><name>~Hopfield</name></member>
+    <member refid="classHopfield_1ad613a118971ea59c6b0e4115a9b9358b" kind="function"><name>check_params</name></member>
+    <member refid="classHopfield_1a907e8a6ba983b9a5e42e53228fb90b24" kind="function"><name>weights_update</name></member>
+    <member refid="classHopfield_1a835ba0a410402cccd5cdc062b60e02d9" kind="function"><name>normalize_weights</name></member>
+  </compound>
+  <compound refid="classupdate__args" kind="class"><name>update_args</name>
+    <member refid="classupdate__args_1a6cf919f4ba9378809d5f000d1d80fc3c" kind="variable"><name>epsil</name></member>
+    <member refid="classupdate__args_1a546e720aa0b732757fae6ad0837335ac" kind="variable"><name>m</name></member>
+    <member refid="classupdate__args_1ac8921a5f304579e3fffd6aa6ea5c83eb" kind="variable"><name>v</name></member>
+    <member refid="classupdate__args_1ad11839c9e08764e1528aae8f806e759a" kind="variable"><name>nweights</name></member>
+    <member refid="classupdate__args_1a4a08ebbe1d10e53ca44966dc7cb5e83e" kind="variable"><name>type</name></member>
+    <member refid="classupdate__args_1a3a0145d580360b2ffae2879af7e68c67" kind="variable"><name>learning_rate</name></member>
+    <member refid="classupdate__args_1abc35ad880888473f137cb9744e874870" kind="variable"><name>momentum</name></member>
+    <member refid="classupdate__args_1a9eb5a4b5663dca4b69a13a19da674f19" kind="variable"><name>decay</name></member>
+    <member refid="classupdate__args_1a1822b0d844c349135590f3583415faec" kind="variable"><name>B1</name></member>
+    <member refid="classupdate__args_1ad4542261082ee829820f2d6a750021f6" kind="variable"><name>B2</name></member>
+    <member refid="classupdate__args_1a82dbdae38d6d36251905a627947730e7" kind="variable"><name>rho</name></member>
+    <member refid="classupdate__args_1adfd1e022ef7da88bf1f76e84c086a6d8" kind="variable"><name>l2norm</name></member>
+    <member refid="classupdate__args_1a795c90db2da78d2764137329ff0518b1" kind="variable"><name>clip</name></member>
+    <member refid="classupdate__args_1a1e38b178064735696135111d295953a2" kind="function"><name>update_args</name></member>
+    <member refid="classupdate__args_1ad5b7f04f05a56009f91fc2734e1d6e11" kind="function"><name>update_args</name></member>
+    <member refid="classupdate__args_1a05540c4366f9d9f4f9a1fc4d8829ceb7" kind="function"><name>~update_args</name></member>
+    <member refid="classupdate__args_1a6910f785fc1bfcb3d74200e27c3f50a3" kind="function"><name>operator=</name></member>
+    <member refid="classupdate__args_1ad4461334cd763896e636d3396dab12cc" kind="function"><name>update_args</name></member>
+    <member refid="classupdate__args_1a20ccad2974c9c163af046a2c70dcdb56" kind="function"><name>init_arrays</name></member>
+    <member refid="classupdate__args_1a59dde2fe4182ef54f6c1215218d5d200" kind="function"><name>update</name></member>
+    <member refid="classupdate__args_1ad88ff99fa6debaaff8511bb61a4895f5" kind="function"><name>adam_update</name></member>
+    <member refid="classupdate__args_1a6adf6d2a148297084a74dd040794a153" kind="function"><name>sgd_update</name></member>
+    <member refid="classupdate__args_1ac4f553b6b0273852e8992f99f689d5ed" kind="function"><name>momentum_update</name></member>
+    <member refid="classupdate__args_1aab47bcd62bc055424eef96c568edc179" kind="function"><name>nesterov_momentum_update</name></member>
+    <member refid="classupdate__args_1a76c0e4254f721f6f3902343bdf29c089" kind="function"><name>adagrad_update</name></member>
+    <member refid="classupdate__args_1a7ded0ac7b4f3634ccfd7f3f538ec65e0" kind="function"><name>rmsprop_update</name></member>
+    <member refid="classupdate__args_1a492cb2c95c7bad02e9a0f368b4b3849b" kind="function"><name>adadelta_update</name></member>
+    <member refid="classupdate__args_1a42964190ac341491a28cee6e6c67636b" kind="function"><name>adamax_update</name></member>
+    <member refid="classupdate__args_1ab264b0b2b5c3b1d2df32c4bcb0d71285" kind="function"><name>norm_value</name></member>
+    <member refid="classupdate__args_1af371f7346e5c312489031b43a69ad61c" kind="function"><name>clip_value</name></member>
   </compound>
   <compound refid="namespacemath" kind="namespace"><name>math</name>
     <member refid="namespacemath_1a6dfb3bbb253c924b625bd9a370d3dbf9" kind="variable"><name>int_e</name></member>
@@ -71,7 +117,11 @@
     <member refid="namespacemath_1a55838ccfd75b9e437b202e781dd4b049" kind="function"><name>gcd</name></member>
     <member refid="namespacemath_1ab6303a0f45d5a302af6a2dd0c6d63307" kind="function"><name>gd</name></member>
   </compound>
+  <compound refid="namespaceoptimizer" kind="namespace"><name>optimizer</name>
+    <member refid="namespaceoptimizer_1a2e2b6f9292db15142e5da58237b04289" kind="variable"><name>get_optimizer</name></member>
+  </compound>
   <compound refid="namespacestd" kind="namespace"><name>std</name>
+    <member refid="utils_8h_1a3e841ff2ad206eb11b0778cc5c01a4c4" kind="function"><name>clamp</name></member>
     <member refid="utils_8h_1a7555adcfa1d636d70f3804287e8242b6" kind="function"><name>make_unique</name></member>
   </compound>
   <compound refid="namespacetransfer" kind="namespace"><name>transfer</name>
@@ -96,12 +146,10 @@
     <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a57a635e7aba6c6444dc87ffde3016c6c" kind="enumvalue"><name>_softsign_</name></member>
     <member refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a712f02cd48697dee7c5da9bbec847a64" kind="enumvalue"><name>_asymm_logistic_</name></member>
     <member refid="namespacetransfer_1a7a2fefd9c121e5feed9093074883b300" kind="variable"><name>get_activation</name></member>
-    <member refid="namespacetransfer_1a5ab5e921662a38b858237c9feb8e81c5" kind="variable"><name>leaky_coeff</name></member>
-    <member refid="namespacetransfer_1ae78adb47a2865cb0abdcac1df7bdc0b4" kind="variable"><name>steepness</name></member>
     <member refid="namespacetransfer_1a74c69d07c8fbfee9e8b8026d13fb68b3" kind="variable"><name>activate</name></member>
     <member refid="namespacetransfer_1a85df5dac767d25bfb67f70e30e8f967f" kind="variable"><name>gradient</name></member>
     <member refid="namespacetransfer_1ac0dc62ada21f04a5abf9e198faef9dd9" kind="function"><name>linear</name></member>
-    <member refid="namespacetransfer_1a3410c1085f6c3cb23311e2245fcc5217" kind="function"><name>g_linear</name></member>
+    <member refid="namespacetransfer_1a7939bb8138f88b18dffc81f987322361" kind="function"><name>g_linear</name></member>
     <member refid="namespacetransfer_1a0393615420e494217c108f89406f76c6" kind="function"><name>stair</name></member>
     <member refid="namespacetransfer_1af758fd3da6a28c25c6fb1dc277b1a354" kind="function"><name>g_stair</name></member>
     <member refid="namespacetransfer_1a233959ee107c12595bf88f574ef23cee" kind="function"><name>hardtan</name></member>
@@ -146,13 +194,8 @@
   <compound refid="namespaceutils" kind="namespace"><name>utils</name>
     <member refid="namespaceutils_1a2cced40efe2ba8dfd91ab631c8e19bba" kind="function"><name>what_time_is_it_now</name></member>
     <member refid="namespaceutils_1aee4b1108131ca374f4c4cf42f1a625c7" kind="function"><name>elapsed_time</name></member>
-    <member refid="namespaceutils_1ab6e3de392c555f49fdc9326ce36d71a9" kind="function"><name>operator*</name></member>
-    <member refid="namespaceutils_1a12db57dc074f7f23c447e302e636e41b" kind="function"><name>operator*</name></member>
     <member refid="namespaceutils_1aaab5e88355f4e1485387e3d16a1dc9c9" kind="function"><name>print_progress</name></member>
     <member refid="namespaceutils_1ab7a2cde9dc8fa709dcffc0dd2056d892" kind="function"><name>file_exists</name></member>
-    <member refid="namespaceutils_1a887b7a3287864333ff22b05327f88d19" kind="function"><name>mergeargsort_serial</name></member>
-    <member refid="namespaceutils_1a3d261d5ba27e92ce7ab72d3f9096615e" kind="function"><name>mergeargsort_parallel_omp</name></member>
-    <member refid="namespaceutils_1af1269571e6741db7bb9e819e74bedf7d" kind="function"><name>argsort</name></member>
   </compound>
   <compound refid="activations_8h" kind="file"><name>activations.h</name>
   </compound>
@@ -170,13 +213,25 @@
   </compound>
   <compound refid="hopfield_8h" kind="file"><name>hopfield.h</name>
   </compound>
+  <compound refid="optimizer_8h" kind="file"><name>optimizer.h</name>
+    <member refid="optimizer_8h_1a72b52171f528dbf8ec5f4d2a8faf8e38" kind="define"><name>ERROR_NWEIGHTS</name></member>
+    <member refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461" kind="enum"><name>optimizer_t</name></member>
+    <member refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a476faccd3ee57983084a9a9a30a4c0f1" kind="enumvalue"><name>_adam</name></member>
+    <member refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461af07fa7e71d6dd0d5376d8ee85cec747c" kind="enumvalue"><name>_momentum</name></member>
+    <member refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a998b406e0925bcec22e702b1f6fb4749" kind="enumvalue"><name>_nesterov_momentum</name></member>
+    <member refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a32b1464ba270a882f040ea9b3abcae8e" kind="enumvalue"><name>_adagrad</name></member>
+    <member refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a4b3bafa9e8c9bd60322ef96ecf216222" kind="enumvalue"><name>_rmsprop</name></member>
+    <member refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a3caa5934366a304c6c6bf3cc474c3a17" kind="enumvalue"><name>_adadelta</name></member>
+    <member refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461aced71dd3f480a1265acd015656dcec19" kind="enumvalue"><name>_adamax</name></member>
+    <member refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a4b7fa459df18d4bf2eaa7955899b3b03" kind="enumvalue"><name>_sgd</name></member>
+  </compound>
   <compound refid="utils_8h" kind="file"><name>utils.h</name>
-    <member refid="utils_8h_1a2e3484535ee610c8e19e9859563abe48" kind="define"><name>__unused</name></member>
-    <member refid="utils_8h_1a41ff14e585aca69984fd070badcda5a9" kind="define"><name>DLLSPEC</name></member>
     <member refid="utils_8h_1a69793e71975c25754a8236df29896e15" kind="define"><name>PBWIDTH</name></member>
     <member refid="utils_8h_1a20a8ab7265b34d3991ec545da2a5d199" kind="define"><name>RESET_COUT</name></member>
     <member refid="utils_8h_1a60cee83cb17f7f508a9353f9d65b366e" kind="variable"><name>FILL_VALUE</name></member>
     <member refid="utils_8h_1a4a24f71756aa5af72e545c4d5ec89e38" kind="variable"><name>NULL_VALUE</name></member>
+    <member refid="utils_8h_1a2ad563d82e3eb5be973e36fb8d6d669c" kind="function"><name>operator*</name></member>
+    <member refid="utils_8h_1a88275192a3a05a32f5a36b6a478635eb" kind="function"><name>operator*</name></member>
   </compound>
   <compound refid="dir_911b18c25225ad5cb4ae7480cb868c47" kind="dir"><name>/home/nico/Code</name>
   </compound>

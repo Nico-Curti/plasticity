@@ -23,7 +23,7 @@
 
 ## Unsupervised Neural Networks with biological-inspired learning rules
 
-**TODO**
+Implementation and optimization of biological-inspired Neural Network models for the features encoding.
 
 * [Overview](#overview)
 * [Theory](#theory)
@@ -42,11 +42,43 @@
 
 ## Overview
 
-**TODO**
+Despite the great success of backpropagation algorithm in deep learning, a question remains to what extent the computational properties of artificial neural networks are comparable to the plasticity rules of the human brain.
+Indeed, even if the architectures of real and artificial neural networks are similar, the supervised training based on backpropagation and the neurobiology learning rules are unrelated.
+
+In the paper by [D. Krotov and J. J. Hopfield](https://arxiv.org/abs/1806.10181), it is proposed an unusual learning rule, which has a degree of biological plausibility and which is motivated by different well known ideas in neuroplasticity theory:
+
+* Hebb's rule: changes of the synapse strength depend only on the activities of the pre- and post-synaptic neurons and so the learning is **physically local** and describable by local mathematics
+
+* the core of the learning procedure is **unsupervised** because it is believed to be mainly observational, with few or no labels and no explicit task
+
+Starting from these concepts, they were able to design an algorithm (based on an extension of the *Oja rule*) capable of learning early feature detectors in a completely unsupervised way and then use them to train higher-layer weights in a usual supervised neural network.
+In particular, the Hopfield model has the structure of a 2-layers neural network which can be described by the following equations:
+
+<img src="https://render.githubusercontent.com/render/math?math=\left\{\begin{matrix}h_j=f(\sum_iw_{ij}v_i)\\c_k=tanh(\sum_js_{jk}h_j)\end{matrix}\right.">
+
+where
+
+<img src="https://render.githubusercontent.com/render/math?math=f(x)=\left\{\begin{matrix}x^n,x\geq0\\0,x<0\end{matrix}\right.">
+
+is the activation function of the unsupervised layer (ReLu for n=1), v<sub>i</sub>, h<sub>j</sub>, c<sub>k</sub> are respectively the input, hidden and output neurons and w<sub>ij</sub>, s<sub>jk</sub> are the receptive fields of the hidden layer (learned by the local unsupervised algorithm) and the weights learned by conventional supervised technique.
 
 ## Theory
 
-**TODO**
+In this project, a parallel approach founded on the same concepts is proposed.
+In particular, it has been developed a model based on the *BCM theory* (E. Bienenstock, L. Cooper, and P. Munro). An exhaustive theoretical description is provided by the original paper of [Castellani et al.](https://pubmed.ncbi.nlm.nih.gov/10378187/).
+
+In general terms, BCM model proposes a sliding threshold for long-term potentiation (LTP) or long-term depression (LTD) induction, and states that synaptic plasticity is stabilized by a dynamic adaptation of the time-averaged postsynaptic activity.
+The BCM learning rule is described by the following equations:
+
+<img src="https://render.githubusercontent.com/render/math?math=\frac{dw_i}{dt}=y(y-\theta_M)x_i\sigma'(y)">
+
+<img src="https://render.githubusercontent.com/render/math?math=\theta_M=E[y^2]">
+
+where <img src="https://render.githubusercontent.com/render/math?math=E[\cdot]"> is the time-average operator and, taking the input `x`, the output `y` is computed as:
+
+<img src="https://render.githubusercontent.com/render/math?math=y=\sigma\left(\sum_iw_ix_i\right)">
+
+In this case, the activation function <img src="https://render.githubusercontent.com/render/math?math=\sigma"> is a sigmoidal.
 
 See [here](https://github.com/Nico-Curti/plasticity/blob/master/docs/source/theory.rst) for further details about the models.
 
@@ -227,6 +259,8 @@ The `plasticity` package is licensed under the MIT "Expat" License. [![License](
 ## Acknowledgments
 
 Thanks goes to all contributors of this project.
+
+We thank also the author(s) of [Catch2](https://github.com/catchorg/Catch2) library: we have used it in the testing procedure of our C++ version and it is amazing!
 
 ## Citation
 

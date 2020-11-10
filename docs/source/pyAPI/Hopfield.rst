@@ -1,7 +1,7 @@
 Hopfield
 --------
 
-.. automodule:: plasticity.model.Hopfield
+.. automodule:: model.hopfield
    :members:
-   :undoc-members:
    :show-inheritance:
+   :inherited-members:

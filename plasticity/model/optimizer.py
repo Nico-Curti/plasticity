@@ -30,9 +30,11 @@ class Optimizer (object):
     lr_max : float (default=np.inf)
       Maximum of learning rate domain
 
-    *args
+    *args : list
+      Class specialization variables.
 
-    **kwargs
+    **kwargs : dict
+      Class Specialization variables.
   '''
 
   def __init__ (self, lr=2e-2, decay=0., lr_min=0., lr_max=np.inf, *args, **kwargs):
@@ -42,7 +44,7 @@ class Optimizer (object):
     self.lr_min = lr_min
     self.lr_max = lr_max
 
-    self.iterations = 0
+    self.iterations = 1
 
   def update (self, params, gradients):
     '''
@@ -55,15 +57,32 @@ class Optimizer (object):
 
       gradients : list
         List of corresponding gradients
+
+    Returns
+    -------
+      self
     '''
     self.lr *= 1. / (self.decay * self.iterations + 1.)
     self.lr  = np.clip(self.lr, self.lr_min, self.lr_max)
+    self.iterations += 1
 
-  def __str__ (self):
+    return self
+
+  def __repr__ (self):
     '''
     Printer
     '''
-    return self.__class__.__name__
+    class_name = self.__class__.__qualname__
+    try:
+      params = super(type(self), self).__init__.__code__.co_varnames
+    except AttributeError:
+      params = self.__init__.__code__.co_varnames
+
+    params = set(params) - {'self', 'args', 'kwargs'}
+    args = ', '.join(['{0}={1}'.format(k, str(getattr(self, k)))
+                      if not isinstance(getattr(self, k), str) else '{0}="{1}"'.format(k, str(getattr(self, k)))
+                      for k in params])
+    return '{0}({1})'.format(class_name, args)
 
 
 class SGD (Optimizer):
@@ -73,7 +92,17 @@ class SGD (Optimizer):
 
   Update the parameters according to the rule
 
+  .. code-block:: python
+
     parameter -= learning_rate * gradient
+
+  Parameters
+  ----------
+    *args : list
+      Class specialization variables.
+
+    **kwargs : dict
+      Class Specialization variables.
   '''
 
   def __init__ (self, *args, **kwargs):
@@ -81,6 +110,22 @@ class SGD (Optimizer):
     super(SGD, self).__init__(*args, **kwargs)
 
   def update (self, params, gradients):
+    '''
+    Update the given parameters according to the class optimization algorithm
+
+    Parameters
+    ----------
+      params : list
+        List of parameters to update
+
+      gradients : list
+        List of corresponding gradients
+
+    Returns
+    -------
+      params : list
+        The updated parameters
+    '''
 
     for p, g in zip(params, gradients):
       p -= self.lr * g#np.clip(g, -1., 1.)
@@ -94,6 +139,25 @@ class Momentum (Optimizer):
 
   '''
   Stochastic Gradient Descent with Momentum specialiation
+
+  Update the parameters according to the rule
+
+  .. code-block:: python
+
+    v = momentum * v - lr * gradient
+    parameter += v - learning_rate * gradient
+
+
+  Parameters
+  ----------
+    momentum : float (default=0.9)
+      Momentum value
+
+    *args : list
+      Class specialization variables.
+
+    **kwargs : dict
+      Class Specialization variables.
   '''
 
   def __init__ (self, momentum=.9, *args, **kwargs):
@@ -104,6 +168,22 @@ class Momentum (Optimizer):
     self.velocity = None
 
   def update (self, params, gradients):
+    '''
+    Update the given parameters according to the class optimization algorithm
+
+    Parameters
+    ----------
+      params : list
+        List of parameters to update
+
+      gradients : list
+        List of corresponding gradients
+
+    Returns
+    -------
+      params : list
+        The updated parameters
+    '''
 
     if self.velocity is None:
       self.velocity = [np.zeros(shape=p.shape, dtype=float) for p in params]
@@ -122,6 +202,24 @@ class NesterovMomentum (Optimizer):
 
   '''
   Stochastic Gradient Descent with Nesterov Momentum specialiation
+
+  Update the parameters according to the rule
+
+  .. code-block:: python
+
+    v = momentum * v - lr * gradient
+    parameter += momentum * v - learning_rate * gradient
+
+  Parameters
+  ----------
+    momentum : float (default=0.9)
+      Momentum value
+
+    *args : list
+      Class specialization variables.
+
+    **kwargs : dict
+      Class Specialization variables.
   '''
 
   def __init__ (self, momentum=.9, *args, **kwargs):
@@ -132,6 +230,22 @@ class NesterovMomentum (Optimizer):
     self.velocity = None
 
   def update (self, params, gradients):
+    '''
+    Update the given parameters according to the class optimization algorithm
+
+    Parameters
+    ----------
+      params : list
+        List of parameters to update
+
+      gradients : list
+        List of corresponding gradients
+
+    Returns
+    -------
+      params : list
+        The updated parameters
+    '''
 
     if self.velocity is None:
       self.velocity = [np.zeros(shape=p.shape, dtype=float) for p in params]
@@ -150,6 +264,24 @@ class Adagrad (Optimizer):
 
   '''
   Adagrad optimizer specialization
+
+  Update the parameters according to the rule
+
+  .. code-block:: python
+
+    c += gradient * gradient
+    parameter -= learning_rate * gradient / (sqrt(c) + epsilon)
+
+  Parameters
+  ----------
+    epsilon : float (default=1e-6)
+      Precision parameter to overcome numerical overflows
+
+    *args : list
+      Class specialization variables.
+
+    **kwargs : dict
+      Class Specialization variables.
   '''
 
   def __init__ (self, epsilon=1e-6, *args, **kwargs):
@@ -160,6 +292,22 @@ class Adagrad (Optimizer):
     self.cache = None
 
   def update (self, params, gradients):
+    '''
+    Update the given parameters according to the class optimization algorithm
+
+    Parameters
+    ----------
+      params : list
+        List of parameters to update
+
+      gradients : list
+        List of corresponding gradients
+
+    Returns
+    -------
+      params : list
+        The updated parameters
+    '''
 
     if self.cache is None:
       self.cache = [np.zeros(shape=p.shape, dtype=float) for p in params]
@@ -176,7 +324,30 @@ class Adagrad (Optimizer):
 
 
 class RMSprop (Optimizer):
+
   '''
+  RMSprop optimization algorithm
+
+  Update the parameters according to the rule
+
+  .. code-block:: python
+
+    c = rho * c + (1. - rho) * gradient * gradient
+    parameter -= learning_rate * gradient / (sqrt(c) + epsilon)
+
+  Parameters
+  ----------
+    rho : float (default=0.9)
+      Decay factor
+
+    epsilon : float (default=1e-6)
+      Precision parameter to overcome numerical overflows
+
+    *args : list
+      Class specialization variables.
+
+    **kwargs : dict
+      Class Specialization variables.
   '''
 
   def __init__ (self, rho=.9, epsilon=1e-6, *args, **kwargs):
@@ -190,6 +361,22 @@ class RMSprop (Optimizer):
     self.iterations = 0
 
   def update (self, params, gradients):
+    '''
+    Update the given parameters according to the class optimization algorithm
+
+    Parameters
+    ----------
+      params : list
+        List of parameters to update
+
+      gradients : list
+        List of corresponding gradients
+
+    Returns
+    -------
+      params : list
+        The updated parameters
+    '''
 
     if self.cache is None:
       self.cache = [np.zeros(shape=p.shape, dtype=float) for p in params]
@@ -197,7 +384,7 @@ class RMSprop (Optimizer):
     for i, (c, p, g) in enumerate(zip(self.cache, params, gradients)):
 
       c = self.rho * c + (1 - self.rho) * g * g
-      p -= (self.lr * g / (np.sqrt(c) + self.epsilon))
+      p -= self.lr * g / (np.sqrt(c) + self.epsilon)
       self.cache[i] = c
 
     super(RMSprop, self).update(params, gradients)
@@ -206,7 +393,32 @@ class RMSprop (Optimizer):
 
 
 class Adadelta (Optimizer):
+
   '''
+  AdaDelta optimization algorithm
+
+  Update the parameters according to the rule
+
+  .. code-block:: python
+
+    c = rho * c + (1. - rho) * gradient * gradient
+    update = gradient * sqrt(d + epsilon) / (sqrt(c) + epsilon)
+    parameter -= learning_rate * update
+    d = rho * d + (1. - rho) * update * update
+
+  Parameters
+  ----------
+    rho : float (default=0.9)
+      Decay factor
+
+    epsilon : float (default=1e-6)
+      Precision parameter to overcome numerical overflows
+
+    *args : list
+      Class specialization variables.
+
+    **kwargs : dict
+      Class Specialization variables.
   '''
 
   def __init__ (self, rho=0.9, epsilon=1e-6, *args, **kwargs):
@@ -220,6 +432,22 @@ class Adadelta (Optimizer):
     self.delta = None
 
   def update (self, params, gradients):
+    '''
+    Update the given parameters according to the class optimization algorithm
+
+    Parameters
+    ----------
+      params : list
+        List of parameters to update
+
+      gradients : list
+        List of corresponding gradients
+
+    Returns
+    -------
+      params : list
+        The updated parameters
+    '''
 
     if self.cache is None:
       self.cache = [np.zeros(shape=p.shape, dtype=float) for p in params]
@@ -243,7 +471,35 @@ class Adadelta (Optimizer):
 
 
 class Adam (Optimizer):
+
   '''
+  Adam optimization algorithm
+
+  Update the parameters according to the rule
+
+  .. code-block:: python
+
+    at  = learning_rate * sqrt(1 - B2**iterations) / (1 - B1**iterations)
+    m = B1 * m + (1 - B1) * gradient
+    v = B2 * m + (1 - B2) * gradient * gradient
+    parameter -= at * m / (sqrt(v) + epsilon)
+
+  Parameters
+  ----------
+    beta1 : float (default=0.9)
+      B1 factor
+
+    beta2 : float (default=0.999)
+      B2 factor
+
+    epsilon : float (default=1e-8)
+      Precision parameter to overcome numerical overflows
+
+    *args : list
+      Class specialization variables.
+
+    **kwargs : dict
+      Class Specialization variables.
   '''
 
   def __init__ (self, beta1=0.9, beta2=0.999, epsilon=1e-8, *args, **kwargs):
@@ -258,8 +514,22 @@ class Adam (Optimizer):
     self.vs = None
 
   def update (self, params, gradients):
-    self.iterations += 1
+    '''
+    Update the given parameters according to the class optimization algorithm
 
+    Parameters
+    ----------
+      params : list
+        List of parameters to update
+
+      gradients : list
+        List of corresponding gradients
+
+    Returns
+    -------
+      params : list
+        The updated parameters
+    '''
     a_t = self.lr * np.sqrt(1 - np.power(self.beta2, self.iterations)) / \
           (1 - np.power(self.beta1, self.iterations))
 
@@ -284,7 +554,35 @@ class Adam (Optimizer):
 
 
 class Adamax (Optimizer):
+
   '''
+  Adamax optimization algorithm
+
+  Update the parameters according to the rule
+
+  .. code-block:: python
+
+    at  = learning_rate / (1 - B1**iterations)
+    m = B1 * m + (1 - B1) * gradient
+    v = max(B2 * v, abs(gradient))
+    parameter -= at * m / (v + epsilon)
+
+  Parameters
+  ----------
+    beta1 : float (default=0.9)
+      B1 factor
+
+    beta2 : float (default=0.999)
+      B2 factor
+
+    epsilon : float (default=1e-8)
+      Precision parameter to overcome numerical overflows
+
+    *args : list
+      Class specialization variables.
+
+    **kwargs : dict
+      Class Specialization variables.
   '''
 
   def __init__ (self, beta1=0.9, beta2=0.999, epsilon=1e-8, *args, **kwargs):
@@ -299,8 +597,22 @@ class Adamax (Optimizer):
     self.vs = None
 
   def update (self, params, gradients):
-    self.iterations += 1
+    '''
+    Update the given parameters according to the class optimization algorithm
 
+    Parameters
+    ----------
+      params : list
+        List of parameters to update
+
+      gradients : list
+        List of corresponding gradients
+
+    Returns
+    -------
+      params : list
+        The updated parameters
+    '''
     a_t = self.lr / (1 - np.power(self.beta1, self.iterations))
 
     if self.ms is None:

@@ -2,6 +2,7 @@
 #include <catch.hpp>
 
 #include <hopfield.h>
+#include <optimizer.h>
 #include <Eigen/Dense>
 
 
@@ -16,14 +17,14 @@ TEST_CASE ( "Test fit" )
 
   const int outputs = 10;
   const int batch_size = 10;
-  const int activation = transfer :: _linear_;
   const float mu = 1.f;
   const float sigma = 2.5f;
-  const float epsilon = 2e-2f;
   const float strenght = 0.f;
   const int seed = SEED;
 
-  Hopfield model(outputs, batch_size, activation, mu, sigma, epsilon, strenght, seed);
+  update_args optimizer(optimizer_t :: _sgd);
+
+  Hopfield model(outputs, batch_size, optimizer, mu, sigma, strenght, seed);
 
   const int num_epochs = 1;
   const int num_samples = batch_size;

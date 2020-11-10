@@ -1,7 +1,7 @@
 BCM
 ---
 
-.. automodule:: plasticity.model.bcm.BCM
+.. automodule:: model.bcm
    :members:
-   :undoc-members:
    :show-inheritance:
+   :inherited-members:

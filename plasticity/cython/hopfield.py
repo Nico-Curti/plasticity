@@ -66,6 +66,8 @@ class Hopfield (BasePlasticity):
   >>> ax.axis("off")
   >>> plt.show()
 
+  .. image:: ../../../img/Hopfield_weights.png
+
   References
   ----------
   - Dmitry Krotov, and John J. Hopfield. Unsupervised learning by competing hidden units,

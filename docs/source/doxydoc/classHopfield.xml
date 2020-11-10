@@ -1,0 +1,455 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classHopfield" kind="class" language="C++" prot="public">
+    <compoundname>Hopfield</compoundname>
+    <basecompoundref refid="classBasePlasticity" prot="public" virt="non-virtual">BasePlasticity</basecompoundref>
+    <includes refid="hopfield_8h" local="no">hopfield.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classHopfield_1a79299a585fd41c7d818c67b2bd9a8252" prot="private" static="no" mutable="no">
+        <type>std ::unique_ptr&lt; float[] &gt;</type>
+        <definition>std :: unique_ptr&lt; float[] &gt; Hopfield::yl</definition>
+        <argsstring></argsstring>
+        <name>yl</name>
+        <briefdescription>
+<para>matrix of updates </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="17" column="22" bodyfile="/home/nico/Code/plasticity/include/hopfield.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classHopfield_1a291c5bbab5b6c688d747cf886904f428" prot="private" static="no" mutable="no">
+        <type>std ::unique_ptr&lt; int[] &gt;</type>
+        <definition>std :: unique_ptr&lt; int[] &gt; Hopfield::fire_indices</definition>
+        <argsstring></argsstring>
+        <name>fire_indices</name>
+        <briefdescription>
+<para>array of indices related to the maximum output </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="18" column="22" bodyfile="/home/nico/Code/plasticity/include/hopfield.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classHopfield_1ab85568f1dab9bcd1063de42a93082b99" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Hopfield::k</definition>
+        <argsstring></argsstring>
+        <name>k</name>
+        <briefdescription>
+<para>ranking parameter </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="20" column="7" bodyfile="/home/nico/Code/plasticity/include/hopfield.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classHopfield_1a855d7f0ebd15856d4fd5bbb5d24f74d8" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Hopfield::delta</definition>
+        <argsstring></argsstring>
+        <name>delta</name>
+        <briefdescription>
+<para>Strength of the anti-hebbian learning. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="22" column="9" bodyfile="/home/nico/Code/plasticity/include/hopfield.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classHopfield_1a22793a5daf2aeef71c8fb186bcd3b94c" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Hopfield::p</definition>
+        <argsstring></argsstring>
+        <name>p</name>
+        <briefdescription>
+<para>Lebesque norm of weights. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="23" column="9" bodyfile="/home/nico/Code/plasticity/include/hopfield.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classHopfield_1a5a4cbce90b0684bfe2fd21a4ea280a5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Hopfield::Hopfield</definition>
+        <argsstring>(const int &amp;outputs, const int &amp;batch_size, update_args optimizer=update_args(optimizer_t ::_sgd), float mu=0.f, float sigma=1.f, float delta=.4f, float p=2.f, int k=2, int seed=42)</argsstring>
+        <name>Hopfield</name>
+        <param>
+          <type>const int &amp;</type>
+          <declname>outputs</declname>
+        </param>
+        <param>
+          <type>const int &amp;</type>
+          <declname>batch_size</declname>
+        </param>
+        <param>
+          <type><ref refid="classupdate__args" kindref="compound">update_args</ref></type>
+          <declname>optimizer</declname>
+          <defval><ref refid="classupdate__args" kindref="compound">update_args</ref>(<ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461" kindref="member">optimizer_t</ref> ::<ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a4b7fa459df18d4bf2eaa7955899b3b03" kindref="member">_sgd</ref>)</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>mu</declname>
+          <defval>0.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>sigma</declname>
+          <defval>1.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>delta</declname>
+          <defval>.4f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>p</declname>
+          <defval>2.f</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>k</declname>
+          <defval>2</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>seed</declname>
+          <defval>42</defval>
+        </param>
+        <briefdescription>
+<para>Construct the object using the list of training parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The constructor follows the same nomenclature of the Python counterpart.</para>
+<para><simplesect kind="note"><para></para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>outputs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of hidden units. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>batch_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of the minibatch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>optimizer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classupdate__args" kindref="compound">update_args</ref> Optimizer object. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mean of the gaussian distribution that initializes the weights. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sigma</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Standard deviation of the gaussian distribution that initializes the weights. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Strength of the anti-hebbian learning </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Lebesgue norm of the weights. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>k</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ranking parameter, must be integer that is bigger or equal than 2. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>seed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Random number generator seed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="49" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classHopfield_1a2478b5f9b8f627d47a2994a34a55b598" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Hopfield::Hopfield</definition>
+        <argsstring>(const Hopfield &amp;b)</argsstring>
+        <name>Hopfield</name>
+        <param>
+          <type>const <ref refid="classHopfield" kindref="compound">Hopfield</ref> &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The copy constructor provides a deep copy of the object, i.e. all the arrays are copied and not moved.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classHopfield" kindref="compound">Hopfield</ref> object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="65" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="classHopfield_1a2e19f875428328622c15d6cf8fe603da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classHopfield" kindref="compound">Hopfield</ref> &amp;</type>
+        <definition>Hopfield&amp; Hopfield::operator=</definition>
+        <argsstring>(const Hopfield &amp;b)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classHopfield" kindref="compound">Hopfield</ref> &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Copy operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The operator performs a deep copy of the object and if there are buffers already allocated, the operatore deletes them and then re-allocates an appropriated portion of memory.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classHopfield" kindref="compound">Hopfield</ref> object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="77" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classHopfield_1a94c62a20249a3440ebacea0d61ea57c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Hopfield::~Hopfield</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Hopfield</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Completely delete the object and release the memory of the arrays. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="87" column="3"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classHopfield_1ad613a118971ea59c6b0e4115a9b9358b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Hopfield::check_params</definition>
+        <argsstring>()</argsstring>
+        <name>check_params</name>
+        <briefdescription>
+<para>Check the given parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>The function checks if the input variable k is positive defined and greater than 2 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="97" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classHopfield_1a907e8a6ba983b9a5e42e53228fb90b24" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Hopfield::weights_update</definition>
+        <argsstring>(float *X, const int &amp;n_features, float *weights_update)</argsstring>
+        <name>weights_update</name>
+        <reimplements refid="classBasePlasticity_1a3ceca70b3099d2a4beebf28f6a48a1c2">weights_update</reimplements>
+        <param>
+          <type>float *</type>
+          <declname>X</declname>
+        </param>
+        <param>
+          <type>const int &amp;</type>
+          <declname>n_features</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>weights_update</declname>
+        </param>
+        <briefdescription>
+<para>Approximation introduced by Krotov. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>Instead of solving dynamical equations we use the currents as a proxy for ranking of the final activities.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>X</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>array in ravel format of the input variables/features. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n_features</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>dimension of the X matrix, i.e. the number of cols. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>weights_update</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array/matrix of updates for weights. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="110" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classHopfield_1a835ba0a410402cccd5cdc062b60e02d9" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Hopfield::normalize_weights</definition>
+        <argsstring>()</argsstring>
+        <name>normalize_weights</name>
+        <reimplements refid="classBasePlasticity_1a5f9be9c944b9840a9372fd09b9b034a2">normalize_weights</reimplements>
+        <briefdescription>
+<para>Apply the Lebesgue norm to the weights. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>The function implements the Lebesque norm on the weight matrix following the equation:</para>
+</simplesect>
+<programlisting filename=".py"><codeline><highlight class="normal">W<sp/>=<sp/><ref refid="namespacemath_1abb8e0d8db22fad9f3804a0341bac8eef" kindref="member">sign</ref>(W)<sp/>*<sp/>abs(W)**(p<sp/>-<sp/>1)</highlight></codeline>
+</programlisting> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="122" column="8"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>BasePlasticity</label>
+        <link refid="classBasePlasticity"/>
+      </node>
+      <node id="1">
+        <label>Hopfield</label>
+        <link refid="classHopfield"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>BasePlasticity</label>
+        <link refid="classBasePlasticity"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>optimizer</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Hopfield</label>
+        <link refid="classHopfield"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>update_args</label>
+        <link refid="classupdate__args"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/nico/Code/plasticity/include/hopfield.h" line="15" column="1" bodyfile="/home/nico/Code/plasticity/include/hopfield.h" bodystart="14" bodyend="124"/>
+    <listofallmembers>
+      <member refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>activation</name></member>
+      <member refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>BasePlasticity</name></member>
+      <member refid="classBasePlasticity_1a4083fb0c002e37a0bf717e40f26d543b" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>BasePlasticity</name></member>
+      <member refid="classBasePlasticity_1a36aafa34a7d39721930afd46d2ccc5cd" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>BasePlasticity</name></member>
+      <member refid="classBasePlasticity_1a4a6ecb6e802bdfc043346c41b2682ca1" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>batch</name></member>
+      <member refid="classHopfield_1ad613a118971ea59c6b0e4115a9b9358b" prot="private" virt="non-virtual"><scope>Hopfield</scope><name>check_params</name></member>
+      <member refid="classHopfield_1a855d7f0ebd15856d4fd5bbb5d24f74d8" prot="private" virt="non-virtual"><scope>Hopfield</scope><name>delta</name></member>
+      <member refid="classBasePlasticity_1a9bc89cbc53982004dddd6c05a6f8c78b" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>engine</name></member>
+      <member refid="classHopfield_1a291c5bbab5b6c688d747cf886904f428" prot="private" virt="non-virtual"><scope>Hopfield</scope><name>fire_indices</name></member>
+      <member refid="classBasePlasticity_1a1adfa1440172822a6e3280e0142fb80e" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>fit</name></member>
+      <member refid="classBasePlasticity_1a35be8a52e26ce61050f1408d2f69fa66" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>get_weights</name></member>
+      <member refid="classBasePlasticity_1adf83370e29d977f79690bf17ed3668bf" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>gradient</name></member>
+      <member refid="classHopfield_1a5a4cbce90b0684bfe2fd21a4ea280a5c" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>Hopfield</name></member>
+      <member refid="classHopfield_1a2478b5f9b8f627d47a2994a34a55b598" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>Hopfield</name></member>
+      <member refid="classHopfield_1ab85568f1dab9bcd1063de42a93082b99" prot="private" virt="non-virtual"><scope>Hopfield</scope><name>k</name></member>
+      <member refid="classBasePlasticity_1a05b0d33b49372359fb6c96e80013ee78" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>load_weights</name></member>
+      <member refid="classBasePlasticity_1a974bdeec773185818312b6c82f7a764b" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>mu</name></member>
+      <member refid="classHopfield_1a835ba0a410402cccd5cdc062b60e02d9" prot="private" virt="virtual"><scope>Hopfield</scope><name>normalize_weights</name></member>
+      <member refid="classBasePlasticity_1a6a98b64e6ab4ff78982b15e8f74ecb2f" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>nweights</name></member>
+      <member refid="classHopfield_1a2e19f875428328622c15d6cf8fe603da" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>operator=</name></member>
+      <member refid="classBasePlasticity_1a8fd48d4e055c774a6add951156790041" prot="public" virt="non-virtual" ambiguityscope="BasePlasticity::"><scope>Hopfield</scope><name>operator=</name></member>
+      <member refid="classBasePlasticity_1a5c440b00a49873031e5d0510f377f791" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>optimizer</name></member>
+      <member refid="classBasePlasticity_1a427d9ff731f3db65bf5474e078b36467" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>output</name></member>
+      <member refid="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>outputs</name></member>
+      <member refid="classHopfield_1a22793a5daf2aeef71c8fb186bcd3b94c" prot="private" virt="non-virtual"><scope>Hopfield</scope><name>p</name></member>
+      <member refid="classBasePlasticity_1ac3b0a942271707d1ac30cfb495fa91b6" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>precision</name></member>
+      <member refid="classBasePlasticity_1a4104d12babea679995d21a5de08d7129" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>predict</name></member>
+      <member refid="classBasePlasticity_1ad5bfcab20dd11a25024d8fb83c0e4c23" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>save_weights</name></member>
+      <member refid="classBasePlasticity_1a45ee1f1803e06f09d9044e9252852631" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>sigma</name></member>
+      <member refid="classBasePlasticity_1a1b218e7e7c6f5494aee2a8f8e603cbec" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>theta</name></member>
+      <member refid="classBasePlasticity_1ac85dc18520a49febfcffd6646b0ab9b6" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>weights</name></member>
+      <member refid="classHopfield_1a907e8a6ba983b9a5e42e53228fb90b24" prot="private" virt="virtual"><scope>Hopfield</scope><name>weights_update</name></member>
+      <member refid="classHopfield_1a79299a585fd41c7d818c67b2bd9a8252" prot="private" virt="non-virtual"><scope>Hopfield</scope><name>yl</name></member>
+      <member refid="classBasePlasticity_1a4f812c1d906aa5e828bfcc65ce4e510a" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>~BasePlasticity</name></member>
+      <member refid="classHopfield_1a94c62a20249a3440ebacea0d61ea57c7" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>~Hopfield</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

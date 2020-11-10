@@ -5,9 +5,6 @@ BCM :: BCM (const int & outputs, const int & batch_size,
             ) : BasePlasticity (outputs, batch_size, activation, optimizer, mu, sigma, seed)
 {
   this->init_interaction_matrix(interaction_strength);
-
-  //const int size = this->outputs * this->batch;
-  //this->yl.reset(new float[size]);
 }
 
 
@@ -83,40 +80,39 @@ void BCM :: weights_update (float * X, const int & n_features, float * weights_u
                                        }) / this->batch;
   }
 
-  // MISS interaction matrix gemm
   // interaction_matrix (outputs, outputs)
   // output (outputs, batch)
-/*
-  for (int i = 0; i < this->outputs; ++i)
-    for (int j = 0; j < this->batch; ++j)
-    {
-      const int idx = i * this->batch + j;
-      this->yl[idx] = 0.f;
+  // X (batch, n_features)
+  // theta (outputs)
 
-      for (int k = 0; k < this->outputs; ++k)
-      {
-        const float out_old = this->output[k * this->batch + j];
-        const float phi = out_old * (out_old - this->theta[k]);
-        this->yl[idx] += this->interaction_matrix[i * this->outputs + k] * phi;
-      }
-    }
-*/
 #ifdef _OPENMP
   #pragma omp for collapse (2)
 #endif
   for (int i = 0; i < this->outputs; ++i)
     for (int j = 0; j < this->batch; ++j)
     {
+
+      float interaction_sum = 0.f;
+
+      for (int k = 0; k < this->outputs; ++k)
+      {
+        const int idx = i * this->outputs + k;
+        const float interaction = this->interaction_matrix[idx];
+        const float out_old = this->output[k * this->batch + j];
+        const float phi = out_old * (out_old - this->theta[k]);
+
+        interaction_sum += interaction * phi;
+      }
+
       const int idx = i * this->batch + j;
       const float out_old = this->output[idx];
-      const float phi = out_old * (out_old - this->theta[i]);
-      const float out_new = phi * this->gradient(this->activation(out_old));
+      const float out_new = this->gradient(this->activation(out_old));
 
       float * xi = X + j * n_features;
       float * wi = weights_update + i * n_features;
 
       for (int k = 0; k < n_features; ++k)
-        wi[k] += out_new * xi[k];
+        wi[k] += interaction_sum * out_new * xi[k];
 
       this->output[idx] = out_new;
     }

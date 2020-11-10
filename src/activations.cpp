@@ -2,6 +2,8 @@
 
 namespace transfer
 {
+  static __unused float leaky_coeff = 1e-1f; ///< Internal coefficient of Leaky activation function
+  static __unused float steepness = 1.f;     ///< Internal coefficient of Elliot function
 
   float linear (const float & x)
   {
@@ -55,7 +57,7 @@ namespace transfer
 
   float g_loggy (const float & x)
   {
-    const float y = ( x + 1.f) * .5f;
+    const float y = ( x + 1.f ) * .5f;
     return 2.f * (1.f - y) * y;
   }
 
@@ -214,8 +216,10 @@ namespace transfer
   float g_asymm_logistic (const float & x)
   {
     const float par = x < 0 ? -1.f : 50.f;
-    const float denom = 1.f + math :: exp(-2.f * x / par);
-    return 4.f * math :: exp(-2.f * x / par) / (denom * denom);
+    //const float denom = 1.f + math :: exp(-2.f * x / par);
+    //return 4.f * math :: exp(-2.f * x / par) / (denom * denom);
+    const float temp = x / par;
+    return (temp + 1.f) * (2.f - temp - 1.f);
   }
 
   void swish_array (const float * x, const int & n, float * output_sigmoid, float * output)

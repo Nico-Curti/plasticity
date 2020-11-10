@@ -10,7 +10,7 @@ namespace transfer
 {
 
   enum{ _logistic_ = 0, _loggy_, _relu_, _elu_, _relie_, _ramp_, _linear_, _tanh_, _plse_, _leaky_, _stair_, _hardtan_, _lhtan_, _selu_, _elliot_, _symm_elliot_, _softplus_, _softsign_, _asymm_logistic_
-  };// activations
+  };///< activation types
 
   static const std :: unordered_map < std :: string, int > get_activation {
                                                                             {"logistic"    , _logistic_},
@@ -32,33 +32,249 @@ namespace transfer
                                                                             {"softplus"    , _softplus_},
                                                                             {"softsign"    , _softsign_},
                                                                             {"as_logistic" , _asymm_logistic_}
-                                                                          };
+                                                                          }; ///< Utility for the activations management
 
-  static __unused float leaky_coeff = 1e-1f;
-  static __unused float steepness = 1.f;
-
+  /**
+  * @brief Linear activation function.
+  *
+  * @details The activation function follows the equation:
+  *
+  * ```python
+  * f(x) = x
+  * ```
+  *
+  * @param x Input variable.
+  *
+  * @return The activated input.
+  */
   float linear (const float & x);
-  float g_linear (__unused const float & x);
+  /**
+  * @brief Gradient of the Linear activation function.
+  *
+  * @details The gradient is equal to:
+  *
+  * ```python
+  * f'(x) = 1
+  * ```
+  *
+  * @param x Input variable.
+  *
+  * @return The gradient of the input.
+  */
+  float g_linear (const float & x);
 
+  /**
+  * @brief Stair activation function.
+  *
+  * @details The activation function follows the equation:
+  *
+  * ```python
+  * f(x) = ...
+  * ```
+  *
+  * @param x Input variable.
+  *
+  * @return The activated input.
+  */
   float stair (const float & x);
+  /**
+  * @brief Gradient of the Stair activation function.
+  *
+  * @details The gradient is equal to:
+  *
+  * ```python
+  * f'(x) = ...
+  * ```
+  *
+  * @param x Input variable.
+  *
+  * @return The gradient of the input.
+  */
   float g_stair (const float & x);
 
+  /**
+  * @brief HardTan activation function.
+  *
+  * @details The activation function follows the equation:
+  *
+  * ```python
+  * if x < -2.5:
+  *   return 0.
+  * elif x > 2.5:
+  *   return 1.
+  * else:
+  *   retun 0.2 * x + 0.5
+  * ```
+  *
+  * @param x Input variable.
+  *
+  * @return The activated input.
+  */
   float hardtan (const float & x);
+  /**
+  * @brief Gradient of the HardTan activation function.
+  *
+  * @details The gradient is equal to:
+  *
+  * ```python
+  * if x > -2.5 and x < 2.5:
+  *   return 0.2
+  * else:
+  *   return 0.0
+  * ```
+  *
+  * @param x Input variable.
+  *
+  * @return The gradient of the input.
+  */
   float g_hardtan (const float & x);
 
+  /**
+  * @brief Logistic (sigmoid) activation function.
+  *
+  * @details The activation function follows the equation:
+  *
+  * ```python
+  * f(x) = 1. / (1. + exp(-x))
+  * ```
+  *
+  * @param x Input variable.
+  *
+  * @return The activated input.
+  */
   float logistic (const float & x);
+  /**
+  * @brief Gradient of the Logistic activation function.
+  *
+  * @details The gradient is equal to:
+  *
+  * ```python
+  * f'(x) = (1. - x) * x
+  * ```
+  *
+  * @param x Input variable.
+  *
+  * @return The gradient of the input.
+  */
   float g_logistic (const float & x);
 
+  /**
+  * @brief Loggy activation function.
+  *
+  * @details The activation function follows the equation:
+  *
+  * ```python
+  * f(x) = 2. / (1. + exp(-x)) - 1.
+  * ```
+  *
+  * @param x Input variable.
+  *
+  * @return The activated input.
+  */
   float loggy (const float & x);
+  /**
+  * @brief Gradient of the Loggy activation function.
+  *
+  * @details The gradient is equal to:
+  *
+  * ```python
+  * y = (x + 1.) * 0.5
+  * f'(x) = 2. * (1. - y) * y
+  * ```
+  *
+  * @param x Input variable.
+  *
+  * @return The gradient of the input.
+  */
   float g_loggy (const float & x);
 
+  /**
+  * @brief ReLU activation function.
+  *
+  * @details The activation function follows the equation:
+  *
+  * ```python
+  * f(x) = max(0, x)
+  * ```
+  *
+  * @param x Input variable.
+  *
+  * @return The activated input.
+  */
   float relu (const float & x);
+  /**
+  * @brief Gradient of the ReLU activation function.
+  *
+  * @details The gradient is equal to:
+  *
+  * ```python
+  * f'(x) = 1 if x > 0 else 0
+  * ```
+  *
+  * @param x Input variable.
+  *
+  * @return The gradient of the input.
+  */
   float g_relu (const float & x);
 
+  /**
+  * @brief Elu activation function.
+  *
+  * @details The activation function follows the equation:
+  *
+  * ```python
+  * y = x >= 0
+  * f(x) = y * x + ~y * exp(x - 1.)
+  * ```
+  *
+  * @param x Input variable.
+  *
+  * @return The activated input.
+  */
   float elu (const float & x);
+  /**
+  * @brief Gradient of the Elu activation function.
+  *
+  * @details The gradient is equal to:
+  *
+  * ```python
+  * y = x >= 0
+  * f'(x) = y + ~y * (x + 1.)
+  * ```
+  *
+  * @param x Input variable.
+  *
+  * @return The gradient of the input.
+  */
   float g_elu (const float & x);
 
+  /**
+  * @brief Relie activation function.
+  *
+  * @details The activation function follows the equation:
+  *
+  * ```python
+  * f(x) = x if x > 0 else 0.001 * x
+  * ```
+  *
+  * @param x Input variable.
+  *
+  * @return The activated input.
+  */
   float relie (const float & x);
+  /**
+  * @brief Gradient of the Relie activation function.
+  *
+  * @details The gradient is equal to:
+  *
+  * ```python
+  * f'(x) = 1 if x > 0 else 0.001
+  * ```
+  *
+  * @param x Input variable.
+  *
+  * @return The gradient of the input.
+  */
   float g_relie (const float & x);
 
   float ramp (const float & x);
@@ -100,7 +316,29 @@ namespace transfer
   void mish_array (const float * x, const int & n, float * input_activation, float * output);
   void mish_gradient (const int & n, const float * activation_input, float * delta);
 
+  /**
+  * @brief Switch case between activation functions.
+  *
+  * @details This function is used to set the desired activation function
+  * (returned as pointer to function) starting from its "name" in the enum.
+  * If the input integer is not in the enum range a nullptr is returned.
+  *
+  * @param active Integer from the enum activation types.
+  *
+  * @return Pointer to the desired function.
+  */
   std :: function < float(const float &) > activate ( const int & active);
+  /**
+  * @brief Switch case between gradient functions.
+  *
+  * @details This function is used to set the desired gradient function
+  * (returned as pointer to function) starting from its "name" in the enum.
+  * If the input integer is not in the enum range a nullptr is returned.
+  *
+  * @param active Integer from the enum activation types.
+  *
+  * @return Pointer to the desired function.
+  */
   std :: function < float(const float &) > gradient ( const int & active);
 
 }

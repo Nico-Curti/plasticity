@@ -4,7 +4,7 @@
 import numpy as np
 
 from plasticity.model._base import BasePlasticity
-from plasticity.utils.optimizer import SGD
+from .optimizer import SGD
 
 __author__  = ['Nico Curti', 'SimoneGasperini']
 __email__ = ['nico.curit2@unibo.it', 'simone.gasperini2@studio.unibo.it']
@@ -72,6 +72,8 @@ class Hopfield (BasePlasticity):
   >>> fig.colorbar(im, ticks=[np.min(w), 0, np.max(w)])
   >>> ax.axis("off")
   >>> plt.show()
+
+  .. image:: ../../../img/Hopfield_weights.png
 
   References
   ----------

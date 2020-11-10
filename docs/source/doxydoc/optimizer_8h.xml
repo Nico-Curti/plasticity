@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="optimizer_8h" kind="file" language="C++">
+    <compoundname>optimizer.h</compoundname>
+    <includes local="no">utils.hpp</includes>
+    <includes local="no">unordered_map</includes>
+    <includes local="no">numeric</includes>
+    <includedby refid="base_8h" local="no">/home/nico/Code/plasticity/include/base.h</includedby>
+    <incdepgraph>
+      <node id="4">
+        <label>numeric</label>
+      </node>
+      <node id="1">
+        <label>/home/nico/Code/plasticity/include/optimizer.h</label>
+        <link refid="optimizer_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>utils.hpp</label>
+      </node>
+      <node id="3">
+        <label>unordered_map</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/nico/Code/plasticity/include/optimizer.h</label>
+        <link refid="optimizer_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/nico/Code/plasticity/include/hopfield.h</label>
+        <link refid="hopfield_8h"/>
+      </node>
+      <node id="3">
+        <label>/home/nico/Code/plasticity/include/bcm.h</label>
+        <link refid="bcm_8h"/>
+      </node>
+      <node id="2">
+        <label>/home/nico/Code/plasticity/include/base.h</label>
+        <link refid="base_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classupdate__args" prot="public">update_args</innerclass>
+    <innernamespace refid="namespaceoptimizer">optimizer</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="optimizer_8h_1a72b52171f528dbf8ec5f4d2a8faf8e38" prot="public" static="no">
+        <name>ERROR_NWEIGHTS</name>
+        <initializer>201</initializer>
+        <briefdescription>
+<para>The weights dimension is incorrect. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="9" column="9" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461" prot="public" static="no" strong="no">
+        <type></type>
+        <name>optimizer_t</name>
+        <enumvalue id="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a476faccd3ee57983084a9a9a30a4c0f1" prot="public">
+          <name>_adam</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461af07fa7e71d6dd0d5376d8ee85cec747c" prot="public">
+          <name>_momentum</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a998b406e0925bcec22e702b1f6fb4749" prot="public">
+          <name>_nesterov_momentum</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a32b1464ba270a882f040ea9b3abcae8e" prot="public">
+          <name>_adagrad</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a4b3bafa9e8c9bd60322ef96ecf216222" prot="public">
+          <name>_rmsprop</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a3caa5934366a304c6c6bf3cc474c3a17" prot="public">
+          <name>_adadelta</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461aced71dd3f480a1265acd015656dcec19" prot="public">
+          <name>_adamax</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a4b7fa459df18d4bf2eaa7955899b3b03" prot="public">
+          <name>_sgd</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="11" column="17" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="11" bodyend="12"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>__update_args_h__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__update_args_h__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utils.hpp&gt;</highlight><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>useful<sp/>macros</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_map&gt;</highlight><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>std<sp/>::<sp/>unordered_map</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;numeric&gt;</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>std<sp/>::<sp/>inner_product</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9" refid="optimizer_8h_1a72b52171f528dbf8ec5f4d2a8faf8e38" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ERROR_NWEIGHTS<sp/>201<sp/></highlight></codeline>
+<codeline lineno="10"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461" kindref="member">optimizer_t</ref><sp/>{<sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a476faccd3ee57983084a9a9a30a4c0f1" kindref="member">_adam</ref><sp/>=<sp/>0,<sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461af07fa7e71d6dd0d5376d8ee85cec747c" kindref="member">_momentum</ref>,<sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a998b406e0925bcec22e702b1f6fb4749" kindref="member">_nesterov_momentum</ref>,<sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a32b1464ba270a882f040ea9b3abcae8e" kindref="member">_adagrad</ref>,<sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a4b3bafa9e8c9bd60322ef96ecf216222" kindref="member">_rmsprop</ref>,<sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a3caa5934366a304c6c6bf3cc474c3a17" kindref="member">_adadelta</ref>,<sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461aced71dd3f480a1265acd015656dcec19" kindref="member">_adamax</ref>,<sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a4b7fa459df18d4bf2eaa7955899b3b03" kindref="member">_sgd</ref></highlight></codeline>
+<codeline lineno="12"><highlight class="normal">};<sp/></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="namespaceoptimizer" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceoptimizer" kindref="compound">optimizer</ref></highlight></codeline>
+<codeline lineno="15"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std<sp/>::<sp/>unordered_map<sp/>&lt;<sp/>std<sp/>::<sp/>string,<sp/>int<sp/>&gt;<sp/>get_optimizer<sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;adam&quot;</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a476faccd3ee57983084a9a9a30a4c0f1" kindref="member">_adam</ref>},</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;momentum&quot;</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461af07fa7e71d6dd0d5376d8ee85cec747c" kindref="member">_momentum</ref>},</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;nesterov_momentum&quot;</highlight><highlight class="normal"><sp/>,<sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a998b406e0925bcec22e702b1f6fb4749" kindref="member">_nesterov_momentum</ref>},</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;adagrad&quot;</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a32b1464ba270a882f040ea9b3abcae8e" kindref="member">_adagrad</ref>},</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;rmsprop&quot;</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a4b3bafa9e8c9bd60322ef96ecf216222" kindref="member">_rmsprop</ref>},</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;adadelta&quot;</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a3caa5934366a304c6c6bf3cc474c3a17" kindref="member">_adadelta</ref>},</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;adamax&quot;</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461aced71dd3f480a1265acd015656dcec19" kindref="member">_adamax</ref>},</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;sgd&quot;</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/><ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a4b7fa459df18d4bf2eaa7955899b3b03" kindref="member">_sgd</ref>},</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};<sp/></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="classupdate__args" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classupdate__args" kindref="compound">update_args</ref></highlight></codeline>
+<codeline lineno="52"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>epsil;<sp/></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="classupdate__args_1a546e720aa0b732757fae6ad0837335ac" refkind="member"><highlight class="normal"><sp/><sp/>std<sp/>::<sp/>unique_ptr<sp/>&lt;<sp/>float<sp/>[]<sp/>&gt;<sp/><ref refid="classupdate__args_1a546e720aa0b732757fae6ad0837335ac" kindref="member">m</ref>;<sp/></highlight></codeline>
+<codeline lineno="59" refid="classupdate__args_1ac8921a5f304579e3fffd6aa6ea5c83eb" refkind="member"><highlight class="normal"><sp/><sp/>std<sp/>::<sp/>unique_ptr<sp/>&lt;<sp/>float<sp/>[]<sp/>&gt;<sp/><ref refid="classupdate__args_1ac8921a5f304579e3fffd6aa6ea5c83eb" kindref="member">v</ref>;<sp/></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="classupdate__args_1ad11839c9e08764e1528aae8f806e759a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1ad11839c9e08764e1528aae8f806e759a" kindref="member">nweights</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65" refid="classupdate__args_1a4a08ebbe1d10e53ca44966dc7cb5e83e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1a4a08ebbe1d10e53ca44966dc7cb5e83e" kindref="member">type</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="classupdate__args_1a3a0145d580360b2ffae2879af7e68c67" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1a3a0145d580360b2ffae2879af7e68c67" kindref="member">learning_rate</ref>;<sp/></highlight></codeline>
+<codeline lineno="68" refid="classupdate__args_1abc35ad880888473f137cb9744e874870" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1abc35ad880888473f137cb9744e874870" kindref="member">momentum</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="69" refid="classupdate__args_1a9eb5a4b5663dca4b69a13a19da674f19" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1a9eb5a4b5663dca4b69a13a19da674f19" kindref="member">decay</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="70" refid="classupdate__args_1a1822b0d844c349135590f3583415faec" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1a1822b0d844c349135590f3583415faec" kindref="member">B1</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="71" refid="classupdate__args_1ad4542261082ee829820f2d6a750021f6" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1ad4542261082ee829820f2d6a750021f6" kindref="member">B2</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="72" refid="classupdate__args_1a82dbdae38d6d36251905a627947730e7" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1a82dbdae38d6d36251905a627947730e7" kindref="member">rho</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74" refid="classupdate__args_1adfd1e022ef7da88bf1f76e84c086a6d8" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1adfd1e022ef7da88bf1f76e84c086a6d8" kindref="member">l2norm</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="75" refid="classupdate__args_1a795c90db2da78d2764137329ff0518b1" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1a795c90db2da78d2764137329ff0518b1" kindref="member">clip</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Constructors</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><ref refid="classupdate__args_1a1e38b178064735696135111d295953a2" kindref="member">update_args</ref><sp/>();</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><ref refid="classupdate__args_1a1e38b178064735696135111d295953a2" kindref="member">update_args</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="classupdate__args_1a4a08ebbe1d10e53ca44966dc7cb5e83e" kindref="member">type</ref>,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1a3a0145d580360b2ffae2879af7e68c67" kindref="member">learning_rate</ref>=2e-2f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1abc35ad880888473f137cb9744e874870" kindref="member">momentum</ref>=.9f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1a9eb5a4b5663dca4b69a13a19da674f19" kindref="member">decay</ref>=1e-4f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1a1822b0d844c349135590f3583415faec" kindref="member">B1</ref>=.9f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1ad4542261082ee829820f2d6a750021f6" kindref="member">B2</ref>=.999f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1a82dbdae38d6d36251905a627947730e7" kindref="member">rho</ref>=0.f,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1adfd1e022ef7da88bf1f76e84c086a6d8" kindref="member">l2norm</ref>=</highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1a795c90db2da78d2764137329ff0518b1" kindref="member">clip</ref>=</highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Destructors</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><ref refid="classupdate__args_1a05540c4366f9d9f4f9a1fc4d8829ceb7" kindref="member">~update_args</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Copy<sp/>operators</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><ref refid="classupdate__args" kindref="compound">update_args</ref><sp/>&amp;<sp/><ref refid="classupdate__args_1a6910f785fc1bfcb3d74200e27c3f50a3" kindref="member">operator = </ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classupdate__args" kindref="compound">update_args</ref><sp/>&amp;<sp/>args);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><ref refid="classupdate__args_1a1e38b178064735696135111d295953a2" kindref="member">update_args</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classupdate__args" kindref="compound">update_args</ref><sp/>&amp;<sp/>args);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1a20ccad2974c9c163af046a2c70dcdb56" kindref="member">init_arrays</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="classupdate__args_1ad11839c9e08764e1528aae8f806e759a" kindref="member">nweights</ref>);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classupdate__args_1a59dde2fe4182ef54f6c1215218d5d200" kindref="member">update</ref><sp/>(<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>iteration,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights_update,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="classupdate__args_1ad11839c9e08764e1528aae8f806e759a" kindref="member">nweights</ref><sp/>);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>adam_update<sp/>(<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>iteration,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights_update<sp/>);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>sgd_update<sp/>(<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights_update<sp/>);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>momentum_update<sp/>(<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights_update<sp/>);</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>nesterov_momentum_update<sp/>(<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights_update<sp/>);</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>adagrad_update<sp/>(<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights_update<sp/>);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>rmsprop_update<sp/>(<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights_update<sp/>);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>adadelta_update<sp/>(<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights_update<sp/>);</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>adamax_update<sp/>(<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>iteration,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights_update<sp/>);</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>norm_value<sp/>(<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>arr,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>size<sp/>);</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>clip_value<sp/>(<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>arr,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>size<sp/>);</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"></highlight></codeline>
+<codeline lineno="260"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>__update_args_h__</highlight></codeline>
+    </programlisting>
+    <location file="/home/nico/Code/plasticity/include/optimizer.h"/>
+  </compounddef>
+</doxygen>

@@ -6,4 +6,6 @@ C++ API
 
    BasePlasticity
    BCM
+   Hopfield
+   Activations
    data_dispatcher

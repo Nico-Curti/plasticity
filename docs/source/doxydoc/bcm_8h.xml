@@ -17,16 +17,26 @@
       <node id="20">
         <label>numeric</label>
       </node>
+      <node id="18">
+        <label>optimizer.h</label>
+        <link refid="optimizer_8h"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
       <node id="13">
         <label>string</label>
       </node>
       <node id="14">
         <label>omp.h</label>
       </node>
-      <node id="19">
+      <node id="21">
         <label>fstream</label>
       </node>
-      <node id="21">
+      <node id="22">
         <label>Eigen/Dense</label>
       </node>
       <node id="8">
@@ -37,10 +47,10 @@
         <link refid="bcm_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="19">
         <label>utils.hpp</label>
       </node>
       <node id="5">
@@ -98,9 +108,11 @@
         </childnode>
         <childnode refid="18" relation="include">
         </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
@@ -150,30 +162,31 @@
 <codeline lineno="27"><highlight class="normal"></highlight></codeline>
 <codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Constructor</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><ref refid="classBCM_1ad407a3e2ebf8c89ec3e24dc441daff4d" kindref="member">BCM</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" kindref="member">outputs</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>batch_size,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" kindref="member">activation</ref>=<ref refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a695741512ccb45671e1b1e7561fdf494" kindref="member">transfer :: _logistic_</ref>,</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a974bdeec773185818312b6c82f7a764b" kindref="member">mu</ref>=0.f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a45ee1f1803e06f09d9044e9252852631" kindref="member">sigma</ref>=1.f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a6261a44333fc063f8a0c96f24e52bf9b" kindref="member">epsilon</ref>=2e-2f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>interaction_strenght=0.f,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>seed=42);</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"></highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Copy<sp/>Operator<sp/>and<sp/>Copy<sp/>Constructor</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><ref refid="classBCM_1ad407a3e2ebf8c89ec3e24dc441daff4d" kindref="member">BCM</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classBCM" kindref="compound">BCM</ref><sp/>&amp;<sp/>b);</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><ref refid="classBCM" kindref="compound">BCM</ref><sp/>&amp;<sp/><ref refid="classBCM_1a9f89c34dc96cc5bb74cc9b3b8f6c454c" kindref="member">operator = </ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classBCM" kindref="compound">BCM</ref><sp/>&amp;<sp/>b);</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"></highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Destructor</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="76"><highlight class="normal"></highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><ref refid="classBCM_1add33374e61bfea8b6331cad75acb8eac" kindref="member">~BCM</ref><sp/>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><ref refid="classBCM_1ae515c4c9647cbe22e28a936373afde00" kindref="member">BCM</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" kindref="member">outputs</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>batch_size,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" kindref="member">activation</ref>=<ref refid="namespacetransfer_1a0648f30ed25351e516ce5b8e3b17e4b4a695741512ccb45671e1b1e7561fdf494" kindref="member">transfer :: _logistic_</ref>,</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classupdate__args" kindref="compound">update_args</ref><sp/><ref refid="namespaceoptimizer" kindref="compound">optimizer</ref>=<ref refid="classupdate__args" kindref="compound">update_args</ref>(<ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a4b7fa459df18d4bf2eaa7955899b3b03" kindref="member">optimizer_t :: _sgd</ref>),</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a974bdeec773185818312b6c82f7a764b" kindref="member">mu</ref>=0.f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a45ee1f1803e06f09d9044e9252852631" kindref="member">sigma</ref>=1.f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>interaction_strength=0.f,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>seed=42);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Copy<sp/>Operator<sp/>and<sp/>Copy<sp/>Constructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><ref refid="classBCM_1ae515c4c9647cbe22e28a936373afde00" kindref="member">BCM</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classBCM" kindref="compound">BCM</ref><sp/>&amp;<sp/>b);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><ref refid="classBCM" kindref="compound">BCM</ref><sp/>&amp;<sp/><ref refid="classBCM_1a9f89c34dc96cc5bb74cc9b3b8f6c454c" kindref="member">operator = </ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classBCM" kindref="compound">BCM</ref><sp/>&amp;<sp/>b);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Destructor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><ref refid="classBCM_1add33374e61bfea8b6331cad75acb8eac" kindref="member">~BCM</ref><sp/>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="85"><highlight class="normal"></highlight></codeline>
-<codeline lineno="86"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"></highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>weights_update<sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>X,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_features,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights_update);</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"></highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>init_interaction_matrix<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>&amp;<sp/>interaction_strenght);</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"></highlight></codeline>
-<codeline lineno="111"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>weights_update<sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>X,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_features,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights_update);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>init_interaction_matrix<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>&amp;<sp/>interaction_strenght);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="113"><highlight class="normal"></highlight></codeline>
-<codeline lineno="114"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>__bcm_h__</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>__bcm_h__</highlight></codeline>
     </programlisting>
     <location file="/home/nico/Code/plasticity/include/bcm.h"/>
   </compounddef>

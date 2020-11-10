@@ -10,6 +10,7 @@
         <name>int_e</name>
         <initializer>= 1076754516.f</initializer>
         <briefdescription>
+<para>integer representation of Euler number </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -24,6 +25,7 @@
         <name>int_10</name>
         <initializer>= 1092616192.f</initializer>
         <briefdescription>
+<para>integer representation of 10.f </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -38,6 +40,7 @@
         <name>log2_over_2</name>
         <initializer>= 0.34657359027997264311f</initializer>
         <briefdescription>
+<para>std :: log(2) / 2 as float </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -52,6 +55,7 @@
         <name>magic_number</name>
         <initializer>= std :: <ref refid="namespacemath_1af49ed44c2047eb392757535867e083f4" kindref="member">pow</ref>(2.f, 23) * (127.f - 0.043035)</initializer>
         <briefdescription>
+<para>std :: pow(2.f, 23) * (127.f - 0.043035); </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -66,6 +70,7 @@
         <name>ln10</name>
         <initializer>= std :: <ref refid="namespacemath_1a27d30e4a25b508c53770ec0e16ebaff5" kindref="member">log</ref>(10.f)</initializer>
         <briefdescription>
+<para>std :: log(10) as float </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -85,12 +90,28 @@
           <declname>p</declname>
         </param>
         <briefdescription>
+<para>Fast approximation of power of 2. </para>
         </briefdescription>
         <detaileddescription>
+<para>The approximation is given by a reinterpretation of binary form of the float variables</para>
+<para><simplesect kind="note"><para>The fast implementation is available if <bold>fast_math</bold> is defined at compile time. Otherwise the evaluation is performed using std functions.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input variable.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result of the operation. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/fmath.h" line="28" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="28" declcolumn="7"/>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="39" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="39" declcolumn="7"/>
       </memberdef>
       <memberdef kind="function" id="namespacemath_1a13d3cf63d92a1c41f09508100f4fa2a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>float</type>
@@ -102,12 +123,28 @@
           <declname>p</declname>
         </param>
         <briefdescription>
+<para>Fast approximation of exp function. </para>
         </briefdescription>
         <detaileddescription>
+<para>The approximation is given by a reinterpretation of binary form of the float variables</para>
+<para><simplesect kind="note"><para>The fast implementation is available if <bold>fast_math</bold> is defined at compile time. Otherwise the evaluation is performed using std functions.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input variable.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result of the operation. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/fmath.h" line="29" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="29" declcolumn="7"/>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="53" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="53" declcolumn="7"/>
       </memberdef>
       <memberdef kind="function" id="namespacemath_1a6a78fd8a4b75a09d7ab12ec0f30cb14f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>float</type>
@@ -119,12 +156,28 @@
           <declname>x</declname>
         </param>
         <briefdescription>
+<para>Fast approximation of log2 function. </para>
         </briefdescription>
         <detaileddescription>
+<para>The approximation is given by a reinterpretation of binary form of the float variables</para>
+<para><simplesect kind="note"><para>The fast implementation is available if <bold>fast_math</bold> is defined at compile time. Otherwise the evaluation is performed using std functions.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input variable.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result of the operation. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/fmath.h" line="30" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="30" declcolumn="7"/>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="67" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="67" declcolumn="7"/>
       </memberdef>
       <memberdef kind="function" id="namespacemath_1a27d30e4a25b508c53770ec0e16ebaff5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>float</type>
@@ -136,12 +189,28 @@
           <declname>x</declname>
         </param>
         <briefdescription>
+<para>Fast approximation of log function. </para>
         </briefdescription>
         <detaileddescription>
+<para>The approximation is given by a reinterpretation of binary form of the float variables</para>
+<para><simplesect kind="note"><para>The fast implementation is available if <bold>fast_math</bold> is defined at compile time. Otherwise the evaluation is performed using std functions.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input variable.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result of the operation. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/fmath.h" line="31" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="31" declcolumn="7"/>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="81" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="81" declcolumn="7"/>
       </memberdef>
       <memberdef kind="function" id="namespacemath_1af49ed44c2047eb392757535867e083f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>float</type>
@@ -157,12 +226,36 @@
           <declname>b</declname>
         </param>
         <briefdescription>
+<para>Fast approximation of pow function. </para>
         </briefdescription>
         <detaileddescription>
+<para>The approximation is given by a reinterpretation of binary form of the float variables</para>
+<para><simplesect kind="note"><para>The fast implementation is available if <bold>fast_math</bold> is defined at compile time. Otherwise the evaluation is performed using std functions.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input variable (base). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input variable (exponent).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result of the operation. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/fmath.h" line="32" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="32" declcolumn="7"/>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="96" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="96" declcolumn="7"/>
       </memberdef>
       <memberdef kind="function" id="namespacemath_1a90c3d8a0c7fb7a9a893d36659544a50d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>float</type>
@@ -174,12 +267,28 @@
           <declname>x</declname>
         </param>
         <briefdescription>
+<para>Fast approximation of log10 function. </para>
         </briefdescription>
         <detaileddescription>
+<para>The approximation is given by a reinterpretation of binary form of the float variables</para>
+<para><simplesect kind="note"><para>The fast implementation is available if <bold>fast_math</bold> is defined at compile time. Otherwise the evaluation is performed using std functions.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input variable.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result of the operation. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/fmath.h" line="33" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="33" declcolumn="7"/>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="110" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="110" declcolumn="7"/>
       </memberdef>
       <memberdef kind="function" id="namespacemath_1a0d42357c4cfb9b650d08da4aecb81c1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>float</type>
@@ -191,12 +300,28 @@
           <declname>x</declname>
         </param>
         <briefdescription>
+<para>Fast approximation of atanh function. </para>
         </briefdescription>
         <detaileddescription>
+<para>The approximation is given by a simplified version of the math formula.</para>
+<para><simplesect kind="note"><para>The fast implementation is available if <bold>fast_math</bold> is defined at compile time. Otherwise the evaluation is performed using std functions.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input variable.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result of the operation. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/fmath.h" line="34" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="34" declcolumn="7"/>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="124" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="124" declcolumn="7"/>
       </memberdef>
       <memberdef kind="function" id="namespacemath_1ac0c70db8bf603c79f1f5d207148cab68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>float</type>
@@ -208,12 +333,28 @@
           <declname>x</declname>
         </param>
         <briefdescription>
+<para>Fast approximation of tanh function. </para>
         </briefdescription>
         <detaileddescription>
+<para>The approximation is given by a simplified version of the math formula.</para>
+<para><simplesect kind="note"><para>The fast implementation is available if <bold>fast_math</bold> is defined at compile time. Otherwise the evaluation is performed using std functions.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input variable.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result of the operation. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/fmath.h" line="35" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="35" declcolumn="7"/>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="138" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="138" declcolumn="7"/>
       </memberdef>
       <memberdef kind="function" id="namespacemath_1a2c18cf38be24af6b01a94cb4f4b5f85b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>float</type>
@@ -225,12 +366,28 @@
           <declname>x</declname>
         </param>
         <briefdescription>
+<para>Fast approximation of hardtanh function. </para>
         </briefdescription>
         <detaileddescription>
+<para>The approximation is given by a reinterpretation of binary form of the float variables</para>
+<para><simplesect kind="note"><para>The fast implementation is available if <bold>fast_math</bold> is defined at compile time. Otherwise the evaluation is performed using std functions.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input variable.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result of the operation. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/fmath.h" line="36" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="36" declcolumn="7"/>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="152" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="152" declcolumn="7"/>
       </memberdef>
       <memberdef kind="function" id="namespacemath_1a5159164653db729fa67e1bf04af2c8ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>float</type>
@@ -242,12 +399,26 @@
           <declname>x</declname>
         </param>
         <briefdescription>
+<para>Fast approximation of sqrt function. </para>
         </briefdescription>
         <detaileddescription>
+<para>The Hard Tanh is evaluated as: .. code-block:: python if x &lt; -1: return -1. elif x &lt;= -1 and x &lt;= 1.: return x else: return 1.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input variable.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result of the operation. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/fmath.h" line="37" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="37" declcolumn="7"/>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="170" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="170" declcolumn="7"/>
       </memberdef>
       <memberdef kind="function" id="namespacemath_1ada08f861ea6a28396b41db3221d789a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>float</type>
@@ -259,12 +430,28 @@
           <declname>x</declname>
         </param>
         <briefdescription>
+<para>Fast approximation of reverse sqrt function. </para>
         </briefdescription>
         <detaileddescription>
+<para>The approximation is given by Newton strategy.</para>
+<para><simplesect kind="note"><para>The fast implementation is available if <bold>fast_math</bold> is defined at compile time. Otherwise the evaluation is performed using std functions.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input variable.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result of the operation. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/fmath.h" line="38" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="38" declcolumn="7"/>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="184" column="7" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="184" declcolumn="7"/>
       </memberdef>
       <memberdef kind="function" id="namespacemath_1abb8e0d8db22fad9f3804a0341bac8eef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -276,12 +463,26 @@
           <declname>x</declname>
         </param>
         <briefdescription>
+<para>Evaluate the sign of the variable. </para>
         </briefdescription>
         <detaileddescription>
+<para>It is just a check of the variable. If it is zero the sign is always zero.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input variable.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The sign of the input as [-1, 0, 1]. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/fmath.h" line="40" column="5" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="40" declcolumn="5"/>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="195" column="5" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="195" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="namespacemath_1a55838ccfd75b9e437b202e781dd4b049" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -297,12 +498,34 @@
           <declname>b</declname>
         </param>
         <briefdescription>
+<para>Gratest Common Divisor between the two variables. </para>
         </briefdescription>
         <detaileddescription>
+<para>The result is obtained by a recursive call of this function.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input variable. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input variable.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The GCD of the two inputs. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/fmath.h" line="41" column="5" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="41" declcolumn="5"/>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="207" column="5" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="207" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="namespacemath_1ab6303a0f45d5a302af6a2dd0c6d63307" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -314,12 +537,26 @@
           <declname>a</declname>
         </param>
         <briefdescription>
+<para>Greatest divisor (GD) of the number. </para>
         </briefdescription>
         <detaileddescription>
+<para>The GD is found by an iteratively division of the number.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input variable.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The greatest divisor of the input </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/fmath.h" line="42" column="5" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="42" declcolumn="5"/>
+        <location file="/home/nico/Code/plasticity/include/fmath.h" line="218" column="5" declfile="/home/nico/Code/plasticity/include/fmath.h" declline="218" declcolumn="5"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

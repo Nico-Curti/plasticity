@@ -3,8 +3,23 @@
   <compounddef id="classBasePlasticity" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>BasePlasticity</compoundname>
     <derivedcompoundref refid="classBCM" prot="public" virt="non-virtual">BCM</derivedcompoundref>
+    <derivedcompoundref refid="classHopfield" prot="public" virt="non-virtual">Hopfield</derivedcompoundref>
     <includes refid="base_8h" local="no">base.h</includes>
       <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classBasePlasticity_1a5c440b00a49873031e5d0510f377f791" prot="protected" static="no" mutable="no">
+        <type><ref refid="classupdate__args" kindref="compound">update_args</ref></type>
+        <definition>update_args BasePlasticity::optimizer</definition>
+        <argsstring></argsstring>
+        <name>optimizer</name>
+        <briefdescription>
+<para>optimizer object </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="40" column="15" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classBasePlasticity_1a427d9ff731f3db65bf5474e078b36467" prot="protected" static="no" mutable="no">
         <type>std ::unique_ptr&lt; float[] &gt;</type>
         <definition>std :: unique_ptr&lt; float[] &gt; BasePlasticity::output</definition>
@@ -17,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="39" column="22" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="39" bodyend="-1"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="42" column="22" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classBasePlasticity_1ac85dc18520a49febfcffd6646b0ab9b6" prot="protected" static="no" mutable="no">
         <type>std ::unique_ptr&lt; float[] &gt;</type>
@@ -31,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="40" column="22" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="40" bodyend="-1"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="48" column="22" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classBasePlasticity_1a1b218e7e7c6f5494aee2a8f8e603cbec" prot="protected" static="no" mutable="no">
         <type>std ::unique_ptr&lt; float[] &gt;</type>
@@ -45,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="41" column="22" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="41" bodyend="-1"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="54" column="22" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" prot="protected" static="no" mutable="no">
         <type>std ::function&lt; float(const float &amp;) &gt;</type>
@@ -59,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="43" column="20" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="43" bodyend="-1"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="56" column="20" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classBasePlasticity_1adf83370e29d977f79690bf17ed3668bf" prot="protected" static="no" mutable="no">
         <type>std ::function&lt; float(const float &amp;) &gt;</type>
@@ -73,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="44" column="20" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="44" bodyend="-1"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="57" column="20" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="57" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classBasePlasticity_1a4a6ecb6e802bdfc043346c41b2682ca1" prot="protected" static="no" mutable="no">
         <type>int</type>
@@ -87,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="54" column="7" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="54" bodyend="-1"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="67" column="7" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" prot="protected" static="no" mutable="no">
         <type>int</type>
@@ -101,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="55" column="7" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="55" bodyend="-1"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="68" column="7" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="68" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classBasePlasticity_1a6a98b64e6ab4ff78982b15e8f74ecb2f" prot="protected" static="no" mutable="no">
         <type>int</type>
@@ -115,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="56" column="7" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="56" bodyend="-1"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="69" column="7" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classBasePlasticity_1a974bdeec773185818312b6c82f7a764b" prot="protected" static="no" mutable="no">
         <type>float</type>
@@ -129,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="58" column="9" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="58" bodyend="-1"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="71" column="9" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classBasePlasticity_1a45ee1f1803e06f09d9044e9252852631" prot="protected" static="no" mutable="no">
         <type>float</type>
@@ -143,21 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="59" column="9" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="59" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classBasePlasticity_1a6261a44333fc063f8a0c96f24e52bf9b" prot="protected" static="no" mutable="no">
-        <type>float</type>
-        <definition>float BasePlasticity::epsilon</definition>
-        <argsstring></argsstring>
-        <name>epsilon</name>
-        <briefdescription>
-<para>Starting learning rate. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="60" column="9" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="60" bodyend="-1"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="72" column="9" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-attrib">
@@ -173,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="48" column="25" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="48" bodyend="-1"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="61" column="25" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="61" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-static-attrib">
@@ -189,7 +190,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="52" column="16" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="52" bodyend="-1"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="65" column="16" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -205,12 +206,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="72" column="3"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="84" column="3"/>
       </memberdef>
-      <memberdef kind="function" id="classBasePlasticity_1a6095d857e3d72d44ab14e707d4f1c97d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classBasePlasticity_1a4083fb0c002e37a0bf717e40f26d543b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>BasePlasticity::BasePlasticity</definition>
-        <argsstring>(const int &amp;outputs, const int &amp;batch_size, int activation=transfer ::_linear_, float mu=0.f, float sigma=1.f, float epsilon=2e-2f, int seed=42)</argsstring>
+        <argsstring>(const int &amp;outputs, const int &amp;batch_size, int activation=transfer ::_linear_, update_args optimizer=update_args(optimizer_t ::_sgd), float mu=0.f, float sigma=1.f, int seed=42)</argsstring>
         <name>BasePlasticity</name>
         <param>
           <type>const int &amp;</type>
@@ -226,6 +227,11 @@
           <defval>transfer ::_linear_</defval>
         </param>
         <param>
+          <type><ref refid="classupdate__args" kindref="compound">update_args</ref></type>
+          <declname>optimizer</declname>
+          <defval><ref refid="classupdate__args" kindref="compound">update_args</ref>(<ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461" kindref="member">optimizer_t</ref> ::<ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a4b7fa459df18d4bf2eaa7955899b3b03" kindref="member">_sgd</ref>)</defval>
+        </param>
+        <param>
           <type>float</type>
           <declname>mu</declname>
           <defval>0.f</defval>
@@ -234,11 +240,6 @@
           <type>float</type>
           <declname>sigma</declname>
           <defval>1.f</defval>
-        </param>
-        <param>
-          <type>float</type>
-          <declname>epsilon</declname>
-          <defval>2e-2f</defval>
         </param>
         <param>
           <type>int</type>
@@ -278,6 +279,14 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
+<parametername>optimizer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classupdate__args" kindref="compound">update_args</ref> Optimizer object. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
 <parametername>mu</parametername>
 </parameternamelist>
 <parameterdescription>
@@ -294,14 +303,6 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>epsilon</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Starting learning rate. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
 <parametername>seed</parametername>
 </parameternamelist>
 <parameterdescription>
@@ -313,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="91" column="3"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="103" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classBasePlasticity_1a36aafa34a7d39721930afd46d2ccc5cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -342,7 +343,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="106" column="3"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="119" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classBasePlasticity_1a8fd48d4e055c774a6add951156790041" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classBasePlasticity" kindref="compound">BasePlasticity</ref> &amp;</type>
@@ -371,7 +372,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="118" column="19"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="131" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classBasePlasticity_1a4f812c1d906aa5e828bfcc65ce4e510a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -386,7 +387,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="128" column="3"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="141" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classBasePlasticity_1a1adfa1440172822a6e3280e0142fb80e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -453,7 +454,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="149" column="8"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="162" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classBasePlasticity_1a4104d12babea679995d21a5de08d7129" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>float *</type>
@@ -510,7 +511,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="169" column="10"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="182" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classBasePlasticity_1ad5bfcab20dd11a25024d8fb83c0e4c23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -539,7 +540,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="182" column="8"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="195" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classBasePlasticity_1a05b0d33b49372359fb6c96e80013ee78" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -568,7 +569,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="195" column="8"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="208" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classBasePlasticity_1a35be8a52e26ce61050f1408d2f69fa66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>float *</type>
@@ -586,7 +587,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="205" column="10"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="218" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -596,6 +597,7 @@
         <argsstring>(float *X, const int &amp;n_features, float *weights_update)=0</argsstring>
         <name>weights_update</name>
         <reimplementedby refid="classBCM_1aa13af88336fddb68d60c7a007c63879a">weights_update</reimplementedby>
+        <reimplementedby refid="classHopfield_1a907e8a6ba983b9a5e42e53228fb90b24">weights_update</reimplementedby>
         <param>
           <type>float *</type>
           <declname>X</declname>
@@ -643,7 +645,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="219" column="16"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="232" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classBasePlasticity_1a0a98532ea9e9b5d125cb127aa08143c7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -673,7 +675,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="229" column="8"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="242" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classBasePlasticity_1a91d7baac000c8ab71aa526c919ca393c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -690,13 +692,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="238" column="8"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="251" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classBasePlasticity_1a5f9be9c944b9840a9372fd09b9b034a2" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
         <definition>virtual void BasePlasticity::normalize_weights</definition>
         <argsstring>()</argsstring>
         <name>normalize_weights</name>
+        <reimplementedby refid="classHopfield_1a835ba0a410402cccd5cdc062b60e02d9">normalize_weights</reimplementedby>
         <briefdescription>
 <para>Normalize the weights according to the given function. </para>
         </briefdescription>
@@ -707,7 +710,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="246" column="16"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="259" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classBasePlasticity_1aceecfca1b48f9d7e37ae865b41c4ef52" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -773,7 +776,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="259" column="8"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="272" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classBasePlasticity_1ac0b63f34c4066d1e59480ff7085697f7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -863,7 +866,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/base.h" line="275" column="8"/>
+        <location file="/home/nico/Code/plasticity/include/base.h" line="288" column="8"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -877,6 +880,12 @@
         <label>BasePlasticity</label>
         <link refid="classBasePlasticity"/>
       </node>
+      <node id="3">
+        <label>Hopfield</label>
+        <link refid="classHopfield"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="2">
         <label>BCM</label>
         <link refid="classBCM"/>
@@ -884,19 +893,31 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="/home/nico/Code/plasticity/include/base.h" line="35" column="1" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="34" bodyend="277"/>
+    <collaborationgraph>
+      <node id="1">
+        <label>BasePlasticity</label>
+        <link refid="classBasePlasticity"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>optimizer</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>update_args</label>
+        <link refid="classupdate__args"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/nico/Code/plasticity/include/base.h" line="36" column="1" bodyfile="/home/nico/Code/plasticity/include/base.h" bodystart="35" bodyend="290"/>
     <listofallmembers>
       <member refid="classBasePlasticity_1aceecfca1b48f9d7e37ae865b41c4ef52" prot="private" virt="non-virtual"><scope>BasePlasticity</scope><name>_fit</name></member>
       <member refid="classBasePlasticity_1ac0b63f34c4066d1e59480ff7085697f7" prot="private" virt="non-virtual"><scope>BasePlasticity</scope><name>_predict</name></member>
       <member refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" prot="protected" virt="non-virtual"><scope>BasePlasticity</scope><name>activation</name></member>
       <member refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" prot="public" virt="non-virtual"><scope>BasePlasticity</scope><name>BasePlasticity</name></member>
-      <member refid="classBasePlasticity_1a6095d857e3d72d44ab14e707d4f1c97d" prot="public" virt="non-virtual"><scope>BasePlasticity</scope><name>BasePlasticity</name></member>
+      <member refid="classBasePlasticity_1a4083fb0c002e37a0bf717e40f26d543b" prot="public" virt="non-virtual"><scope>BasePlasticity</scope><name>BasePlasticity</name></member>
       <member refid="classBasePlasticity_1a36aafa34a7d39721930afd46d2ccc5cd" prot="public" virt="non-virtual"><scope>BasePlasticity</scope><name>BasePlasticity</name></member>
       <member refid="classBasePlasticity_1a4a6ecb6e802bdfc043346c41b2682ca1" prot="protected" virt="non-virtual"><scope>BasePlasticity</scope><name>batch</name></member>
       <member refid="classBasePlasticity_1a0a98532ea9e9b5d125cb127aa08143c7" prot="private" virt="non-virtual"><scope>BasePlasticity</scope><name>check_dims</name></member>
       <member refid="classBasePlasticity_1a91d7baac000c8ab71aa526c919ca393c" prot="private" virt="non-virtual"><scope>BasePlasticity</scope><name>check_is_fitted</name></member>
       <member refid="classBasePlasticity_1a9bc89cbc53982004dddd6c05a6f8c78b" prot="public" virt="non-virtual"><scope>BasePlasticity</scope><name>engine</name></member>
-      <member refid="classBasePlasticity_1a6261a44333fc063f8a0c96f24e52bf9b" prot="protected" virt="non-virtual"><scope>BasePlasticity</scope><name>epsilon</name></member>
       <member refid="classBasePlasticity_1a1adfa1440172822a6e3280e0142fb80e" prot="public" virt="non-virtual"><scope>BasePlasticity</scope><name>fit</name></member>
       <member refid="classBasePlasticity_1a35be8a52e26ce61050f1408d2f69fa66" prot="public" virt="non-virtual"><scope>BasePlasticity</scope><name>get_weights</name></member>
       <member refid="classBasePlasticity_1adf83370e29d977f79690bf17ed3668bf" prot="protected" virt="non-virtual"><scope>BasePlasticity</scope><name>gradient</name></member>
@@ -905,6 +926,7 @@
       <member refid="classBasePlasticity_1a5f9be9c944b9840a9372fd09b9b034a2" prot="private" virt="virtual"><scope>BasePlasticity</scope><name>normalize_weights</name></member>
       <member refid="classBasePlasticity_1a6a98b64e6ab4ff78982b15e8f74ecb2f" prot="protected" virt="non-virtual"><scope>BasePlasticity</scope><name>nweights</name></member>
       <member refid="classBasePlasticity_1a8fd48d4e055c774a6add951156790041" prot="public" virt="non-virtual"><scope>BasePlasticity</scope><name>operator=</name></member>
+      <member refid="classBasePlasticity_1a5c440b00a49873031e5d0510f377f791" prot="protected" virt="non-virtual"><scope>BasePlasticity</scope><name>optimizer</name></member>
       <member refid="classBasePlasticity_1a427d9ff731f3db65bf5474e078b36467" prot="protected" virt="non-virtual"><scope>BasePlasticity</scope><name>output</name></member>
       <member refid="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" prot="protected" virt="non-virtual"><scope>BasePlasticity</scope><name>outputs</name></member>
       <member refid="classBasePlasticity_1ac3b0a942271707d1ac30cfb495fa91b6" prot="protected" virt="non-virtual"><scope>BasePlasticity</scope><name>precision</name></member>

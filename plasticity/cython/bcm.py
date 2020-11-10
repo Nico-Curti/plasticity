@@ -70,6 +70,8 @@ class BCM (BasePlasticity):
   >>> ax.axis("off")
   >>> plt.show()
 
+  .. image:: ../../../img/BCM_weights.png
+
   References
   ----------
   - Castellani G., Intrator N., Shouval H.Z., Cooper L.N. Solutions of the BCM learning

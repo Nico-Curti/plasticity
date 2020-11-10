@@ -100,9 +100,9 @@ html_static_path = []
 
 
 breathe_projects = {
-  #'Activations' : './doxydoc/',
+  'Activations' : './doxydoc/',
   'BasePlasticity' : './doxydoc/',
   'BCM' : './doxydoc/',
-  #'Hopfield' : './doxydoc/',
+  'Hopfield' : './doxydoc/',
   'data_dispatcher' : './doxydoc/',
   }

@@ -123,7 +123,6 @@ void Hopfield :: weights_update (float * X, const int & n_features, float * weig
                                           0.f);
   }
 
-  // MISS gemm_nn  yl @ X - theta * self.weights
   // weights (outputs, n_features)
   // X (batch, n_features)
   // theta (outputs, )

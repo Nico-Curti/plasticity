@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/utils.h" line="93" column="10" declfile="/home/nico/Code/plasticity/include/utils.h" declline="93" declcolumn="10"/>
+        <location file="/home/nico/Code/plasticity/include/utils.h" line="94" column="10" declfile="/home/nico/Code/plasticity/include/utils.h" declline="94" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="namespaceutils_1aee4b1108131ca374f4c4cf42f1a625c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -64,71 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/utils.h" line="134" column="10" declfile="/home/nico/Code/plasticity/include/utils.h" declline="134" declcolumn="10"/>
-      </memberdef>
-      <memberdef kind="function" id="namespaceutils_1ab6e3de392c555f49fdc9326ce36d71a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename Char</type>
-          </param>
-          <param>
-            <type>typename Traits</type>
-          </param>
-          <param>
-            <type>typename Allocator</type>
-          </param>
-        </templateparamlist>
-        <type>std ::basic_string&lt; Char, Traits, Allocator &gt;</type>
-        <definition>std :: basic_string&lt; Char, Traits, Allocator &gt; utils::operator*</definition>
-        <argsstring>(const std ::basic_string&lt; Char, Traits, Allocator &gt; &amp;s, std ::size_t n)</argsstring>
-        <name>operator*</name>
-        <param>
-          <type>const std ::basic_string&lt; Char, Traits, Allocator &gt; &amp;</type>
-          <declname>s</declname>
-        </param>
-        <param>
-          <type>std ::size_t</type>
-          <declname>n</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/utils.h" line="137" column="24" declfile="/home/nico/Code/plasticity/include/utils.h" declline="137" declcolumn="24"/>
-      </memberdef>
-      <memberdef kind="function" id="namespaceutils_1a12db57dc074f7f23c447e302e636e41b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename Char</type>
-          </param>
-          <param>
-            <type>typename Traits</type>
-          </param>
-          <param>
-            <type>typename Allocator</type>
-          </param>
-        </templateparamlist>
-        <type>std ::basic_string&lt; Char, Traits, Allocator &gt;</type>
-        <definition>std :: basic_string&lt; Char, Traits, Allocator &gt; utils::operator*</definition>
-        <argsstring>(std ::size_t n, const std ::basic_string&lt; Char, Traits, Allocator &gt; &amp;s)</argsstring>
-        <name>operator*</name>
-        <param>
-          <type>std ::size_t</type>
-          <declname>n</declname>
-        </param>
-        <param>
-          <type>const std ::basic_string&lt; Char, Traits, Allocator &gt; &amp;</type>
-          <declname>s</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/utils.h" line="140" column="24" declfile="/home/nico/Code/plasticity/include/utils.h" declline="140" declcolumn="24"/>
+        <location file="/home/nico/Code/plasticity/include/utils.h" line="135" column="10" declfile="/home/nico/Code/plasticity/include/utils.h" declline="135" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="namespaceutils_1aaab5e88355f4e1485387e3d16a1dc9c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -153,12 +89,49 @@
           <declname>timer</declname>
         </param>
         <briefdescription>
+<para>Print progress bar. </para>
         </briefdescription>
         <detaileddescription>
+<para>This function is used to progressively print a progress bar with timer.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Timer type returned by the what_time_is_it_now function </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>i</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current iteration value. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>num_batches</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of iterations, i.e the width of the progress bar. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Start time (the timer is reset at the end of the function). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/utils.h" line="143" column="8" declfile="/home/nico/Code/plasticity/include/utils.h" declline="143" declcolumn="8"/>
+        <location file="/home/nico/Code/plasticity/include/utils.h" line="150" column="8" declfile="/home/nico/Code/plasticity/include/utils.h" declline="150" declcolumn="8"/>
       </memberdef>
       <memberdef kind="function" id="namespaceutils_1ab7a2cde9dc8fa709dcffc0dd2056d892" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -189,131 +162,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/utils.h" line="158" column="8" declfile="/home/nico/Code/plasticity/include/utils.h" declline="158" declcolumn="8"/>
-      </memberdef>
-      <memberdef kind="function" id="namespaceutils_1a887b7a3287864333ff22b05327f88d19" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename lambda</type>
-          </param>
-        </templateparamlist>
-        <type>void</type>
-        <definition>void utils::mergeargsort_serial</definition>
-        <argsstring>(std ::pair&lt; float, int &gt; *array, const float *a, const int &amp;start, const int &amp;end, lambda ord)</argsstring>
-        <name>mergeargsort_serial</name>
-        <param>
-          <type>std ::pair&lt; float, int &gt; *</type>
-          <declname>array</declname>
-        </param>
-        <param>
-          <type>const float *</type>
-          <declname>a</declname>
-        </param>
-        <param>
-          <type>const int &amp;</type>
-          <declname>start</declname>
-        </param>
-        <param>
-          <type>const int &amp;</type>
-          <declname>end</declname>
-        </param>
-        <param>
-          <type>lambda</type>
-          <declname>ord</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
         <location file="/home/nico/Code/plasticity/include/utils.h" line="165" column="8" declfile="/home/nico/Code/plasticity/include/utils.h" declline="165" declcolumn="8"/>
-      </memberdef>
-      <memberdef kind="function" id="namespaceutils_1a3d261d5ba27e92ce7ab72d3f9096615e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename lambda</type>
-          </param>
-        </templateparamlist>
-        <type>void</type>
-        <definition>void utils::mergeargsort_parallel_omp</definition>
-        <argsstring>(std ::pair&lt; float, int &gt; *array, const float *a, const int &amp;start, const int &amp;end, const int &amp;threads, lambda ord)</argsstring>
-        <name>mergeargsort_parallel_omp</name>
-        <param>
-          <type>std ::pair&lt; float, int &gt; *</type>
-          <declname>array</declname>
-        </param>
-        <param>
-          <type>const float *</type>
-          <declname>a</declname>
-        </param>
-        <param>
-          <type>const int &amp;</type>
-          <declname>start</declname>
-        </param>
-        <param>
-          <type>const int &amp;</type>
-          <declname>end</declname>
-        </param>
-        <param>
-          <type>const int &amp;</type>
-          <declname>threads</declname>
-        </param>
-        <param>
-          <type>lambda</type>
-          <declname>ord</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/utils.h" line="168" column="8" declfile="/home/nico/Code/plasticity/include/utils.h" declline="168" declcolumn="8"/>
-      </memberdef>
-      <memberdef kind="function" id="namespaceutils_1af1269571e6741db7bb9e819e74bedf7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename lambda</type>
-          </param>
-        </templateparamlist>
-        <type>void</type>
-        <definition>void utils::argsort</definition>
-        <argsstring>(const float *a, int *indexes, const int &amp;start, const int &amp;end, lambda ord)</argsstring>
-        <name>argsort</name>
-        <param>
-          <type>const float *</type>
-          <declname>a</declname>
-        </param>
-        <param>
-          <type>int *</type>
-          <declname>indexes</declname>
-        </param>
-        <param>
-          <type>const int &amp;</type>
-          <declname>start</declname>
-        </param>
-        <param>
-          <type>const int &amp;</type>
-          <declname>end</declname>
-        </param>
-        <param>
-          <type>lambda</type>
-          <declname>ord</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/utils.h" line="171" column="8" declfile="/home/nico/Code/plasticity/include/utils.h" declline="171" declcolumn="8"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/nico/Code/plasticity/include/utils.h" line="79" column="1"/>
+    <location file="/home/nico/Code/plasticity/include/utils.h" line="80" column="1"/>
   </compounddef>
 </doxygen>

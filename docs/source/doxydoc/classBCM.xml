@@ -21,10 +21,10 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="classBCM_1ad407a3e2ebf8c89ec3e24dc441daff4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classBCM_1ae515c4c9647cbe22e28a936373afde00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>BCM::BCM</definition>
-        <argsstring>(const int &amp;outputs, const int &amp;batch_size, int activation=transfer ::_logistic_, float mu=0.f, float sigma=1.f, float epsilon=2e-2f, float interaction_strength=0.f, int seed=42)</argsstring>
+        <argsstring>(const int &amp;outputs, const int &amp;batch_size, int activation=transfer ::_logistic_, update_args optimizer=update_args(optimizer_t ::_sgd), float mu=0.f, float sigma=1.f, float interaction_strength=0.f, int seed=42)</argsstring>
         <name>BCM</name>
         <param>
           <type>const int &amp;</type>
@@ -40,6 +40,11 @@
           <defval>transfer ::_logistic_</defval>
         </param>
         <param>
+          <type><ref refid="classupdate__args" kindref="compound">update_args</ref></type>
+          <declname>optimizer</declname>
+          <defval><ref refid="classupdate__args" kindref="compound">update_args</ref>(<ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461" kindref="member">optimizer_t</ref> ::<ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a4b7fa459df18d4bf2eaa7955899b3b03" kindref="member">_sgd</ref>)</defval>
+        </param>
+        <param>
           <type>float</type>
           <declname>mu</declname>
           <defval>0.f</defval>
@@ -48,11 +53,6 @@
           <type>float</type>
           <declname>sigma</declname>
           <defval>1.f</defval>
-        </param>
-        <param>
-          <type>float</type>
-          <declname>epsilon</declname>
-          <defval>2e-2f</defval>
         </param>
         <param>
           <type>float</type>
@@ -97,6 +97,14 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
+<parametername>optimizer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classupdate__args" kindref="compound">update_args</ref> Optimizer object. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
 <parametername>mu</parametername>
 </parameternamelist>
 <parameterdescription>
@@ -113,18 +121,10 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>epsilon</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Starting learning rate. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
 <parametername>interaction_strength</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Set the lateral interaction strenght between weights. </para>
+<para>Set the lateral interaction strength between weights. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/bcm.h" line="61" column="3"/>
+        <location file="/home/nico/Code/plasticity/include/bcm.h" line="62" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classBCM_1a9f89c34dc96cc5bb74cc9b3b8f6c454c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classBCM" kindref="compound">BCM</ref> &amp;</type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/bcm.h" line="73" column="8"/>
+        <location file="/home/nico/Code/plasticity/include/bcm.h" line="74" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classBCM_1add33374e61bfea8b6331cad75acb8eac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/bcm.h" line="83" column="3"/>
+        <location file="/home/nico/Code/plasticity/include/bcm.h" line="84" column="3"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -270,16 +270,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/bcm.h" line="98" column="8"/>
+        <location file="/home/nico/Code/plasticity/include/bcm.h" line="99" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classBCM_1aa33368c82222851cb8403566f30d1eca" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void BCM::init_interaction_matrix</definition>
-        <argsstring>(const float &amp;interaction_strength)</argsstring>
+        <argsstring>(const float &amp;interaction_strenght)</argsstring>
         <name>init_interaction_matrix</name>
         <param>
           <type>const float &amp;</type>
-          <declname>interaction_strength</declname>
+          <declname>interaction_strenght</declname>
         </param>
         <briefdescription>
 <para>Initialize the weights interaction matrix. </para>
@@ -289,7 +289,7 @@
 </simplesect>
 <parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>interaction_strength</parametername>
+<parametername>interaction_strenght</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>Set the lateral interaction strenght between weights. </para>
@@ -300,7 +300,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/bcm.h" line="109" column="8"/>
+        <location file="/home/nico/Code/plasticity/include/bcm.h" line="110" column="8"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -325,6 +325,13 @@
       <node id="2">
         <label>BasePlasticity</label>
         <link refid="classBasePlasticity"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>optimizer</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>update_args</label>
+        <link refid="classupdate__args"/>
       </node>
       <node id="1">
         <label>BCM</label>
@@ -333,17 +340,16 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/nico/Code/plasticity/include/bcm.h" line="21" column="1" bodyfile="/home/nico/Code/plasticity/include/bcm.h" bodystart="20" bodyend="111"/>
+    <location file="/home/nico/Code/plasticity/include/bcm.h" line="21" column="1" bodyfile="/home/nico/Code/plasticity/include/bcm.h" bodystart="20" bodyend="112"/>
     <listofallmembers>
       <member refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" prot="protected" virt="non-virtual"><scope>BCM</scope><name>activation</name></member>
       <member refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" prot="public" virt="non-virtual"><scope>BCM</scope><name>BasePlasticity</name></member>
-      <member refid="classBasePlasticity_1a6095d857e3d72d44ab14e707d4f1c97d" prot="public" virt="non-virtual"><scope>BCM</scope><name>BasePlasticity</name></member>
+      <member refid="classBasePlasticity_1a4083fb0c002e37a0bf717e40f26d543b" prot="public" virt="non-virtual"><scope>BCM</scope><name>BasePlasticity</name></member>
       <member refid="classBasePlasticity_1a36aafa34a7d39721930afd46d2ccc5cd" prot="public" virt="non-virtual"><scope>BCM</scope><name>BasePlasticity</name></member>
       <member refid="classBasePlasticity_1a4a6ecb6e802bdfc043346c41b2682ca1" prot="protected" virt="non-virtual"><scope>BCM</scope><name>batch</name></member>
-      <member refid="classBCM_1ad407a3e2ebf8c89ec3e24dc441daff4d" prot="public" virt="non-virtual"><scope>BCM</scope><name>BCM</name></member>
+      <member refid="classBCM_1ae515c4c9647cbe22e28a936373afde00" prot="public" virt="non-virtual"><scope>BCM</scope><name>BCM</name></member>
       <member refid="classBCM_1aacec2c922e994d7f4b6d33aa59667429" prot="public" virt="non-virtual"><scope>BCM</scope><name>BCM</name></member>
       <member refid="classBasePlasticity_1a9bc89cbc53982004dddd6c05a6f8c78b" prot="public" virt="non-virtual"><scope>BCM</scope><name>engine</name></member>
-      <member refid="classBasePlasticity_1a6261a44333fc063f8a0c96f24e52bf9b" prot="protected" virt="non-virtual"><scope>BCM</scope><name>epsilon</name></member>
       <member refid="classBasePlasticity_1a1adfa1440172822a6e3280e0142fb80e" prot="public" virt="non-virtual"><scope>BCM</scope><name>fit</name></member>
       <member refid="classBasePlasticity_1a35be8a52e26ce61050f1408d2f69fa66" prot="public" virt="non-virtual"><scope>BCM</scope><name>get_weights</name></member>
       <member refid="classBasePlasticity_1adf83370e29d977f79690bf17ed3668bf" prot="protected" virt="non-virtual"><scope>BCM</scope><name>gradient</name></member>
@@ -354,6 +360,7 @@
       <member refid="classBasePlasticity_1a6a98b64e6ab4ff78982b15e8f74ecb2f" prot="protected" virt="non-virtual"><scope>BCM</scope><name>nweights</name></member>
       <member refid="classBCM_1a9f89c34dc96cc5bb74cc9b3b8f6c454c" prot="public" virt="non-virtual"><scope>BCM</scope><name>operator=</name></member>
       <member refid="classBasePlasticity_1a8fd48d4e055c774a6add951156790041" prot="public" virt="non-virtual" ambiguityscope="BasePlasticity::"><scope>BCM</scope><name>operator=</name></member>
+      <member refid="classBasePlasticity_1a5c440b00a49873031e5d0510f377f791" prot="protected" virt="non-virtual"><scope>BCM</scope><name>optimizer</name></member>
       <member refid="classBasePlasticity_1a427d9ff731f3db65bf5474e078b36467" prot="protected" virt="non-virtual"><scope>BCM</scope><name>output</name></member>
       <member refid="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" prot="protected" virt="non-virtual"><scope>BCM</scope><name>outputs</name></member>
       <member refid="classBasePlasticity_1ac3b0a942271707d1ac30cfb495fa91b6" prot="protected" virt="non-virtual"><scope>BCM</scope><name>precision</name></member>

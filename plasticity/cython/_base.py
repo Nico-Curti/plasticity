@@ -20,10 +20,6 @@ __author__  = ['Nico Curti']
 __email__   = ['nico.curti2@unibo.it']
 
 
-# TODO: this implementation is not fully-compatible with scikit-learn
-# APIs since the __init__ variables are not saved into member class
-# variables but only the cython wrap is used as private member!
-
 class BasePlasticity (BaseEstimator, TransformerMixin):
 
   '''
@@ -58,18 +54,28 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     seed : int (default=42)
       Random seed for weights generation
 
-    **kwargs :
+    **kwargs : dict
       Class Specialization variables.
   '''
 
-  def __init__ (self, model, outputs=100, num_epochs=100,
-      batch_size=100, activation='linear', optimizer=Optimizer(update_type='SGD'),
+  def __init__ (self, model=None, outputs=100, num_epochs=100,
+      batch_size=100, activation='Linear', optimizer=Optimizer(update_type='SGD'),
       mu=0., sigma=1.,
       seed=42, **kwargs):
 
-    activation, _ = _check_activation(self, activation)
+    self.outputs = outputs
     self.num_epochs = num_epochs
+    self.batch_size = batch_size
+    self.activation = activation
+    self.optimizer = optimizer
+    self.mu = mu
+    self.sigma = sigma
+    self.seed = seed
 
+    for k, v in kwargs.items():
+      setattr(self, k, v)
+
+    activation, _ = _check_activation(self, activation_func=activation)
     self._obj = model(outputs, batch_size, activation, optimizer._object,
                       mu, sigma, seed, *kwargs.values())
 
@@ -231,13 +237,14 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     return self
 
-  def __repr__(self):
+  def __repr__ (self):
     '''
     Object representation
     '''
     class_name = self.__class__.__qualname__
     params = self.__init__.__code__.co_varnames
-    #params = set(params) - {'self'}
-    params = ['model'] # TODO: fix this line when the obj will be compatible with scikit-learn APIs
-    args = ', '.join(['{0}={1}'.format(k, str(getattr(self, k))) for k in params])
+    params = set(params) - {'self', 'kwargs', 'model'}
+    args = ', '.join(['{0}={1}'.format(k, str(getattr(self, k)))
+                      if not isinstance(getattr(self, k), str) else '{0}="{1}"'.format(k, str(getattr(self, k)))
+                      for k in params])
     return '{0}({1})'.format(class_name, args)

@@ -101,6 +101,75 @@
     <innerclass refid="classstd_1_1wstring__view" prot="public">std::wstring_view</innerclass>
     <innerclass refid="classstd_1_1wstringstream" prot="public">std::wstringstream</innerclass>
       <sectiondef kind="func">
+      <memberdef kind="function" id="utils_8h_1a3e841ff2ad206eb11b0778cc5c01a4c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class type</type>
+          </param>
+        </templateparamlist>
+        <type>const type &amp;</type>
+        <definition>const type&amp; std::clamp</definition>
+        <argsstring>(const type &amp;v, const type &amp;lo, const type &amp;hi)</argsstring>
+        <name>clamp</name>
+        <param>
+          <type>const type &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const type &amp;</type>
+          <declname>lo</declname>
+        </param>
+        <param>
+          <type>const type &amp;</type>
+          <declname>hi</declname>
+        </param>
+        <briefdescription>
+<para>Clamp the given value between the two extrema. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>C++11 compatible implementation of clap function with template values.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value data type </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input value. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Low value of the domain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hi</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>High value of the domain.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Value clamped between the two extrema. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/utils.h" line="229" column="13" declfile="/home/nico/Code/plasticity/include/utils.h" declline="229" declcolumn="13"/>
+      </memberdef>
       <memberdef kind="function" id="utils_8h_1a7555adcfa1d636d70f3804287e8242b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
@@ -144,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/utils.h" line="198" column="20" declfile="/home/nico/Code/plasticity/include/utils.h" declline="198" declcolumn="20"/>
+        <location file="/home/nico/Code/plasticity/include/utils.h" line="245" column="20" declfile="/home/nico/Code/plasticity/include/utils.h" declline="245" declcolumn="20"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

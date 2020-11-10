@@ -191,7 +191,7 @@ void BasePlasticity :: _fit (float * X, const int & num_epochs, const int & n_fe
   {
     std :: shuffle(batch_indices.get(), batch_indices.get() + num_batches, BasePlasticity :: engine);
 
-    std :: cout << RESET_COUT << "Epoch " << epoch << "/" << num_epochs << std :: endl;
+    std :: cout << RESET_COUT << "Epoch " << epoch + 1 << "/" << num_epochs << std :: endl;
     auto timer  = utils :: what_time_is_it_now();
 
     for (int i = 0; i < num_batches; ++i)
@@ -222,7 +222,7 @@ void BasePlasticity :: _fit (float * X, const int & num_epochs, const int & n_fe
 
 #endif
 
-      utils :: print_progress (i, num_batches, timer);
+      utils :: print_progress (i + 1, num_batches, timer);
 
     } // end for
 

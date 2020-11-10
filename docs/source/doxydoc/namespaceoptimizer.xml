@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespaceoptimizer" kind="namespace" language="C++">
+    <compoundname>optimizer</compoundname>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespaceoptimizer_1a2e2b6f9292db15142e5da58237b04289" prot="public" static="yes" mutable="no">
+        <type>const std ::unordered_map&lt; std ::string, int &gt;</type>
+        <definition>const std :: unordered_map&lt; std :: string, int &gt; optimizer::get_optimizer</definition>
+        <argsstring></argsstring>
+        <name>get_optimizer</name>
+        <initializer>{
+                                                                          {&quot;adam&quot;              , _adam},
+                                                                          {&quot;momentum&quot;          , _momentum},
+                                                                          {&quot;nesterov_momentum&quot; , _nesterov_momentum},
+                                                                          {&quot;adagrad&quot;           , _adagrad},
+                                                                          {&quot;rmsprop&quot;           , _rmsprop},
+                                                                          {&quot;adadelta&quot;          , _adadelta},
+                                                                          {&quot;adamax&quot;            , _adamax},
+                                                                          {&quot;sgd&quot;               , _sgd},
+                                                                        }</initializer>
+        <briefdescription>
+<para>Utility for the optimizer management. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="17" column="36" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/nico/Code/plasticity/include/optimizer.h" line="15" column="1"/>
+  </compounddef>
+</doxygen>

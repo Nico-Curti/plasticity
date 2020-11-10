@@ -4,7 +4,7 @@
 import numpy as np
 
 from plasticity.model._base import BasePlasticity
-from plasticity.utils.optimizer import SGD
+from .optimizer import SGD
 
 __author__  = ['Nico Curti', 'SimoneGasperini']
 __email__ = ['nico.curit2@unibo.it', 'simone.gasperini2@studio.unibo.it']
@@ -77,6 +77,8 @@ class BCM (BasePlasticity):
   >>> ax.axis("off")
   >>> plt.show()
 
+  .. image:: ../../../img/BCM_weights.png
+
   References
   ----------
   - Castellani G., Intrator N., Shouval H.Z., Cooper L.N. Solutions of the BCM learning rule
@@ -140,10 +142,10 @@ class BCM (BasePlasticity):
 
     theta = np.mean(output**2, axis=1, keepdims=True)
     phi = output * (output - theta)
-    output = self.activation(output)
+    output = self.activation.activate(output)
 
     #dw = self._interaction_matrix @ phi * self.gradient(output) @ X
-    dw = np.einsum('ij, jk, ik, kl -> il', self._interaction_matrix, phi, self.gradient(output), X, optimize=True)
+    dw = np.einsum('ij, jk, ik, kl -> il', self._interaction_matrix, phi, self.activation.gradient(output), X, optimize=True)
 
     nc = np.max(np.abs(dw))
     nc = 1. / max(nc, self.precision)

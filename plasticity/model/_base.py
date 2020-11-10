@@ -5,7 +5,7 @@ import numpy as np
 from tqdm import tqdm
 
 from plasticity.utils import _check_activation
-from plasticity.utils.optimizer import Optimizer
+from .optimizer import Optimizer
 
 from sklearn.base import BaseEstimator
 from sklearn.base import TransformerMixin
@@ -32,7 +32,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     batch_size : int (default=100)
       Size of the minibatch
 
-    activation : str (default="linear")
+    activation : str (default="Linear")
       Name of the activation function
 
     optimizer : Optimizer (default=SGD)
@@ -52,7 +52,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
   '''
 
   def __init__ (self, outputs=100, num_epochs=100,
-      activation='linear', optimizer=Optimizer,
+      activation='Linear', optimizer=Optimizer,
       batch_size=100, mu=0., sigma=1.,
       precision=1e-30, seed=42):
 
@@ -61,9 +61,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     self.outputs = outputs
     self.num_epochs = num_epochs
     self.batch_size = batch_size
-    self.activation = activation.activate
+    self.activation = activation
     self.optimizer = optimizer
-    self.gradient = activation.gradient
     self.mu = mu
     self.sigma = sigma
     self.precision = precision
@@ -156,7 +155,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     .. note::
       The model tries to memorize the given input producing a valid encoding.
 
-    .. warnings::
+    .. warning::
       The array of labels is not used by the model since its function is just to encode the features.
       It is inserted in the function signature just for a compatibility with sklearn APIs.
     '''
@@ -199,7 +198,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     Notes
     -----
-    .. warnings::
+    .. warning::
       The array of labels is not used by the model since its function is just to encode the features.
       It is inserted in the function signature just for a compatibility with sklearn APIs.
     '''
@@ -244,7 +243,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     Notes
     -----
-    .. warnings::
+    .. warning::
       The array of labels is not used by the model since its function is just to encode the features.
       It is inserted in the function signature just for a compatibility with sklearn APIs.
     '''
@@ -294,6 +293,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     '''
     class_name = self.__class__.__qualname__
     params = self.__init__.__code__.co_varnames
-    params = set(params) - {"self"}
-    args = ", ".join(["{0}={1}".format(k, str(getattr(self, k))) for k in params])
-    return "{0}({1})".format(class_name, args)
+    params = set(params) - {'self'}
+    args = ', '.join(['{0}={1}'.format(k, str(getattr(self, k)))
+                      if not isinstance(getattr(self, k), str) else '{0}="{1}"'.format(k, str(getattr(self, k)))
+                      for k in params])
+    return '{0}({1})'.format(class_name, args)

@@ -3,10 +3,11 @@
 
 # import utilities
 
-from plasticity.utils.misc import _check_activation
-from plasticity.utils.misc import _check_string
-from plasticity.utils.misc import view_weights
-from plasticity.utils.activations import *
+from .misc import _check_activation
+from .misc import _check_string
+from .misc import _check_update
+from .misc import view_weights
+from .activations import *
 
 __author__ = ['Mattia Ceccarelli', 'Nico Curti']
 __email__ = ['mattia.ceccarelli5@unibo.it', 'nico.curti2@unibo.it']
