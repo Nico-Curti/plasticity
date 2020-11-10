@@ -178,9 +178,10 @@ matrix:
           update: true
           sources:
             - ubuntu-toolchain-r-test
-            #- llvm-toolchain-trusty-5.0
+            - llvm-toolchain-xenial-5
           packages:
             - clang-5.0
+            - g++-9.0
             #- libstdc++-7-dev
             - libclang-5.0-dev
             - libstdc++-9-dev
@@ -199,10 +200,10 @@ matrix:
           update: true
           sources:
             - ubuntu-toolchain-r-test
-            #- llvm-toolchain-trusty-6.0
-            #- sourceline: 'ppa:ubuntu-toolchain-r/test'
+            - llvm-toolchain-xenial-6
           packages:
             - clang-6.0
+            - g++-9.0
             #- libstdc++-7-dev
             - libclang-6.0-dev
             - libstdc++-9-dev
