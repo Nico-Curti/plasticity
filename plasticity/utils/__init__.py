@@ -6,6 +6,7 @@
 from .misc import _check_activation
 from .misc import _check_string
 from .misc import _check_update
+from .misc import redirect_stdout
 from .misc import view_weights
 from .activations import *
 
