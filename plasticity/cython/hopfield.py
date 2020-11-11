@@ -84,7 +84,7 @@ class Hopfield (BasePlasticity):
       batch_size=100, optimizer=SGD(learning_rate=2e-2),
       delta=.4, mu=0., sigma=1.,
       p=2., k=2, seed=42,
-      vebose=True):
+      verbose=True):
 
     super (Hopfield, self).__init__(model=_Hopfield, outputs=outputs, num_epochs=num_epochs,
                                     batch_size=batch_size, activation='Linear',

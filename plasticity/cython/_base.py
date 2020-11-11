@@ -6,6 +6,7 @@ from __future__ import print_function
 
 from plasticity.utils import _check_activation
 from plasticity.utils import _check_string
+from plasticity.utils import redirect_stdout
 from .optimizer import SGD
 
 from sklearn.base import BaseEstimator
