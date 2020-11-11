@@ -71,7 +71,7 @@ def _check_activation (obj, activation_func):
     raise ValueError('{0}: incorrect value of Activation Function given'.format(class_name))
 
   # temporary solution to avoid not implemented activation function
-  if activation > 13: # Selu is the last available activation function
+  if activation > 18: # Asymmetric Logistic is the last available activation function
     raise NotImplementedError('The {0} activation function is not implemented yet!'.format(activation_func.name))
 
   return (activation, activation_func)
@@ -264,6 +264,7 @@ def view_weights (weights, dims):
 
   # plot the results
   fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(10, 10))
+  ax.axis('off')
   im = ax.imshow(image, cmap='bwr', vmin=-nc, vmax=nc)
   fig.colorbar(im, ticks=[np.amin(selected_weights), 0, np.amax(selected_weights)])
 

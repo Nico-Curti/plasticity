@@ -131,12 +131,12 @@ class Hopfield (BasePlasticity):
     return ds * nc
 
 
-  def _fit (self, X, view=False):
+  def _fit (self, X):
     '''
     Core function for the fit member
     '''
 
-    return super(Hopfield, self)._fit(X=X, norm=True, view=view)
+    return super(Hopfield, self)._fit(X=X, norm=True)
 
 
 if __name__ == '__main__':

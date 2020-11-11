@@ -155,12 +155,12 @@ class BCM (BasePlasticity):
 
     return dw * nc
 
-  def _fit (self, X, view=False):
+  def _fit (self, X):
     '''
     Core function for the fit member
     '''
 
-    return super(BCM, self)._fit(X=X, norm=False, view=view)
+    return super(BCM, self)._fit(X=X, norm=False)
 
 
 if __name__ == '__main__':

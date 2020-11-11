@@ -175,7 +175,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     '''
     check_is_fitted(self, 'weights')
     Xnew = self.predict(X)
-    return Xnew
+    return Xnew.transpose()
 
   def fit_transform (self, X, y=None):
     '''

@@ -106,7 +106,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     self.weights, = self.optimizer.update(params=[self.weights], gradients=[-w_update]) # -update for compatibility with optimizers
 
 
-  def _fit (self, X, norm=False, view=False):
+  def _fit (self, X, norm=False):
     '''
     Core function for the fit member
     '''
@@ -127,7 +127,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
       batches = np.lib.stride_tricks.as_strided(indices, shape=(num_batches, self.batch_size), strides=(self.batch_size * 8, 8))
 
-      for batch in tqdm(batches, disable=~self.verbose):
+      for batch in tqdm(batches, disable=(not self.verbose)):
 
         batch_data = X[batch, ...]
 
@@ -136,7 +136,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     return self
 
-  def fit (self, X, y=None, view=False):
+  def fit (self, X, y=None):
     '''
     Fit the Plasticity model weights.
 
@@ -147,9 +147,6 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
       y : array-like, default=None
         The array of labels
-
-      view : bool
-        Switch if plot the weight matrix at each iteration or not
 
     Returns
     -------
@@ -174,7 +171,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     #  raise ValueError('Minibatch size must be a divisor of the input size. Sorry, but this is a temporary solution.')
 
     self.weights = np.random.normal(loc=self.mu, scale=self.sigma, size=(self.outputs, num_features))
-    self._fit(X, view=view)
+    self._fit(X)
 
     return self
 
@@ -228,7 +225,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     '''
     check_is_fitted(self, 'weights')
     Xnew = self._predict(X)
-    return Xnew
+    return Xnew.transpose()
 
   def fit_transform (self, X, y=None):
     '''
