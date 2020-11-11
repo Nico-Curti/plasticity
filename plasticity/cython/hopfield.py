@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from ._base import BasePlasticity
-from .optimizer import Optimizer
+from .optimizer import SGD
 from plasticity.lib.hopfield import _Hopfield
 
 __author__  = ['Nico Curti']
@@ -25,6 +25,9 @@ class Hopfield (BasePlasticity):
     batch_size : int (default=10)
       Size of the minibatch
 
+    optimizer : Optimizer (default=SGD)
+      Optimizer object (derived by the base class Optimizer)
+
     delta : float (default=0.4)
       Strength of the anti-hebbian learning
 
@@ -42,6 +45,9 @@ class Hopfield (BasePlasticity):
 
     seed : int (default=42)
       Random seed for weights generation
+
+    verbose : bool (default=True)
+      Turn on/off the verbosity
 
   Examples
   --------
@@ -75,12 +81,14 @@ class Hopfield (BasePlasticity):
   '''
 
   def __init__(self, outputs=100, num_epochs=100,
-      batch_size=100, optimizer=Optimizer(update_type='SGD'),
+      batch_size=100, optimizer=SGD(learning_rate=2e-2),
       delta=.4, mu=0., sigma=1.,
-      p=2., k=2, seed=42):
+      p=2., k=2, seed=42,
+      vebose=True):
 
     super (Hopfield, self).__init__(model=_Hopfield, outputs=outputs, num_epochs=num_epochs,
                                     batch_size=batch_size, activation='Linear',
                                     optimizer=optimizer,
                                     mu=mu, sigma=sigma, seed=seed,
-                                    delta=delta, p=p, k=k)
+                                    delta=delta, p=p, k=k,
+                                    verbose=verbose)

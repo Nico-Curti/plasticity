@@ -6,7 +6,7 @@ from __future__ import print_function
 
 from plasticity.utils import _check_activation
 from plasticity.utils import _check_string
-from .optimizer import Optimizer
+from .optimizer import SGD
 
 from sklearn.base import BaseEstimator
 from sklearn.base import TransformerMixin
@@ -42,7 +42,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     activation : str (default="linear")
       Name of the activation function
 
-    optimizer : Optimizer object
+    optimizer : Optimizer object (default=SGD)
       The optimization algorithm to use during the training
 
     mu : float (default=0.)
@@ -54,14 +54,18 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     seed : int (default=42)
       Random seed for weights generation
 
+    verbose : bool (default=True)
+      Turn on/off the verbosity
+
     **kwargs : dict
       Class Specialization variables.
   '''
 
   def __init__ (self, model=None, outputs=100, num_epochs=100,
-      batch_size=100, activation='Linear', optimizer=Optimizer(update_type='SGD'),
+      batch_size=100, activation='Linear', optimizer=SGD(learning_rate=2e-2),
       mu=0., sigma=1.,
-      seed=42, **kwargs):
+      seed=42,  verbose=True,
+      **kwargs):
 
     self.outputs = outputs
     self.num_epochs = num_epochs
@@ -71,6 +75,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     self.mu = mu
     self.sigma = sigma
     self.seed = seed
+    self.verbose = verbose
 
     for k, v in kwargs.items():
       setattr(self, k, v)
@@ -113,12 +118,13 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     num_samples, num_features = X.shape
     X = np.ascontiguousarray(X.ravel().astype('float32'))
 
-    self._obj.fit(X, num_samples, num_features, self.num_epochs)
+    with redirect_stdout(self.verbose):
+      self._obj.fit(X, num_samples, num_features, self.num_epochs)
 
     self.weights, shape = self._obj.get_weights()
     self.weights = np.asarray(self.weights).reshape(shape)
 
-    #return self
+    return self
 
   def predict (self, X, y=None):
     '''

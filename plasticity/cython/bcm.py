@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from ._base import BasePlasticity
-from .optimizer import Optimizer
+from .optimizer import SGD
 from plasticity.lib.bcm import _BCM
 
 __author__  = ['Nico Curti']
@@ -35,6 +35,9 @@ class BCM (BasePlasticity):
     activation : string or Activations object (default='Logistic')
       Activation function to apply
 
+    optimizer : Optimizer (default=SGD)
+      Optimizer object (derived by the base class Optimizer)
+
     mu : float (default=0.)
       Mean of the gaussian distribution that initializes the weights
 
@@ -46,6 +49,9 @@ class BCM (BasePlasticity):
 
     seed : int (default=42)
       Random seed for weights generation
+
+    verbose : bool (default=True)
+      Turn on/off the verbosity
 
   Examples
   --------
@@ -81,14 +87,15 @@ class BCM (BasePlasticity):
 
   def __init__(self, outputs=100, num_epochs=100,
       batch_size=100, activation='Logistic',
-      optimizer=Optimizer(update_type='SGD'),
+      optimizer=SGD(learning_rate=2e-2),
       mu=0., sigma=1.,
-      interaction_strength=0., seed=42):
+      interaction_strength=0., seed=42,
+      verbose=True):
 
     super (BCM, self).__init__(model=_BCM, outputs=outputs, num_epochs=num_epochs,
                                batch_size=batch_size, activation=activation,
                                optimizer=optimizer,
                                mu=mu, sigma=sigma,
-                               seed=seed,
+                               seed=seed, verbose=verbose,
                                interaction_strength=interaction_strength)
 

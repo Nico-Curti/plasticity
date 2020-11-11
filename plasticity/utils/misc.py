@@ -2,9 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import os
+import warnings
 import numpy as np
 import pylab as plt
 from inspect import isclass
+from contextlib import contextmanager
 from plasticity.utils import activations
 
 __author__ = ['Mattia Ceccarelli', 'Nico Curti']
@@ -155,6 +157,70 @@ def _check_update (upd_type):
 
   return (update_type, update_num)
 
+
+@contextmanager
+def redirect_stdout (verbose):
+  '''
+  Redirect output stdout from cython wrap to devnull or not.
+  This function works ONLY for cython wrap functions!!
+  If you want to redirect python prints you can use something like
+
+  Parameters
+  ----------
+    verbose: bool
+      Switch if turn on/off the output redirection
+
+  Example
+  -------
+  >>> from io import StringIO
+  >>> import contextlib
+  >>> temp_stdout = StringIO()
+  >>> foo = lambda : print('hello world!')
+  >>> with contextlib.redirect_stdout(temp_stdout):
+  >>>   foo()
+
+  '''
+
+  try:
+    # Temporary fix for the IPython console.
+    # The current version of the redirect_stdout does not support the
+    # redirection using IPython.
+    # Error: "ValueError: write to closed file"
+    # TODO: fix this issue with some workaround for the devnull redirection in IPython
+    __IPYTHON__
+    warnings.warn('The current version does not allow to redirect the stdout using an IPython console.', RuntimeWarning)
+    verbose = True
+
+  except NameError:
+    pass
+
+  if verbose:
+    try:
+      yield
+    finally:
+      return
+
+  to = os.devnull
+
+  fd = sys.stdout.fileno()
+
+  # assert that Python and C stdio write using the same file descriptor
+  # assert libc.fileno(ctypes.c_void_p.in_dll(libc, "stdout")) == fd == 1
+
+  def _redirect_stdout (to):
+    sys.stdout.close()              # + implicit flush()
+    os.dup2(to.fileno(), fd)        # fd writes to 'to' file
+    sys.stdout = os.fdopen(fd, 'w') # Python writes to fd
+
+  with os.fdopen(os.dup(fd), 'w') as old_stdout:
+    with open(to, 'w') as file:
+      _redirect_stdout(to=file)
+    try:
+      yield # allow code to be run with the redirected stdout
+    finally:
+      _redirect_stdout(to=old_stdout) # restore stdout.
+                                      # buffering and flags such as
+                                      # CLOEXEC may be different
 
 
 def view_weights (weights, dims):

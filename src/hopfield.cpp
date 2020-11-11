@@ -99,6 +99,9 @@ void Hopfield :: weights_update (float * X, const int & n_features, float * weig
                 });
   }
 
+#ifdef _OPENMP
+  #pragma omp for
+#endif
   for (int i = 0; i < this->batch; ++i)
   {
     const int idx = i * this->outputs + this->outputs;
@@ -107,9 +110,6 @@ void Hopfield :: weights_update (float * X, const int & n_features, float * weig
     this->yl[up_idx] = 1.f;
     this->yl[rest_idx] = - this->delta;
   }
-
-  static float nc;
-  nc = 0.f;
 
 #ifdef _OPENMP
   #pragma omp for
@@ -156,12 +156,25 @@ void Hopfield :: weights_update (float * X, const int & n_features, float * weig
     {
       const int idx = i * n_features + j;
       weights_update[idx] -= theta_value * this->weights[idx];
-
-      const float abs_w_up = std :: fabs(weights_update[idx]);
-      nc = nc < abs_w_up ? abs_w_up : nc;
     }
   }
 
+  static float nc;
+
+  nc = 0.f;
+
+#ifdef _OPENMP
+  #pragma omp for reduction (max : nc)
+#endif
+  for (int i = 0; i < this->nweights; ++i)
+  {
+    const float out = std :: fabs(weights_update[i]);
+    nc = nc < out ? out : nc;
+  }
+
+#ifdef _OPENMP
+  #pragma omp single
+#endif
   nc = 1.f / std :: max(nc, BasePlasticity :: precision);
 
 
@@ -177,10 +190,8 @@ void Hopfield :: weights_update (float * X, const int & n_features, float * weig
 
 void Hopfield :: normalize_weights ()
 {
-  if ( this->p != 2 )
+  if ( this->p != 2.f )
   {
-
-    const int p = this->p;
 
 #ifdef _OPENMP
 
@@ -188,7 +199,7 @@ void Hopfield :: normalize_weights ()
     for (int i = 0; i < this->nweights; ++i)
     {
       const float wi = this->weights[i];
-      this->weights[i] = std :: copysign( std :: pow(std :: fabs(wi), p - 1), wi );
+      this->weights[i] = std :: copysign( std :: pow(std :: fabs(wi), this->p - 1.f), wi );
     }
 
 #else
@@ -197,7 +208,7 @@ void Hopfield :: normalize_weights ()
                      this->weights.get(),
                      [&](const float & wi)
                      {
-                       return std :: copysign( std :: pow(std :: fabs(wi), p - 1), wi );
+                       return std :: copysign( std :: pow(std :: fabs(wi), this->p - 1.f), wi );
                      });
 
 #endif

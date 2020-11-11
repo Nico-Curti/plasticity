@@ -54,6 +54,9 @@ class BCM (BasePlasticity):
     seed : int (default=42)
       Random seed for weights generation
 
+    verbose : bool (default=True)
+      Turn on/off the verbosity
+
   Examples
   --------
   >>> from sklearn.datasets import fetch_openml
@@ -87,10 +90,10 @@ class BCM (BasePlasticity):
 
   def __init__(self, outputs=100, num_epochs=100,
       batch_size=100, activation='Logistic',
-      optimizer=SGD(lr=2e-2),
+      optimizer=SGD(learning_rate=2e-2),
       mu=0., sigma=1., interaction_strength=0.,
       precision=1e-30,
-      seed=42):
+      seed=42, verbose=True):
 
     self._interaction_matrix = self._weights_interaction(interaction_strength, outputs)
     self.interaction_strength = interaction_strength
@@ -100,7 +103,7 @@ class BCM (BasePlasticity):
                                optimizer=optimizer,
                                mu=mu, sigma=sigma,
                                precision=precision,
-                               seed=seed)
+                               seed=seed, verbose=verbose)
 
   def _weights_interaction (self, strength, outputs):
     '''

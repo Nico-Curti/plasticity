@@ -49,12 +49,15 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     seed : int (default=42)
       Random seed for weights generation
+
+    verbose : bool (default=True)
+      Turn on/off the verbosity
   '''
 
   def __init__ (self, outputs=100, num_epochs=100,
       activation='Linear', optimizer=Optimizer,
       batch_size=100, mu=0., sigma=1.,
-      precision=1e-30, seed=42):
+      precision=1e-30, seed=42, verbose=True):
 
     _, activation = _check_activation(self, activation)
 
@@ -67,6 +70,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     self.sigma = sigma
     self.precision = precision
     self.seed = seed
+    self.verbose = verbose
 
   def _weights_update(self, X, output):
     '''
@@ -114,14 +118,16 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     num_batches = num_samples // self.batch_size
 
     for epoch in range(self.num_epochs):
-      print('Epoch {:d}/{:d}'.format(epoch + 1, self.num_epochs))
+
+      if self.verbose:
+        print('Epoch {:d}/{:d}'.format(epoch + 1, self.num_epochs))
 
       # random shuffle the input
       np.random.shuffle(indices)
 
       batches = np.lib.stride_tricks.as_strided(indices, shape=(num_batches, self.batch_size), strides=(self.batch_size * 8, 8))
 
-      for batch in tqdm(batches):
+      for batch in tqdm(batches, disable=~self.verbose):
 
         batch_data = X[batch, ...]
 
@@ -164,8 +170,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     np.random.seed(self.seed)
     num_samples, num_features = X.shape
 
-    if num_samples % self.batch_size != 0:
-      raise ValueError('Minibatch size must be a divisor of the input size. Sorry, but this is a temporary solution.')
+    #if num_samples % self.batch_size != 0:
+    #  raise ValueError('Minibatch size must be a divisor of the input size. Sorry, but this is a temporary solution.')
 
     self.weights = np.random.normal(loc=self.mu, scale=self.sigma, size=(self.outputs, num_features))
     self._fit(X, view=view)
@@ -176,8 +182,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     '''
     Core function for the predict member
     '''
-    #return self.activation(self.weights @ X.T)
-    return self.activation(np.einsum('ij, kj -> ik', self.weights, X, optimize=True))
+    #return self.activation.activate(self.weights @ X.T)
+    return self.activation.activate(np.einsum('ij, kj -> ik', self.weights, X, optimize=True))
 
   def predict (self, X, y=None):
     '''

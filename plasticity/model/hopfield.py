@@ -50,6 +50,9 @@ class Hopfield (BasePlasticity):
     seed : int (default=42)
       Random seed for weights generation
 
+    verbose : bool (default=True)
+      Turn on/off the verbosity
+
   Examples
   --------
   >>> from sklearn.datasets import fetch_openml
@@ -61,7 +64,7 @@ class Hopfield (BasePlasticity):
   >>> model = Hopfield(outputs=100, num_epochs=10)
   >>> model.fit(X)
   Hopfield(batch_size=100, outputs=100, sigma=1.0, mu=0.0,
-  num_epochs=10, seed=42, epsilon=0.02, precision=1e-30)
+  num_epochs=10, seed=42, precision=1e-30)
   >>>
   >>> # view the memorized weights
   >>> w = model.weights[0].reshape(28, 28)
@@ -83,11 +86,11 @@ class Hopfield (BasePlasticity):
 
   def __init__(self, outputs=100, num_epochs=100,
       batch_size=100, delta=.4,
-      optimizer=SGD(lr=2e-2),
+      optimizer=SGD(learning_rate=2e-2),
       mu=0., sigma=1.,
       p=2., k=2,
-      epsilon=2e-2, precision=1e-30,
-      seed=42):
+      precision=1e-30,
+      seed=42, verbose=True):
 
     self.delta = delta
     self.p = p
@@ -98,7 +101,7 @@ class Hopfield (BasePlasticity):
                                optimizer=optimizer,
                                mu=mu, sigma=sigma,
                                precision=precision,
-                               seed=seed)
+                               seed=seed, verbose=verbose)
 
   def _weights_update (self, X, output):
     '''

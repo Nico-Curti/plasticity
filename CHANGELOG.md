@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - 2020-11-09
+## [1.0.0] - 2020-11-11
 
 First version of the algorithm.
 The starting point of this project is given by the https://github.com/SimoneGasperini/biological_neuralnet repository.
@@ -34,7 +34,5 @@ The starting point of this project is given by the https://github.com/SimoneGasp
 
 ### TODO
 
-- Improve the compatibility of the setup script for multiple OS (maybe using scikit-build)
-- Implement the setup run into the CMake installation
 - Implement a series of tests for the package CI (see coverage)
 - Upload the package to PyPi at the first release

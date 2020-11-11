@@ -5,6 +5,8 @@ from __future__ import print_function
 
 import os
 import re
+import sys
+import pathlib
 import platform
 import subprocess
 
@@ -22,6 +24,76 @@ from distutils import sysconfig
 from Cython.Distutils import build_ext
 from distutils.sysconfig import customize_compiler
 from distutils.command.sdist import sdist as _sdist
+
+
+class CMakeExtension (Extension):
+
+  # Reference: https://stackoverflow.com/a/48015772
+
+  def __init__(self, name):
+    # don't invoke the original build_ext for this special extension
+    super().__init__(name, sources=[])
+
+
+class cmake_build_ext (build_ext):
+
+  # Reference: https://stackoverflow.com/a/48015772
+
+  def run (self):
+
+    for ext in self.extensions:
+      self.build_cmake(ext)
+
+    super().run()
+
+  def build_cmake (self, ext):
+
+    cwd = pathlib.Path().absolute()
+
+    # these dirs will be created in build_py, so if you don't have
+    # any python sources to bundle, the dirs will be missing
+    build_temp = pathlib.Path(self.build_temp)
+    build_temp.mkdir(parents=True, exist_ok=True)
+    extdir = pathlib.Path(self.get_ext_fullpath(ext.name))
+    extdir.mkdir(parents=True, exist_ok=True)
+
+    # example of cmake args
+    config = 'Debug' if self.debug else 'Release'
+    cmake_args = [
+        '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + str(extdir.parent.absolute()),
+        '-DCMAKE_BUILD_TYPE=' + config,
+        '-DPYWRAP=ON',
+        '-DBUILD_DOCS=OFF',
+        '-DBUILD_TEST=OFF',
+        '-DVERBOSE=ON',
+        '-DOMP={}'.format('ON' if ENABLE_OMP else 'OFF')
+    ]
+
+    # example of build args
+    build_args = [
+        '--target', 'install',
+        '--config', config,
+        '--', '-j4',
+    ]
+
+    os.chdir(str(build_temp))
+    self.spawn(['cmake', str(cwd)] + cmake_args)
+    if not self.dry_run:
+      self.spawn(['cmake', '--build', '.'] + build_args)
+    # Troubleshooting: if fail on line above then delete all possible
+    # temporary CMake files including "CMakeCache.txt" in top level dir.
+    os.chdir(str(cwd))
+
+
+
+class sdist (_sdist):
+
+  def run (self):
+
+    self.run_command('build_ext')
+    _sdist.run(self)
+
+
 
 def get_requires (requirements_filename):
   '''
@@ -68,90 +140,6 @@ def read_description (readme_filename):
 
   except IOError:
     return ''
-
-def get_ext_filename_without_platform_suffix (filename):
-  name, ext = os.path.splitext(filename)
-  ext_suffix = sysconfig.get_config_var('EXT_SUFFIX')
-
-  if ext_suffix == ext:
-    return filename
-
-  ext_suffix = ext_suffix.replace(ext, '')
-  idx = name.find(ext_suffix)
-
-  if idx == -1:
-    return filename
-  else:
-    return name[:idx] + ext
-
-
-class custom_build_ext (build_ext):
-  '''
-  Custom build type
-  '''
-
-  def get_ext_filename (self, ext_name):
-
-    if platform.system() == 'Windows':
-      # The default EXT_SUFFIX of windows includes the PEP 3149 tags of compiled modules
-      # In this case I rewrite a custom version of the original distutils.command.build_ext.get_ext_filename function
-      ext_path = ext_name.split('.')
-      ext_suffix = '.pyd'
-      filename = os.path.join(*ext_path) + ext_suffix
-    else:
-      filename = super().get_ext_filename(ext_name)
-
-    return get_ext_filename_without_platform_suffix(filename)
-
-  def build_extensions (self):
-
-    customize_compiler(self.compiler)
-
-    try:
-      self.compiler.compiler_so.remove('-Wstrict-prototypes')
-
-    except (AttributeError, ValueError):
-      pass
-
-    build_ext.build_extensions(self)
-
-
-class sdist (_sdist):
-
-  def run (self):
-
-    self.run_command('build_ext')
-    _sdist.run(self)
-
-
-def get_eigen_link_flags ():
-  '''
-  Get the links and flags variables for Eigen links
-  '''
-
-  # TODO: this solution could work only for UNIX OS
-  # A possible workaround is given by scikit-build!
-  # I will move the setup to scikit-build ASAP
-
-  eigen_lib_flags = subprocess.run('echo `pkg-config --cflags eigen3`',
-                                    shell=True,
-                                    stdout=subprocess.PIPE,
-                                    universal_newlines=True
-                                    )
-  if eigen_lib_flags.stderr:
-
-    # Check if we're running on Read the Docs' servers
-    read_the_docs_build = os.environ.get('READTHEDOCS', None) == 'True'
-
-    if read_the_docs_build:
-      eigen_lib_flags = '-I/include/eigen3/'
-    else:
-      raise OSError('Package eigen3 was not found in the pkg-config search path.')
-  else:
-    eigen_lib_flags = eigen_lib_flags.stdout[:-1]
-
-  return eigen_lib_flags
-
 
 def read_version (CMakeLists):
   '''
@@ -231,6 +219,10 @@ VERSION_FILENAME = os.path.join(here, 'plasticity', '__version__.py')
 
 ENABLE_OMP = False
 
+if '--omp' in sys.argv:
+  ENABLE_OMP = True
+  sys.argv.remove('--omp')
+
 # Import the README and use it as the long-description.
 # Note: this will only work if 'README.md' is present in your MANIFEST.in file!
 try:
@@ -253,66 +245,8 @@ else:
 # parse version variables and add them to command line as definitions
 Version = about['__version__'].split('.')
 
-# link to OpenCV libraries
-eigen_flags = get_eigen_link_flags()
-
-define_args = [ '-DMAJOR={}'.format(Version[0]),
-                '-DMINOR={}'.format(Version[1]),
-                '-DREVISION={}'.format(Version[2])
-                ]
-
-
-if 'GCC' in CPP_COMPILER or 'Clang' in CPP_COMPILER:
-
-  cpp_compiler_args = ['-std=c++1z', '-std=gnu++1z', '-g0']
-
-  compile_args = ['-Wno-unused-function', # disable unused-function warnings
-                  '-Wno-narrowing', # disable narrowing conversion warnings
-                   # enable common warnings flags
-                  '-Wall',
-                  '-Wextra',
-                  '-Wno-unused-result',
-                  '-Wno-unknown-pragmas',
-                  '-Wfatal-errors',
-                  '-Wpedantic',
-                  '-march=native',
-                  '-Ofast'
-                  ]
-
-  try:
-
-    compiler, compiler_version = CPP_COMPILER.split()
-
-  except ValueError:
-
-    compiler, compiler_version = (CPP_COMPILER, '0')
-
-  if ENABLE_OMP and compiler == 'GCC':
-    linker_args = [eigen_flags, '-fopenmp']
-
-  else:
-    linker_args = [eigen_flags, ]
-
-  if 'Clang' in CPP_COMPILER and 'clang' in os.environ['CXX']:
-    cpp_compiler_args += ['-stdlib=libc++']
-
-elif 'MSC' in CPP_COMPILER:
-  cpp_compiler_args = ['/std:c++latest']
-  compile_args = []
-
-  if ENABLE_OMP:
-    linker_args = [eigen_flags, '/openmp']
-  else:
-    linker_args = [eigen_flags, ]
-
-else:
-  raise ValueError('Unknown c++ compiler arg')
-
-whole_compiler_args = sum([cpp_compiler_args, compile_args, define_args, linker_args], [])
-
-cmdclass = {'build_ext': custom_build_ext,
+cmdclass = {'build_ext': cmake_build_ext,
             'sdist': sdist}
-
 
 
 setup(
@@ -355,72 +289,6 @@ setup(
   license                       = 'MIT',
   cmdclass                      = cmdclass,
   ext_modules                   = [
-                                    Extension(name='.'.join(['plasticity', 'lib', 'bcm']),
-                                              sources=['./plasticity/source/bcm.pyx',
-                                                       './src/activations.cpp',
-                                                       './src/fmath.cpp',
-                                                       './src/bcm.cpp',
-                                                       './src/base.cpp',
-                                                       './src/optimizer.cpp',
-                                                       './src/utils.cpp',
-                                              ],
-                                              include_dirs=['./plasticity/lib/',
-                                                            './hpp/',
-                                                            './include/'
-                                              ],
-                                              libraries=[],
-                                              library_dirs=[
-                                                            os.path.join(here, 'lib'),
-                                                            os.path.join('usr', 'lib'),
-                                                            os.path.join('usr', 'local', 'lib'),
-                                              ],  # path to .a or .so file(s)
-                                              extra_compile_args = whole_compiler_args,
-                                              extra_link_args = linker_args,
-                                              language='c++'
-                                              ),
-
-                                    Extension(name='.'.join(['plasticity', 'lib', 'hopfield']),
-                                              sources=['./plasticity/source/hopfield.pyx',
-                                                       './src/activations.cpp',
-                                                       './src/base.cpp',
-                                                       './src/fmath.cpp',
-                                                       './src/hopfield.cpp',
-                                                       './src/optimizer.cpp',
-                                                       './src/utils.cpp'
-                                              ],
-                                              include_dirs=['./plasticity/lib/',
-                                                            './hpp/',
-                                                            './include/'
-                                              ],
-                                              libraries=[],
-                                              library_dirs=[
-                                                            os.path.join(here, 'lib'),
-                                                            os.path.join('usr', 'lib'),
-                                                            os.path.join('usr', 'local', 'lib'),
-                                              ],  # path to .a or .so file(s)
-                                              extra_compile_args = whole_compiler_args,
-                                              extra_link_args = linker_args,
-                                              language='c++'
-                                              ),
-                                    Extension(name='.'.join(['plasticity', 'lib', 'update_args']),
-                                              sources=['./plasticity/source/update_args.pyx',
-                                                       './src/fmath.cpp',
-                                                       './src/optimizer.cpp',
-                                                       './src/utils.cpp'
-                                              ],
-                                              include_dirs=['./plasticity/lib/',
-                                                            './hpp/',
-                                                            './include/'
-                                              ],
-                                              libraries=[],
-                                              library_dirs=[
-                                                            os.path.join(here, 'lib'),
-                                                            os.path.join('usr', 'lib'),
-                                                            os.path.join('usr', 'local', 'lib'),
-                                              ],  # path to .a or .so file(s)
-                                              extra_compile_args = whole_compiler_args,
-                                              extra_link_args = linker_args,
-                                              language='c++'
-                                              ),
+                                    CMakeExtension(name=NAME)
   ],
 )

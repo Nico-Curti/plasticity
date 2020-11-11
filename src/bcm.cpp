@@ -126,6 +126,9 @@ void BCM :: weights_update (float * X, const int & n_features, float * weights_u
     nc = nc < out ? out : nc;
   }
 
+#ifdef _OPENMP
+  #pragma omp single
+#endif
   nc = 1.f / std :: max(nc, BasePlasticity :: precision);
 
 #ifdef _OPENMP

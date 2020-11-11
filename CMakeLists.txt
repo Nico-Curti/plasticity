@@ -24,6 +24,7 @@ option (OMP        "Enable OpenMP                support" OFF)
 option (BUILD_TEST "Enable tests build           support" OFF)
 option (PYWRAP     "Enable Python wrap compilation      " OFF)
 option (BUILD_DOCS "Enable Documentaion builid   support" OFF)
+option (VERBOSE    "Enable verbosity             support" ON)
 
 #################################################################
 #                         SETTING VARIABLES                     #
@@ -120,6 +121,10 @@ if (EIGEN3_FOUND)
   include_directories(${EIGEN3_INCLUDE_DIR})
 else ()
   message(FATAL_ERROR "Eigen not found")
+endif ()
+
+if (VERBOSE)
+  add_definitions (-D__verbose__)
 endif ()
 
 #################################################################

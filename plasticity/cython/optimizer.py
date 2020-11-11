@@ -21,7 +21,7 @@ class Optimizer (object):
     update_type : str or int
       Update rule to apply
 
-    learning_rate : float (default=2e-2)
+    learning_rate : float (default=1e-3)
       Learning rate value
 
     momentum : float (default=0.9)

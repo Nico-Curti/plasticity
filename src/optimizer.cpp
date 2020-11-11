@@ -67,9 +67,19 @@ void update_args :: update ( const int & iteration, float * weights, float * wei
 
   if ( this->nweights != nweights )
   {
-    std :: cerr << "Invalid number of weights found. Given " << nweights << ". Aspected " << this->nweights << std :: endl;
-    throw ERROR_NWEIGHTS;
-  }
+#ifdef _OPENMP
+    #pragma omp single
+    {
+#endif
+
+      std :: cerr << "Invalid number of weights found. Given " << nweights << ". Aspected " << this->nweights << std :: endl;
+      throw ERROR_NWEIGHTS;
+
+#ifdef _OPENMP
+    } // end single section
+#endif
+
+  } // end if
 
   if ( this->l2norm )
     this->norm_value(weights_update, nweights);
@@ -97,8 +107,19 @@ void update_args :: update ( const int & iteration, float * weights, float * wei
     break;
 
   }
-  this->learning_rate *= 1.f / (this->decay * iteration + 1.f);
-  this->learning_rate  = this->learning_rate < 0.f ? 0.f : this->learning_rate;
+
+#ifdef _OPENMP
+  #pragma omp single
+  {
+#endif
+
+    this->learning_rate *= 1.f / (this->decay * iteration + 1.f);
+    this->learning_rate  = this->learning_rate < 0.f ? 0.f : this->learning_rate;
+
+#ifdef _OPENMP
+  }
+#endif
+
 }
 
 
@@ -186,15 +207,13 @@ void update_args :: rmsprop_update (float * weights, float * weights_update)
 void update_args :: adadelta_update (float * weights, float * weights_update)
 {
 
-  float update = 0.f;
-
 #ifdef _OPENMP
   #pragma omp for
 #endif
   for (int i = 0; i < this->nweights; ++i)
   {
     this->v[i]  = this->rho * this->v[i] + (1.f - this->rho) * weights_update[i] * weights_update[i];
-    update      = weights_update[i] * ( math :: sqrt(this->m[i]) + update_args :: epsil) / (math :: sqrt(this->v[i]) + update_args :: epsil);
+    const float update = weights_update[i] * ( math :: sqrt(this->m[i]) + update_args :: epsil) / (math :: sqrt(this->v[i]) + update_args :: epsil);
     weights[i] -= this->learning_rate * update;
     this->m[i]  = this->rho * this->m[i] + (1.f - this->rho) * update * update;
   }
@@ -224,12 +243,14 @@ void update_args :: norm_value (float * arr, const int & size)
 
 #ifdef _OPENMP
 
-  float norm = 0;
+  static float norm;
+  norm = 0.f;
 
-  #pragma omp for
+  #pragma omp for reduction (+ : norm)
   for (int i = 0; i < size; ++i)
     norm += arr[i] * arr[i];
 
+  #pragma omp single
   norm = math :: rsqrt(norm);
 
   #pragma omp for

@@ -192,7 +192,16 @@ python setup.py develop --user
 
 ## Efficiency
 
-**TODO**
+![Comparison of time performances between the pure-`Python` implementation and `Cython` version of the `BCM` model varying the input dimension sizes (number of samples and number of features). For each input configuration 10 runs of both algorithm were performed keeping fixed all the other parameters. In the simulation we used 10 epochs and a SGD optimization algorithm.](./img/BCM_timing.png)
+
+![Comparison of time performances between the pure-`Python` implementation and `Cython` version of the `Hopfield` model varying the input dimension sizes (number of samples and number of features). For each input configuration 10 runs of both algorithm were performed keeping fixed all the other parameters. In the simulation we used 10 epochs and a SGD optimization algorithm.](./img/Hopfield_timing.png)
+
+We test the computational efficiency of both the implementation (pure-`Python` and `Cython` with multi-threading enabled).
+The tests were performed keeping fixed all the training parameters and varying just the input dimension (number of samples and number of features).
+
+As expected we have the most significant improvements enlarging the number of samples, while varying the number of features the scalability of the code is quite stable.
+Both the algorithms spend the same time for the simulations and therefore their use is not constrained by any computational limitation.
+We however encourage the use of the `Cython` version since it is obviously faster than the `Python` counterpart.
 
 ## Usage
 
