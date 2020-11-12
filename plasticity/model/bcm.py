@@ -4,7 +4,7 @@
 import numpy as np
 
 from plasticity.model._base import BasePlasticity
-from .optimizer import SGD
+from plasticity.model.optimizer import SGD
 
 __author__  = ['Nico Curti', 'SimoneGasperini']
 __email__ = ['nico.curit2@unibo.it', 'simone.gasperini2@studio.unibo.it']
@@ -174,7 +174,7 @@ if __name__ == '__main__':
   # normalize the sample into [0, 1]
   X *= 1. / 255
 
-  model = BCM(outputs=100, num_epochs=10, activation='Logistic', epsilon=.04)
+  model = BCM(outputs=100, num_epochs=10, activation='Logistic')
   model.fit(X)
 
   w = model.weights[0].reshape(28, 28)
