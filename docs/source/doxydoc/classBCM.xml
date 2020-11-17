@@ -17,14 +17,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/bcm.h" line="23" column="22" bodyfile="/home/nico/Code/plasticity/include/bcm.h" bodystart="23" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/bcm.h" line="23" column="22" bodyfile="/home/nico/Desktop/Code/plasticity/include/bcm.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="classBCM_1ae515c4c9647cbe22e28a936373afde00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classBCM_1a2962dc3ba31cb780b872e269cd6b62c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>BCM::BCM</definition>
-        <argsstring>(const int &amp;outputs, const int &amp;batch_size, int activation=transfer ::_logistic_, update_args optimizer=update_args(optimizer_t ::_sgd), float mu=0.f, float sigma=1.f, float interaction_strength=0.f, int seed=42)</argsstring>
+        <argsstring>(const int &amp;outputs, const int &amp;batch_size, int activation=transfer ::_logistic_, update_args optimizer=update_args(optimizer_t ::_sgd), float mu=0.f, float sigma=1.f, int epochs_for_convergency=1, float convergency_atol=1e-2f, float interaction_strength=0.f, int seed=42)</argsstring>
         <name>BCM</name>
         <param>
           <type>const int &amp;</type>
@@ -53,6 +53,16 @@
           <type>float</type>
           <declname>sigma</declname>
           <defval>1.f</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>epochs_for_convergency</declname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>convergency_atol</declname>
+          <defval>1e-2f</defval>
         </param>
         <param>
           <type>float</type>
@@ -121,6 +131,22 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
+<parametername>epochs_for_convergency</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of stable epochs requested for the convergency. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>convergency_atol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Absolute tolerance requested for the convergency. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
 <parametername>interaction_strength</parametername>
 </parameternamelist>
 <parameterdescription>
@@ -140,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/bcm.h" line="47" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/bcm.h" line="49" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classBCM_1aacec2c922e994d7f4b6d33aa59667429" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -169,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/bcm.h" line="62" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/bcm.h" line="66" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classBCM_1a9f89c34dc96cc5bb74cc9b3b8f6c454c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classBCM" kindref="compound">BCM</ref> &amp;</type>
@@ -198,7 +224,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/bcm.h" line="74" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/bcm.h" line="78" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classBCM_1add33374e61bfea8b6331cad75acb8eac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -213,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/bcm.h" line="84" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/bcm.h" line="88" column="3"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -270,7 +296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/bcm.h" line="99" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/bcm.h" line="103" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classBCM_1aa33368c82222851cb8403566f30d1eca" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -300,7 +326,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/bcm.h" line="110" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/bcm.h" line="114" column="8"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -340,19 +366,22 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/nico/Code/plasticity/include/bcm.h" line="21" column="1" bodyfile="/home/nico/Code/plasticity/include/bcm.h" bodystart="20" bodyend="112"/>
+    <location file="/home/nico/Desktop/Code/plasticity/include/bcm.h" line="21" column="1" bodyfile="/home/nico/Desktop/Code/plasticity/include/bcm.h" bodystart="20" bodyend="116"/>
     <listofallmembers>
       <member refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" prot="protected" virt="non-virtual"><scope>BCM</scope><name>activation</name></member>
       <member refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" prot="public" virt="non-virtual"><scope>BCM</scope><name>BasePlasticity</name></member>
-      <member refid="classBasePlasticity_1a4083fb0c002e37a0bf717e40f26d543b" prot="public" virt="non-virtual"><scope>BCM</scope><name>BasePlasticity</name></member>
+      <member refid="classBasePlasticity_1ad24090d74bf2a00d7b94f17ad5a643f5" prot="public" virt="non-virtual"><scope>BCM</scope><name>BasePlasticity</name></member>
       <member refid="classBasePlasticity_1a36aafa34a7d39721930afd46d2ccc5cd" prot="public" virt="non-virtual"><scope>BCM</scope><name>BasePlasticity</name></member>
       <member refid="classBasePlasticity_1a4a6ecb6e802bdfc043346c41b2682ca1" prot="protected" virt="non-virtual"><scope>BCM</scope><name>batch</name></member>
-      <member refid="classBCM_1ae515c4c9647cbe22e28a936373afde00" prot="public" virt="non-virtual"><scope>BCM</scope><name>BCM</name></member>
+      <member refid="classBCM_1a2962dc3ba31cb780b872e269cd6b62c3" prot="public" virt="non-virtual"><scope>BCM</scope><name>BCM</name></member>
       <member refid="classBCM_1aacec2c922e994d7f4b6d33aa59667429" prot="public" virt="non-virtual"><scope>BCM</scope><name>BCM</name></member>
+      <member refid="classBasePlasticity_1a2940d7e49ae8f8725ac552bfb0666e93" prot="protected" virt="non-virtual"><scope>BCM</scope><name>convergency_atol</name></member>
       <member refid="classBasePlasticity_1a9bc89cbc53982004dddd6c05a6f8c78b" prot="public" virt="non-virtual"><scope>BCM</scope><name>engine</name></member>
+      <member refid="classBasePlasticity_1a510a58d019657002b7b292072cd4a9e9" prot="protected" virt="non-virtual"><scope>BCM</scope><name>epochs_for_convergency</name></member>
       <member refid="classBasePlasticity_1a1adfa1440172822a6e3280e0142fb80e" prot="public" virt="non-virtual"><scope>BCM</scope><name>fit</name></member>
       <member refid="classBasePlasticity_1a35be8a52e26ce61050f1408d2f69fa66" prot="public" virt="non-virtual"><scope>BCM</scope><name>get_weights</name></member>
       <member refid="classBasePlasticity_1adf83370e29d977f79690bf17ed3668bf" prot="protected" virt="non-virtual"><scope>BCM</scope><name>gradient</name></member>
+      <member refid="classBasePlasticity_1aa892a754bac8c9e6ab0268be5b070f4b" prot="protected" virt="non-virtual"><scope>BCM</scope><name>history</name></member>
       <member refid="classBCM_1aa33368c82222851cb8403566f30d1eca" prot="private" virt="non-virtual"><scope>BCM</scope><name>init_interaction_matrix</name></member>
       <member refid="classBCM_1a09d3456546b0f80ebcda02fa4f803870" prot="private" virt="non-virtual"><scope>BCM</scope><name>interaction_matrix</name></member>
       <member refid="classBasePlasticity_1a05b0d33b49372359fb6c96e80013ee78" prot="public" virt="non-virtual"><scope>BCM</scope><name>load_weights</name></member>

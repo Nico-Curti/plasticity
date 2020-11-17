@@ -1,8 +1,10 @@
 #include <hopfield.h>
 
 Hopfield :: Hopfield (const int & outputs, const int & batch_size, update_args optimizer,
-                      float mu, float sigma, float delta, float p, int k, int seed
-                      ) : BasePlasticity (outputs, batch_size, transfer :: _linear_, optimizer, mu, sigma, seed),
+                      float mu, float sigma,
+                      int epochs_for_convergency, float convergency_atol,
+                      float delta, float p, int k, int seed
+                      ) : BasePlasticity (outputs, batch_size, transfer :: _linear_, optimizer, mu, sigma, epochs_for_convergency, convergency_atol, seed),
                           k (k), delta (delta), p (p)
 {
   const int size = this->outputs * this->batch;

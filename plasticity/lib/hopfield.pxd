@@ -9,7 +9,7 @@ cdef extern from "hopfield.h" nogil:
 
   cppclass Hopfield:
 
-    Hopfield (const int & outputs, const int & batch_size, update_args optimizer, float mu, float sigma, float delta, float p, int k, int seed) except +
+    Hopfield (const int & outputs, const int & batch_size, update_args optimizer, float mu, float sigma, int epochs_for_convergency, float convergency_atol, float delta, float p, int k, int seed) except +
 
     ## Attributes
 

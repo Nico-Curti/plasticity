@@ -4,10 +4,9 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - 2020-11-11
+## [1.0.0] - 2020-11-17
 
 First version of the algorithm.
-The starting point of this project is given by the https://github.com/SimoneGasperini/biological_neuralnet repository.
 
 ### Added
 
@@ -20,17 +19,23 @@ The starting point of this project is given by the https://github.com/SimoneGasp
 - Add first version of CI using travis and appveyor
 - Add first version of code evaluation with codebeat and codacy
 - Add optimizer object for the convergency of the training
+- Add inpainting examples using BCM and Hopfield models
+- Add classifier examples using BCM and Hopfield models
+- Testing the performances of both the models on the MNIST dataset (without supervised part!!)
 
 ### Changed
 
 - Implement the class inheritance in the BCM and Hopfield models
 - Use a set of Activation classes for improve the model testing
+- The stop criteria is based on the theta array for the BCM model and on the xx array in the Hopfield model
+- The stop criteria monitors the absolute difference despite the relative difference
 
 ### Improvements
 
 - Use the numpy einsum function for an optimized implementation of the GEMM
 - Use the Eigen3 library for the matrix inversion in the C++ implementation of the BCM
 - Use the OpenMP support for a parallel computation of the training
+- Add stopping criteria in both the C++ and Python versions
 
 ### TODO
 

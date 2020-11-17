@@ -44,6 +44,13 @@ class BCM (BasePlasticity):
     sigma : float (default=1.)
       Standard deviation of the gaussian distribution that initializes the weights
 
+    epochs_for_convergency : int (default=None)
+      Number of stable epochs requested for the convergency.
+      If None the training proceeds up to the maximum number of epochs (num_epochs).
+
+    convergency_atol : float (default=0.01)
+      Absolute tolerance requested for the convergency
+
     interaction_strength : float (default=0.)
       Set the lateral interaction strength between weights
 
@@ -76,7 +83,7 @@ class BCM (BasePlasticity):
   >>> ax.axis("off")
   >>> plt.show()
 
-  .. image:: ../../../img/BCM_weights.png
+  .. image:: ../../../img/BCM_weights.gif
 
   References
   ----------
@@ -89,6 +96,8 @@ class BCM (BasePlasticity):
       batch_size=100, activation='Logistic',
       optimizer=SGD(learning_rate=2e-2),
       mu=0., sigma=1.,
+      epochs_for_convergency=None,
+      convergency_atol=0.01,
       interaction_strength=0., seed=42,
       verbose=True):
 
@@ -96,6 +105,8 @@ class BCM (BasePlasticity):
                                batch_size=batch_size, activation=activation,
                                optimizer=optimizer,
                                mu=mu, sigma=sigma,
+                               epochs_for_convergency=epochs_for_convergency,
+                               convergency_atol=convergency_atol,
                                seed=seed, verbose=verbose,
                                interaction_strength=interaction_strength)
 

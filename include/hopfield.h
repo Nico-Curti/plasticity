@@ -40,6 +40,8 @@ public:
   * @param optimizer update_args Optimizer object.
   * @param mu Mean of the gaussian distribution that initializes the weights.
   * @param sigma Standard deviation of the gaussian distribution that initializes the weights.
+  * @param epochs_for_convergency Number of stable epochs requested for the convergency.
+  * @param convergency_atol Absolute tolerance requested for the convergency.
   * @param delta Strength of the anti-hebbian learning
   * @param p Lebesgue norm of the weights.
   * @param k Ranking parameter, must be integer that is bigger or equal than 2.
@@ -48,7 +50,9 @@ public:
   */
   Hopfield (const int & outputs, const int & batch_size,
             update_args optimizer=update_args(optimizer_t :: _sgd),
-            float mu=0.f, float sigma=1.f, float delta=.4f, float p=2.f,
+            float mu=0.f, float sigma=1.f,
+            int epochs_for_convergency=1, float convergency_atol=1e-2f,
+            float delta=.4f, float p=2.f,
             int k=2, int seed=42);
 
   // Copy Operator and Copy Constructor

@@ -3,6 +3,7 @@
 
 import numpy as np
 from tqdm import tqdm
+from collections import deque
 
 from plasticity.utils import _check_activation
 from .optimizer import Optimizer
@@ -10,6 +11,7 @@ from .optimizer import Optimizer
 from sklearn.base import BaseEstimator
 from sklearn.base import TransformerMixin
 from sklearn.utils import check_array
+from sklearn.utils import check_X_y
 from sklearn.utils.validation import check_is_fitted
 
 __author__  = ['Nico Curti', 'SimoneGasperini']
@@ -27,7 +29,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       Number of hidden units
 
     num_epochs : int (default=100)
-      Number of epochs for model convergency
+      Maximum number of epochs for model convergency
 
     batch_size : int (default=100)
       Size of the minibatch
@@ -47,6 +49,13 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     precision : float (default=1e-30)
       Parameter that controls numerical precision of the weight updates
 
+    epochs_for_convergency : int (default=None)
+      Number of stable epochs requested for the convergency.
+      If None the training proceeds up to the maximum number of epochs (num_epochs).
+
+    convergency_atol : float (default=0.01)
+      Absolute tolerance requested for the convergency
+
     seed : int (default=42)
       Random seed for weights generation
 
@@ -57,7 +66,10 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
   def __init__ (self, outputs=100, num_epochs=100,
       activation='Linear', optimizer=Optimizer,
       batch_size=100, mu=0., sigma=1.,
-      precision=1e-30, seed=42, verbose=True):
+      precision=1e-30,
+      epochs_for_convergency=None,
+      convergency_atol=0.01,
+      seed=42, verbose=True):
 
     _, activation = _check_activation(self, activation)
 
@@ -69,12 +81,31 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     self.mu = mu
     self.sigma = sigma
     self.precision = precision
+    self.epochs_for_convergency = epochs_for_convergency if epochs_for_convergency is not None else num_epochs
+    self.epochs_for_convergency = max(self.epochs_for_convergency, 1)
+    self.convergency_atol = convergency_atol
     self.seed = seed
     self.verbose = verbose
 
   def _weights_update(self, X, output):
     '''
     Compute the weights update using the given learning rule.
+
+    Parameters
+    ----------
+      X : array-like (2D)
+        Input array of data
+
+      output : array-like (1D)
+        Output of the model estimated by the predict function
+
+    Returns
+    -------
+      weight_update : array-like (2D)
+        Weight updates matrix to apply
+
+      theta : array-like
+        Array of learning progress
     '''
     raise NotImplementedError
 
@@ -86,11 +117,24 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       sign = np.sign(self.weights)
       self.weights = sign * np.absolute(self.weights)**(self.p - 1)
 
-  def _fit_step (self, X, norm):
+  def _fit_step (self, X, norm=False):
     '''
     Core function of fit step (forward + backward + updates).
     We divide the step into a function to allow an easier visualization
     of the weight matrix (if necessary).
+
+    Parameters
+    ----------
+      X : array-like (2D)
+        Input array of data
+
+      norm : bool (default=False)
+        Switch on/off the weights normalization using Lebesque norm
+
+    Returns
+    -------
+      theta : array-like
+        Array of learning progress
     '''
 
     if norm:
@@ -100,18 +144,91 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     output = self._predict(X)
 
     # update weights
-    w_update = self._weights_update(X, output)
+    w_update, theta = self._weights_update(X, output)
 
     #self.weights[:] += epsilon * w_update
     self.weights, = self.optimizer.update(params=[self.weights], gradients=[-w_update]) # -update for compatibility with optimizers
 
+    return theta
+
+  @property
+  def _check_convergency (self):
+    '''
+    Check if the current training has reached the convergency.
+
+    Returns
+    -------
+      check : bool
+        Check if the learning history of the model is stable.
+
+    Notes
+    -----
+    .. note::
+      The convergency is estimated by the stability or not of the
+      learning parameter in a fixed (epochs_for_convergency) number
+      of epochs for all the outputs.
+    '''
+
+    if len(self.history) < self.epochs_for_convergency:
+      return False
+
+    last = np.full_like(self.history, fill_value=self.history[-1])
+
+    return np.allclose(self.history, last, atol=self.convergency_atol)#, rtol=self.convergency_atol)
+
+  def _join_input_label (self, X, y):
+    '''
+    Join the input data matrix to the labels.
+    In this way the labels array/matrix is considered as a new
+    set of inputs for the model and the plasticity model can
+    perform classification tasks without any extra supervised learning.
+
+    Parameters
+    ----------
+      X : array-like (2D)
+        Input array of data
+
+      y : array-like (1D or 2D)
+        Labels array/matrix
+
+    Returns
+    -------
+      join : array-like (2D)
+        Matrix of the merged data in which the first n_sample columns
+        are occupied by the original data and the remaining ones store
+        the labels.
+
+    Notes
+    -----
+    .. note::
+      The labels can be a 1D array or multi-dimensional array: the given
+      shape is internally reshaped according to the required dimensions.
+    '''
+
+    X, y = check_X_y(X, y, multi_output=True, y_numeric=True)
+    # reshape the labels if it is a single array
+    y = y.reshape(-1, 1) if len(y.shape) == 1 else y
+    # concatenate the labels as new inputs for neurons
+    X = np.concatenate((X, y), axis=1)
+
+    return X
 
   def _fit (self, X, norm=False):
     '''
     Core function for the fit member
-    '''
 
-    #epsilon = np.linspace(start=self.epsilon, stop=self.epsilon*(1. - (self.num_epochs - 1) / self.num_epochs), num=self.num_epochs)
+    Parameters
+    ----------
+      X : array-like (2D)
+        Input array of data
+
+      norm : bool (default=False)
+        Switch on/off the weights normalization using Lebesque norm
+
+    Returns
+    -------
+      self
+    '''
 
     num_samples, _ = X.shape
     indices = np.arange(0, num_samples).astype('int64')
@@ -131,8 +248,18 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
         batch_data = X[batch, ...]
 
-        self._fit_step(X=batch_data, norm=norm)
+        theta = self._fit_step(X=batch_data, norm=norm)
 
+      # append only the last theta value of the batch
+      # for the convergency evaluation since the weight matrix
+      # changes (it is updated) at every batch
+      self.history.append(theta)
+
+      # check if the model has reached the convergency (early stopping criteria)
+      if self._check_convergency:
+        if self.verbose:
+          print('Early stopping: the training has reached the convergency criteria')
+        break
 
     return self
 
@@ -159,18 +286,20 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       The model tries to memorize the given input producing a valid encoding.
 
     .. warning::
-      The array of labels is not used by the model since its function is just to encode the features.
-      It is inserted in the function signature just for a compatibility with sklearn APIs.
+      If the array of labels is provided, it will be considered as a set of new inputs
+      for the neurons. The labels can be 1D array or multi-dimensional array: the given
+      shape is internally reshaped according to the required dimensions.
     '''
+
+    if y is not None:
+      X = self._join_input_label(X=X, y=y)
 
     X = check_array(X)
     np.random.seed(self.seed)
     num_samples, num_features = X.shape
 
-    #if num_samples % self.batch_size != 0:
-    #  raise ValueError('Minibatch size must be a divisor of the input size. Sorry, but this is a temporary solution.')
-
     self.weights = np.random.normal(loc=self.mu, scale=self.sigma, size=(self.outputs, num_features))
+    self.history = deque(maxlen=self.epochs_for_convergency)
     self._fit(X)
 
     return self
@@ -179,7 +308,6 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     '''
     Core function for the predict member
     '''
-    #return self.activation.activate(self.weights @ X.T)
     return self.activation.activate(np.einsum('ij, kj -> ik', self.weights, X, optimize=True))
 
   def predict (self, X, y=None):
@@ -202,10 +330,17 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     Notes
     -----
     .. warning::
-      The array of labels is not used by the model since its function is just to encode the features.
-      It is inserted in the function signature just for a compatibility with sklearn APIs.
+      If the array of labels is provided, it will be considered as a set of new inputs
+      for the neurons. The labels can be 1D array or multi-dimensional array: the given
+      shape is internally reshaped according to the required dimensions.
     '''
     check_is_fitted(self, 'weights')
+
+    if y is not None:
+      X = self._join_input_label(X=X, y=y)
+
+      return np.einsum('ij, kj -> ik', self.weights, X, optimize=True).transpose() # without activation
+
     X = check_array(X)
     return self._predict(X)
 
@@ -247,10 +382,11 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     Notes
     -----
     .. warning::
-      The array of labels is not used by the model since its function is just to encode the features.
-      It is inserted in the function signature just for a compatibility with sklearn APIs.
+      If the array of labels is provided, it will be considered as a set of new inputs
+      for the neurons. The labels can be 1D array or multi-dimensional array: the given
+      shape is internally reshaped according to the required dimensions.
     '''
-    self.fit(X, y)
+    self.fit(X, y=y)
     Xnew = self.transform(X)
     return Xnew
 

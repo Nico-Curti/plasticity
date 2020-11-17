@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="54" column="16" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="54" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="54" column="16" bodyfile="/home/nico/Desktop/Code/plasticity/include/optimizer.h" bodystart="54" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="58" column="22" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="58" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="58" column="22" bodyfile="/home/nico/Desktop/Code/plasticity/include/optimizer.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classupdate__args_1ac8921a5f304579e3fffd6aa6ea5c83eb" prot="protected" static="no" mutable="no">
         <type>std ::unique_ptr&lt; float[] &gt;</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="59" column="22" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="59" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="59" column="22" bodyfile="/home/nico/Desktop/Code/plasticity/include/optimizer.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classupdate__args_1ad11839c9e08764e1528aae8f806e759a" prot="protected" static="no" mutable="no">
         <type>int</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="61" column="7" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="61" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="61" column="7" bodyfile="/home/nico/Desktop/Code/plasticity/include/optimizer.h" bodystart="61" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-attrib">
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="65" column="7" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="65" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="65" column="7" bodyfile="/home/nico/Desktop/Code/plasticity/include/optimizer.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classupdate__args_1a3a0145d580360b2ffae2879af7e68c67" prot="public" static="no" mutable="no">
         <type>float</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="67" column="9" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="67" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="67" column="9" bodyfile="/home/nico/Desktop/Code/plasticity/include/optimizer.h" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classupdate__args_1abc35ad880888473f137cb9744e874870" prot="public" static="no" mutable="no">
         <type>float</type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="68" column="9" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="68" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="68" column="9" bodyfile="/home/nico/Desktop/Code/plasticity/include/optimizer.h" bodystart="68" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classupdate__args_1a9eb5a4b5663dca4b69a13a19da674f19" prot="public" static="no" mutable="no">
         <type>float</type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="69" column="9" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="69" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="69" column="9" bodyfile="/home/nico/Desktop/Code/plasticity/include/optimizer.h" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classupdate__args_1a1822b0d844c349135590f3583415faec" prot="public" static="no" mutable="no">
         <type>float</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="70" column="9" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="70" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="70" column="9" bodyfile="/home/nico/Desktop/Code/plasticity/include/optimizer.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classupdate__args_1ad4542261082ee829820f2d6a750021f6" prot="public" static="no" mutable="no">
         <type>float</type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="71" column="9" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="71" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="71" column="9" bodyfile="/home/nico/Desktop/Code/plasticity/include/optimizer.h" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classupdate__args_1a82dbdae38d6d36251905a627947730e7" prot="public" static="no" mutable="no">
         <type>float</type>
@@ -160,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="72" column="9" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="72" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="72" column="9" bodyfile="/home/nico/Desktop/Code/plasticity/include/optimizer.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classupdate__args_1adfd1e022ef7da88bf1f76e84c086a6d8" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="74" column="8" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="74" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="74" column="8" bodyfile="/home/nico/Desktop/Code/plasticity/include/optimizer.h" bodystart="74" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classupdate__args_1a795c90db2da78d2764137329ff0518b1" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="75" column="8" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="75" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="75" column="8" bodyfile="/home/nico/Desktop/Code/plasticity/include/optimizer.h" bodystart="75" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -204,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="83" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="83" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classupdate__args_1ad5b7f04f05a56009f91fc2734e1d6e11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -339,7 +339,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="105" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="105" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classupdate__args_1a05540c4366f9d9f4f9a1fc4d8829ceb7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -354,7 +354,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="115" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="115" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classupdate__args_1a6910f785fc1bfcb3d74200e27c3f50a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classupdate__args" kindref="compound">update_args</ref> &amp;</type>
@@ -383,7 +383,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="129" column="16"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="129" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classupdate__args_1ad4461334cd763896e636d3396dab12cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -412,7 +412,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="140" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="140" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classupdate__args_1a20ccad2974c9c163af046a2c70dcdb56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -441,7 +441,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="151" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="151" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classupdate__args_1a59dde2fe4182ef54f6c1215218d5d200" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -506,7 +506,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="164" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="164" column="8"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -560,7 +560,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="176" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="176" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classupdate__args_1a6adf6d2a148297084a74dd040794a153" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -600,7 +600,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="185" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="185" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classupdate__args_1ac4f553b6b0273852e8992f99f689d5ed" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -640,7 +640,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="194" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="194" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classupdate__args_1aab47bcd62bc055424eef96c568edc179" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -680,7 +680,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="203" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="203" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classupdate__args_1a76c0e4254f721f6f3902343bdf29c089" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -720,7 +720,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="212" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="212" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classupdate__args_1a7ded0ac7b4f3634ccfd7f3f538ec65e0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -760,7 +760,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="221" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="221" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classupdate__args_1a492cb2c95c7bad02e9a0f368b4b3849b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -800,7 +800,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="230" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="230" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classupdate__args_1a42964190ac341491a28cee6e6c67636b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -852,7 +852,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="240" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="240" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classupdate__args_1ab264b0b2b5c3b1d2df32c4bcb0d71285" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -892,7 +892,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="249" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="249" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classupdate__args_1af371f7346e5c312489031b43a69ad61c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -932,7 +932,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/optimizer.h" line="258" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="258" column="8"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -952,7 +952,7 @@
 </para>
 <para>The desired optimization algorithm can be set using the type variable in the constructor signature. The core functionality of the object is given by the &apos;update&apos; member function which applies the desired optimization algorithm step using the given parameters and gradients. </para>
     </detaileddescription>
-    <location file="/home/nico/Code/plasticity/include/optimizer.h" line="52" column="1" bodyfile="/home/nico/Code/plasticity/include/optimizer.h" bodystart="51" bodyend="260"/>
+    <location file="/home/nico/Desktop/Code/plasticity/include/optimizer.h" line="52" column="1" bodyfile="/home/nico/Desktop/Code/plasticity/include/optimizer.h" bodystart="51" bodyend="260"/>
     <listofallmembers>
       <member refid="classupdate__args_1a492cb2c95c7bad02e9a0f368b4b3849b" prot="private" virt="non-virtual"><scope>update_args</scope><name>adadelta_update</name></member>
       <member refid="classupdate__args_1a76c0e4254f721f6f3902343bdf29c089" prot="private" virt="non-virtual"><scope>update_args</scope><name>adagrad_update</name></member>

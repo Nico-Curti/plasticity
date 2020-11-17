@@ -9,7 +9,7 @@ cdef extern from "bcm.h" nogil:
 
   cppclass BCM:
 
-    BCM (const int & outputs, const int & batch_size, const int & activation, update_args optimizer, float mu, float sigma, float interaction_strength, int seed) except +
+    BCM (const int & outputs, const int & batch_size, const int & activation, update_args optimizer, float mu, float sigma, int epochs_for_convergency, float convergency_atol, float interaction_strength, int seed) except +
 
     ## Attributes
 

@@ -12,6 +12,7 @@ from .optimizer import SGD
 from sklearn.base import BaseEstimator
 from sklearn.base import TransformerMixin
 
+from sklearn.utils import check_X_y
 from sklearn.utils import check_array
 from sklearn.utils.validation import check_is_fitted
 
@@ -52,6 +53,13 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     sigma : float (default=1.)
       Standard deviation of the gaussian distribution that initializes the weights
 
+    epochs_for_convergency : int (default=None)
+      Number of stable epochs requested for the convergency.
+      If None the training proceeds up to the maximum number of epochs (num_epochs).
+
+    convergency_atol : float (default=0.01)
+      Absolute tolerance requested for the convergency
+
     seed : int (default=42)
       Random seed for weights generation
 
@@ -65,6 +73,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
   def __init__ (self, model=None, outputs=100, num_epochs=100,
       batch_size=100, activation='Linear', optimizer=SGD(learning_rate=2e-2),
       mu=0., sigma=1.,
+      epochs_for_convergency=None, convergency_atol=0.01,
       seed=42,  verbose=True,
       **kwargs):
 
@@ -75,6 +84,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     self.optimizer = optimizer
     self.mu = mu
     self.sigma = sigma
+    self.epochs_for_convergency = epochs_for_convergency if epochs_for_convergency is not None else 1
+    self.convergency_atol = convergency_atol
     self.seed = seed
     self.verbose = verbose
 
@@ -83,7 +94,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     activation, _ = _check_activation(self, activation_func=activation)
     self._obj = model(outputs, batch_size, activation, optimizer._object,
-                      mu, sigma, seed, *kwargs.values())
+                      mu, sigma, epochs_for_convergency, convergency_atol,
+                      seed, *kwargs.values())
 
   def fit (self, X, y=None):
     '''

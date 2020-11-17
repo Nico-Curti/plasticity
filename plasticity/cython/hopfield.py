@@ -37,6 +37,13 @@ class Hopfield (BasePlasticity):
     sigma : float (default=1.)
       Standard deviation of the gaussian distribution that initializes the weights
 
+    epochs_for_convergency : int (default=None)
+      Number of stable epochs requested for the convergency.
+      If None the training proceeds up to the maximum number of epochs (num_epochs).
+
+    convergency_atol : float (default=0.01)
+      Absolute tolerance requested for the convergency
+
     p : float (default=2.)
       Lebesgue norm of the weights
 
@@ -72,7 +79,7 @@ class Hopfield (BasePlasticity):
   >>> ax.axis("off")
   >>> plt.show()
 
-  .. image:: ../../../img/Hopfield_weights.png
+  .. image:: ../../../img/Hopfield_weights.gif
 
   References
   ----------
@@ -83,12 +90,16 @@ class Hopfield (BasePlasticity):
   def __init__(self, outputs=100, num_epochs=100,
       batch_size=100, optimizer=SGD(learning_rate=2e-2),
       delta=.4, mu=0., sigma=1.,
+      epochs_for_convergency=None,
+      convergency_atol=0.01,
       p=2., k=2, seed=42,
       verbose=True):
 
     super (Hopfield, self).__init__(model=_Hopfield, outputs=outputs, num_epochs=num_epochs,
                                     batch_size=batch_size, activation='Linear',
                                     optimizer=optimizer,
-                                    mu=mu, sigma=sigma, seed=seed,
-                                    delta=delta, p=p, k=k,
+                                    mu=mu, sigma=sigma,
+                                    epochs_for_convergency=epochs_for_convergency,
+                                    convergency_atol=convergency_atol,
+                                    seed=seed, delta=delta, p=p, k=k,
                                     verbose=verbose)

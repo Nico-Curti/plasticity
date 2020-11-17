@@ -9,9 +9,9 @@ from update_args cimport _update_args
 
 cdef class _BCM:
 
-  def __init__ (self, int outputs, int batch_size, int activation, _update_args optimizer, float mu, float sigma, int seed, float interaction_strenght):
+  def __init__ (self, int outputs, int batch_size, int activation, _update_args optimizer, float mu, float sigma, int epochs_for_convergency, float convergency_atol, int seed, float interaction_strenght):
 
-    self.thisptr.reset(new BCM(outputs, batch_size, activation, deref(optimizer.thisptr.get()), mu, sigma, interaction_strenght, seed))
+    self.thisptr.reset(new BCM(outputs, batch_size, activation, deref(optimizer.thisptr.get()), mu, sigma, epochs_for_convergency, convergency_atol, interaction_strenght, seed))
     self.outputs = outputs
     self.n_features = 0
 

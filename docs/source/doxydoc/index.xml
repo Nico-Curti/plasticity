@@ -4,18 +4,21 @@
     <member refid="classBasePlasticity_1a5c440b00a49873031e5d0510f377f791" kind="variable"><name>optimizer</name></member>
     <member refid="classBasePlasticity_1a427d9ff731f3db65bf5474e078b36467" kind="variable"><name>output</name></member>
     <member refid="classBasePlasticity_1ac85dc18520a49febfcffd6646b0ab9b6" kind="variable"><name>weights</name></member>
+    <member refid="classBasePlasticity_1aa892a754bac8c9e6ab0268be5b070f4b" kind="variable"><name>history</name></member>
     <member refid="classBasePlasticity_1a1b218e7e7c6f5494aee2a8f8e603cbec" kind="variable"><name>theta</name></member>
     <member refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" kind="variable"><name>activation</name></member>
     <member refid="classBasePlasticity_1adf83370e29d977f79690bf17ed3668bf" kind="variable"><name>gradient</name></member>
     <member refid="classBasePlasticity_1a4a6ecb6e802bdfc043346c41b2682ca1" kind="variable"><name>batch</name></member>
     <member refid="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" kind="variable"><name>outputs</name></member>
     <member refid="classBasePlasticity_1a6a98b64e6ab4ff78982b15e8f74ecb2f" kind="variable"><name>nweights</name></member>
+    <member refid="classBasePlasticity_1a510a58d019657002b7b292072cd4a9e9" kind="variable"><name>epochs_for_convergency</name></member>
     <member refid="classBasePlasticity_1a974bdeec773185818312b6c82f7a764b" kind="variable"><name>mu</name></member>
     <member refid="classBasePlasticity_1a45ee1f1803e06f09d9044e9252852631" kind="variable"><name>sigma</name></member>
+    <member refid="classBasePlasticity_1a2940d7e49ae8f8725ac552bfb0666e93" kind="variable"><name>convergency_atol</name></member>
     <member refid="classBasePlasticity_1a9bc89cbc53982004dddd6c05a6f8c78b" kind="variable"><name>engine</name></member>
     <member refid="classBasePlasticity_1ac3b0a942271707d1ac30cfb495fa91b6" kind="variable"><name>precision</name></member>
     <member refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" kind="function"><name>BasePlasticity</name></member>
-    <member refid="classBasePlasticity_1a4083fb0c002e37a0bf717e40f26d543b" kind="function"><name>BasePlasticity</name></member>
+    <member refid="classBasePlasticity_1ad24090d74bf2a00d7b94f17ad5a643f5" kind="function"><name>BasePlasticity</name></member>
     <member refid="classBasePlasticity_1a36aafa34a7d39721930afd46d2ccc5cd" kind="function"><name>BasePlasticity</name></member>
     <member refid="classBasePlasticity_1a8fd48d4e055c774a6add951156790041" kind="function"><name>operator=</name></member>
     <member refid="classBasePlasticity_1a4f812c1d906aa5e828bfcc65ce4e510a" kind="function"><name>~BasePlasticity</name></member>
@@ -27,13 +30,15 @@
     <member refid="classBasePlasticity_1a3ceca70b3099d2a4beebf28f6a48a1c2" kind="function"><name>weights_update</name></member>
     <member refid="classBasePlasticity_1a0a98532ea9e9b5d125cb127aa08143c7" kind="function"><name>check_dims</name></member>
     <member refid="classBasePlasticity_1a91d7baac000c8ab71aa526c919ca393c" kind="function"><name>check_is_fitted</name></member>
+    <member refid="classBasePlasticity_1a5c55267feabcfa7b1b8353ec00d83ce7" kind="function"><name>check_params</name></member>
+    <member refid="classBasePlasticity_1af6b1dd223ec430e273cfad5e169f93eb" kind="function"><name>check_convergency</name></member>
     <member refid="classBasePlasticity_1a5f9be9c944b9840a9372fd09b9b034a2" kind="function"><name>normalize_weights</name></member>
     <member refid="classBasePlasticity_1aceecfca1b48f9d7e37ae865b41c4ef52" kind="function"><name>_fit</name></member>
     <member refid="classBasePlasticity_1ac0b63f34c4066d1e59480ff7085697f7" kind="function"><name>_predict</name></member>
   </compound>
   <compound refid="classBCM" kind="class"><name>BCM</name>
     <member refid="classBCM_1a09d3456546b0f80ebcda02fa4f803870" kind="variable"><name>interaction_matrix</name></member>
-    <member refid="classBCM_1ae515c4c9647cbe22e28a936373afde00" kind="function"><name>BCM</name></member>
+    <member refid="classBCM_1a2962dc3ba31cb780b872e269cd6b62c3" kind="function"><name>BCM</name></member>
     <member refid="classBCM_1aacec2c922e994d7f4b6d33aa59667429" kind="function"><name>BCM</name></member>
     <member refid="classBCM_1a9f89c34dc96cc5bb74cc9b3b8f6c454c" kind="function"><name>operator=</name></member>
     <member refid="classBCM_1add33374e61bfea8b6331cad75acb8eac" kind="function"><name>~BCM</name></member>
@@ -56,7 +61,7 @@
     <member refid="classHopfield_1ab85568f1dab9bcd1063de42a93082b99" kind="variable"><name>k</name></member>
     <member refid="classHopfield_1a855d7f0ebd15856d4fd5bbb5d24f74d8" kind="variable"><name>delta</name></member>
     <member refid="classHopfield_1a22793a5daf2aeef71c8fb186bcd3b94c" kind="variable"><name>p</name></member>
-    <member refid="classHopfield_1a5a4cbce90b0684bfe2fd21a4ea280a5c" kind="function"><name>Hopfield</name></member>
+    <member refid="classHopfield_1aef2955c44b6b2c99738963d178c15ee1" kind="function"><name>Hopfield</name></member>
     <member refid="classHopfield_1a2478b5f9b8f627d47a2994a34a55b598" kind="function"><name>Hopfield</name></member>
     <member refid="classHopfield_1a2e19f875428328622c15d6cf8fe603da" kind="function"><name>operator=</name></member>
     <member refid="classHopfield_1a94c62a20249a3440ebacea0d61ea57c7" kind="function"><name>~Hopfield</name></member>
@@ -203,6 +208,7 @@
     <member refid="base_8h_1a80a8b1aec81995e16eb50277831747ad" kind="define"><name>ERROR_K_POSITIVE</name></member>
     <member refid="base_8h_1ac2c86502e66f2307ca9396dd8c77174e" kind="define"><name>ERROR_FITTED</name></member>
     <member refid="base_8h_1a6103a7d0f62795c68e45eae3d7d4fdf6" kind="define"><name>ERROR_DIMENSIONS</name></member>
+    <member refid="base_8h_1ac79790ef9baefd3f640e6513daf77ad8" kind="define"><name>ERROR_CONVERGENCY_POSITIVE</name></member>
   </compound>
   <compound refid="bcm_8h" kind="file"><name>bcm.h</name>
   </compound>
@@ -233,14 +239,16 @@
     <member refid="utils_8h_1a2ad563d82e3eb5be973e36fb8d6d669c" kind="function"><name>operator*</name></member>
     <member refid="utils_8h_1a88275192a3a05a32f5a36b6a478635eb" kind="function"><name>operator*</name></member>
   </compound>
-  <compound refid="dir_911b18c25225ad5cb4ae7480cb868c47" kind="dir"><name>/home/nico/Code</name>
+  <compound refid="dir_33eda3486c9674b30e913b82d84032a0" kind="dir"><name>/home/nico/Desktop/Code</name>
+  </compound>
+  <compound refid="dir_351fec499539e52595e8391ed32827da" kind="dir"><name>/home/nico/Desktop</name>
   </compound>
   <compound refid="dir_43e0a1f539e00dcfa1a6bc4d4fee4fc2" kind="dir"><name>/home</name>
   </compound>
-  <compound refid="dir_94cb042337b27e715016b3e884886c81" kind="dir"><name>/home/nico/Code/plasticity/include</name>
+  <compound refid="dir_61bd35155540199eadb9771b7552194b" kind="dir"><name>/home/nico/Desktop/Code/plasticity/include</name>
   </compound>
   <compound refid="dir_286188036a6f69a2571aeb75726499cb" kind="dir"><name>/home/nico</name>
   </compound>
-  <compound refid="dir_7ad830a7306606d27520bdf5a905f90e" kind="dir"><name>/home/nico/Code/plasticity</name>
+  <compound refid="dir_98cb6a5a35639cf327416bfaab3460c3" kind="dir"><name>/home/nico/Desktop/Code/plasticity</name>
   </compound>
 </doxygenindex>

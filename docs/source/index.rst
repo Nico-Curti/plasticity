@@ -53,7 +53,7 @@ You can also visualize the weights connections using the utility functions provi
 
 The results should be something like
 
-.. image:: ../../img/BCM_weights.png
+.. image:: ../../img/BCM_weights.gif
 
 For sake of completeness the same pipeline can be run also with the Hopfield model.
 In this case the could will be
@@ -76,7 +76,7 @@ In this case the could will be
 
 And in this case the weights matrix should appear similar to
 
-.. image:: ../../img/Hopfield_weights.png
+.. image:: ../../img/Hopfield_weights.gif
 
 
 .. _`scikit-learn`: https://github.com/scikit-learn/scikit-learn

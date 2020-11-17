@@ -21,7 +21,7 @@ class Hopfield (BasePlasticity):
       Number of hidden units
 
     num_epochs : int (default=100)
-      Number of epochs for model convergency
+      Maximum number of epochs for model convergency
 
     batch_size : int (default=10)
       Size of the minibatch
@@ -46,6 +46,13 @@ class Hopfield (BasePlasticity):
 
     precision : float (default=1e-30)
       Parameter that controls numerical precision of the weight updates
+
+    epochs_for_convergency : int (default=None)
+      Number of stable epochs requested for the convergency.
+      If None the training proceeds up to the maximum number of epochs (num_epochs).
+
+    convergency_atol : float (default=0.01)
+      Absolute tolerance requested for the convergency
 
     seed : int (default=42)
       Random seed for weights generation
@@ -76,7 +83,7 @@ class Hopfield (BasePlasticity):
   >>> ax.axis("off")
   >>> plt.show()
 
-  .. image:: ../../../img/Hopfield_weights.png
+  .. image:: ../../../img/Hopfield_weights.gif
 
   References
   ----------
@@ -90,6 +97,8 @@ class Hopfield (BasePlasticity):
       mu=0., sigma=1.,
       p=2., k=2,
       precision=1e-30,
+      epochs_for_convergency=None,
+      convergency_atol=0.01,
       seed=42, verbose=True):
 
     self.delta = delta
@@ -101,6 +110,8 @@ class Hopfield (BasePlasticity):
                                optimizer=optimizer,
                                mu=mu, sigma=sigma,
                                precision=precision,
+                               epochs_for_convergency=epochs_for_convergency,
+                               convergency_atol=convergency_atol,
                                seed=seed, verbose=verbose)
 
   def _weights_update (self, X, output):
@@ -108,6 +119,22 @@ class Hopfield (BasePlasticity):
     Approximation introduced by Krotov.
     Instead of solving dynamical equations we use the currents as a proxy
     for ranking of the final activities as suggested in [0].
+
+    Parameters
+    ----------
+      X : array-like (2D)
+        Input array of data
+
+      output : array-like (1D)
+        Output of the model estimated by the predict function
+
+    Returns
+    -------
+      weight_update : array-like (2D)
+        Weight updates matrix to apply
+
+      theta : array-like (1D)
+        Array of learning progress
 
     Notes
     -----
@@ -122,13 +149,13 @@ class Hopfield (BasePlasticity):
     yl[order[-self.k, :], range(self.batch_size)] = - self.delta
 
     xx = np.sum(yl * output, axis=1, keepdims=True)
-    #ds = yl @ X - xx * self.weights # TODO: convert to einsum
+    #ds = yl @ X - xx * self.weights
     ds = np.einsum('ij, jk -> ik', yl, X, optimize=True) - xx * self.weights
 
     nc = np.max(np.abs(ds))
     nc = 1. / max(nc, self.precision)
 
-    return ds * nc
+    return ds * nc, xx
 
 
   def _fit (self, X):

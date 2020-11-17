@@ -3,17 +3,22 @@
 std :: mt19937 BasePlasticity :: engine = std :: mt19937(0);
 float BasePlasticity :: precision = 1e-30f;
 
-BasePlasticity :: BasePlasticity () : optimizer (), output (nullptr), weights (nullptr), activation (nullptr), gradient (nullptr),
-                                      batch (100), outputs (100), nweights (0), mu (0.f), sigma (1.f)
+BasePlasticity :: BasePlasticity () : optimizer (), output (nullptr), weights (nullptr), history (), theta (nullptr), activation (nullptr), gradient (nullptr),
+                                      batch (100), outputs (100), nweights (0), epochs_for_convergency (0), mu (0.f), sigma (1.f), convergency_atol (0.f)
 {
 }
 
 BasePlasticity :: BasePlasticity (const int & outputs, const int & batch_size, int activation,
                                   update_args optimizer,
-                                  float mu, float sigma, int seed
-                                  ) : optimizer (optimizer), output (nullptr), weights (nullptr), activation (nullptr), gradient (nullptr),
-                                      batch (batch_size), outputs (outputs), nweights (0), mu (mu), sigma (sigma)
+                                  float mu, float sigma,
+                                  int epochs_for_convergency, float convergency_atol,
+                                  int seed
+                                  ) : optimizer (optimizer), output (nullptr), weights (nullptr), history (), theta (nullptr), activation (nullptr), gradient (nullptr),
+                                      batch (batch_size), outputs (outputs), nweights (0), epochs_for_convergency (epochs_for_convergency), mu (mu), sigma (sigma), convergency_atol (convergency_atol)
 {
+  //// correct epochs_for_convergency
+  ////this->epochs_for_convergency = std :: max(this->epochs_for_convergency, 1);
+
   this->activation = transfer :: activate( activation );
   this->gradient   = transfer :: gradient( activation );
 
@@ -31,9 +36,11 @@ BasePlasticity :: BasePlasticity (const BasePlasticity & b)
   this->batch    = b.batch;
   this->outputs  = b.outputs;
   this->nweights = b.nweights;
+  this->epochs_for_convergency = b.epochs_for_convergency;
 
-  this->mu      = b.mu;
-  this->sigma   = b.sigma;
+  this->mu    = b.mu;
+  this->sigma = b.sigma;
+  this->convergency_atol = b.convergency_atol;
 
   this->optimizer = b.optimizer;
 
@@ -53,9 +60,11 @@ BasePlasticity & BasePlasticity :: operator = (const BasePlasticity & b)
   this->batch    = b.batch;
   this->outputs  = b.outputs;
   this->nweights = b.nweights;
+  this->epochs_for_convergency = b.epochs_for_convergency;
 
-  this->mu      = b.mu;
-  this->sigma   = b.sigma;
+  this->mu    = b.mu;
+  this->sigma = b.sigma;
+  this->convergency_atol = b.convergency_atol;
 
   this->optimizer = b.optimizer;
 
@@ -174,6 +183,49 @@ void BasePlasticity :: check_is_fitted ()
   }
 }
 
+void BasePlasticity :: check_params ()
+{
+  if ( this->epochs_for_convergency <= 0 )
+  {
+    std :: cerr << "epochs_for_convergency must be an integer bigger or equal than 1" << std :: endl;
+    std :: exit(ERROR_CONVERGENCY_POSITIVE);
+  }
+}
+
+bool BasePlasticity :: check_convergency ()
+{
+  if ( static_cast < int >(this->history.size()) < this->epochs_for_convergency )
+  {
+    this->history.emplace_back(new float[this->outputs]);
+    std :: copy_n(this->theta.get(), this->outputs, this->history[this->history.size() - 1].get());
+    return false;
+  }
+
+  int check = 0;
+  const float toll = this->convergency_atol;
+
+  for (int i = 0; i < this->epochs_for_convergency; ++i)
+  {
+    check = std :: inner_product(this->theta.get(), this->theta.get() + this->outputs,
+                                 this->history[i].get(), 0,
+                                 std :: plus < float >(),
+                                 [&](const float & theta, const float & history)
+                                 {
+                                   return static_cast < int >(std :: fabs(theta - history) < toll);
+                                 });
+
+    if ( check == this->outputs )
+      goto stop;
+  }
+
+  this->history.pop_front();
+  this->history.emplace_back(new float[this->outputs]);
+  std :: copy_n(this->theta.get(), this->outputs, this->history[this->history.size() - 1].get());
+
+  stop:
+  return check == this->outputs;
+}
+
 void BasePlasticity :: normalize_weights ()
 {
 }
@@ -232,14 +284,29 @@ void BasePlasticity :: _fit (float * X, const int & num_epochs, const int & n_fe
 
 #endif // __verbose__
 
-    } // end for
+    } // end for batches
 
 #ifdef __verbose__
 
     std :: cout << std :: endl;
 
 #endif // __verbose__
-  }
+
+
+    if ( this->check_convergency() )
+    {
+
+#ifdef __verbose__
+
+      std :: cout << "Early stopping: the training has reached the convergency criteria" << std :: endl;
+
+#endif // __verbose__
+
+      break;
+    }
+
+
+  } // end for epoch
 }
 
 void BasePlasticity :: _predict (const float * A, const float * B, float * C, const int & N, const int & M, const int & K)

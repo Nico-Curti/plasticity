@@ -6,6 +6,7 @@
 #include <utils.hpp>
 
 #include <memory>
+#include <deque>
 #include <fstream>
 #include <algorithm>
 #include <numeric>
@@ -16,6 +17,7 @@
 #define ERROR_K_POSITIVE 101
 #define ERROR_FITTED     102
 #define ERROR_DIMENSIONS 103
+#define ERROR_CONVERGENCY_POSITIVE 104
 
 /**
 * @class BasePlasticity
@@ -51,6 +53,7 @@ public:
 protected:
 #endif
 
+  std :: deque < std :: unique_ptr < float[] > > history; ///< deque for the convergency monitoring
   std :: unique_ptr < float[] > theta; ///< array of means
 
   std :: function < float(const float &) > activation; ///< pointer to activation function
@@ -64,13 +67,14 @@ protected:
 
   static float precision; ///< Parameter that controls numerical precision of the weight updates.
 
-  int batch;    ///< batch size
-  int outputs;  ///< number of hidden units
-  int nweights; ///< number of weights
+  int batch;                  ///< batch size
+  int outputs;                ///< number of hidden units
+  int nweights;               ///< number of weights
+  int epochs_for_convergency; ///< number of stable epochs requested for the convergency
 
-  float mu;      ///< Mean of the gaussian distribution that initializes the weights
-  float sigma;   ///< Standard deviation of the gaussian distribution that initializes the weights
-
+  float mu;               ///< Mean of the gaussian distribution that initializes the weights
+  float sigma;            ///< Standard deviation of the gaussian distribution that initializes the weights
+  float convergency_atol; ///< Absolute tolerance requested for the convergency
 
 public:
 
@@ -97,12 +101,16 @@ public:
   * @param optimizer update_args Optimizer object.
   * @param mu Mean of the gaussian distribution that initializes the weights.
   * @param sigma Standard deviation of the gaussian distribution that initializes the weights.
+  * @param epochs_for_convergency Number of stable epochs requested for the convergency.
+  * @param convergency_atol Absolute tolerance requested for the convergency.
   * @param seed Random number generator seed.
   *
   */
   BasePlasticity (const int & outputs, const int & batch_size, int activation=transfer :: _linear_,
                   update_args optimizer=update_args(optimizer_t :: _sgd),
-                  float mu=0.f, float sigma=1.f, int seed=42);
+                  float mu=0.f, float sigma=1.f,
+                  int epochs_for_convergency=1, float convergency_atol=1e-2f,
+                  int seed=42);
 
 
   // Copy Operator and Copy Constructor
@@ -249,6 +257,24 @@ private:
   *
   */
   void check_is_fitted ();
+
+  /**
+  * @brief Check the given parameters.
+  *
+  * @note The function checks if the input variable epochs_for_convergency is positive defined and greater than 1
+  *
+  */
+  void check_params ();
+
+  /**
+  * @brief Check if the model training has reached the convergency.
+  *
+  * @note The convergency is estimated by the stability or not of the
+  * learning parameter in a fixed (epochs_for_convergency) number
+  * of epochs for all the outputs.
+  *
+  */
+  bool check_convergency ();
 
   /**
   * @brief Normalize the weights according to the given function.

@@ -40,13 +40,17 @@ public:
   * @param optimizer update_args Optimizer object.
   * @param mu Mean of the gaussian distribution that initializes the weights.
   * @param sigma Standard deviation of the gaussian distribution that initializes the weights.
+  * @param epochs_for_convergency Number of stable epochs requested for the convergency.
+  * @param convergency_atol Absolute tolerance requested for the convergency.
   * @param interaction_strength Set the lateral interaction strength between weights.
   * @param seed Random number generator seed.
   *
   */
   BCM (const int & outputs, const int & batch_size, int activation=transfer :: _logistic_,
        update_args optimizer=update_args(optimizer_t :: _sgd),
-       float mu=0.f, float sigma=1.f, float interaction_strength=0.f, int seed=42);
+       float mu=0.f, float sigma=1.f,
+       int epochs_for_convergency=1, float convergency_atol=1e-2f,
+       float interaction_strength=0.f, int seed=42);
 
   // Copy Operator and Copy Constructor
 

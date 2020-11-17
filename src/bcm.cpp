@@ -1,8 +1,10 @@
 #include <bcm.h>
 
 BCM :: BCM (const int & outputs, const int & batch_size,
-            int activation, update_args optimizer, float mu, float sigma, float interaction_strength, int seed
-            ) : BasePlasticity (outputs, batch_size, activation, optimizer, mu, sigma, seed)
+            int activation, update_args optimizer, float mu, float sigma,
+            int epochs_for_convergency, float convergency_atol,
+            float interaction_strength, int seed
+            ) : BasePlasticity (outputs, batch_size, activation, optimizer, mu, sigma, epochs_for_convergency, convergency_atol, seed)
 {
   this->init_interaction_matrix(interaction_strength);
 }

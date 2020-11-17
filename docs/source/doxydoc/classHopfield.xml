@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="17" column="22" bodyfile="/home/nico/Code/plasticity/include/hopfield.h" bodystart="17" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="17" column="22" bodyfile="/home/nico/Desktop/Code/plasticity/include/hopfield.h" bodystart="17" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHopfield_1a291c5bbab5b6c688d747cf886904f428" prot="private" static="no" mutable="no">
         <type>std ::unique_ptr&lt; int[] &gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="18" column="22" bodyfile="/home/nico/Code/plasticity/include/hopfield.h" bodystart="18" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="18" column="22" bodyfile="/home/nico/Desktop/Code/plasticity/include/hopfield.h" bodystart="18" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHopfield_1ab85568f1dab9bcd1063de42a93082b99" prot="private" static="no" mutable="no">
         <type>int</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="20" column="7" bodyfile="/home/nico/Code/plasticity/include/hopfield.h" bodystart="20" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="20" column="7" bodyfile="/home/nico/Desktop/Code/plasticity/include/hopfield.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHopfield_1a855d7f0ebd15856d4fd5bbb5d24f74d8" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="22" column="9" bodyfile="/home/nico/Code/plasticity/include/hopfield.h" bodystart="22" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="22" column="9" bodyfile="/home/nico/Desktop/Code/plasticity/include/hopfield.h" bodystart="22" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classHopfield_1a22793a5daf2aeef71c8fb186bcd3b94c" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -73,14 +73,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="23" column="9" bodyfile="/home/nico/Code/plasticity/include/hopfield.h" bodystart="23" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="23" column="9" bodyfile="/home/nico/Desktop/Code/plasticity/include/hopfield.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="classHopfield_1a5a4cbce90b0684bfe2fd21a4ea280a5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classHopfield_1aef2955c44b6b2c99738963d178c15ee1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>Hopfield::Hopfield</definition>
-        <argsstring>(const int &amp;outputs, const int &amp;batch_size, update_args optimizer=update_args(optimizer_t ::_sgd), float mu=0.f, float sigma=1.f, float delta=.4f, float p=2.f, int k=2, int seed=42)</argsstring>
+        <argsstring>(const int &amp;outputs, const int &amp;batch_size, update_args optimizer=update_args(optimizer_t ::_sgd), float mu=0.f, float sigma=1.f, int epochs_for_convergency=1, float convergency_atol=1e-2f, float delta=.4f, float p=2.f, int k=2, int seed=42)</argsstring>
         <name>Hopfield</name>
         <param>
           <type>const int &amp;</type>
@@ -104,6 +104,16 @@
           <type>float</type>
           <declname>sigma</declname>
           <defval>1.f</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>epochs_for_convergency</declname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>convergency_atol</declname>
+          <defval>1e-2f</defval>
         </param>
         <param>
           <type>float</type>
@@ -174,6 +184,22 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
+<parametername>epochs_for_convergency</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of stable epochs requested for the convergency. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>convergency_atol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Absolute tolerance requested for the convergency. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
 <parametername>delta</parametername>
 </parameternamelist>
 <parameterdescription>
@@ -209,7 +235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="49" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="51" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classHopfield_1a2478b5f9b8f627d47a2994a34a55b598" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -238,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="65" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="69" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classHopfield_1a2e19f875428328622c15d6cf8fe603da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classHopfield" kindref="compound">Hopfield</ref> &amp;</type>
@@ -267,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="77" column="13"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="81" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classHopfield_1a94c62a20249a3440ebacea0d61ea57c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -282,7 +308,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="87" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="91" column="3"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -301,7 +327,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="97" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="101" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classHopfield_1a907e8a6ba983b9a5e42e53228fb90b24" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -356,7 +382,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="110" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="114" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classHopfield_1a835ba0a410402cccd5cdc062b60e02d9" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -375,7 +401,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/hopfield.h" line="122" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="126" column="8"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -413,21 +439,24 @@
         <link refid="classupdate__args"/>
       </node>
     </collaborationgraph>
-    <location file="/home/nico/Code/plasticity/include/hopfield.h" line="15" column="1" bodyfile="/home/nico/Code/plasticity/include/hopfield.h" bodystart="14" bodyend="124"/>
+    <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="15" column="1" bodyfile="/home/nico/Desktop/Code/plasticity/include/hopfield.h" bodystart="14" bodyend="128"/>
     <listofallmembers>
       <member refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>activation</name></member>
       <member refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>BasePlasticity</name></member>
-      <member refid="classBasePlasticity_1a4083fb0c002e37a0bf717e40f26d543b" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>BasePlasticity</name></member>
+      <member refid="classBasePlasticity_1ad24090d74bf2a00d7b94f17ad5a643f5" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>BasePlasticity</name></member>
       <member refid="classBasePlasticity_1a36aafa34a7d39721930afd46d2ccc5cd" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>BasePlasticity</name></member>
       <member refid="classBasePlasticity_1a4a6ecb6e802bdfc043346c41b2682ca1" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>batch</name></member>
       <member refid="classHopfield_1ad613a118971ea59c6b0e4115a9b9358b" prot="private" virt="non-virtual"><scope>Hopfield</scope><name>check_params</name></member>
+      <member refid="classBasePlasticity_1a2940d7e49ae8f8725ac552bfb0666e93" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>convergency_atol</name></member>
       <member refid="classHopfield_1a855d7f0ebd15856d4fd5bbb5d24f74d8" prot="private" virt="non-virtual"><scope>Hopfield</scope><name>delta</name></member>
       <member refid="classBasePlasticity_1a9bc89cbc53982004dddd6c05a6f8c78b" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>engine</name></member>
+      <member refid="classBasePlasticity_1a510a58d019657002b7b292072cd4a9e9" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>epochs_for_convergency</name></member>
       <member refid="classHopfield_1a291c5bbab5b6c688d747cf886904f428" prot="private" virt="non-virtual"><scope>Hopfield</scope><name>fire_indices</name></member>
       <member refid="classBasePlasticity_1a1adfa1440172822a6e3280e0142fb80e" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>fit</name></member>
       <member refid="classBasePlasticity_1a35be8a52e26ce61050f1408d2f69fa66" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>get_weights</name></member>
       <member refid="classBasePlasticity_1adf83370e29d977f79690bf17ed3668bf" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>gradient</name></member>
-      <member refid="classHopfield_1a5a4cbce90b0684bfe2fd21a4ea280a5c" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>Hopfield</name></member>
+      <member refid="classBasePlasticity_1aa892a754bac8c9e6ab0268be5b070f4b" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>history</name></member>
+      <member refid="classHopfield_1aef2955c44b6b2c99738963d178c15ee1" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>Hopfield</name></member>
       <member refid="classHopfield_1a2478b5f9b8f627d47a2994a34a55b598" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>Hopfield</name></member>
       <member refid="classHopfield_1ab85568f1dab9bcd1063de42a93082b99" prot="private" virt="non-virtual"><scope>Hopfield</scope><name>k</name></member>
       <member refid="classBasePlasticity_1a05b0d33b49372359fb6c96e80013ee78" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>load_weights</name></member>

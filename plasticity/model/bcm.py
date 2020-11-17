@@ -28,7 +28,7 @@ class BCM (BasePlasticity):
       Number of hidden units
 
     num_epochs : int (default=100)
-      Number of epochs for model convergency
+      Maximum number of epochs for model convergency
 
     batch_size : int (default=10)
       Size of the minibatch
@@ -50,6 +50,13 @@ class BCM (BasePlasticity):
 
     precision : float (default=1e-30)
       Parameter that controls numerical precision of the weight updates
+
+    epochs_for_convergency : int (default=None)
+      Number of stable epochs requested for the convergency.
+      If None the training proceeds up to the maximum number of epochs (num_epochs).
+
+    convergency_atol : float (default=0.01)
+      Absolute tolerance requested for the convergency
 
     seed : int (default=42)
       Random seed for weights generation
@@ -80,7 +87,7 @@ class BCM (BasePlasticity):
   >>> ax.axis("off")
   >>> plt.show()
 
-  .. image:: ../../../img/BCM_weights.png
+  .. image:: ../../../img/BCM_weights.gif
 
   References
   ----------
@@ -93,6 +100,8 @@ class BCM (BasePlasticity):
       optimizer=SGD(learning_rate=2e-2),
       mu=0., sigma=1., interaction_strength=0.,
       precision=1e-30,
+      epochs_for_convergency=None,
+      convergency_atol=0.01,
       seed=42, verbose=True):
 
     self._interaction_matrix = self._weights_interaction(interaction_strength, outputs)
@@ -103,6 +112,8 @@ class BCM (BasePlasticity):
                                optimizer=optimizer,
                                mu=mu, sigma=sigma,
                                precision=precision,
+                               epochs_for_convergency=epochs_for_convergency,
+                               convergency_atol=convergency_atol,
                                seed=seed, verbose=verbose)
 
   def _weights_interaction (self, strength, outputs):
@@ -136,6 +147,22 @@ class BCM (BasePlasticity):
     '''
     Compute the weights update using the BCM learning rule.
 
+    Parameters
+    ----------
+      X : array-like (2D)
+        Input array of data
+
+      output : array-like (1D)
+        Output of the model estimated by the predict function
+
+    Returns
+    -------
+      weight_update : array-like (2D)
+        Weight updates matrix to apply
+
+      theta : array-like (1D)
+        Array of learning progress
+
     Notes
     -----
     .. note::
@@ -153,7 +180,7 @@ class BCM (BasePlasticity):
     nc = np.max(np.abs(dw))
     nc = 1. / max(nc, self.precision)
 
-    return dw * nc
+    return dw * nc, theta
 
   def _fit (self, X):
     '''
@@ -174,7 +201,7 @@ if __name__ == '__main__':
   # normalize the sample into [0, 1]
   X *= 1. / 255
 
-  model = BCM(outputs=100, num_epochs=10, activation='Logistic', epsilon=.04)
+  model = BCM(outputs=100, num_epochs=10, activation='Logistic')
   model.fit(X)
 
   w = model.weights[0].reshape(28, 28)
