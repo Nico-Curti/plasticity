@@ -16,6 +16,7 @@ dependencies:
   # building
   - pkgconfig
   - cython>=0.29
+  - cmake
   - eigen
 
   # documentation

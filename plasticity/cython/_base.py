@@ -12,7 +12,6 @@ from .optimizer import SGD
 from sklearn.base import BaseEstimator
 from sklearn.base import TransformerMixin
 
-from sklearn.utils import check_X_y
 from sklearn.utils import check_array
 from sklearn.utils.validation import check_is_fitted
 
