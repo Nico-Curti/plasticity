@@ -4,7 +4,7 @@
 import numpy as np
 
 from plasticity.model._base import BasePlasticity
-from .optimizer import SGD
+from plasticity.model.optimizer import SGD
 
 __author__  = ['Nico Curti', 'SimoneGasperini']
 __email__ = ['nico.curit2@unibo.it', 'simone.gasperini2@studio.unibo.it']
