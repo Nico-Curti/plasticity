@@ -77,10 +77,10 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="classHopfield_1aef2955c44b6b2c99738963d178c15ee1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classHopfield_1a1481513b54353fc9784db3a579820e53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>Hopfield::Hopfield</definition>
-        <argsstring>(const int &amp;outputs, const int &amp;batch_size, update_args optimizer=update_args(optimizer_t ::_sgd), float mu=0.f, float sigma=1.f, int epochs_for_convergency=1, float convergency_atol=1e-2f, float delta=.4f, float p=2.f, int k=2, int seed=42)</argsstring>
+        <argsstring>(const int &amp;outputs, const int &amp;batch_size, update_args optimizer=update_args(optimizer_t ::_sgd), weights_initialization weights_init=weights_initialization(weights_init_t ::_uniform_), int epochs_for_convergency=1, float convergency_atol=1e-2f, float delta=.4f, float p=2.f, int k=2)</argsstring>
         <name>Hopfield</name>
         <param>
           <type>const int &amp;</type>
@@ -96,14 +96,9 @@
           <defval><ref refid="classupdate__args" kindref="compound">update_args</ref>(<ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461" kindref="member">optimizer_t</ref> ::<ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a4b7fa459df18d4bf2eaa7955899b3b03" kindref="member">_sgd</ref>)</defval>
         </param>
         <param>
-          <type>float</type>
-          <declname>mu</declname>
-          <defval>0.f</defval>
-        </param>
-        <param>
-          <type>float</type>
-          <declname>sigma</declname>
-          <defval>1.f</defval>
+          <type><ref refid="classweights__initialization" kindref="compound">weights_initialization</ref></type>
+          <declname>weights_init</declname>
+          <defval><ref refid="classweights__initialization" kindref="compound">weights_initialization</ref>(<ref refid="weights_8h_1a9bfa7623aa902dbd0dbd5198fadc6062" kindref="member">weights_init_t</ref> ::<ref refid="weights_8h_1a9bfa7623aa902dbd0dbd5198fadc6062a34e3d731ac6a8f06c178f8d9c3e630ac" kindref="member">_uniform_</ref>)</defval>
         </param>
         <param>
           <type>int</type>
@@ -129,11 +124,6 @@
           <type>int</type>
           <declname>k</declname>
           <defval>2</defval>
-        </param>
-        <param>
-          <type>int</type>
-          <declname>seed</declname>
-          <defval>42</defval>
         </param>
         <briefdescription>
 <para>Construct the object using the list of training parameters. </para>
@@ -163,23 +153,15 @@
 <parametername>optimizer</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="classupdate__args" kindref="compound">update_args</ref> Optimizer object. </para>
+<para><ref refid="classupdate__args" kindref="compound">update_args</ref> Optimizer object (default=SGD algorithm). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>mu</parametername>
+<parametername><ref refid="namespaceweights__init" kindref="compound">weights_init</ref></parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Mean of the gaussian distribution that initializes the weights. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>sigma</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Standard deviation of the gaussian distribution that initializes the weights. </para>
+<para><ref refid="classweights__initialization" kindref="compound">weights_initialization</ref> object (default=uniform initialization in [-1, 1]). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -222,20 +204,12 @@
 <para>Ranking parameter, must be integer that is bigger or equal than 2. </para>
 </parameterdescription>
 </parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>seed</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Random number generator seed. </para>
-</parameterdescription>
-</parameteritem>
 </parameterlist>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="51" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="49" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classHopfield_1a2478b5f9b8f627d47a2994a34a55b598" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -264,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="69" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="67" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classHopfield_1a2e19f875428328622c15d6cf8fe603da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classHopfield" kindref="compound">Hopfield</ref> &amp;</type>
@@ -293,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="81" column="13"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="79" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classHopfield_1a94c62a20249a3440ebacea0d61ea57c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -308,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="91" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="89" column="3"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -327,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="101" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="99" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classHopfield_1a907e8a6ba983b9a5e42e53228fb90b24" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -382,7 +356,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="114" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="112" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classHopfield_1a835ba0a410402cccd5cdc062b60e02d9" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -401,7 +375,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="126" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="124" column="8"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -427,6 +401,9 @@
         <childnode refid="3" relation="usage">
           <edgelabel>optimizer</edgelabel>
         </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>w_init</edgelabel>
+        </childnode>
       </node>
       <node id="1">
         <label>Hopfield</label>
@@ -434,33 +411,35 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="4">
+        <label>weights_initialization</label>
+        <link refid="classweights__initialization"/>
+      </node>
       <node id="3">
         <label>update_args</label>
         <link refid="classupdate__args"/>
       </node>
     </collaborationgraph>
-    <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="15" column="1" bodyfile="/home/nico/Desktop/Code/plasticity/include/hopfield.h" bodystart="14" bodyend="128"/>
+    <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h" line="15" column="1" bodyfile="/home/nico/Desktop/Code/plasticity/include/hopfield.h" bodystart="14" bodyend="126"/>
     <listofallmembers>
       <member refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>activation</name></member>
       <member refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>BasePlasticity</name></member>
-      <member refid="classBasePlasticity_1ad24090d74bf2a00d7b94f17ad5a643f5" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>BasePlasticity</name></member>
+      <member refid="classBasePlasticity_1add3158933beaf86f25f2eb26f23e1e0b" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>BasePlasticity</name></member>
       <member refid="classBasePlasticity_1a36aafa34a7d39721930afd46d2ccc5cd" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>BasePlasticity</name></member>
       <member refid="classBasePlasticity_1a4a6ecb6e802bdfc043346c41b2682ca1" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>batch</name></member>
       <member refid="classHopfield_1ad613a118971ea59c6b0e4115a9b9358b" prot="private" virt="non-virtual"><scope>Hopfield</scope><name>check_params</name></member>
       <member refid="classBasePlasticity_1a2940d7e49ae8f8725ac552bfb0666e93" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>convergency_atol</name></member>
       <member refid="classHopfield_1a855d7f0ebd15856d4fd5bbb5d24f74d8" prot="private" virt="non-virtual"><scope>Hopfield</scope><name>delta</name></member>
-      <member refid="classBasePlasticity_1a9bc89cbc53982004dddd6c05a6f8c78b" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>engine</name></member>
       <member refid="classBasePlasticity_1a510a58d019657002b7b292072cd4a9e9" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>epochs_for_convergency</name></member>
       <member refid="classHopfield_1a291c5bbab5b6c688d747cf886904f428" prot="private" virt="non-virtual"><scope>Hopfield</scope><name>fire_indices</name></member>
-      <member refid="classBasePlasticity_1a1adfa1440172822a6e3280e0142fb80e" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>fit</name></member>
+      <member refid="classBasePlasticity_1a34ecefbd46ab87048276f3857b1236c9" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>fit</name></member>
       <member refid="classBasePlasticity_1a35be8a52e26ce61050f1408d2f69fa66" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>get_weights</name></member>
       <member refid="classBasePlasticity_1adf83370e29d977f79690bf17ed3668bf" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>gradient</name></member>
       <member refid="classBasePlasticity_1aa892a754bac8c9e6ab0268be5b070f4b" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>history</name></member>
-      <member refid="classHopfield_1aef2955c44b6b2c99738963d178c15ee1" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>Hopfield</name></member>
+      <member refid="classHopfield_1a1481513b54353fc9784db3a579820e53" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>Hopfield</name></member>
       <member refid="classHopfield_1a2478b5f9b8f627d47a2994a34a55b598" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>Hopfield</name></member>
       <member refid="classHopfield_1ab85568f1dab9bcd1063de42a93082b99" prot="private" virt="non-virtual"><scope>Hopfield</scope><name>k</name></member>
       <member refid="classBasePlasticity_1a05b0d33b49372359fb6c96e80013ee78" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>load_weights</name></member>
-      <member refid="classBasePlasticity_1a974bdeec773185818312b6c82f7a764b" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>mu</name></member>
       <member refid="classHopfield_1a835ba0a410402cccd5cdc062b60e02d9" prot="private" virt="virtual"><scope>Hopfield</scope><name>normalize_weights</name></member>
       <member refid="classBasePlasticity_1a6a98b64e6ab4ff78982b15e8f74ecb2f" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>nweights</name></member>
       <member refid="classHopfield_1a2e19f875428328622c15d6cf8fe603da" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>operator=</name></member>
@@ -472,8 +451,8 @@
       <member refid="classBasePlasticity_1ac3b0a942271707d1ac30cfb495fa91b6" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>precision</name></member>
       <member refid="classBasePlasticity_1a4104d12babea679995d21a5de08d7129" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>predict</name></member>
       <member refid="classBasePlasticity_1ad5bfcab20dd11a25024d8fb83c0e4c23" prot="public" virt="non-virtual"><scope>Hopfield</scope><name>save_weights</name></member>
-      <member refid="classBasePlasticity_1a45ee1f1803e06f09d9044e9252852631" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>sigma</name></member>
       <member refid="classBasePlasticity_1a1b218e7e7c6f5494aee2a8f8e603cbec" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>theta</name></member>
+      <member refid="classBasePlasticity_1ac011e1dcde8003ed7b67e13154a82c12" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>w_init</name></member>
       <member refid="classBasePlasticity_1ac85dc18520a49febfcffd6646b0ab9b6" prot="protected" virt="non-virtual"><scope>Hopfield</scope><name>weights</name></member>
       <member refid="classHopfield_1a907e8a6ba983b9a5e42e53228fb90b24" prot="private" virt="virtual"><scope>Hopfield</scope><name>weights_update</name></member>
       <member refid="classHopfield_1a79299a585fd41c7d818c67b2bd9a8252" prot="private" virt="non-virtual"><scope>Hopfield</scope><name>yl</name></member>

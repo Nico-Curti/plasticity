@@ -3,6 +3,7 @@
 
 #include <activations.h>
 #include <optimizer.h>
+#include <weights.h>
 #include <utils.hpp>
 
 #include <memory>
@@ -40,6 +41,7 @@ class BasePlasticity
 protected:
 
   update_args optimizer;                 ///< optimizer object
+  weights_initialization w_init;         ///< weights initialization object
 
   std :: unique_ptr < float[] > output;  ///< array of outputs
 
@@ -59,10 +61,6 @@ protected:
   std :: function < float(const float &) > activation; ///< pointer to activation function
   std :: function < float(const float &) > gradient;   ///< pointer to gradient function
 
-public:
-
-  static std :: mt19937 engine; ///< Random number generator
-
 protected:
 
   static float precision; ///< Parameter that controls numerical precision of the weight updates.
@@ -72,8 +70,6 @@ protected:
   int nweights;               ///< number of weights
   int epochs_for_convergency; ///< number of stable epochs requested for the convergency
 
-  float mu;               ///< Mean of the gaussian distribution that initializes the weights
-  float sigma;            ///< Standard deviation of the gaussian distribution that initializes the weights
   float convergency_atol; ///< Absolute tolerance requested for the convergency
 
 public:
@@ -98,19 +94,16 @@ public:
   * @param outputs Number of hidden units.
   * @param batch_size Size of the minibatch.
   * @param activation Index of the activation function.
-  * @param optimizer update_args Optimizer object.
-  * @param mu Mean of the gaussian distribution that initializes the weights.
-  * @param sigma Standard deviation of the gaussian distribution that initializes the weights.
+  * @param optimizer update_args Optimizer object (default=SGD algorithm).
+  * @param weights_init weights_initialization object (default=uniform initialization in [-1, 1]).
   * @param epochs_for_convergency Number of stable epochs requested for the convergency.
   * @param convergency_atol Absolute tolerance requested for the convergency.
-  * @param seed Random number generator seed.
   *
   */
   BasePlasticity (const int & outputs, const int & batch_size, int activation=transfer :: _linear_,
                   update_args optimizer=update_args(optimizer_t :: _sgd),
-                  float mu=0.f, float sigma=1.f,
-                  int epochs_for_convergency=1, float convergency_atol=1e-2f,
-                  int seed=42);
+                  weights_initialization weights_init=weights_initialization(weights_init_t :: _uniform_),
+                  int epochs_for_convergency=1, float convergency_atol=1e-2f);
 
 
   // Copy Operator and Copy Constructor
@@ -165,9 +158,10 @@ public:
   * @param n_samples dimension of the X matrix, i.e. the number of rows
   * @param n_features dimension of the X matrix, i.e. the number of cols
   * @param num_epochs Number of epochs for model convergency.
+  * @param seed Random seed number for the batch subdivisions.
   *
   */
-  void fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs);
+  void fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs, int seed=42);
 
   /**
   * @brief Train the model/encoder
@@ -293,9 +287,10 @@ private:
   * @param num_epochs Number of epochs for model convergency.
   * @param n_samples dimension of the X matrix, i.e. the number of rows
   * @param n_features dimension of the X matrix, i.e. the number of cols
+  * @param seed Random seed number for the batch subdivisions.
   *
   */
-  void _fit (float * X, const int & num_epochs, const int & n_features, const int & n_samples);
+  void _fit (float * X, const int & num_epochs, const int & n_features, const int & n_samples, const int & seed);
 
   /**
   * @brief Core function of the predict formula

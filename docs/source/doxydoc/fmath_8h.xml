@@ -6,6 +6,7 @@
     <includes local="no">cmath</includes>
     <includedby refid="activations_8h" local="no">/home/nico/Desktop/Code/plasticity/include/activations.h</includedby>
     <includedby refid="utils_8h" local="no">/home/nico/Desktop/Code/plasticity/include/utils.h</includedby>
+    <includedby refid="weights_8h" local="no">/home/nico/Desktop/Code/plasticity/include/weights.h</includedby>
     <incdepgraph>
       <node id="13">
         <label>functional</label>
@@ -108,12 +109,20 @@
         <label>/home/nico/Desktop/Code/plasticity/include/hopfield.h</label>
         <link refid="hopfield_8h"/>
       </node>
+      <node id="8">
+        <label>/home/nico/Desktop/Code/plasticity/include/weights.h</label>
+        <link refid="weights_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
       <node id="1">
         <label>/home/nico/Desktop/Code/plasticity/include/fmath.h</label>
         <link refid="fmath_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
       <node id="7">

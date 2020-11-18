@@ -8,3 +8,4 @@ Python API
    BCM
    Hopfield
    activations
+   weights

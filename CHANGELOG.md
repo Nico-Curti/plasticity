@@ -22,6 +22,7 @@ First version of the algorithm.
 - Add inpainting examples using BCM and Hopfield models
 - Add classifier examples using BCM and Hopfield models
 - Testing the performances of both the models on the MNIST dataset (without supervised part!!)
+- Add multiple initializers for the weights matrix since we notice different convergency behaviour changing the initial conditions
 
 ### Changed
 

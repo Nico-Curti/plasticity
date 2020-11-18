@@ -36,13 +36,15 @@
         </childnode>
         <childnode refid="18" relation="include">
         </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
         <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
         <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
@@ -66,7 +68,7 @@
         <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="22">
+      <node id="23">
         <label>fstream</label>
       </node>
       <node id="8">
@@ -115,7 +117,7 @@
       <node id="9">
         <label>iostream</label>
       </node>
-      <node id="21">
+      <node id="22">
         <label>deque</label>
       </node>
       <node id="17">
@@ -123,6 +125,16 @@
       </node>
       <node id="7">
         <label>climits</label>
+      </node>
+      <node id="21">
+        <label>weights.h</label>
+        <link refid="weights_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
       </node>
       <node id="4">
         <label>fmath.h</label>
@@ -167,35 +179,35 @@
 <codeline lineno="28"><highlight class="normal"></highlight></codeline>
 <codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Constructor</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><ref refid="classHopfield_1aef2955c44b6b2c99738963d178c15ee1" kindref="member">Hopfield</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" kindref="member">outputs</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>batch_size,</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classupdate__args" kindref="compound">update_args</ref><sp/><ref refid="namespaceoptimizer" kindref="compound">optimizer</ref>=<ref refid="classupdate__args" kindref="compound">update_args</ref>(<ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a4b7fa459df18d4bf2eaa7955899b3b03" kindref="member">optimizer_t :: _sgd</ref>),</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a974bdeec773185818312b6c82f7a764b" kindref="member">mu</ref>=0.f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a45ee1f1803e06f09d9044e9252852631" kindref="member">sigma</ref>=1.f,</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a510a58d019657002b7b292072cd4a9e9" kindref="member">epochs_for_convergency</ref>=1,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a2940d7e49ae8f8725ac552bfb0666e93" kindref="member">convergency_atol</ref>=1e-2f,</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>delta=.4f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>p=2.f,</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>k=2,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>seed=42);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><ref refid="classHopfield_1a1481513b54353fc9784db3a579820e53" kindref="member">Hopfield</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="classBasePlasticity_1a6128541398550402261cf3eb1d6d1822" kindref="member">outputs</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>batch_size,</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classupdate__args" kindref="compound">update_args</ref><sp/><ref refid="namespaceoptimizer" kindref="compound">optimizer</ref>=<ref refid="classupdate__args" kindref="compound">update_args</ref>(<ref refid="optimizer_8h_1a75322c2c76bf9aff92b61f429863e461a4b7fa459df18d4bf2eaa7955899b3b03" kindref="member">optimizer_t :: _sgd</ref>),</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classweights__initialization" kindref="compound">weights_initialization</ref><sp/><ref refid="namespaceweights__init" kindref="compound">weights_init</ref>=<ref refid="classweights__initialization" kindref="compound">weights_initialization</ref>(<ref refid="weights_8h_1a9bfa7623aa902dbd0dbd5198fadc6062a34e3d731ac6a8f06c178f8d9c3e630ac" kindref="member">weights_init_t :: _uniform_</ref>),</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a510a58d019657002b7b292072cd4a9e9" kindref="member">epochs_for_convergency</ref>=1,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classBasePlasticity_1a2940d7e49ae8f8725ac552bfb0666e93" kindref="member">convergency_atol</ref>=1e-2f,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>delta=.4f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>p=2.f,</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>k=2);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Copy<sp/>Operator<sp/>and<sp/>Copy<sp/>Constructor</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Copy<sp/>Operator<sp/>and<sp/>Copy<sp/>Constructor</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="59"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><ref refid="classHopfield_1aef2955c44b6b2c99738963d178c15ee1" kindref="member">Hopfield</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classHopfield" kindref="compound">Hopfield</ref><sp/>&amp;<sp/>b);</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"></highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><ref refid="classHopfield" kindref="compound">Hopfield</ref><sp/>&amp;<sp/><ref refid="classHopfield_1a2e19f875428328622c15d6cf8fe603da" kindref="member">operator = </ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classHopfield" kindref="compound">Hopfield</ref><sp/>&amp;<sp/>b);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><ref refid="classHopfield_1a1481513b54353fc9784db3a579820e53" kindref="member">Hopfield</ref><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classHopfield" kindref="compound">Hopfield</ref><sp/>&amp;<sp/>b);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><ref refid="classHopfield" kindref="compound">Hopfield</ref><sp/>&amp;<sp/><ref refid="classHopfield_1a2e19f875428328622c15d6cf8fe603da" kindref="member">operator = </ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classHopfield" kindref="compound">Hopfield</ref><sp/>&amp;<sp/>b);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Destructor</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="82"><highlight class="normal"></highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Destructor</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="84"><highlight class="normal"></highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><ref refid="classHopfield_1a94c62a20249a3440ebacea0d61ea57c7" kindref="member">~Hopfield</ref><sp/>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><ref refid="classHopfield_1a94c62a20249a3440ebacea0d61ea57c7" kindref="member">~Hopfield</ref><sp/>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"></highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>check_params<sp/>();</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"></highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>weights_update<sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>X,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_features,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights_update);</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"></highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>normalize_weights<sp/>();</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>check_params<sp/>();</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>weights_update<sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>X,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>&amp;<sp/>n_features,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>weights_update);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>normalize_weights<sp/>();</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="127"><highlight class="normal"></highlight></codeline>
-<codeline lineno="128"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"></highlight></codeline>
-<codeline lineno="130"><highlight class="normal"></highlight></codeline>
-<codeline lineno="131"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>__hopfield_h__</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>__hopfield_h__</highlight></codeline>
     </programlisting>
     <location file="/home/nico/Desktop/Code/plasticity/include/hopfield.h"/>
   </compounddef>

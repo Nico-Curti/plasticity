@@ -1,20 +1,18 @@
 #include <base.h>
 
-std :: mt19937 BasePlasticity :: engine = std :: mt19937(0);
 float BasePlasticity :: precision = 1e-30f;
 
-BasePlasticity :: BasePlasticity () : optimizer (), output (nullptr), weights (nullptr), history (), theta (nullptr), activation (nullptr), gradient (nullptr),
-                                      batch (100), outputs (100), nweights (0), epochs_for_convergency (0), mu (0.f), sigma (1.f), convergency_atol (0.f)
+BasePlasticity :: BasePlasticity () : optimizer (), w_init (), output (nullptr), weights (nullptr), history (), theta (nullptr), activation (nullptr), gradient (nullptr),
+                                      batch (100), outputs (100), nweights (0), epochs_for_convergency (0), convergency_atol (0.f)
 {
 }
 
 BasePlasticity :: BasePlasticity (const int & outputs, const int & batch_size, int activation,
                                   update_args optimizer,
-                                  float mu, float sigma,
-                                  int epochs_for_convergency, float convergency_atol,
-                                  int seed
-                                  ) : optimizer (optimizer), output (nullptr), weights (nullptr), history (), theta (nullptr), activation (nullptr), gradient (nullptr),
-                                      batch (batch_size), outputs (outputs), nweights (0), epochs_for_convergency (epochs_for_convergency), mu (mu), sigma (sigma), convergency_atol (convergency_atol)
+                                  weights_initialization weights_init,
+                                  int epochs_for_convergency, float convergency_atol
+                                  ) : optimizer (optimizer), w_init (weights_init), output (nullptr), weights (nullptr), history (), theta (nullptr), activation (nullptr), gradient (nullptr),
+                                      batch (batch_size), outputs (outputs), nweights (0), epochs_for_convergency (epochs_for_convergency), convergency_atol (convergency_atol)
 {
   //// correct epochs_for_convergency
   ////this->epochs_for_convergency = std :: max(this->epochs_for_convergency, 1);
@@ -23,8 +21,6 @@ BasePlasticity :: BasePlasticity (const int & outputs, const int & batch_size, i
   this->gradient   = transfer :: gradient( activation );
 
   this->theta.reset(new float[this->outputs]);
-
-  BasePlasticity :: engine = std :: mt19937(seed);
 }
 
 BasePlasticity :: BasePlasticity (const BasePlasticity & b)
@@ -38,11 +34,10 @@ BasePlasticity :: BasePlasticity (const BasePlasticity & b)
   this->nweights = b.nweights;
   this->epochs_for_convergency = b.epochs_for_convergency;
 
-  this->mu    = b.mu;
-  this->sigma = b.sigma;
   this->convergency_atol = b.convergency_atol;
 
   this->optimizer = b.optimizer;
+  this->w_init = b.w_init;
 
   this->weights.reset(new float[b.nweights]);
   std :: copy_n (b.weights.get(), b.nweights, this->weights.get());
@@ -62,11 +57,10 @@ BasePlasticity & BasePlasticity :: operator = (const BasePlasticity & b)
   this->nweights = b.nweights;
   this->epochs_for_convergency = b.epochs_for_convergency;
 
-  this->mu    = b.mu;
-  this->sigma = b.sigma;
   this->convergency_atol = b.convergency_atol;
 
   this->optimizer = b.optimizer;
+  this->w_init = b.w_init;
 
   this->weights.reset(new float[b.nweights]);
   std :: copy_n (b.weights.get(), b.nweights, this->weights.get());
@@ -78,7 +72,7 @@ BasePlasticity & BasePlasticity :: operator = (const BasePlasticity & b)
 }
 
 
-void BasePlasticity :: fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs)
+void BasePlasticity :: fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs, int seed)
 {
   this->nweights = this->outputs * n_features;
   this->weights.reset(new float[this->nweights]);
@@ -86,17 +80,10 @@ void BasePlasticity :: fit (float * X, const int & n_samples, const int & n_feat
   const int outputs = this->outputs * this->batch;
   this->output.reset(new float[outputs]);
 
-  std :: normal_distribution < float > random_normal (this->mu, this->sigma);
-
-  std :: generate_n (this->weights.get(), this->nweights,
-                     [&]()
-                     {
-                       return random_normal(BasePlasticity :: engine);
-                     });
-
+  this->w_init.init(this->weights.get(), this->outputs, n_features);
   this->optimizer.init_arrays(this->nweights);
 
-  this->_fit (X, num_epochs, n_features, n_samples);
+  this->_fit (X, num_epochs, n_features, n_samples, seed);
 }
 
 float * BasePlasticity :: predict (const float * X, const int & n_samples, const int & n_features)
@@ -231,7 +218,7 @@ void BasePlasticity :: normalize_weights ()
 }
 
 
-void BasePlasticity :: _fit (float * X, const int & num_epochs, const int & n_features, const int & n_samples)
+void BasePlasticity :: _fit (float * X, const int & num_epochs, const int & n_features, const int & n_samples, const int & seed)
 {
   const int num_batches = n_samples / this->batch;
 
@@ -239,9 +226,11 @@ void BasePlasticity :: _fit (float * X, const int & num_epochs, const int & n_fe
   std :: unique_ptr < int[] > batch_indices(new int [num_batches]);
   std :: iota(batch_indices.get(), batch_indices.get() + num_batches, 0);
 
+  std :: mt19937 engine(seed);
+
   for (int epoch = 0; epoch < num_epochs; ++epoch)
   {
-    std :: shuffle(batch_indices.get(), batch_indices.get() + num_batches, BasePlasticity :: engine);
+    std :: shuffle(batch_indices.get(), batch_indices.get() + num_batches, engine);
 
 #ifdef __verbose__
 

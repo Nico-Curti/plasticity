@@ -10,6 +10,7 @@
     <innerfile refid="hopfield_8h">hopfield.h</innerfile>
     <innerfile refid="optimizer_8h">optimizer.h</innerfile>
     <innerfile refid="utils_8h">utils.h</innerfile>
+    <innerfile refid="weights_8h">weights.h</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

@@ -37,20 +37,18 @@ public:
   * @param outputs Number of hidden units.
   * @param batch_size Size of the minibatch.
   * @param activation Index of the activation function.
-  * @param optimizer update_args Optimizer object.
-  * @param mu Mean of the gaussian distribution that initializes the weights.
-  * @param sigma Standard deviation of the gaussian distribution that initializes the weights.
+  * @param optimizer update_args Optimizer object (default=SGD algorithm).
+  * @param weights_init weights_initialization object (default=uniform initialization in [-1, 1]).
   * @param epochs_for_convergency Number of stable epochs requested for the convergency.
   * @param convergency_atol Absolute tolerance requested for the convergency.
   * @param interaction_strength Set the lateral interaction strength between weights.
-  * @param seed Random number generator seed.
   *
   */
   BCM (const int & outputs, const int & batch_size, int activation=transfer :: _logistic_,
        update_args optimizer=update_args(optimizer_t :: _sgd),
-       float mu=0.f, float sigma=1.f,
+       weights_initialization weights_init=weights_initialization(weights_init_t :: _uniform_),
        int epochs_for_convergency=1, float convergency_atol=1e-2f,
-       float interaction_strength=0.f, int seed=42);
+       float interaction_strength=0.f);
 
   // Copy Operator and Copy Constructor
 

@@ -22,6 +22,8 @@ class data_dispatcher
 {
   float ** batch; ///< pointer matrix to the original data.
 
+  std :: mt19937 engine; ///< Random number generator
+
   std :: unique_ptr < int[] > indices; ///< array of indices (it is necessary if shuffle is enabled)
 
 public:
@@ -45,11 +47,12 @@ public:
   * @param N_rows Original number of rows in the matrix
   * @param N_cols Original number of cols in the matrix
   * @param shuffle Enable/Disable the random shuffle of the input data
+  * @param seed Random number generator seed.
   *
   */
   data_dispatcher (float * buffer, const int & batch_size,
                    const int & N_rows, const int & N_cols,
-                   bool shuffle=true);
+                   bool shuffle=true, int seed=42);
 
 
   // Destructor

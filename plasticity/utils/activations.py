@@ -109,6 +109,9 @@ class Logistic (Activations):
   def gradient (x, copy=False):
     return (1. - x) * x
 
+# set alias
+Sigmoid = Logistic
+
 
 class Loggy (Activations):
 

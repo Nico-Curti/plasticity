@@ -18,6 +18,20 @@
         </inbodydescription>
         <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="23" column="10" bodyfile="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" bodystart="23" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classdata__dispatcher_1a41d90d3dd8a9ee5b616751255ec0cca4" prot="private" static="no" mutable="no">
+        <type>std ::mt19937</type>
+        <definition>std :: mt19937 data_dispatcher::engine</definition>
+        <argsstring></argsstring>
+        <name>engine</name>
+        <briefdescription>
+<para>Random number generator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="25" column="18" bodyfile="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classdata__dispatcher_1ac554125a64fe13dd309a601f26a6be8d" prot="private" static="no" mutable="no">
         <type>std ::unique_ptr&lt; int[] &gt;</type>
         <definition>std :: unique_ptr&lt; int[] &gt; data_dispatcher::indices</definition>
@@ -30,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="25" column="22" bodyfile="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" bodystart="25" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="27" column="22" bodyfile="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-attrib">
@@ -46,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="29" column="7" bodyfile="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" bodystart="29" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="31" column="7" bodyfile="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classdata__dispatcher_1a4534481c56bb11ba842d11c49b601663" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -60,14 +74,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="30" column="7" bodyfile="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" bodystart="30" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="32" column="7" bodyfile="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="classdata__dispatcher_1aa78476c02bdbbfb8f79c1159e9c409fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classdata__dispatcher_1a1ca76a117bb60e676b5bfbafcbf932b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>data_dispatcher::data_dispatcher</definition>
-        <argsstring>(float *buffer, const int &amp;batch_size, const int &amp;N_rows, const int &amp;N_cols, bool shuffle=true)</argsstring>
+        <argsstring>(float *buffer, const int &amp;batch_size, const int &amp;N_rows, const int &amp;N_cols, bool shuffle=true, int seed=42)</argsstring>
         <name>data_dispatcher</name>
         <param>
           <type>float *</type>
@@ -89,6 +103,11 @@
           <type>bool</type>
           <declname>shuffle</declname>
           <defval>true</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>seed</declname>
+          <defval>42</defval>
         </param>
         <briefdescription>
 <para>Construct the data dispatcher. </para>
@@ -137,12 +156,20 @@
 <para>Enable/Disable the random shuffle of the input data </para>
 </parameterdescription>
 </parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>seed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Random number generator seed. </para>
+</parameterdescription>
+</parameteritem>
 </parameterlist>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="50" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="53" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classdata__dispatcher_1a0f15d139d58173887861aa5d28cf3280" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -157,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="63" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="66" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classdata__dispatcher_1a10585190c2f35014a789081f0b08ee0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>float *</type>
@@ -188,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="76" column="10"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="79" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classdata__dispatcher_1a1fc9b0f2b18e75a74d7aba81273df143" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -203,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="85" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="88" column="8"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -212,11 +239,12 @@
     <detaileddescription>
 <para>The object simply points to the original buffer of data without any copy. In this way the member function get_batch can return a portion of the original data according to the size given by the batch_dimensions member. The batches can be randomized and returned into a shuffle order using the variable shuffle in the constructor. </para>
     </detaileddescription>
-    <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="22" column="1" bodyfile="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" bodystart="21" bodyend="87"/>
+    <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="22" column="1" bodyfile="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" bodystart="21" bodyend="90"/>
     <listofallmembers>
       <member refid="classdata__dispatcher_1ae09bb2f3e4d0b097efcc0d9748339336" prot="private" virt="non-virtual"><scope>data_dispatcher</scope><name>batch</name></member>
       <member refid="classdata__dispatcher_1a4534481c56bb11ba842d11c49b601663" prot="public" virt="non-virtual"><scope>data_dispatcher</scope><name>batch_dimension</name></member>
-      <member refid="classdata__dispatcher_1aa78476c02bdbbfb8f79c1159e9c409fa" prot="public" virt="non-virtual"><scope>data_dispatcher</scope><name>data_dispatcher</name></member>
+      <member refid="classdata__dispatcher_1a1ca76a117bb60e676b5bfbafcbf932b3" prot="public" virt="non-virtual"><scope>data_dispatcher</scope><name>data_dispatcher</name></member>
+      <member refid="classdata__dispatcher_1a41d90d3dd8a9ee5b616751255ec0cca4" prot="private" virt="non-virtual"><scope>data_dispatcher</scope><name>engine</name></member>
       <member refid="classdata__dispatcher_1a10585190c2f35014a789081f0b08ee0a" prot="public" virt="non-virtual"><scope>data_dispatcher</scope><name>get_batch</name></member>
       <member refid="classdata__dispatcher_1ac554125a64fe13dd309a601f26a6be8d" prot="private" virt="non-virtual"><scope>data_dispatcher</scope><name>indices</name></member>
       <member refid="classdata__dispatcher_1af724ea38d5403cde7717460f59a54482" prot="public" virt="non-virtual"><scope>data_dispatcher</scope><name>num_batches</name></member>

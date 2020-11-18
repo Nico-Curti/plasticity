@@ -122,7 +122,7 @@ def _check_update (upd_type):
       Name of the update function
 
     update_num : int
-      Byron update function index
+      C++ update function index
 
   Notes
   -----
@@ -157,6 +157,57 @@ def _check_update (upd_type):
     raise ValueError('Optimizer: incorrect value of Update Function given. Possible values are ({})'.format(', '.join(allowed_upd)))
 
   return (update_type, update_num)
+
+def _check_weights_init (init_type):
+  '''
+  Check if the weights initialization function is valid.
+
+  Parameters
+  ----------
+    init_type : string or int
+      weights initialization function to check.
+
+  Returns
+  -------
+    init_type : str
+      Name of the weights initialization function
+
+    init_num : int
+      C++ weights initialization function index
+
+  Notes
+  -----
+  .. note::
+    You can use this function to verify if the given weights initialization function is valid.
+    The function can be passed either as a string either as integer.
+
+  Examples
+  --------
+  >>> name, type = _check_weights_init('Uniform')
+  >>> print(name, type)
+      ('Uniform', 2)
+  >>> print(_check_weights_init(2))
+      ('Uniform', 2)
+  '''
+
+  allowed_init = ('Zeros', 'Ones', 'Uniform', 'Normal', 'LecunUniform', 'GlorotUniform', 'GlorotNormal', 'HeUniform', 'HeNormal')
+
+  if isinstance(init_type, str):
+
+    if init_type not in allowed_init:
+      raise ValueError('Weights initialization: incorrect value of weights initialization Function given. Possible values are ({})'.format(', '.join(allowed_init)))
+
+    init_type = init_type
+    init_num = allowed_init.index(init_type)
+
+  elif isinstance(init_type, int) and init_type < len(allowed_init):
+    init_type = allowed_init[init_type]
+    init_num = init_type
+
+  else:
+      raise ValueError('Weights initialization: incorrect value of weights initialization Function given. Possible values are ({})'.format(', '.join(allowed_init)))
+
+  return (init_type, init_num)
 
 
 @contextmanager

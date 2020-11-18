@@ -8,6 +8,7 @@ from plasticity.utils import _check_activation
 from plasticity.utils import _check_string
 from plasticity.utils import redirect_stdout
 from .optimizer import SGD
+from .weights import Uniform
 
 from sklearn.base import BaseEstimator
 from sklearn.base import TransformerMixin
@@ -46,11 +47,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     optimizer : Optimizer object (default=SGD)
       The optimization algorithm to use during the training
 
-    mu : float (default=0.)
-      Mean of the gaussian distribution that initializes the weights
-
-    sigma : float (default=1.)
-      Standard deviation of the gaussian distribution that initializes the weights
+    weights_init : BaseWeights object (default="Uniform")
+      Weights initialization strategy.
 
     epochs_for_convergency : int (default=None)
       Number of stable epochs requested for the convergency.
@@ -59,7 +57,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     convergency_atol : float (default=0.01)
       Absolute tolerance requested for the convergency
 
-    seed : int (default=42)
+    random_state : int (default=0)
       Random seed for weights generation
 
     verbose : bool (default=True)
@@ -71,9 +69,9 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
   def __init__ (self, model=None, outputs=100, num_epochs=100,
       batch_size=100, activation='Linear', optimizer=SGD(learning_rate=2e-2),
-      mu=0., sigma=1.,
+      weights_init=Uniform,
       epochs_for_convergency=None, convergency_atol=0.01,
-      seed=42,  verbose=True,
+      random_state=0,  verbose=True,
       **kwargs):
 
     self.outputs = outputs
@@ -81,20 +79,56 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     self.batch_size = batch_size
     self.activation = activation
     self.optimizer = optimizer
-    self.mu = mu
-    self.sigma = sigma
+    self.weights_init = weights_init
     self.epochs_for_convergency = epochs_for_convergency if epochs_for_convergency is not None else 1
     self.convergency_atol = convergency_atol
-    self.seed = seed
+    self.random_state = random_state
     self.verbose = verbose
 
     for k, v in kwargs.items():
       setattr(self, k, v)
 
     activation, _ = _check_activation(self, activation_func=activation)
-    self._obj = model(outputs, batch_size, activation, optimizer._object,
-                      mu, sigma, epochs_for_convergency, convergency_atol,
-                      seed, *kwargs.values())
+    self._obj = model(self.outputs, self.batch_size, activation, self.optimizer._object,
+                      self.weights_init._object, self.epochs_for_convergency, self.convergency_atol,
+                      *kwargs.values())
+
+  def _join_input_label (self, X, y):
+    '''
+    Join the input data matrix to the labels.
+    In this way the labels array/matrix is considered as a new
+    set of inputs for the model and the plasticity model can
+    perform classification tasks without any extra supervised learning.
+
+    Parameters
+    ----------
+      X : array-like (2D)
+        Input array of data
+
+      y : array-like (1D or 2D)
+        Labels array/matrix
+
+    Returns
+    -------
+      join : array-like (2D)
+        Matrix of the merged data in which the first n_sample columns
+        are occupied by the original data and the remaining ones store
+        the labels.
+
+    Notes
+    -----
+    .. note::
+      The labels can be a 1D array or multi-dimensional array: the given
+      shape is internally reshaped according to the required dimensions.
+    '''
+
+    X, y = check_X_y(X, y, multi_output=True, y_numeric=True)
+    # reshape the labels if it is a single array
+    y = y.reshape(-1, 1) if len(y.shape) == 1 else y
+    # concatenate the labels as new inputs for neurons
+    X = np.concatenate((X, y), axis=1)
+
+    return X
 
   def fit (self, X, y=None):
     '''
@@ -126,12 +160,19 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       It is inserted in the function signature just for a compatibility with sklearn APIs.
     '''
 
+    if y is not None:
+      X = self._join_input_label(X=X, y=y)
+
     X = check_array(X)
     num_samples, num_features = X.shape
     X = np.ascontiguousarray(X.ravel().astype('float32'))
 
+    if self.batch_size > num_samples:
+      raise ValueError('Incorrect batch_size found. The batch_size must be less or equal to the number of samples. '
+                       'Given {:d} for {:d} samples'.format(self.batch_size, num_samples))
+
     with redirect_stdout(self.verbose):
-      self._obj.fit(X, num_samples, num_features, self.num_epochs)
+      self._obj.fit(X, num_samples, num_features, self.num_epochs, self.random_state)
 
     self.weights, shape = self._obj.get_weights()
     self.weights = np.asarray(self.weights).reshape(shape)
@@ -162,6 +203,13 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       It is inserted in the function signature just for a compatibility with sklearn APIs.
     '''
     check_is_fitted(self, 'weights')
+
+    if y is not None:
+      X = self._join_input_label(X=X, y=y)
+
+      # TODO: implement prediction without activation
+      return np.einsum('ij, kj -> ik', self.weights, X, optimize=True).transpose()
+
     X = check_array(X)
     num_samples, num_features = X.shape
 

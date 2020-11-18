@@ -3,7 +3,7 @@
 
 data_dispatcher :: data_dispatcher (float * buffer, const int & batch_size,
                                     const int & N_rows, const int & N_cols,
-                                    bool shuffle) :
+                                    bool shuffle, int seed) :
                                     batch (nullptr), indices (nullptr),
                                     num_batches (N_rows / batch_size), batch_dimension (batch_size * N_cols)
 {
@@ -14,13 +14,15 @@ data_dispatcher :: data_dispatcher (float * buffer, const int & batch_size,
     std :: exit (ERROR_DISPATCH);
   }
 
+  this->engine = std :: mt19937(seed);
+
   this->batch = new float * [this->num_batches];
 
   this->indices = std :: make_unique < int[] >(this->num_batches);
   std :: iota(this->indices.get(), this->indices.get() + this->num_batches, 0);
 
   if ( shuffle )
-    std :: shuffle(this->indices.get(), this->indices.get() + this->num_batches, BasePlasticity :: engine);
+    std :: shuffle(this->indices.get(), this->indices.get() + this->num_batches, this->engine);
 
   for (int i = 0; i < this->num_batches; ++i)
   {
@@ -48,7 +50,7 @@ float * data_dispatcher :: get_batch (const int & idx)
 
 void data_dispatcher :: randomize ()
 {
-  std :: shuffle(this->indices.get(), this->indices.get() + this->num_batches, BasePlasticity :: engine);
+  std :: shuffle(this->indices.get(), this->indices.get() + this->num_batches, this->engine);
 
   for (int i = 0; i < this->num_batches; ++i)
   {

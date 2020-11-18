@@ -3,8 +3,9 @@
 
 import numpy as np
 
-from plasticity.model._base import BasePlasticity
-from plasticity.model.optimizer import SGD
+from ._base import BasePlasticity
+from .optimizer import SGD
+from .weights import Normal
 
 __author__  = ['Nico Curti', 'SimoneGasperini']
 __email__ = ['nico.curit2@unibo.it', 'simone.gasperini2@studio.unibo.it']
@@ -13,7 +14,7 @@ __email__ = ['nico.curit2@unibo.it', 'simone.gasperini2@studio.unibo.it']
 class BCM (BasePlasticity):
 
   '''
-  Bienenstock, Cooper and Munro algorithm (BCM).
+  Bienenstock, Cooper and Munro algorithm (BCM) [1]_.
 
   The idea of BCM theory is that for a random sequence of input patterns a synapse
   is learning to differentiate between those stimuli that excite the postsynaptic
@@ -39,11 +40,8 @@ class BCM (BasePlasticity):
     optimizer : Optimizer (default=SGD)
       Optimizer object (derived by the base class Optimizer)
 
-    mu : float (default=0.)
-      Mean of the gaussian distribution that initializes the weights
-
-    sigma : float (default=1.)
-      Standard deviation of the gaussian distribution that initializes the weights
+    weights_init : BaseWeights object (default="Normal")
+      Weights initialization strategy.
 
     interaction_strength : float (default=0.)
       Set the lateral interaction strenght between weights
@@ -58,7 +56,7 @@ class BCM (BasePlasticity):
     convergency_atol : float (default=0.01)
       Absolute tolerance requested for the convergency
 
-    seed : int (default=42)
+    random_state : int (default=None)
       Random seed for weights generation
 
     verbose : bool (default=True)
@@ -74,8 +72,7 @@ class BCM (BasePlasticity):
   >>> X *= 1. / 255
   >>> model = BCM(outputs=100, num_epochs=10)
   >>> model.fit(X)
-  BCM(batch_size=100, outputs=100, sigma=1.0, mu=0.0,
-  num_epochs=10, seed=42, epsilon=0.02, precision=1e-30)
+  BCM(batch_size=100, outputs=100, num_epochs=10, random_state=42, epsilon=0.02, precision=1e-30)
   >>>
   >>> # view the memorized weights
   >>> w = model.weights[0].reshape(28, 28)
@@ -91,18 +88,19 @@ class BCM (BasePlasticity):
 
   References
   ----------
-  - Castellani G., Intrator N., Shouval H.Z., Cooper L.N. Solutions of the BCM learning rule
-    in a network of lateral interacting nonlinear neurons, Network Computation in Neural Systems, 10.1088/0954-898X/10/2/001
+  .. [1] Castellani G., Intrator N., Shouval H.Z., Cooper L.N. Solutions of the BCM learning rule
+         in a network of lateral interacting nonlinear neurons, Network Computation in Neural Systems, 10.1088/0954-898X/10/2/001
   '''
 
   def __init__(self, outputs=100, num_epochs=100,
       batch_size=100, activation='Logistic',
       optimizer=SGD(learning_rate=2e-2),
-      mu=0., sigma=1., interaction_strength=0.,
+      weights_init=Normal(mu=0., std=1.),
+      interaction_strength=0.,
       precision=1e-30,
       epochs_for_convergency=None,
       convergency_atol=0.01,
-      seed=42, verbose=True):
+      random_state=None, verbose=True):
 
     self._interaction_matrix = self._weights_interaction(interaction_strength, outputs)
     self.interaction_strength = interaction_strength
@@ -110,11 +108,11 @@ class BCM (BasePlasticity):
     super (BCM, self).__init__(outputs=outputs, num_epochs=num_epochs,
                                batch_size=batch_size, activation=activation,
                                optimizer=optimizer,
-                               mu=mu, sigma=sigma,
+                               weights_init=weights_init,
                                precision=precision,
                                epochs_for_convergency=epochs_for_convergency,
                                convergency_atol=convergency_atol,
-                               seed=seed, verbose=verbose)
+                               random_state=random_state, verbose=verbose)
 
   def _weights_interaction (self, strength, outputs):
     '''

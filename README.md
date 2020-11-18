@@ -213,7 +213,37 @@ You can use the `plasticity` library into pure-Python modules or inside your C++
 
 ### Python Version
 
-**TODO**
+The `plasticity` classes are totally equivalent to a `scikit-learn` feature-encoder method and thus they provide the member functions `fit` (to train your model) and `predict` (to test a trained model on new samples).
+First of all you need to import the desired `plasticity` class and then simply call the training/testing functions.
+
+```python
+from plasticity.models import BCM
+from sklearn.datasets import fetch_openml
+
+# Download the MNIST dataset
+X, y = fetch_openml(name='mnist_784', version=1, data_id=None, return_X_y=True)
+
+# normalize the sample into [0, 1]
+X *= 1. / 255
+
+from plasticity.model import BCM
+
+model = BCM(outputs=100, num_epochs=10, batch_size=100, interaction_strenght=0.)
+model.fit(X)
+```
+
+You can also visualize the weights connections using the utility functions provided by the package as
+
+```python
+
+from plasticity.utils import view_weights
+
+view_weights (model.weights, dims=(28, 28))
+```
+
+The results should be something like
+
+![BCM_weights](https://github.com/Nico-Curti/plasticity/blob/master/img/BCM_weights.gif)
 
 ## Testing
 

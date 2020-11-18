@@ -69,7 +69,7 @@ public:
   float decay;         ///< Decay parameter
   float B1;            ///< Adam-like parameter
   float B2;            ///< Adam-like parameter
-  float rho;           ///< TODO
+  float rho;           ///< Decay factor
 
   bool l2norm;         ///< Normalize the gradient values according to their l2 norms
   bool clip;           ///< Clip gradient values between -1 and 1

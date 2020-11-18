@@ -37,23 +37,21 @@ public:
   *
   * @param outputs Number of hidden units.
   * @param batch_size Size of the minibatch.
-  * @param optimizer update_args Optimizer object.
-  * @param mu Mean of the gaussian distribution that initializes the weights.
-  * @param sigma Standard deviation of the gaussian distribution that initializes the weights.
+  * @param optimizer update_args Optimizer object (default=SGD algorithm).
+  * @param weights_init weights_initialization object (default=uniform initialization in [-1, 1]).
   * @param epochs_for_convergency Number of stable epochs requested for the convergency.
   * @param convergency_atol Absolute tolerance requested for the convergency.
   * @param delta Strength of the anti-hebbian learning
   * @param p Lebesgue norm of the weights.
   * @param k Ranking parameter, must be integer that is bigger or equal than 2.
-  * @param seed Random number generator seed.
   *
   */
   Hopfield (const int & outputs, const int & batch_size,
             update_args optimizer=update_args(optimizer_t :: _sgd),
-            float mu=0.f, float sigma=1.f,
+            weights_initialization weights_init=weights_initialization(weights_init_t :: _uniform_),
             int epochs_for_convergency=1, float convergency_atol=1e-2f,
             float delta=.4f, float p=2.f,
-            int k=2, int seed=42);
+            int k=2);
 
   // Copy Operator and Copy Constructor
 

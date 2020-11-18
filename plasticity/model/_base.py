@@ -7,6 +7,7 @@ from collections import deque
 
 from plasticity.utils import _check_activation
 from .optimizer import Optimizer
+from .weights import BaseWeights
 
 from sklearn.base import BaseEstimator
 from sklearn.base import TransformerMixin
@@ -34,17 +35,14 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     batch_size : int (default=100)
       Size of the minibatch
 
+    weights_init : BaseWeights object
+      Weights initialization strategy.
+
     activation : str (default="Linear")
       Name of the activation function
 
     optimizer : Optimizer (default=SGD)
       Optimizer object (derived by the base class Optimizer)
-
-    mu : float (default=0.)
-      Mean of the gaussian distribution that initializes the weights
-
-    sigma : float (default=1.)
-      Standard deviation of the gaussian distribution that initializes the weights
 
     precision : float (default=1e-30)
       Parameter that controls numerical precision of the weight updates
@@ -56,8 +54,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     convergency_atol : float (default=0.01)
       Absolute tolerance requested for the convergency
 
-    seed : int (default=42)
-      Random seed for weights generation
+    random_state : int (default=None)
+      Random seed for batch subdivisions
 
     verbose : bool (default=True)
       Turn on/off the verbosity
@@ -65,11 +63,12 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
   def __init__ (self, outputs=100, num_epochs=100,
       activation='Linear', optimizer=Optimizer,
-      batch_size=100, mu=0., sigma=1.,
+      batch_size=100, weights_init=BaseWeights,
       precision=1e-30,
       epochs_for_convergency=None,
       convergency_atol=0.01,
-      seed=42, verbose=True):
+      random_state=None,
+      verbose=True):
 
     _, activation = _check_activation(self, activation)
 
@@ -78,16 +77,15 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     self.batch_size = batch_size
     self.activation = activation
     self.optimizer = optimizer
-    self.mu = mu
-    self.sigma = sigma
+    self.weights_init = weights_init
     self.precision = precision
     self.epochs_for_convergency = epochs_for_convergency if epochs_for_convergency is not None else num_epochs
     self.epochs_for_convergency = max(self.epochs_for_convergency, 1)
     self.convergency_atol = convergency_atol
-    self.seed = seed
+    self.random_state = random_state
     self.verbose = verbose
 
-  def _weights_update(self, X, output):
+  def _weights_update (self, X, output):
     '''
     Compute the weights update using the given learning rule.
 
@@ -109,7 +107,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     '''
     raise NotImplementedError
 
-  def _lebesque_norm(self):
+  def _lebesque_norm (self):
     '''
     Apply the Lebesgue norm to the weights.
     '''
@@ -295,10 +293,15 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       X = self._join_input_label(X=X, y=y)
 
     X = check_array(X)
-    np.random.seed(self.seed)
+    np.random.seed(self.random_state)
     num_samples, num_features = X.shape
 
-    self.weights = np.random.normal(loc=self.mu, scale=self.sigma, size=(self.outputs, num_features))
+    if self.batch_size > num_samples:
+      raise ValueError('Incorrect batch_size found. The batch_size must be less or equal to the number of samples. '
+                       'Given {:d} for {:d} samples'.format(self.batch_size, num_samples))
+
+    #self.weights = np.random.normal(loc=self.mu, scale=self.sigma, size=(self.outputs, num_features))
+    self.weights = self.weights_init.get(size=(self.outputs, num_features))
     self.history = deque(maxlen=self.epochs_for_convergency)
     self._fit(X)
 

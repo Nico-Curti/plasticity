@@ -327,7 +327,7 @@ namespace transfer
   *
   * @return Pointer to the desired function.
   */
-  std :: function < float(const float &) > activate ( const int & active);
+  std :: function < float(const float &) > activate ( const int & active );
   /**
   * @brief Switch case between gradient functions.
   *
@@ -339,7 +339,7 @@ namespace transfer
   *
   * @return Pointer to the desired function.
   */
-  std :: function < float(const float &) > gradient ( const int & active);
+  std :: function < float(const float &) > gradient ( const int & active );
 
 }
 

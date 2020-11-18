@@ -3,6 +3,7 @@
 
 from ._base import BasePlasticity
 from .optimizer import SGD
+from .weights import Normal
 from plasticity.lib.hopfield import _Hopfield
 
 __author__  = ['Nico Curti']
@@ -12,7 +13,7 @@ __email__ = ['nico.curit2@unibo.it']
 class Hopfield (BasePlasticity):
 
   '''
-  Hopfield and Krotov implementation of the BCM algorithm.
+  Hopfield and Krotov implementation of the BCM algorithm [1]_.
 
   Parameters
   ----------
@@ -31,11 +32,8 @@ class Hopfield (BasePlasticity):
     delta : float (default=0.4)
       Strength of the anti-hebbian learning
 
-    mu : float (default=0.)
-      Mean of the gaussian distribution that initializes the weights
-
-    sigma : float (default=1.)
-      Standard deviation of the gaussian distribution that initializes the weights
+    weights_init : BaseWeights object (default="Normal")
+      Weights initialization strategy.
 
     epochs_for_convergency : int (default=None)
       Number of stable epochs requested for the convergency.
@@ -50,7 +48,7 @@ class Hopfield (BasePlasticity):
     k : int (default=2)
       Ranking parameter, must be integer that is bigger or equal than 2
 
-    seed : int (default=42)
+    random_state : int (default=42)
       Random seed for weights generation
 
     verbose : bool (default=True)
@@ -66,8 +64,7 @@ class Hopfield (BasePlasticity):
   >>> X *= 1. / 255
   >>> model = Hopfield(outputs=100, num_epochs=10)
   >>> model.fit(X)
-  Hopfield(batch_size=100, outputs=100, sigma=1.0, mu=0.0,
-  num_epochs=10, seed=42, epsilon=0.02, precision=1e-30)
+  Hopfield(batch_size=100, outputs=100, num_epochs=10, random_state=42, epsilon=0.02, precision=1e-30)
   >>>
   >>> # view the memorized weights
   >>> w = model.weights[0].reshape(28, 28)
@@ -83,23 +80,24 @@ class Hopfield (BasePlasticity):
 
   References
   ----------
-  - Dmitry Krotov, and John J. Hopfield. Unsupervised learning by competing hidden units,
-    PNAS, 2019, www.pnas.org/cgi/doi/10.1073/pnas.1820458116
+  .. [1] Dmitry Krotov, and John J. Hopfield. Unsupervised learning by competing hidden units,
+         PNAS, 2019, www.pnas.org/cgi/doi/10.1073/pnas.1820458116
   '''
 
   def __init__(self, outputs=100, num_epochs=100,
       batch_size=100, optimizer=SGD(learning_rate=2e-2),
-      delta=.4, mu=0., sigma=1.,
+      delta=.4,
+      weights_init=Normal(mu=0., std=1.),
       epochs_for_convergency=None,
       convergency_atol=0.01,
-      p=2., k=2, seed=42,
+      p=2., k=2, random_state=42,
       verbose=True):
 
     super (Hopfield, self).__init__(model=_Hopfield, outputs=outputs, num_epochs=num_epochs,
                                     batch_size=batch_size, activation='Linear',
                                     optimizer=optimizer,
-                                    mu=mu, sigma=sigma,
+                                    weights_init=weights_init,
                                     epochs_for_convergency=epochs_for_convergency,
                                     convergency_atol=convergency_atol,
-                                    seed=seed, delta=delta, p=p, k=k,
+                                    random_state=random_state, delta=delta, p=p, k=k,
                                     verbose=verbose)

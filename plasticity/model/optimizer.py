@@ -144,7 +144,7 @@ class Momentum (Optimizer):
 
   .. code-block:: python
 
-    v = momentum * v - lr * gradient
+    v = momentum * v - learning_rate * gradient
     parameter += v - learning_rate * gradient
 
 
@@ -207,7 +207,7 @@ class NesterovMomentum (Optimizer):
 
   .. code-block:: python
 
-    v = momentum * v - lr * gradient
+    v = momentum * v - learning_rate * gradient
     parameter += momentum * v - learning_rate * gradient
 
   Parameters
