@@ -91,7 +91,7 @@ class Hopfield (BasePlasticity):
   def __init__(self, outputs=100, num_epochs=100,
       batch_size=100, delta=.4,
       optimizer=SGD(learning_rate=2e-2),
-      weights_init=Normal(mu=0., sigma=1.),
+      weights_init=Normal(mu=0., std=1.),
       p=2., k=2,
       precision=1e-30,
       epochs_for_convergency=None,
