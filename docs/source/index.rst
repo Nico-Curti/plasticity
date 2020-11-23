@@ -91,4 +91,5 @@ And in this case the weights matrix should appear similar to
    installation
    cppAPI/modules
    pyAPI/modules
+   examples/modules
    references

@@ -74,7 +74,8 @@ master_doc = 'index'
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.napoleon',
               'sphinx.ext.viewcode',
-              'breathe'
+              'breathe',
+              'nbsphinx'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -97,6 +98,11 @@ html_theme = 'sphinx_rtd_theme'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = []
+
+
+nbsphinx_input_prompt = 'In [%s]:'
+nbsphinx_kernel_name = 'python3'
+nbsphinx_output_prompt = 'Out[%s]:'
 
 
 breathe_projects = {

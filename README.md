@@ -243,7 +243,12 @@ view_weights (model.weights, dims=(28, 28))
 
 The results should be something like
 
-![BCM_weights](https://github.com/Nico-Curti/plasticity/blob/master/img/BCM_weights.gif)
+<a href="https://github.com/Nico-Curti/plasticity/blob/master/img/BCM_weights.gif">
+  <div class="image">
+    <img src="img/BCM_weights.gif" width="392" height="392">
+  </div>
+</a>
+
 
 ## Testing
 

@@ -21,3 +21,4 @@ dependencies:
 
   # documentation
   - breathe>=4.14.1
+  - nbsphinx
