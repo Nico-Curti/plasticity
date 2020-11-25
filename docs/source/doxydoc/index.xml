@@ -276,16 +276,14 @@
     <member refid="weights_8h_1a9bfa7623aa902dbd0dbd5198fadc6062a9f4775e1cdd0cf49a4edc158f03e5106" kind="enumvalue"><name>_he_uniform_</name></member>
     <member refid="weights_8h_1a9bfa7623aa902dbd0dbd5198fadc6062ae8d177fd92dce72b8c3a974e7be5a375" kind="enumvalue"><name>_he_normal_</name></member>
   </compound>
-  <compound refid="dir_33eda3486c9674b30e913b82d84032a0" kind="dir"><name>/home/nico/Desktop/Code</name>
-  </compound>
-  <compound refid="dir_351fec499539e52595e8391ed32827da" kind="dir"><name>/home/nico/Desktop</name>
+  <compound refid="dir_911b18c25225ad5cb4ae7480cb868c47" kind="dir"><name>/home/nico/Code</name>
   </compound>
   <compound refid="dir_43e0a1f539e00dcfa1a6bc4d4fee4fc2" kind="dir"><name>/home</name>
   </compound>
-  <compound refid="dir_61bd35155540199eadb9771b7552194b" kind="dir"><name>/home/nico/Desktop/Code/plasticity/include</name>
+  <compound refid="dir_94cb042337b27e715016b3e884886c81" kind="dir"><name>/home/nico/Code/plasticity/include</name>
   </compound>
   <compound refid="dir_286188036a6f69a2571aeb75726499cb" kind="dir"><name>/home/nico</name>
   </compound>
-  <compound refid="dir_98cb6a5a35639cf327416bfaab3460c3" kind="dir"><name>/home/nico/Desktop/Code/plasticity</name>
+  <compound refid="dir_7ad830a7306606d27520bdf5a905f90e" kind="dir"><name>/home/nico/Code/plasticity</name>
   </compound>
 </doxygenindex>

@@ -5,6 +5,9 @@ set(PYC_INC_DIR    ${PYC_DIR}/lib          CACHE PATH "Path where find pxd files
 
 set_source_files_properties( ${PYC_SRC_DIR}/activations.pyx PROPERTIES CYTHON_IS_CXX TRUE )
 set_source_files_properties( ${PYC_SRC_DIR}/bcm.pyx PROPERTIES CYTHON_IS_CXX TRUE )
+set_source_files_properties( ${PYC_SRC_DIR}/hopfield.pyx PROPERTIES CYTHON_IS_CXX TRUE )
+set_source_files_properties( ${PYC_SRC_DIR}/weights_initialization.pyx PROPERTIES CYTHON_IS_CXX TRUE )
+set_source_files_properties( ${PYC_SRC_DIR}/update_args.pyx PROPERTIES CYTHON_IS_CXX TRUE )
 
 # Include *.pxd directory
 

@@ -6,197 +6,199 @@ on:
   pull_request:
     branches: [ main ]
 
+
 jobs:
-  ubuntu-cmake:
-    runs-on: ubuntu-latest
+  ci:
+    name: ${{ matrix.os }}-${{ matrix.compiler }}@${{ matrix.version }}
+    runs-on: ${{ matrix.os }}
 
     strategy:
+      fail-test: false
       matrix:
         python-version: [3.5, 3.6, 3.7]
+        include:
+          - os: ubuntu-20.04
+            compiler: gcc
+            version: 4.8
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
+          - os: ubuntu-20.04
+            compiler: gcc
+            version: 4.9
 
-    - uses: actions/checkout@v2
+          - os: ubuntu-20.04
+            compiler: gcc
+            version: 5
 
-    - name: 'Update apt'
-      run: sudo apt update
-    - name: 'Install CMake'
-      run: sudo apt install cmake
-    - name: 'Install Eigen3'
-      run: sudo apt install libeigen3-dev
+          - os: ubuntu-20.04
+            compiler: gcc
+            version: 6
 
-    - name: Install dependencies
-      run: |
-        git submodule update --init --recursive
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          - os: ubuntu-20.04
+            compiler: gcc
+            version: 7
 
-    - name: 'Configure build'
-      run: |
-        mkdir buildDirectory_debug
-        cd buildDirectory_debug
-        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Debug" -DOMP=OFF -DPYWRAP=OFF
-        cd ..
-        mkdir buildDirectory_release
-        cd buildDirectory_release
-        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Release" -DOMP=OFF -DPYWRAP=OFF
-        cd ..
-    - name: 'Build'
-      run: |
-        cd buildDirectory_debug
-        cmake --build . --target install -- -j8
-        cd ..
-        cd buildDirectory_release
-        cmake --build . --target install -- -j8
-        cd ..
+          - os: ubuntu-20.04
+            compiler: gcc
+            version: 8
 
+          - os: ubuntu-20.04
+            compiler: gcc
+            version: 9
 
+          - os: ubuntu-20.04
+            compiler: clang
+            version: 3.6
 
-  ubuntu-cmake-omp:
-    runs-on: ubuntu-latest
+          - os: ubuntu-20.04
+            compiler: clang
+            version: 3.8
 
-    strategy:
-      matrix:
-        python-version: [3.5, 3.6, 3.7]
+          - os: ubuntu-20.04
+            compiler: clang
+            version: 3.9
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
+          - os: ubuntu-20.04
+            compiler: clang
+            version: 4.0
 
-    - uses: actions/checkout@v2
+          - os: ubuntu-20.04
+            compiler: clang
+            version: 5.0
 
-    - name: 'Update apt'
-      run: sudo apt update
-    - name: 'Install CMake'
-      run: sudo apt install cmake
-    - name: 'Install Eigen3'
-      run: sudo apt install libeigen3-dev
+          - os: ubuntu-20.04
+            compiler: clang
+            version: 6.0
 
-    - name: Install dependencies
-      run: |
-        git submodule update --init --recursive
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          - os: ubuntu-20.04
+            compiler: clang
+            version: 7.0
 
-    - name: 'Configure build'
-      run: |
-        mkdir buildDirectory_debug
-        cd buildDirectory_debug
-        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Debug" -DOMP=ON -DPYWRAP=OFF
-        cd ..
-        mkdir buildDirectory_release
-        cd buildDirectory_release
-        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Release" -DOMP=ON -DPYWRAP=OFF
-        cd ..
-    - name: 'Build'
-      run: |
-        cd buildDirectory_debug
-        cmake --build . --target install -- -j8
-        cd ..
-        cd buildDirectory_release
-        cmake --build . --target install -- -j8
-        cd ..
+          - os: windows-latest
+            compiler: cl
+            version: Visual Studio 2017
+
+          - os: windows-latest
+            compiler: clang-cl
+            version: latest
+
+          - os: windows-latest
+            compiler: gcc
+            version: latest
+
+          - os: macos-latest
+            compiler: gcc
+            version: latest
+
+          - os: macos-latest
+            compiler: clang
+            version: latest
 
 
+      steps:
+        - uses: actions/checkout@v1
 
-  ubuntu-cmake-omp-cython:
-    runs-on: ubuntu-latest
+        - name: Setting env variables
+          run: |
+            echo "WORKSPACE=$HOME" >> $GITHUB_ENV
+            echo "VCPKG_ROOT=$HOME/vcpkg" >> $GITHUB_ENV
+            echo "VCPKG_DEFAULT_TRIPLET=x64-windows" >> $GITHUB_ENV
 
-    strategy:
-      matrix:
-        python-version: [3.5, 3.6, 3.7]
+        - name: Install (Ubuntu)
+          if: runner.os == 'Linux'
+          run: |
+            sudo apt-get install -y --no-install-recommends ninja-build clang-tidy-10
+            sudo ln -s /usr/bin/clang-tidy-10 /usr/local/bin/clang-tidy
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
+            if [ "${{ matrix.compiler }}" == "gcc" ]; then
+              sudo apt-get install -y ${{ matrix.compiler }}-${{ matrix.version }}
+              echo CC=gcc >> $GITHUB_ENV
+              echo CXX=g++ >> $GITHUB_ENV
+            else
+              echo CC=clang >> $GITHUB_ENV
+              echo CXX=clang++ >> $GITHUB_ENV
+            fi
 
-    - uses: actions/checkout@v2
+            sudo apt install -y cmake
+            sudo apt install -y libeigen3-dev
 
-    - name: 'Update apt'
-      run: sudo apt update
-    - name: 'Install CMake'
-      run: sudo apt install cmake
-    - name: 'Install Eigen3'
-      run: sudo apt install libeigen3-dev
+        - name: Install (macOS)
+          if: runner.os == 'macOS'
+          run: |
+            brew install ninja
+            sudo ln -s /usr/local/opt/llvm/bin/clang-tidy /usr/local/bin/clang-tidy
 
-    - name: Install dependencies
-      run: |
-        git submodule update --init --recursive
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ "${{ matrix.compiler }}" = "gcc" ]; then
+            echo CC=gcc >> $GITHUB_ENV
+            echo CXX=g++ >> $GITHUB_ENV
+          else
+            echo CC=clang >> $GITHUB_ENV
+            echo CXX=clang++ >> $GITHUB_ENV
+          fi
 
-    - name: 'Configure build'
-      run: |
-        mkdir buildDirectory_debug
-        cd buildDirectory_debug
-        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Debug" -DOMP=ON -DPYWRAP=ON
-        cd ..
-        mkdir buildDirectory_release
-        cd buildDirectory_release
-        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Release" -DOMP=ON -DPYWRAP=ON
-        cd ..
-    - name: 'Build'
-      run: |
-        cd buildDirectory_debug
-        cmake --build . --target install -- -j8
-        cd ..
-        cd buildDirectory_release
-        cmake --build . --target install -- -j8
-        cd ..
+          brew install eigen
 
-  osx-cmake:
-    runs-on: macOS-latest
+      - name: Install (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+          scoop install ninja llvm --global
 
-    strategy:
-      matrix:
-        python-version: [3.5, 3.6, 3.7]
+          if ("${{ matrix.compiler }}" -eq "gcc") {
+            echo CC=gcc | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+            echo CXX=g++ | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+          } elseif ("${{ matrix.compiler }}" -eq "clang") {
+            echo CC=clang | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+            echo CXX=clang++ | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+          } else {
+            echo CC=${{ matrix.compiler }} | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+            echo CXX=${{ matrix.compiler }} | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+          }
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
+          # We add the output directories to the PATH to make sure the tests and
+          # examples can find the reproc and reproc++ DLL's.
+          $env:PATH += ";$pwd\build\reproc\lib"
+          $env:PATH += ";$pwd\build\reproc++\lib"
 
-    - uses: actions/checkout@v2
+          # Make all PATH additions made by scoop and ourselves global.
+          echo "PATH=$env:PATH" | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
 
-    - name: 'Update apt'
-      run: brew update
-    - name: 'Install Eigen3'
-      run: brew install eigen
+          if ("${{ matrix.compiler }}".endswith("cl")) {
+            & .github\workflows\vsenv.ps1 -arch x64 -hostArch x64
+          }
 
-    - name: Install dependencies
-      run: |
-        git submodule update --init --recursive
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          # Install vcpkg
+          cd $env:WORKSPACE
+          git clone https://github.com/Microsoft/vcpkg.git
+          cd vcpkg
+          git checkout --force 2020.01
+          .\bootstrap-vcpkg.bat
+          .\vcpkg.exe install eigen3:$env:VCPKG_DEFAULT_TRIPLET
+          cd -
 
-    - name: 'Configure build'
-      run: |
-        mkdir buildDirectory_debug
-        cd buildDirectory_debug
-        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Debug" -DOMP=OFF -DPYWRAP=OFF
-        cd ..
-        mkdir buildDirectory_release
-        cd buildDirectory_release
-        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Release" -DOMP=OFF -DPYWRAP=OFF
-        cd ..
-    - name: 'Build'
-      run: |
-        cd buildDirectory_debug
-        cmake --build . --target install -- -j8
-        cd ..
-        cd buildDirectory_release
-        cmake --build . --target install -- -j8
-        cd ..
+      - name: Install dependencies
+        run: |
+          git submodule update --init --recursive
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+
+      - name: 'Configure build'
+        run: |
+          mkdir buildDirectory_debug
+          cd buildDirectory_debug
+          cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
+          cd ..
+          mkdir buildDirectory_release
+          cd buildDirectory_release
+          cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
+          cd ..
+
+
+      - name: 'Build'
+        run: |
+          cd buildDirectory_debug
+          cmake --build . --target install -- -j8
+          cd ..
+          cd buildDirectory_release
+          cmake --build . --target install -- -j8
+          cd ..

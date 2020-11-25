@@ -5,7 +5,7 @@
     <includes refid="fmath_8h" local="no">fmath.h</includes>
     <includes local="no">unordered_map</includes>
     <includes local="no">numeric</includes>
-    <includedby refid="base_8h" local="no">/home/nico/Desktop/Code/plasticity/include/base.h</includedby>
+    <includedby refid="base_8h" local="no">/home/nico/Code/plasticity/include/base.h</includedby>
     <incdepgraph>
       <node id="14">
         <label>functional</label>
@@ -59,17 +59,8 @@
       <node id="13">
         <label>utility</label>
       </node>
-      <node id="7">
-        <label>iostream</label>
-      </node>
-      <node id="15">
-        <label>unordered_map</label>
-      </node>
-      <node id="5">
-        <label>climits</label>
-      </node>
       <node id="1">
-        <label>/home/nico/Desktop/Code/plasticity/include/weights.h</label>
+        <label>/home/nico/Code/plasticity/include/weights.h</label>
         <link refid="weights_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -77,6 +68,9 @@
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
+      </node>
+      <node id="7">
+        <label>iostream</label>
       </node>
       <node id="2">
         <label>fmath.h</label>
@@ -86,6 +80,12 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
+      <node id="15">
+        <label>unordered_map</label>
+      </node>
+      <node id="5">
+        <label>climits</label>
+      </node>
       <node id="9">
         <label>algorithm</label>
       </node>
@@ -94,26 +94,26 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
+      <node id="4">
+        <label>/home/nico/Code/plasticity/include/hopfield.h</label>
+        <link refid="hopfield_8h"/>
+      </node>
       <node id="3">
-        <label>/home/nico/Desktop/Code/plasticity/include/bcm.h</label>
+        <label>/home/nico/Code/plasticity/include/bcm.h</label>
         <link refid="bcm_8h"/>
       </node>
+      <node id="1">
+        <label>/home/nico/Code/plasticity/include/weights.h</label>
+        <link refid="weights_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
       <node id="2">
-        <label>/home/nico/Desktop/Code/plasticity/include/base.h</label>
+        <label>/home/nico/Code/plasticity/include/base.h</label>
         <link refid="base_8h"/>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>/home/nico/Desktop/Code/plasticity/include/hopfield.h</label>
-        <link refid="hopfield_8h"/>
-      </node>
-      <node id="1">
-        <label>/home/nico/Desktop/Code/plasticity/include/weights.h</label>
-        <link refid="weights_8h"/>
-        <childnode refid="2" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/Code/plasticity/include/weights.h" line="9" column="9" bodyfile="/home/nico/Desktop/Code/plasticity/include/weights.h" bodystart="9" bodyend="-1"/>
+        <location file="/home/nico/Code/plasticity/include/weights.h" line="9" column="9" bodyfile="/home/nico/Code/plasticity/include/weights.h" bodystart="9" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="enum">
@@ -206,7 +206,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/Code/plasticity/include/weights.h" line="11" column="20" bodyfile="/home/nico/Desktop/Code/plasticity/include/weights.h" bodystart="11" bodyend="12"/>
+        <location file="/home/nico/Code/plasticity/include/weights.h" line="11" column="20" bodyfile="/home/nico/Code/plasticity/include/weights.h" bodystart="11" bodyend="12"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -299,6 +299,6 @@
 <codeline lineno="290"><highlight class="normal"></highlight></codeline>
 <codeline lineno="291"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//__weights_h__</highlight></codeline>
     </programlisting>
-    <location file="/home/nico/Desktop/Code/plasticity/include/weights.h"/>
+    <location file="/home/nico/Code/plasticity/include/weights.h"/>
   </compounddef>
 </doxygen>
