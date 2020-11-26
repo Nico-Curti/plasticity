@@ -46,16 +46,17 @@ jobs:
     - name: Install Doxygen
       run: |
         sudo apt install doxygen
+        sudo apt install pandoc
 
     - name: 'Configure build'
       run: |
         mkdir buildDirectory_debug
         cd buildDirectory_debug
-        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Debug" -DBUILD_DOCS=ON
+        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Debug" -DBUILD_DOCS=ON -DPYWRAP=ON
         cd ..
         mkdir buildDirectory_release
         cd buildDirectory_release
-        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Release" -DBUILD_DOCS=ON
+        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="Release" -DBUILD_DOCS=ON -DPYWRAP=ON
         cd ..
 
     - name: 'Build'

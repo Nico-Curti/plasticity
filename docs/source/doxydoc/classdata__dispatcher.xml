@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="23" column="10" bodyfile="/home/nico/Code/plasticity/include/data_dispatcher.h" bodystart="23" bodyend="-1"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" line="23" column="10" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classdata__dispatcher_1a41d90d3dd8a9ee5b616751255ec0cca4" prot="private" static="no" mutable="no">
         <type>std ::mt19937</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="25" column="18" bodyfile="/home/nico/Code/plasticity/include/data_dispatcher.h" bodystart="25" bodyend="-1"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" line="25" column="18" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classdata__dispatcher_1ac554125a64fe13dd309a601f26a6be8d" prot="private" static="no" mutable="no">
         <type>std ::unique_ptr&lt; int[] &gt;</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="27" column="22" bodyfile="/home/nico/Code/plasticity/include/data_dispatcher.h" bodystart="27" bodyend="-1"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" line="27" column="22" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-attrib">
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="31" column="7" bodyfile="/home/nico/Code/plasticity/include/data_dispatcher.h" bodystart="31" bodyend="-1"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" line="31" column="7" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classdata__dispatcher_1a4534481c56bb11ba842d11c49b601663" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="32" column="7" bodyfile="/home/nico/Code/plasticity/include/data_dispatcher.h" bodystart="32" bodyend="-1"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" line="32" column="7" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="53" column="3"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" line="53" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classdata__dispatcher_1a0f15d139d58173887861aa5d28cf3280" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="66" column="3"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" line="66" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classdata__dispatcher_1a10585190c2f35014a789081f0b08ee0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>float *</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="79" column="10"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" line="79" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classdata__dispatcher_1a1fc9b0f2b18e75a74d7aba81273df143" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="88" column="8"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" line="88" column="8"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -239,7 +239,7 @@
     <detaileddescription>
 <para>The object simply points to the original buffer of data without any copy. In this way the member function get_batch can return a portion of the original data according to the size given by the batch_dimensions member. The batches can be randomized and returned into a shuffle order using the variable shuffle in the constructor. </para>
     </detaileddescription>
-    <location file="/home/nico/Code/plasticity/include/data_dispatcher.h" line="22" column="1" bodyfile="/home/nico/Code/plasticity/include/data_dispatcher.h" bodystart="21" bodyend="90"/>
+    <location file="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" line="22" column="1" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" bodystart="21" bodyend="90"/>
     <listofallmembers>
       <member refid="classdata__dispatcher_1ae09bb2f3e4d0b097efcc0d9748339336" prot="private" virt="non-virtual"><scope>data_dispatcher</scope><name>batch</name></member>
       <member refid="classdata__dispatcher_1a4534481c56bb11ba842d11c49b601663" prot="public" virt="non-virtual"><scope>data_dispatcher</scope><name>batch_dimension</name></member>

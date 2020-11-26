@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="57" column="18" bodyfile="/home/nico/Code/plasticity/include/weights.h" bodystart="57" bodyend="-1"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="57" column="18" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/weights.h" bodystart="57" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classweights__initialization_1aa2fe590bc847af86c8d62be64749800b" prot="private" static="no" mutable="no">
         <type>int</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="59" column="7" bodyfile="/home/nico/Code/plasticity/include/weights.h" bodystart="59" bodyend="-1"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="59" column="7" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/weights.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classweights__initialization_1af0e67beaa3fdef645d36ce2158cfe273" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="61" column="9" bodyfile="/home/nico/Code/plasticity/include/weights.h" bodystart="61" bodyend="-1"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="61" column="9" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/weights.h" bodystart="61" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classweights__initialization_1a22d1b05f5c257eccb4288548e08df743" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="62" column="9" bodyfile="/home/nico/Code/plasticity/include/weights.h" bodystart="62" bodyend="-1"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="62" column="9" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/weights.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classweights__initialization_1af8c28922b20dc355554eae3745c65e89" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="63" column="9" bodyfile="/home/nico/Code/plasticity/include/weights.h" bodystart="63" bodyend="-1"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="63" column="9" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/weights.h" bodystart="63" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="74" column="3"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="74" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classweights__initialization_1aff8148f7d7be02a2274a39c921b7d579" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="91" column="3"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="91" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classweights__initialization_1a94007a3897bbb531ce07a39dc6a20891" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -186,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="101" column="3"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="101" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classweights__initialization_1a55046e47c7d026cb9cbfb0c75cc912bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classweights__initialization" kindref="compound">weights_initialization</ref> &amp;</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="113" column="27"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="113" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classweights__initialization_1a4bc624cd32c8e75e27ff7f85b0d98bd8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -244,7 +244,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="124" column="3"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="124" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classweights__initialization_1abe12e988f0d01cd299a51b0a2e472718" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -297,7 +297,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="136" column="8"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="136" column="8"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -354,7 +354,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="153" column="8"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="153" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classweights__initialization_1a0b2c11efeb38d4dc2fdf03c243588110" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -409,7 +409,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="168" column="8"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="168" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classweights__initialization_1a92200aad6364c6301a817446d7feb948" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -464,7 +464,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="184" column="8"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="184" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classweights__initialization_1a51a379c8e7466ff87f258e84f1c3a7b6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -519,7 +519,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="200" column="8"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="200" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classweights__initialization_1afcae83388f4dfa14c9e9528a140a3f3a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -575,7 +575,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="217" column="8"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="217" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classweights__initialization_1ae471e9333f5a5de67c90f7624b8cdabc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -631,7 +631,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="235" column="8"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="235" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classweights__initialization_1aa9fd852ad662a64c5aa87b3f8d156778" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -687,7 +687,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="253" column="8"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="253" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classweights__initialization_1a0b25d13fdfbeca0ace16ca447d90c816" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -743,7 +743,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="270" column="8"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="270" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classweights__initialization_1af74b43fc796a59fb3696b59fc51731a3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -799,7 +799,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Code/plasticity/include/weights.h" line="287" column="8"/>
+        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="287" column="8"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -820,7 +820,7 @@
 </para>
 <para>The desired weights initialization algorithm can be set using the type variable in the constructor signature. The core functionality of the object is given by the &apos;init&apos; member function which applies the desired initialization algorithm using the member parameters. </para>
     </detaileddescription>
-    <location file="/home/nico/Code/plasticity/include/weights.h" line="54" column="1" bodyfile="/home/nico/Code/plasticity/include/weights.h" bodystart="53" bodyend="289"/>
+    <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="54" column="1" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/weights.h" bodystart="53" bodyend="289"/>
     <listofallmembers>
       <member refid="classweights__initialization_1afa82077e0c793ef32375527423627c6c" prot="private" virt="non-virtual"><scope>weights_initialization</scope><name>engine</name></member>
       <member refid="classweights__initialization_1aa9fd852ad662a64c5aa87b3f8d156778" prot="private" virt="non-virtual"><scope>weights_initialization</scope><name>glorot_normal</name></member>

@@ -10,11 +10,26 @@
       <node id="10">
         <label>iomanip</label>
       </node>
+      <node id="1">
+        <label>/home/nico/Desktop/C++Code/plasticity/include/hopfield.h</label>
+        <link refid="hopfield_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
       <node id="6">
         <label>cmath</label>
       </node>
       <node id="20">
         <label>numeric</label>
+      </node>
+      <node id="13">
+        <label>string</label>
+      </node>
+      <node id="14">
+        <label>omp.h</label>
+      </node>
+      <node id="23">
+        <label>fstream</label>
       </node>
       <node id="18">
         <label>optimizer.h</label>
@@ -26,19 +41,14 @@
         <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="13">
-        <label>string</label>
-      </node>
-      <node id="14">
-        <label>omp.h</label>
-      </node>
-      <node id="23">
-        <label>fstream</label>
-      </node>
-      <node id="1">
-        <label>/home/nico/Code/plasticity/include/hopfield.h</label>
-        <link refid="hopfield_8h"/>
-        <childnode refid="2" relation="include">
+      <node id="3">
+        <label>activations.h</label>
+        <link refid="activations_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="8">
@@ -78,35 +88,8 @@
       <node id="15">
         <label>utility</label>
       </node>
-      <node id="21">
-        <label>weights.h</label>
-        <link refid="weights_8h"/>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-      </node>
       <node id="9">
         <label>iostream</label>
-      </node>
-      <node id="4">
-        <label>fmath.h</label>
-        <link refid="fmath_8h"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-      </node>
-      <node id="22">
-        <label>deque</label>
-      </node>
-      <node id="17">
-        <label>unordered_map</label>
-      </node>
-      <node id="7">
-        <label>climits</label>
       </node>
       <node id="2">
         <label>base.h</label>
@@ -134,14 +117,31 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="3">
-        <label>activations.h</label>
-        <link refid="activations_8h"/>
+      <node id="22">
+        <label>deque</label>
+      </node>
+      <node id="17">
+        <label>unordered_map</label>
+      </node>
+      <node id="7">
+        <label>climits</label>
+      </node>
+      <node id="4">
+        <label>fmath.h</label>
+        <link refid="fmath_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>weights.h</label>
+        <link refid="weights_8h"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
       <node id="11">
@@ -209,6 +209,6 @@
 <codeline lineno="128"><highlight class="normal"></highlight></codeline>
 <codeline lineno="129"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>__hopfield_h__</highlight></codeline>
     </programlisting>
-    <location file="/home/nico/Code/plasticity/include/hopfield.h"/>
+    <location file="/home/nico/Desktop/C++Code/plasticity/include/hopfield.h"/>
   </compounddef>
 </doxygen>
