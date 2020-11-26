@@ -137,68 +137,68 @@ jobs:
 
             brew install eigen
 
-      - name: Install (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
-          scoop install ninja llvm --global
+        - name: Install (Windows)
+          if: runner.os == 'Windows'
+          run: |
+            Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+            scoop install ninja llvm --global
 
-          if ("${{ matrix.compiler }}" -eq "gcc") {
-            echo CC=gcc | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
-            echo CXX=g++ | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
-          } elseif ("${{ matrix.compiler }}" -eq "clang") {
-            echo CC=clang | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
-            echo CXX=clang++ | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
-          } else {
-            echo CC=${{ matrix.compiler }} | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
-            echo CXX=${{ matrix.compiler }} | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
-          }
+            if ("${{ matrix.compiler }}" -eq "gcc") {
+              echo CC=gcc | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+              echo CXX=g++ | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+            } elseif ("${{ matrix.compiler }}" -eq "clang") {
+              echo CC=clang | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+              echo CXX=clang++ | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+            } else {
+              echo CC=${{ matrix.compiler }} | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+              echo CXX=${{ matrix.compiler }} | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+            }
 
-          # We add the output directories to the PATH to make sure the tests and
-          # examples can find the reproc and reproc++ DLL's.
-          $env:PATH += ";$pwd\build\reproc\lib"
-          $env:PATH += ";$pwd\build\reproc++\lib"
+            # We add the output directories to the PATH to make sure the tests and
+            # examples can find the reproc and reproc++ DLL's.
+            $env:PATH += ";$pwd\build\reproc\lib"
+            $env:PATH += ";$pwd\build\reproc++\lib"
 
-          # Make all PATH additions made by scoop and ourselves global.
-          echo "PATH=$env:PATH" | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+            # Make all PATH additions made by scoop and ourselves global.
+            echo "PATH=$env:PATH" | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
 
-          if ("${{ matrix.compiler }}".endswith("cl")) {
-            & .github\workflows\vsenv.ps1 -arch x64 -hostArch x64
-          }
+            if ("${{ matrix.compiler }}".endswith("cl")) {
+              & .github\workflows\vsenv.ps1 -arch x64 -hostArch x64
+            }
 
-          # Install vcpkg
-          cd $env:WORKSPACE
-          git clone https://github.com/Microsoft/vcpkg.git
-          cd vcpkg
-          git checkout --force 2020.01
-          .\bootstrap-vcpkg.bat
-          .\vcpkg.exe install eigen3:$env:VCPKG_DEFAULT_TRIPLET
-          cd -
+            # Install vcpkg
+            cd $env:WORKSPACE
+            git clone https://github.com/Microsoft/vcpkg.git
+            cd vcpkg
+            git checkout --force 2020.01
+            .\bootstrap-vcpkg.bat
+            .\vcpkg.exe install eigen3:$env:VCPKG_DEFAULT_TRIPLET
+            cd -
 
-      - name: Install dependencies
-        run: |
-          git submodule update --init --recursive
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-
-      - name: 'Configure build'
-        run: |
-          mkdir buildDirectory_debug
-          cd buildDirectory_debug
-          cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
-          cd ..
-          mkdir buildDirectory_release
-          cd buildDirectory_release
-          cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
-          cd ..
+        - name: Install dependencies
+          run: |
+            git submodule update --init --recursive
+            python -m pip install --upgrade pip
+            if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
 
-      - name: 'Build'
-        run: |
-          cd buildDirectory_debug
-          cmake --build . --target install -- -j8
-          cd ..
-          cd buildDirectory_release
-          cmake --build . --target install -- -j8
-          cd ..
+        - name: 'Configure build'
+          run: |
+            mkdir buildDirectory_debug
+            cd buildDirectory_debug
+            cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
+            cd ..
+            mkdir buildDirectory_release
+            cd buildDirectory_release
+            cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
+            cd ..
+
+
+        - name: 'Build'
+          run: |
+            cd buildDirectory_debug
+            cmake --build . --target install -- -j8
+            cd ..
+            cd buildDirectory_release
+            cmake --build . --target install -- -j8
+            cd ..
