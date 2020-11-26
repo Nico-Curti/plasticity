@@ -170,10 +170,10 @@ class BCM (BasePlasticity):
 
     theta = np.mean(output**2, axis=1, keepdims=True)
     phi = output * (output - theta)
-    output = self.activation.activate(output)
+    output = self.activation.activate(output, copy=True)
 
     #dw = self._interaction_matrix @ phi * self.gradient(output) @ X
-    dw = np.einsum('ij, jk, ik, kl -> il', self._interaction_matrix, phi, self.activation.gradient(output), X, optimize=True)
+    dw = np.einsum('ij, jk, ik, kl -> il', self._interaction_matrix, phi, self.activation.gradient(output, copy=True), X, optimize=True)
 
     nc = np.max(np.abs(dw))
     nc = 1. / max(nc, self.precision)

@@ -12,8 +12,7 @@ namespace transfer
   enum{ _logistic_ = 0, _loggy_, _relu_, _elu_, _relie_, _ramp_, _linear_, _tanh_, _plse_, _leaky_, _stair_, _hardtan_, _lhtan_, _selu_, _elliot_, _symm_elliot_, _softplus_, _softsign_, _asymm_logistic_
   };///< activation types
 
-  static const std :: unordered_map < std :: string, int > get_activation {
-                                                                            {"logistic"    , _logistic_},
+  static const std :: unordered_map < std :: string, int > get_activation { {"logistic"    , _logistic_},
                                                                             {"loggy"       , _loggy_},
                                                                             {"relu"        , _relu_},
                                                                             {"elu"         , _elu_},
@@ -31,8 +30,7 @@ namespace transfer
                                                                             {"s_elliot"    , _symm_elliot_},
                                                                             {"softplus"    , _softplus_},
                                                                             {"softsign"    , _softsign_},
-                                                                            {"as_logistic" , _asymm_logistic_}
-                                                                          }; ///< Utility for the activations management
+                                                                            {"as_logistic" , _asymm_logistic_} }; ///< Utility for the activations management
 
   /**
   * @brief Linear activation function.

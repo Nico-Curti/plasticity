@@ -311,7 +311,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     '''
     Core function for the predict member
     '''
-    return self.activation.activate(np.einsum('ij, kj -> ik', self.weights, X, optimize=True))
+    return self.activation.activate(np.einsum('ij, kj -> ik', self.weights, X, optimize=True), copy=True)
 
   def predict (self, X, y=None):
     '''
