@@ -167,3 +167,4 @@ results_*
 # Doxygen
 *.xslt
 *.xsd
+docs/source/doxydoc/dir_*
