@@ -8,13 +8,12 @@ on:
 
 
 jobs:
-  build:
+  ci:
 
     name: ${{ matrix.os }}-${{ matrix.compiler }}@${{ matrix.version }}
     runs-on: ${{ matrix.os }}
 
     strategy:
-      fail-test: false
       matrix:
         python-version: [3.5, 3.6, 3.7]
         include:
