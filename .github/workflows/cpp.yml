@@ -8,91 +8,53 @@ on:
 
 
 jobs:
-  ci:
+  build:
 
-    name: ${{ matrix.os }}-${{ matrix.compiler }}@${{ matrix.version }}
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.cfg.os }}
+    name: ${{ matrix.cfg.os }}@${{ matrix.cfg.cpp-compiler }}-${{ matrix.cfg.cpp-version }}
 
     strategy:
       matrix:
-        python-version: [3.5, 3.6, 3.7]
-        include:
-          - os: ubuntu-20.04
-            compiler: gcc
-            version: 4.8
+        cfg:
+          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 4.8, python-version: 3.8}
+          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 4.9, python-version: 3.8}
+          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 5.0, python-version: 3.8}
+          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 6.0, python-version: 3.8}
+          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 7.0, python-version: 3.8}
 
-          - os: ubuntu-20.04
-            compiler: gcc
-            version: 4.9
+          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 4.8, python-version: 3.8}
+          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 4.9, python-version: 3.8}
+          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 5.0, python-version: 3.8}
+          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 6.0, python-version: 3.8}
+          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 7.0, python-version: 3.8}
 
-          - os: ubuntu-20.04
-            compiler: gcc
-            version: 5
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 4.8, python-version: 3.8}
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 4.9, python-version: 3.8}
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 5.0, python-version: 3.8}
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 6.0, python-version: 3.8}
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 7.0, python-version: 3.8}
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 8.0, python-version: 3.8}
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0, python-version: 3.8}
 
-          - os: ubuntu-20.04
-            compiler: gcc
-            version: 6
+          - {os: ubuntu-20.04, cpp-compiler: clang, cpp-version: 3.6, python-version: 3.8}
+          - {os: ubuntu-20.04, cpp-compiler: clang, cpp-version: 3.8, python-version: 3.8}
+          - {os: ubuntu-20.04, cpp-compiler: clang, cpp-version: 3.9, python-version: 3.8}
+          - {os: ubuntu-20.04, cpp-compiler: clang, cpp-version: 4.0, python-version: 3.8}
+          - {os: ubuntu-20.04, cpp-compiler: clang, cpp-version: 5.0, python-version: 3.8}
+          - {os: ubuntu-20.04, cpp-compiler: clang, cpp-version: 6.0, python-version: 3.8}
+          - {os: ubuntu-20.04, cpp-compiler: clang, cpp-version: 7.0, python-version: 3.8}
 
-          - os: ubuntu-20.04
-            compiler: gcc
-            version: 7
+          - {os: windows-latest, cpp-compiler: cl, cpp-version: latest, python-version: 3.8}
+          - {os: windows-latest, cpp-compiler: clang-cl, cpp-version: latest, python-version: 3.8}
+          - {os: windows-latest, cpp-compiler: gcc, cpp-version: latest, python-version: 3.8}
 
-          - os: ubuntu-20.04
-            compiler: gcc
-            version: 8
+          - {os: macos-latest, cpp-compiler: gcc, cpp-version: 7.0, python-version: 3.8}
+          - {os: macos-latest, cpp-compiler: clang, cpp-version: 7.0, python-version: 3.8}
 
-          - os: ubuntu-20.04
-            compiler: gcc
-            version: 9
 
-          - os: ubuntu-20.04
-            compiler: clang
-            version: 3.6
-
-          - os: ubuntu-20.04
-            compiler: clang
-            version: 3.8
-
-          - os: ubuntu-20.04
-            compiler: clang
-            version: 3.9
-
-          - os: ubuntu-20.04
-            compiler: clang
-            version: 4.0
-
-          - os: ubuntu-20.04
-            compiler: clang
-            version: 5.0
-
-          - os: ubuntu-20.04
-            compiler: clang
-            version: 6.0
-
-          - os: ubuntu-20.04
-            compiler: clang
-            version: 7.0
-
-          - os: windows-latest
-            compiler: cl
-            version: Visual Studio 2017
-
-          - os: windows-latest
-            compiler: clang-cl
-            version: latest
-
-          - os: windows-latest
-            compiler: gcc
-            version: latest
-
-          - os: macos-latest
-            compiler: gcc
-            version: latest
-
-          - os: macos-latest
-            compiler: clang
-            version: latest
-
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0, python-version: 3.5}
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0, python-version: 3.6}
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0, python-version: 3.7}
 
     steps:
     - uses: actions/checkout@v1
@@ -106,35 +68,32 @@ jobs:
     - name: Install (Ubuntu)
       if: runner.os == 'Linux'
       run: |
-        sudo apt-get install -y --no-install-recommends ninja-build clang-tidy-10
-        sudo ln -s /usr/bin/clang-tidy-10 /usr/local/bin/clang-tidy
+        sudo apt-get install ${{ matrix.cfg.cpp-compiler }}-${{ matrix.cfg.cpp-version }}
+        echo "CC=${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
 
-        if [ "${{ matrix.compiler }}" == "gcc" ]; then
-          sudo apt-get install -y ${{ matrix.compiler }}-${{ matrix.version }}
-          echo "CC=gcc-${{ matrix.version }}" >> $GITHUB_ENV
-          echo "CXX=g++-${{ matrix.version }}" >> $GITHUB_ENV
+        if [ "${{ matrix.cfg.cpp-compiler }}" = "gcc" ]; then
+          echo "CXX=g++-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
         else
-          echo "CC=clang-${{ matrix.version }}" >> $GITHUB_ENV
-          echo "CXX=clang++-${{ matrix.version }}" >> $GITHUB_ENV
+          echo "CXX=clang++-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
         fi
 
+        sudo apt-get install -y --no-install-recommends ninja-build
         sudo apt install -y cmake
         sudo apt install -y libeigen3-dev
 
     - name: Install (macOS)
       if: runner.os == 'macOS'
       run: |
-        brew install ninja
-        sudo ln -s /usr/local/opt/llvm/bin/clang-tidy /usr/local/bin/clang-tidy
+        brew reinstall ${{ matrix.cfg.cpp-compiler }}@${{ matrix.cfg.cpp-version }}
 
-        if [ "${{ matrix.compiler }}" = "gcc" ]; then
-          echo "CC=gcc" >> $GITHUB_ENV
-          echo "CXX=g++" >> $GITHUB_ENV
+        if [ "${{ matrix.cfg.cpp-compiler }}" = "gcc" ]; then
+          echo "CXX=g++-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
         else
-          echo "CC=clang" >> $GITHUB_ENV
-          echo "CXX=clang++" >> $GITHUB_ENV
+          echo "CXX=clang++-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
         fi
 
+        brew install ninja
+        brew install cmake
         brew install eigen
 
     - name: Install (Windows)
@@ -143,15 +102,15 @@ jobs:
         Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
         scoop install ninja llvm --global
 
-        if ("${{ matrix.compiler }}" -eq "gcc") {
+        if ("${{ matrix.cfg.cpp-compiler }}" -eq "gcc") {
           echo CC=gcc | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
           echo CXX=g++ | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
-        } elseif ("${{ matrix.compiler }}" -eq "clang") {
+        } elseif ("${{ matrix.cfg.cpp-compiler }}" -eq "clang") {
           echo CC=clang | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
           echo CXX=clang++ | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
         } else {
-          echo CC=${{ matrix.compiler }} | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
-          echo CXX=${{ matrix.compiler }} | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+          echo CC=${{ matrix.cfg.cpp-compiler }} | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+          echo CXX=${{ matrix.cfg.cpp-compiler }} | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
         }
 
         # We add the output directories to the PATH to make sure the tests and
@@ -162,7 +121,7 @@ jobs:
         # Make all PATH additions made by scoop and ourselves global.
         echo "PATH=$env:PATH" | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
 
-        if ("${{ matrix.compiler }}".endswith("cl")) {
+        if ("${{ matrix.cfg.cpp-compiler }}".endswith("cl")) {
           & .github\workflows\vsenv.ps1 -arch x64 -hostArch x64
         }
 
@@ -178,9 +137,8 @@ jobs:
     - name: Install dependencies
       run: |
         git submodule update --init --recursive
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
+        python${{ matrix.cfg.python-version }} -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then python${{ matrix.cfg.python-version }} -m pip install -r requirements.txt; fi
 
     - name: 'Configure build'
       run: |
@@ -192,7 +150,6 @@ jobs:
         cd buildDirectory_release
         cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
         cd ..
-
 
     - name: 'Build'
       run: |
