@@ -61,8 +61,6 @@ jobs:
       run: |
         sudo apt-get update -y
         sudo apt-get install -y ${{ matrix.cfg.cpp-compiler }}-${{ matrix.cfg.cpp-version }}
-        sudo apt-get install -y ${{ matrix.cfg.python-version }}
-        sudo apt-get install -y python3-pip
 
         echo "CC=${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
 
@@ -80,8 +78,6 @@ jobs:
       if: runner.os == 'macOS'
       run: |
         brew reinstall ${{ matrix.cfg.cpp-compiler }}@${{ matrix.cfg.cpp-version }}
-        brew reinstall ${{ matrix.cfg.python-version }}
-        brew reinstall python3-pip
 
         if [ "${{ matrix.cfg.cpp-compiler }}" = "gcc" ]; then
           echo "CXX=g++-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
@@ -130,12 +126,6 @@ jobs:
         .\bootstrap-vcpkg.bat
         .\vcpkg.exe install eigen3:$env:VCPKG_DEFAULT_TRIPLET
         cd -
-
-    - name: Install dependencies
-      run: |
-        git submodule update --init --recursive
-        python${{ matrix.cfg.python-version }} -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then python${{ matrix.cfg.python-version }} -m pip install -r requirements.txt; fi
 
     - name: 'Configure build'
       run: |
