@@ -16,36 +16,46 @@ jobs:
     strategy:
       matrix:
         cfg:
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 4.8, python-version: 3.5}
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 4.9, python-version: 3.5}
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 5.0, python-version: 3.5}
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 6.0, python-version: 3.5}
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 7.0, python-version: 3.5}
+          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 4.8}
+          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 4.9}
+          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 5.0}
+          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 6.0}
+          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 7.0}
 
-          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 7.0, python-version: 3.8}
-          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 8.0, python-version: 3.8}
-          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 9.0, python-version: 3.8}
+          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 7.0}
+          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 8.0}
+          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 9.0}
 
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 4.8, python-version: 3.8}
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 4.9, python-version: 3.8}
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 5.0, python-version: 3.8}
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 6.0, python-version: 3.8}
-          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 7.0, python-version: 3.8}
-          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 8.0, python-version: 3.8}
-          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0, python-version: 3.8}
-          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 10.0, python-version: 3.8}
-
-          - {os: windows-latest, cpp-compiler: cl, cpp-version: latest, python-version: 3}
-          - {os: windows-latest, cpp-compiler: clang-cl, cpp-version: latest, python-version: 3}
-          - {os: windows-latest, cpp-compiler: gcc, cpp-version: latest, python-version: 3}
-
-          - {os: macos-latest, cpp-compiler: gcc, cpp-version: 7.0, python-version: 3.8}
-          - {os: macos-latest, cpp-compiler: clang, cpp-version: 7.0, python-version: 3.8}
+          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 4.8}
+          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 4.9}
+          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 5.0}
+          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 6.0}
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 7.0}
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 8.0}
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0}
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 10}
 
 
-          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0, python-version: 3.5}
-          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0, python-version: 3.6}
-          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0, python-version: 3.7}
+#          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 3.6}
+#          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 3.8}
+#          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 3.9}
+#          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 4.0}
+#          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 5.0}
+#          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 6.0}
+#          - {os: ubuntu-18.04, cpp-compiler: clang, cpp-version: 7.0}
+
+
+          - {os: windows-latest, cpp-compiler: cl, cpp-version: latest}
+#          - {os: windows-latest, cpp-compiler: clang-cl, cpp-version: latest}
+#          - {os: windows-latest, cpp-compiler: gcc, cpp-version: latest}
+
+#          - {os: macos-latest, cpp-compiler: gcc, cpp-version: 7.0}
+#          - {os: macos-latest, cpp-compiler: clang, cpp-version: 7.0}
+
+
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0}
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0}
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0}
 
     steps:
     - uses: actions/checkout@v1
