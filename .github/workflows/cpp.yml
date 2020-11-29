@@ -36,12 +36,12 @@ jobs:
           - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 8.0, python-version: 3.8}
           - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0, python-version: 3.8}
 
-          - {os: ubuntu-18.04, cpp-compiler: clang, cpp-version: 3.6, python-version: 3.8}
-          - {os: ubuntu-18.04, cpp-compiler: clang, cpp-version: 3.8, python-version: 3.8}
-          - {os: ubuntu-18.04, cpp-compiler: clang, cpp-version: 3.9, python-version: 3.8}
-          - {os: ubuntu-18.04, cpp-compiler: clang, cpp-version: 4.0, python-version: 3.8}
-          - {os: ubuntu-18.04, cpp-compiler: clang, cpp-version: 5.0, python-version: 3.8}
-          - {os: ubuntu-18.04, cpp-compiler: clang, cpp-version: 6.0, python-version: 3.8}
+          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 3.6, python-version: 3.8}
+          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 3.8, python-version: 3.8}
+          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 3.9, python-version: 3.8}
+          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 4.0, python-version: 3.8}
+          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 5.0, python-version: 3.8}
+          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 6.0, python-version: 3.8}
           - {os: ubuntu-18.04, cpp-compiler: clang, cpp-version: 7.0, python-version: 3.8}
 
           - {os: windows-latest, cpp-compiler: cl, cpp-version: latest, python-version: 3.8}
@@ -68,7 +68,8 @@ jobs:
     - name: Install (Ubuntu)
       if: runner.os == 'Linux'
       run: |
-        sudo apt-get install ${{ matrix.cfg.cpp-compiler }}-${{ matrix.cfg.cpp-version }}
+        sudo apt-get update -y
+        sudo apt-get install -y ${{ matrix.cfg.cpp-compiler }}-${{ matrix.cfg.cpp-version }}
         echo "CC=${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
 
         if [ "${{ matrix.cfg.cpp-compiler }}" = "gcc" ]; then
