@@ -22,11 +22,9 @@ jobs:
           - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 6.0, python-version: 3.8}
           - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 7.0, python-version: 3.8}
 
-          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 4.8, python-version: 3.8}
-          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 4.9, python-version: 3.8}
-          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 5.0, python-version: 3.8}
-          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 6.0, python-version: 3.8}
           - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 7.0, python-version: 3.8}
+          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 8.0, python-version: 3.8}
+          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 9.0, python-version: 3.8}
 
           - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 4.8, python-version: 3.8}
           - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 4.9, python-version: 3.8}
@@ -35,6 +33,7 @@ jobs:
           - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 7.0, python-version: 3.8}
           - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 8.0, python-version: 3.8}
           - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0, python-version: 3.8}
+          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 10.0, python-version: 3.8}
 
           - {os: windows-latest, cpp-compiler: cl, cpp-version: latest, python-version: 3.8}
           - {os: windows-latest, cpp-compiler: clang-cl, cpp-version: latest, python-version: 3.8}
