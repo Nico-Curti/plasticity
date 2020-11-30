@@ -100,7 +100,6 @@ jobs:
     - name: Install (Windows)
       if: runner.os == 'Windows'
       run: |
-        Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
 
         if ("${{ matrix.cfg.cpp-compiler }}" -eq "gcc") {
           echo CC=gcc | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
