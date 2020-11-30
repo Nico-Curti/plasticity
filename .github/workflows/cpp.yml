@@ -45,7 +45,7 @@ jobs:
 #          - {os: ubuntu-18.04, cpp-compiler: clang, cpp-version: 7.0}
 
 
-          - {os: windows-latest, cpp-compiler: cl, cpp-version: latest}
+#          - {os: windows-latest, cpp-compiler: cl, cpp-version: latest}
 #          - {os: windows-latest, cpp-compiler: clang-cl, cpp-version: latest}
 #          - {os: windows-latest, cpp-compiler: gcc, cpp-version: latest}
 
@@ -81,7 +81,11 @@ jobs:
         fi
 
         sudo apt install -y cmake
+        sudo apt install -y ninja-build
         sudo apt install -y libeigen3-dev
+
+        # add ninja to path
+        sudo ln -s /usr/bin/ninja /usr/bin/ninja-build
 
     - name: Install (macOS)
       if: runner.os == 'macOS'
@@ -133,11 +137,11 @@ jobs:
       run: |
         mkdir buildDirectory_debug
         cd buildDirectory_debug
-        cmake .. -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
+        cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
         cd ..
         mkdir buildDirectory_release
         cd buildDirectory_release
-        cmake .. -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
+        cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
         cd ..
 
     - name: 'Build'
