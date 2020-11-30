@@ -66,6 +66,12 @@ jobs:
         echo "VCPKG_ROOT=$HOME/vcpkg" >> $GITHUB_ENV
         echo "VCPKG_DEFAULT_TRIPLET=x64-windows" >> $GITHUB_ENV
 
+    - name: Setup Ninja
+      uses: ashutoshvarma/setup-ninja@master
+      with:
+        # ninja version to download. Default: 1.10.0
+        version: 1.10.0
+
     - name: Install (Ubuntu)
       if: runner.os == 'Linux'
       run: |
@@ -80,12 +86,7 @@ jobs:
           echo "CXX=clang++-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
         fi
 
-        sudo apt install -y cmake
-        sudo apt install -y ninja-build
         sudo apt install -y libeigen3-dev
-
-        # add ninja to path
-        sudo ln -s /usr/bin/ninja /usr/bin/ninja-build
 
     - name: Install (macOS)
       if: runner.os == 'macOS'
@@ -98,7 +99,6 @@ jobs:
           echo "CXX=clang++-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
         fi
 
-        brew install cmake
         brew install eigen
 
     - name: Install (Windows)
@@ -134,6 +134,7 @@ jobs:
         cd -
 
     - name: 'Configure build'
+      uses: ashutoshvarma/action-cmake-build@master
       run: |
         mkdir buildDirectory_debug
         cd buildDirectory_debug
