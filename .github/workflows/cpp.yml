@@ -80,7 +80,6 @@ jobs:
           echo "CXX=clang++-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
         fi
 
-        sudo apt-get install -y --no-install-recommends ninja-build
         sudo apt install -y cmake
         sudo apt install -y libeigen3-dev
 
@@ -95,7 +94,6 @@ jobs:
           echo "CXX=clang++-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
         fi
 
-        brew install ninja
         brew install cmake
         brew install eigen
 
@@ -103,7 +101,6 @@ jobs:
       if: runner.os == 'Windows'
       run: |
         Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
-        scoop install ninja llvm --global
 
         if ("${{ matrix.cfg.cpp-compiler }}" -eq "gcc") {
           echo CC=gcc | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
@@ -141,11 +138,11 @@ jobs:
       run: |
         mkdir buildDirectory_debug
         cd buildDirectory_debug
-        cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
+        cmake .. -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
         cd ..
         mkdir buildDirectory_release
         cd buildDirectory_release
-        cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
+        cmake .. -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
         cd ..
 
     - name: 'Build'
