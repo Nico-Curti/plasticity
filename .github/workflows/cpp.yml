@@ -125,16 +125,16 @@ jobs:
 #        # Install the Eigen Library
 #        .\vcpkg.exe install eigen3:x64-windows
 
-     - name: Restore from cache and run vcpkg
-       if: runner.os == 'Windows'
-       env:
-         vcpkgResponseFile: ${{ github.workspace }}/cmake/vcpkg_windows.diff
-       uses: lukka/run-vcpkg@v6
-       with:
-         vcpkgArguments: '@${{ env.vcpkgResponseFile }}'
-         vcpkgDirectory: '${{ github.workspace }}/vcpkg'
-         vcpkgGitCommitId: '8121b4ec3d6a11353daf7639ed9082a78e617a2e'
-         appendedCacheKey: ${{ hashFiles(env.vcpkgResponseFile) }}
+    - name: Restore from cache and run vcpkg
+      if: runner.os == 'Windows'
+      env:
+        vcpkgResponseFile: ${{ github.workspace }}/cmake/vcpkg_windows.diff
+      uses: lukka/run-vcpkg@v6
+      with:
+        vcpkgArguments: '@${{ env.vcpkgResponseFile }}'
+        vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+        vcpkgGitCommitId: '8121b4ec3d6a11353daf7639ed9082a78e617a2e'
+        appendedCacheKey: ${{ hashFiles(env.vcpkgResponseFile) }}
 
     - name: 'Build with CMake and vcpkg'
       if: runner.os == 'Windows'
