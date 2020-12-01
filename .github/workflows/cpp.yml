@@ -71,12 +71,6 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Setting env variables
-      run: |
-        echo "WORKSPACE=${{ github.workspace }}" >> $GITHUB_ENV
-        echo "VCPKG_ROOT=${{ github.workspace }}/vcpkg" >> $GITHUB_ENV
-        echo "VCPKG_DEFAULT_TRIPLET=x64-windows" >> $GITHUB_ENV
-
     - name: Get latest CMake and Ninja
       if: matrix.cfg.generator == 'Ninja'
       # Using 'latest' branch, the latest CMake and ninja are installed.
@@ -125,26 +119,27 @@ jobs:
         echo CXX=${{ matrix.cfg.cxx }}.exe | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
 
         # Install vcpkg
-        cd $env:WORKSPACE
+        cd ..
         git clone https://github.com/Microsoft/vcpkg.git
         cd vcpkg
         git checkout --force 2020.01
         .\bootstrap-vcpkg.bat
 
         # Install the Eigen Library
-        .\vcpkg.exe install eigen3:$env:VCPKG_DEFAULT_TRIPLET
+        .\vcpkg.exe install eigen3:x64-windows
 
     - name: 'Configure build (Windows)'
       if: runner.os == 'Windows'
       run: |
 
+        cd ${{ github.workspace }}
         mkdir buildDirectory_debug
         cd buildDirectory_debug
-        cmake .. -G "${{ matrix.cfg.generator }}" -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=ON -DPYWRAP=OFF
+        cmake .. -G "${{ matrix.cfg.generator }}" -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}/../vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="x64-windows" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=ON -DPYWRAP=OFF
         cd ..
         mkdir buildDirectory_release
         cd buildDirectory_release
-        cmake .. -G "${{ matrix.cfg.generator }}" -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=ON -DPYWRAP=OFF
+        cmake .. -G "${{ matrix.cfg.generator }}" -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}/../vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="x64-windows" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=ON -DPYWRAP=OFF
         cd ..
 
     - name: 'Configure build (Unix)'
