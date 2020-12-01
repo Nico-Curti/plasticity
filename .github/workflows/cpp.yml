@@ -120,8 +120,8 @@ jobs:
       if: runner.os == 'Windows'
       run: |
 
-        echo "::set-env name=CXX::${{ matrix.cfg.cc }}.exe"
-        echo "::set-env name=CXX::${{ matrix.cfg.cxx }}.exe"
+        echo CC=${{ matrix.cfg.cc }}.exe | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+        echo CXX=${{ matrix.cfg.cxx }}.exe | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
 
         # Install vcpkg
         cd $env:WORKSPACE
