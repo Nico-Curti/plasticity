@@ -41,7 +41,7 @@ jobs:
           #- {os: ubuntu-18.04, cc: clang, cxx: clang, cpp-version: 3.9}
           #- {os: ubuntu-18.04, cc: clang, cxx: clang, cpp-version: 4.0}
           #- {os: ubuntu-18.04, cc: clang, cxx: clang, cpp-version: 5.0}
-          - {os: ubuntu-18.04, cc: clang, cxx: clang, cpp-version: 6.0}
+          #- {os: ubuntu-18.04, cc: clang, cxx: clang, cpp-version: 6.0}
 #          - {os: ubuntu-20.04, cc: clang, cxx: clang++, cpp-version: 7} # WORKS
 #          - {os: ubuntu-20.04, cc: clang, cxx: clang++, cpp-version: 8} # WORKS
 #          - {os: ubuntu-20.04, cc: clang, cxx: clang++, cpp-version: 9} # WORKS
@@ -52,13 +52,8 @@ jobs:
 #          - {os: windows-latest, cc: clang-cl, cxx: clang-cl, cpp-version: latest}
 #          - {os: windows-latest, cc: gcc, cxx: g++, cpp-version: latest}
 
-#          - {os: macos-latest, cc: gcc, cxx: gcc, cpp-version: 7.0}
-#          - {os: macos-latest, cc: clang, cxx: clang, cpp-version: 7.0}
-
-
-#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0} # WORKS
-#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0} # WORKS
-#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0} # WORKS
+          - {os: macos-latest, cc: gcc, cxx: gcc, cpp-version: 7.0}
+          - {os: macos-latest, cc: clang, cxx: clang++, cpp-version: 7.0}
 
     steps:
     - name: Checkout
