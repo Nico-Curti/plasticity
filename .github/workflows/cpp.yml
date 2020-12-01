@@ -16,54 +16,54 @@ jobs:
     strategy:
       matrix:
         cfg:
-#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.8} # WORKS
-#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.9} # WORKS
-#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 5.0} # WORKS
-#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 6.0} # WORKS
-#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 7.0} # WORKS
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.8, generator: Ninja} # WORKS
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.9, generator: Ninja} # WORKS
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 5.0, generator: Ninja} # WORKS
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 6.0, generator: Ninja} # WORKS
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 7.0, generator: Ninja} # WORKS
 #
-#          - {os: ubuntu-18.04, cc: gcc, cxx: g++, cpp-version: 7.0} # WORKS
-#          - {os: ubuntu-18.04, cc: gcc, cxx: g++, cpp-version: 8.0} # WORKS
-#          - {os: ubuntu-18.04, cc: gcc, cxx: g++, cpp-version: 9.0} # WORKS
+#          - {os: ubuntu-18.04, cc: gcc, cxx: g++, cpp-version: 7.0, generator: Ninja} # WORKS
+#          - {os: ubuntu-18.04, cc: gcc, cxx: g++, cpp-version: 8.0, generator: Ninja} # WORKS
+#          - {os: ubuntu-18.04, cc: gcc, cxx: g++, cpp-version: 9.0, generator: Ninja} # WORKS
 #
-#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.8} # WORKS
-#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.9} # WORKS
-#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 5.0} # WORKS
-#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 6.0} # WORKS
-#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 7.0} # WORKS
-#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 8.0} # WORKS
-#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0} # WORKS
-#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 10} # WORKS
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.8, generator: Ninja} # WORKS
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.9, generator: Ninja} # WORKS
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 5.0, generator: Ninja} # WORKS
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 6.0, generator: Ninja} # WORKS
+#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 7.0, generator: Ninja} # WORKS
+#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 8.0, generator: Ninja} # WORKS
+#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0, generator: Ninja} # WORKS
+#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 10,  generator: Ninja} # WORKS
 
 
-          #- {os: ubuntu-16.04, cc: clang, cxx: clang, cpp-version: 3.6}
-          #- {os: ubuntu-16.04, cc: clang, cxx: clang, cpp-version: 3.8}
-          #- {os: ubuntu-18.04, cc: clang, cxx: clang, cpp-version: 3.9}
-          #- {os: ubuntu-18.04, cc: clang, cxx: clang, cpp-version: 4.0}
-          #- {os: ubuntu-18.04, cc: clang, cxx: clang, cpp-version: 5.0}
-          #- {os: ubuntu-18.04, cc: clang, cxx: clang, cpp-version: 6.0}
-#          - {os: ubuntu-20.04, cc: clang, cxx: clang++, cpp-version: 7} # WORKS
-#          - {os: ubuntu-20.04, cc: clang, cxx: clang++, cpp-version: 8} # WORKS
-#          - {os: ubuntu-20.04, cc: clang, cxx: clang++, cpp-version: 9} # WORKS
-#          - {os: ubuntu-20.04, cc: clang, cxx: clang++, cpp-version: 10} # WORKS
+          #- {os: ubuntu-16.04, cc: clang, cxx: clang, cpp-version: 3.6, generator: Ninja}
+          #- {os: ubuntu-16.04, cc: clang, cxx: clang, cpp-version: 3.8, generator: Ninja}
+          #- {os: ubuntu-18.04, cc: clang, cxx: clang, cpp-version: 3.9, generator: Ninja}
+          #- {os: ubuntu-18.04, cc: clang, cxx: clang, cpp-version: 4.0, generator: Ninja}
+          #- {os: ubuntu-18.04, cc: clang, cxx: clang, cpp-version: 5.0, generator: Ninja}
+          #- {os: ubuntu-18.04, cc: clang, cxx: clang, cpp-version: 6.0, generator: Ninja}
+#          - {os: ubuntu-20.04, cc: clang, cxx: clang++, cpp-version: 7, generator: Ninja} # WORKS
+#          - {os: ubuntu-20.04, cc: clang, cxx: clang++, cpp-version: 8, generator: Ninja} # WORKS
+#          - {os: ubuntu-20.04, cc: clang, cxx: clang++, cpp-version: 9, generator: Ninja} # WORKS
+#          - {os: ubuntu-20.04, cc: clang, cxx: clang++, cpp-version: 10,generator: Ninja} # WORKS
 
 
-          - {os: windows-latest, cc: cl, cxx: cl, cpp-version: latest}
-          - {os: windows-2016, cc: cl, cxx: cl, cpp-version: latest}
-#          - {os: windows-latest, cc: clang-cl, cxx: clang-cl, cpp-version: latest}
-#          - {os: windows-latest, cc: gcc, cxx: g++, cpp-version: latest}
+          - {os: windows-latest, cc: cl, cxx: cl, cpp-version: latest, generator: Visual Studio 16 2019}
+          - {os: windows-2016, cc: cl, cxx: cl, cpp-version: latest, generator: Ninja}
+#          - {os: windows-latest, cc: clang-cl, cxx: clang-cl, cpp-version: latest, generator: Ninja}
+#          - {os: windows-latest, cc: gcc, cxx: g++, cpp-version: latest, generator: Ninja}
 
-#          - {os: macOS-10.15, cc: gcc, cxx: g++, cpp-version: 9} # WORKS
-#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.2.1} # WORKS
-#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.3.1} # WORKS
-#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.4.1} # WORKS
-#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.5} # WORKS
-#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.6} # WORKS
-#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.7} # WORKS
-#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.0.1} # WORKS
-#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.1} # WORKS
-#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.1.1} # WORKS
-#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.2} # WORKS
+#          - {os: macOS-10.15, cc: gcc, cxx: g++, cpp-version: 9, generator: Ninje} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.2.1, generator: Ninja} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.3.1, generator: Ninja} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.4.1, generator: Ninja} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.5, generator: Ninja} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.6, generator: Ninja} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.7, generator: Ninja} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.0.1, generator: Ninja} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.1, generator: Ninja} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.1.1, generator: Ninja} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.2, generator: Ninja} # WORKS
 
     steps:
     - name: Checkout
@@ -73,11 +73,12 @@ jobs:
 
     - name: Setting env variables
       run: |
-        echo "WORKSPACE=${{ github.workspace }}/.." >> $GITHUB_ENV
-        echo "VCPKG_ROOT=${{ github.workspace }}/../vcpkg" >> $GITHUB_ENV
+        echo "WORKSPACE=${{ github.workspace }}" >> $GITHUB_ENV
+        echo "VCPKG_ROOT=${{ github.workspace }}/vcpkg" >> $GITHUB_ENV
         echo "VCPKG_DEFAULT_TRIPLET=x64-windows" >> $GITHUB_ENV
 
     - name: Get latest CMake and Ninja
+      if: matrix.cfg.generator == 'Ninja'
       # Using 'latest' branch, the latest CMake and ninja are installed.
       uses: lukka/get-cmake@latest
 
@@ -136,32 +137,43 @@ jobs:
     - name: 'Configure build (Windows)'
       if: runner.os == 'Windows'
       run: |
-        cd $env:WORKSPACE
+
         mkdir buildDirectory_debug
         cd buildDirectory_debug
-        cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=ON -DPYWRAP=OFF
+        cmake .. -G "${{ matrix.cfg.generator }}" -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=ON -DPYWRAP=OFF
         cd ..
         mkdir buildDirectory_release
         cd buildDirectory_release
-        cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=ON -DPYWRAP=OFF
+        cmake .. -G "${{ matrix.cfg.generator }}" -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=ON -DPYWRAP=OFF
         cd ..
 
     - name: 'Configure build (Unix)'
       if: runner.os == 'Linux' || runner.os == 'macOS'
       run: |
-        cd ${{ github.workspace }}
+
         mkdir buildDirectory_debug
         cd buildDirectory_debug
-        cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Debug" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=OFF -DPYWRAP=OFF
+        cmake .. -G "${{ matrix.cfg.generator }}" -DCMAKE_BUILD_TYPE="Debug" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=OFF -DPYWRAP=OFF
         cd ..
         mkdir buildDirectory_release
         cd buildDirectory_release
-        cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Release" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=OFF -DPYWRAP=OFF
+        cmake .. -G "${{ matrix.cfg.generator }}" -DCMAKE_BUILD_TYPE="Release" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=OFF -DPYWRAP=OFF
         cd ..
 
-    - name: 'Build'
+    - name: 'Build (Windows)'
+      if: runner.os == 'Windows'
       run: |
-        cd ${{ github.workspace }}
+        cd buildDirectory_debug
+        cmake --build . --target install --config Debug -- -j8
+        cd ..
+        cd buildDirectory_release
+        cmake --build . --target install --config Release -- -j8
+        cd ..
+
+    - name: 'Build (Unix)'
+      if: runner.os == 'Linux' || runner.os == 'macOS'
+      run: |
+
         cd buildDirectory_debug
         cmake --build . --target install -- -j8
         cd ..
