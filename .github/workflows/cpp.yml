@@ -11,38 +11,38 @@ jobs:
   build:
 
     runs-on: ${{ matrix.cfg.os }}
-    name: ${{ matrix.cfg.os }}@${{ matrix.cfg.cpp-compiler }}-${{ matrix.cfg.cpp-version }}
+    name: ${{ matrix.cfg.os }}@${{ matrix.cfg.cxx }}-${{ matrix.cfg.cpp-version }}
 
     strategy:
       matrix:
         cfg:
-          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.8}
-          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.9}
-          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 5.0}
-          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 6.0}
-          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 7.0}
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.8} # WORKS
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.9} # WORKS
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 5.0} # WORKS
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 6.0} # WORKS
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 7.0} # WORKS
+#
+#          - {os: ubuntu-18.04, cc: gcc, cxx: g++, cpp-version: 7.0} # WORKS
+#          - {os: ubuntu-18.04, cc: gcc, cxx: g++, cpp-version: 8.0} # WORKS
+#          - {os: ubuntu-18.04, cc: gcc, cxx: g++, cpp-version: 9.0} # WORKS
+#
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.8} # WORKS
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.9} # WORKS
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 5.0} # WORKS
+#          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 6.0} # WORKS
+#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 7.0} # WORKS
+#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 8.0} # WORKS
+#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0} # WORKS
+#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 10} # WORKS
 
-          - {os: ubuntu-18.04, cc: gcc, cxx: g++, cpp-version: 7.0}
-          - {os: ubuntu-18.04, cc: gcc, cxx: g++, cpp-version: 8.0}
-          - {os: ubuntu-18.04, cc: gcc, cxx: g++, cpp-version: 9.0}
 
-          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.8}
-          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.9}
-          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 5.0}
-          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 6.0}
-          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 7.0}
-          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 8.0}
-          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0}
-          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 10}
-
-
-          - {os: ubuntu-16.04, cc: clang, cxx: clang++, cpp-version: 3.6}
-          - {os: ubuntu-16.04, cc: clang, cxx: clang++, cpp-version: 3.8}
-          - {os: ubuntu-16.04, cc: clang, cxx: clang++, cpp-version: 3.9}
-          - {os: ubuntu-16.04, cc: clang, cxx: clang++, cpp-version: 4.0}
-          - {os: ubuntu-16.04, cc: clang, cxx: clang++, cpp-version: 5.0}
-          - {os: ubuntu-16.04, cc: clang, cxx: clang++, cpp-version: 6.0}
-          - {os: ubuntu-18.04, cc: clang, cxx: clang++, cpp-version: 7.0}
+          - {os: ubuntu-16.04, cc: clang, cxx: clang, cpp-version: 3.6}
+          - {os: ubuntu-16.04, cc: clang, cxx: clang, cpp-version: 3.8}
+          - {os: ubuntu-16.04, cc: clang, cxx: clang, cpp-version: 3.9}
+          - {os: ubuntu-16.04, cc: clang, cxx: clang, cpp-version: 4.0}
+          - {os: ubuntu-16.04, cc: clang, cxx: clang, cpp-version: 5.0}
+          - {os: ubuntu-16.04, cc: clang, cxx: clang, cpp-version: 6.0}
+          - {os: ubuntu-18.04, cc: clang, cxx: clang, cpp-version: 7.0}
 
 
 #          - {os: windows-latest, cc: cl, cxx: cl, cpp-version: latest}
@@ -53,9 +53,9 @@ jobs:
 #          - {os: macos-latest, cc: clang, cxx: clang, cpp-version: 7.0}
 
 
-          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0}
-          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0}
-          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0}
+#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0} # WORKS
+#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0} # WORKS
+#          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0} # WORKS
 
     steps:
     - name: Checkout
