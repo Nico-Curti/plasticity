@@ -63,7 +63,7 @@ class cmake_build_ext (build_ext):
         '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + str(extdir.parent.absolute()),
         '-DCMAKE_BUILD_TYPE=' + config,
         '-DPYWRAP=ON',
-        '-DBUILD_DOCS={}'.format('ON' if os.environ.get('READTHEDOCS', None) == 'True' else 'OFF')
+        '-DBUILD_DOCS={}'.format('ON' if os.environ.get('READTHEDOCS', None) == 'True' else 'OFF'),
         '-DBUILD_TEST=OFF',
         '-DVERBOSE=ON',
         '-DOMP={}'.format('ON' if ENABLE_OMP else 'OFF')

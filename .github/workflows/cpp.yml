@@ -69,11 +69,9 @@ jobs:
         echo "VCPKG_ROOT=$env:WORKSPACE/vcpkg" >> $GITHUB_ENV
         echo "VCPKG_DEFAULT_TRIPLET=x64-windows" >> $GITHUB_ENV
 
-    - name: Setup Ninja
-      uses: ashutoshvarma/setup-ninja@master
-      with:
-        # ninja version to download. Default: 1.10.0
-        version: 1.10.0
+    - name: Get latest CMake and Ninja
+      # Using 'latest' branch, the latest CMake and ninja are installed.
+      uses: lukka/get-cmake@latest
 
     - name: Install (Ubuntu)
       if: runner.os == 'Linux'
