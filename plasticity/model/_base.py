@@ -259,6 +259,19 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
           print('Early stopping: the training has reached the convergency criteria')
         break
 
+      ##### WEIGHTS SYMMETRIC ORTHOGONALIZATION (once at the end of each epoch)
+      # the two methods are actually exactly equivalent
+      # (provable by simple linear algebra in real domain)
+      # but the first using the numpy svd function is faster
+
+      # (1)
+      #U, _, Vt = np.linalg.svd(self.weights, full_matrices=False)
+      #self.weights = np.einsum('ij, jk -> ik', U, Vt, optimize=True)
+
+      # (2)
+      #from scipy.linalg import sqrtm
+      #self.weights = np.real(self.weights @ np.linalg.inv(sqrtm(self.weights.T @ self.weights)))
+
     return self
 
   def fit (self, X, y=None):
@@ -311,7 +324,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     '''
     Core function for the predict member
     '''
-    return self.activation.activate(np.einsum('ij, kj -> ik', self.weights, X, optimize=True), copy=True)
+    raise NotImplementedError
 
   def predict (self, X, y=None):
     '''
