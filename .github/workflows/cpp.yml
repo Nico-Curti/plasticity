@@ -74,7 +74,7 @@ jobs:
     - name: Setting env variables
       run: |
         echo "WORKSPACE=${{ github.workspace }}/.." >> $GITHUB_ENV
-        echo "VCPKG_ROOT=$env:WORKSPACE/vcpkg" >> $GITHUB_ENV
+        echo "VCPKG_ROOT=${{ github.workspace }}/../vcpkg" >> $GITHUB_ENV
         echo "VCPKG_DEFAULT_TRIPLET=x64-windows" >> $GITHUB_ENV
 
     - name: Get latest CMake and Ninja
@@ -120,8 +120,8 @@ jobs:
       if: runner.os == 'Windows'
       run: |
 
-        echo CC=${{ matrix.cfg.cc }} | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
-        echo CXX=${{ matrix.cfg.cxx }} | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+        echo "::set-env name=CXX::${{ matrix.cfg.cc }}.exe"
+        echo "::set-env name=CXX::${{ matrix.cfg.cxx }}.exe"
 
         # Install vcpkg
         cd $env:WORKSPACE
@@ -136,7 +136,7 @@ jobs:
     - name: 'Configure build (Windows)'
       if: runner.os == 'Windows'
       run: |
-        cd ${{ github.workspace }}
+        cd $env:WORKSPACE
         mkdir buildDirectory_debug
         cd buildDirectory_debug
         cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=ON -DPYWRAP=OFF
