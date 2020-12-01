@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/bcm.h" line="23" column="22" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/bcm.h" bodystart="23" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/bcm.h" line="23" column="22" bodyfile="/home/nico/Desktop/Code/plasticity/include/bcm.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/bcm.h" line="47" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/bcm.h" line="47" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classBCM_1aacec2c922e994d7f4b6d33aa59667429" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/bcm.h" line="64" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/bcm.h" line="64" column="3"/>
       </memberdef>
       <memberdef kind="function" id="classBCM_1a9f89c34dc96cc5bb74cc9b3b8f6c454c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classBCM" kindref="compound">BCM</ref> &amp;</type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/bcm.h" line="76" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/bcm.h" line="76" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classBCM_1add33374e61bfea8b6331cad75acb8eac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/bcm.h" line="86" column="3"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/bcm.h" line="86" column="3"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -270,7 +270,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/bcm.h" line="101" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/bcm.h" line="101" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classBCM_1aa33368c82222851cb8403566f30d1eca" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -300,7 +300,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/bcm.h" line="112" column="8"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/bcm.h" line="112" column="8"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -347,7 +347,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/nico/Desktop/C++Code/plasticity/include/bcm.h" line="21" column="1" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/bcm.h" bodystart="20" bodyend="114"/>
+    <location file="/home/nico/Desktop/Code/plasticity/include/bcm.h" line="21" column="1" bodyfile="/home/nico/Desktop/Code/plasticity/include/bcm.h" bodystart="20" bodyend="114"/>
     <listofallmembers>
       <member refid="classBasePlasticity_1a6e55f0f7d052edaf0887db9ea54e550e" prot="protected" virt="non-virtual"><scope>BCM</scope><name>activation</name></member>
       <member refid="classBasePlasticity_1ab930aa85f4b5c42f2db8b18a1cba3a57" prot="public" virt="non-virtual"><scope>BCM</scope><name>BasePlasticity</name></member>

@@ -14,8 +14,8 @@
     <includes local="no">omp.h</includes>
     <includes local="no">utility</includes>
     <includes local="no">functional</includes>
-    <includedby refid="data__dispatcher_8h" local="no">/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h</includedby>
-    <includedby refid="fmath_8h" local="no">/home/nico/Desktop/C++Code/plasticity/include/fmath.h</includedby>
+    <includedby refid="data__dispatcher_8h" local="no">/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h</includedby>
+    <includedby refid="fmath_8h" local="no">/home/nico/Desktop/Code/plasticity/include/fmath.h</includedby>
     <incdepgraph>
       <node id="13">
         <label>functional</label>
@@ -36,7 +36,7 @@
         <label>random</label>
       </node>
       <node id="1">
-        <label>/home/nico/Desktop/C++Code/plasticity/include/utils.h</label>
+        <label>/home/nico/Desktop/Code/plasticity/include/utils.h</label>
         <link refid="utils_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -88,42 +88,44 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="7">
-        <label>/home/nico/Desktop/C++Code/plasticity/include/hopfield.h</label>
-        <link refid="hopfield_8h"/>
-      </node>
-      <node id="6">
-        <label>/home/nico/Desktop/C++Code/plasticity/include/bcm.h</label>
-        <link refid="bcm_8h"/>
-      </node>
       <node id="4">
-        <label>/home/nico/Desktop/C++Code/plasticity/include/activations.h</label>
+        <label>/home/nico/Desktop/Code/plasticity/include/activations.h</label>
         <link refid="activations_8h"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="1">
-        <label>/home/nico/Desktop/C++Code/plasticity/include/utils.h</label>
-        <link refid="utils_8h"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-      </node>
-      <node id="2">
-        <label>/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h</label>
-        <link refid="data__dispatcher_8h"/>
+      <node id="6">
+        <label>/home/nico/Desktop/Code/plasticity/include/bcm.h</label>
+        <link refid="bcm_8h"/>
       </node>
       <node id="5">
-        <label>/home/nico/Desktop/C++Code/plasticity/include/base.h</label>
+        <label>/home/nico/Desktop/Code/plasticity/include/base.h</label>
         <link refid="base_8h"/>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
+      <node id="1">
+        <label>/home/nico/Desktop/Code/plasticity/include/utils.h</label>
+        <link refid="utils_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/home/nico/Desktop/Code/plasticity/include/hopfield.h</label>
+        <link refid="hopfield_8h"/>
+      </node>
+      <node id="8">
+        <label>/home/nico/Desktop/Code/plasticity/include/weights.h</label>
+        <link refid="weights_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
       <node id="3">
-        <label>/home/nico/Desktop/C++Code/plasticity/include/fmath.h</label>
+        <label>/home/nico/Desktop/Code/plasticity/include/fmath.h</label>
         <link refid="fmath_8h"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -132,11 +134,9 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="8">
-        <label>/home/nico/Desktop/C++Code/plasticity/include/weights.h</label>
-        <link refid="weights_8h"/>
-        <childnode refid="5" relation="include">
-        </childnode>
+      <node id="2">
+        <label>/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h</label>
+        <link refid="data__dispatcher_8h"/>
       </node>
     </invincdepgraph>
     <innernamespace refid="namespaceutils">utils</innernamespace>
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/utils.h" line="66" column="9" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/utils.h" bodystart="66" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/utils.h" line="66" column="9" bodyfile="/home/nico/Desktop/Code/plasticity/include/utils.h" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="utils_8h_1a20a8ab7265b34d3991ec545da2a5d199" prot="public" static="no">
         <name>RESET_COUT</name>
@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/utils.h" line="73" column="12" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/utils.h" bodystart="73" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/utils.h" line="73" column="12" bodyfile="/home/nico/Desktop/Code/plasticity/include/utils.h" bodystart="73" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="var">
@@ -181,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/utils.h" line="67" column="28" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/utils.h" bodystart="67" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/utils.h" line="67" column="28" bodyfile="/home/nico/Desktop/Code/plasticity/include/utils.h" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="utils_8h_1a4a24f71756aa5af72e545c4d5ec89e38" prot="public" static="yes" mutable="no">
         <type>const std ::string</type>
@@ -196,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/utils.h" line="68" column="28" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/utils.h" bodystart="68" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/utils.h" line="68" column="28" bodyfile="/home/nico/Desktop/Code/plasticity/include/utils.h" bodystart="68" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -277,7 +277,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/utils.h" line="186" column="22" declfile="/home/nico/Desktop/C++Code/plasticity/include/utils.h" declline="186" declcolumn="22"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/utils.h" line="186" column="22" declfile="/home/nico/Desktop/Code/plasticity/include/utils.h" declline="186" declcolumn="22"/>
       </memberdef>
       <memberdef kind="function" id="utils_8h_1a88275192a3a05a32f5a36b6a478635eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -356,7 +356,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/utils.h" line="204" column="22" declfile="/home/nico/Desktop/C++Code/plasticity/include/utils.h" declline="204" declcolumn="22"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/utils.h" line="204" column="22" declfile="/home/nico/Desktop/Code/plasticity/include/utils.h" declline="204" declcolumn="22"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -502,6 +502,6 @@
 <codeline lineno="252"><highlight class="normal"></highlight></codeline>
 <codeline lineno="253"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>__utils_h__</highlight></codeline>
     </programlisting>
-    <location file="/home/nico/Desktop/C++Code/plasticity/include/utils.h"/>
+    <location file="/home/nico/Desktop/Code/plasticity/include/utils.h"/>
   </compounddef>
 </doxygen>

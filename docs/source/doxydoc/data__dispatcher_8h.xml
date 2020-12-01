@@ -50,12 +50,6 @@
         <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="1">
-        <label>/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h</label>
-        <link refid="data__dispatcher_8h"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-      </node>
       <node id="13">
         <label>utility</label>
       </node>
@@ -71,6 +65,12 @@
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h</label>
+        <link refid="data__dispatcher_8h"/>
+        <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="8">
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" line="6" column="9" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h" bodystart="6" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" line="6" column="9" bodyfile="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h" bodystart="6" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -139,6 +139,6 @@
 <codeline lineno="92"><highlight class="normal"></highlight></codeline>
 <codeline lineno="93"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>__data_dispatcher_h__</highlight></codeline>
     </programlisting>
-    <location file="/home/nico/Desktop/C++Code/plasticity/include/data_dispatcher.h"/>
+    <location file="/home/nico/Desktop/Code/plasticity/include/data_dispatcher.h"/>
   </compounddef>
 </doxygen>

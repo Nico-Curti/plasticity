@@ -13,14 +13,24 @@
     <includes local="no">numeric</includes>
     <includes local="no">utility</includes>
     <includes local="no">iostream</includes>
-    <includedby refid="bcm_8h" local="no">/home/nico/Desktop/C++Code/plasticity/include/bcm.h</includedby>
-    <includedby refid="hopfield_8h" local="no">/home/nico/Desktop/C++Code/plasticity/include/hopfield.h</includedby>
+    <includedby refid="bcm_8h" local="no">/home/nico/Desktop/Code/plasticity/include/bcm.h</includedby>
+    <includedby refid="hopfield_8h" local="no">/home/nico/Desktop/Code/plasticity/include/hopfield.h</includedby>
     <incdepgraph>
       <node id="15">
         <label>functional</label>
       </node>
       <node id="9">
         <label>iomanip</label>
+      </node>
+      <node id="2">
+        <label>activations.h</label>
+        <link refid="activations_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
       </node>
       <node id="5">
         <label>cmath</label>
@@ -31,11 +41,34 @@
       <node id="12">
         <label>string</label>
       </node>
+      <node id="1">
+        <label>/home/nico/Desktop/Code/plasticity/include/base.h</label>
+        <link refid="base_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
       <node id="13">
         <label>omp.h</label>
-      </node>
-      <node id="22">
-        <label>fstream</label>
       </node>
       <node id="17">
         <label>optimizer.h</label>
@@ -47,15 +80,8 @@
         <childnode refid="19" relation="include">
         </childnode>
       </node>
-      <node id="2">
-        <label>activations.h</label>
-        <link refid="activations_8h"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
+      <node id="22">
+        <label>fstream</label>
       </node>
       <node id="7">
         <label>random</label>
@@ -97,32 +123,6 @@
       <node id="8">
         <label>iostream</label>
       </node>
-      <node id="1">
-        <label>/home/nico/Desktop/C++Code/plasticity/include/base.h</label>
-        <link refid="base_8h"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-      </node>
       <node id="21">
         <label>deque</label>
       </node>
@@ -131,14 +131,6 @@
       </node>
       <node id="6">
         <label>climits</label>
-      </node>
-      <node id="3">
-        <label>fmath.h</label>
-        <link refid="fmath_8h"/>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
       </node>
       <node id="20">
         <label>weights.h</label>
@@ -150,6 +142,14 @@
         <childnode refid="19" relation="include">
         </childnode>
       </node>
+      <node id="3">
+        <label>fmath.h</label>
+        <link refid="fmath_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
       <node id="10">
         <label>algorithm</label>
       </node>
@@ -158,21 +158,21 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="3">
-        <label>/home/nico/Desktop/C++Code/plasticity/include/hopfield.h</label>
-        <link refid="hopfield_8h"/>
-      </node>
       <node id="2">
-        <label>/home/nico/Desktop/C++Code/plasticity/include/bcm.h</label>
+        <label>/home/nico/Desktop/Code/plasticity/include/bcm.h</label>
         <link refid="bcm_8h"/>
       </node>
       <node id="1">
-        <label>/home/nico/Desktop/C++Code/plasticity/include/base.h</label>
+        <label>/home/nico/Desktop/Code/plasticity/include/base.h</label>
         <link refid="base_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
+      </node>
+      <node id="3">
+        <label>/home/nico/Desktop/Code/plasticity/include/hopfield.h</label>
+        <link refid="hopfield_8h"/>
       </node>
     </invincdepgraph>
     <innerclass refid="classBasePlasticity" prot="public">BasePlasticity</innerclass>
@@ -186,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/base.h" line="18" column="9" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/base.h" bodystart="18" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/base.h" line="18" column="9" bodyfile="/home/nico/Desktop/Code/plasticity/include/base.h" bodystart="18" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="base_8h_1ac2c86502e66f2307ca9396dd8c77174e" prot="public" static="no">
         <name>ERROR_FITTED</name>
@@ -197,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/base.h" line="19" column="9" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/base.h" bodystart="19" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/base.h" line="19" column="9" bodyfile="/home/nico/Desktop/Code/plasticity/include/base.h" bodystart="19" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="base_8h_1a6103a7d0f62795c68e45eae3d7d4fdf6" prot="public" static="no">
         <name>ERROR_DIMENSIONS</name>
@@ -208,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/base.h" line="20" column="9" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/base.h" bodystart="20" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/base.h" line="20" column="9" bodyfile="/home/nico/Desktop/Code/plasticity/include/base.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="base_8h_1ac79790ef9baefd3f640e6513daf77ad8" prot="public" static="no">
         <name>ERROR_CONVERGENCY_POSITIVE</name>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/base.h" line="21" column="9" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/base.h" bodystart="21" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/base.h" line="21" column="9" bodyfile="/home/nico/Desktop/Code/plasticity/include/base.h" bodystart="21" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -344,6 +344,6 @@
 <codeline lineno="313"><highlight class="normal"></highlight></codeline>
 <codeline lineno="314"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>__base_h__</highlight></codeline>
     </programlisting>
-    <location file="/home/nico/Desktop/C++Code/plasticity/include/base.h"/>
+    <location file="/home/nico/Desktop/Code/plasticity/include/base.h"/>
   </compounddef>
 </doxygen>

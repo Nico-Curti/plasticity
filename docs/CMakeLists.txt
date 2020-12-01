@@ -31,6 +31,7 @@ set(SPHINX_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/source/)
 set(SPHINX_BUILD ${CMAKE_CURRENT_BINARY_DIR}/docs/build)
 
 add_custom_target(Sphinx ALL
+                  DEPENDS doc_doxygen
                   COMMAND ${SPHINX_EXECUTABLE} -b html
                   # Tell Breathe where to find the Doxygen output
                   -Dbreathe_projects.CatCutifier=${DOXYGEN_OUTPUT_DIR}

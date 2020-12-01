@@ -26,13 +26,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="17" column="38" bodyfile="/home/nico/Desktop/C++Code/plasticity/include/weights.h" bodystart="17" bodyend="-1"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/weights.h" line="17" column="38" bodyfile="/home/nico/Desktop/Code/plasticity/include/weights.h" bodystart="17" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/nico/Desktop/C++Code/plasticity/include/weights.h" line="16" column="1"/>
+    <location file="/home/nico/Desktop/Code/plasticity/include/weights.h" line="16" column="1"/>
   </compounddef>
 </doxygen>

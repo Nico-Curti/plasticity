@@ -16,54 +16,57 @@ jobs:
     strategy:
       matrix:
         cfg:
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 4.8}
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 4.9}
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 5.0}
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 6.0}
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 7.0}
+          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.8}
+          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.9}
+          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 5.0}
+          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 6.0}
+          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 7.0}
 
-          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 7.0}
-          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 8.0}
-          - {os: ubuntu-18.04, cpp-compiler: gcc, cpp-version: 9.0}
+          - {os: ubuntu-18.04, cc: gcc, cxx: g++, cpp-version: 7.0}
+          - {os: ubuntu-18.04, cc: gcc, cxx: g++, cpp-version: 8.0}
+          - {os: ubuntu-18.04, cc: gcc, cxx: g++, cpp-version: 9.0}
 
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 4.8}
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 4.9}
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 5.0}
-          - {os: ubuntu-16.04, cpp-compiler: gcc, cpp-version: 6.0}
-          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 7.0}
-          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 8.0}
-          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0}
-          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 10}
-
-
-#          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 3.6}
-#          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 3.8}
-#          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 3.9}
-#          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 4.0}
-#          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 5.0}
-#          - {os: ubuntu-16.04, cpp-compiler: clang, cpp-version: 6.0}
-#          - {os: ubuntu-18.04, cpp-compiler: clang, cpp-version: 7.0}
+          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.8}
+          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 4.9}
+          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 5.0}
+          - {os: ubuntu-16.04, cc: gcc, cxx: g++, cpp-version: 6.0}
+          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 7.0}
+          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 8.0}
+          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0}
+          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 10}
 
 
-#          - {os: windows-latest, cpp-compiler: cl, cpp-version: latest}
-#          - {os: windows-latest, cpp-compiler: clang-cl, cpp-version: latest}
-#          - {os: windows-latest, cpp-compiler: gcc, cpp-version: latest}
+#          - {os: ubuntu-16.04, cc: clang, cxx: clang++, cpp-version: 3.6}
+#          - {os: ubuntu-16.04, cc: clang, cxx: clang++, cpp-version: 3.8}
+#          - {os: ubuntu-16.04, cc: clang, cxx: clang++, cpp-version: 3.9}
+#          - {os: ubuntu-16.04, cc: clang, cxx: clang++, cpp-version: 4.0}
+#          - {os: ubuntu-16.04, cc: clang, cxx: clang++, cpp-version: 5.0}
+#          - {os: ubuntu-16.04, cc: clang, cxx: clang++, cpp-version: 6.0}
+#          - {os: ubuntu-18.04, cc: clang, cxx: clang++, cpp-version: 7.0}
 
-#          - {os: macos-latest, cpp-compiler: gcc, cpp-version: 7.0}
-#          - {os: macos-latest, cpp-compiler: clang, cpp-version: 7.0}
+
+#          - {os: windows-latest, cc: cl, cxx: cl, cpp-version: latest}
+#          - {os: windows-latest, cc: clang-cl, cxx: clang-cl, cpp-version: latest}
+#          - {os: windows-latest, cc: gcc, cxx: g++, cpp-version: latest}
+
+#          - {os: macos-latest, cc: gcc, cxx: gcc, cpp-version: 7.0}
+#          - {os: macos-latest, cc: clang, cxx: clang, cpp-version: 7.0}
 
 
-          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0}
-          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0}
-          - {os: ubuntu-20.04, cpp-compiler: gcc, cpp-version: 9.0}
+          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0}
+          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0}
+          - {os: ubuntu-20.04, cc: gcc, cxx: g++, cpp-version: 9.0}
 
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
+        submodules: recursive
 
     - name: Setting env variables
       run: |
-        echo "WORKSPACE=$HOME" >> $GITHUB_ENV
-        echo "VCPKG_ROOT=$HOME/vcpkg" >> $GITHUB_ENV
+        echo "WORKSPACE=${{ github.workspace }}/.." >> $GITHUB_ENV
+        echo "VCPKG_ROOT=$env:WORKSPACE/vcpkg" >> $GITHUB_ENV
         echo "VCPKG_DEFAULT_TRIPLET=x64-windows" >> $GITHUB_ENV
 
     - name: Setup Ninja
@@ -76,53 +79,28 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         sudo apt-get update -y
-        sudo apt-get install -y ${{ matrix.cfg.cpp-compiler }}-${{ matrix.cfg.cpp-version }}
+        sudo apt-get install -y ${{ matrix.cfg.cc }}-${{ matrix.cfg.cpp-version }}
 
-        echo "CC=${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
+        echo "CC=${{ matrix.cfg.cc }}-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
+        echo "CXX=${{ matrix.cfg.cxx }}-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
 
-        if [ "${{ matrix.cfg.cpp-compiler }}" = "gcc" ]; then
-          echo "CXX=g++-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
-        else
-          echo "CXX=clang++-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
-        fi
-
-        sudo apt install -y libeigen3-dev
+        # Install the Eigen Library
+        sudo apt-get install -y libeigen3-dev
 
     - name: Install (macOS)
       if: runner.os == 'macOS'
       run: |
-        brew reinstall ${{ matrix.cfg.cpp-compiler }}@${{ matrix.cfg.cpp-version }}
+        brew reinstall ${{ matrix.cfg.cc }}@${{ matrix.cfg.cpp-version }}
 
-        if [ "${{ matrix.cfg.cpp-compiler }}" = "gcc" ]; then
-          echo "CXX=g++-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
-        else
-          echo "CXX=clang++-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
-        fi
+        echo "CC=${{ matrix.cfg.cc }}-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
+        echo "CXX=${{ matrix.cfg.cxx }}-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
 
+        # Install the Eigen Library
         brew install eigen
 
     - name: Install (Windows)
       if: runner.os == 'Windows'
       run: |
-
-        if ("${{ matrix.cfg.cpp-compiler }}" -eq "gcc") {
-          echo CC=gcc | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
-          echo CXX=g++ | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
-        } elseif ("${{ matrix.cfg.cpp-compiler }}" -eq "clang") {
-          echo CC=clang | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
-          echo CXX=clang++ | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
-        } else {
-          echo CC=${{ matrix.cfg.cpp-compiler }} | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
-          echo CXX=${{ matrix.cfg.cpp-compiler }} | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
-        }
-
-        # We add the output directories to the PATH to make sure the tests and
-        # examples can find the reproc and reproc++ DLL's.
-        $env:PATH += ";$pwd\build\reproc\lib"
-        $env:PATH += ";$pwd\build\reproc++\lib"
-
-        # Make all PATH additions made by scoop and ourselves global.
-        echo "PATH=$env:PATH" | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
 
         # Install vcpkg
         cd $env:WORKSPACE
@@ -130,23 +108,39 @@ jobs:
         cd vcpkg
         git checkout --force 2020.01
         .\bootstrap-vcpkg.bat
-        .\vcpkg.exe install eigen3:$env:VCPKG_DEFAULT_TRIPLET
-        cd -
 
-    - name: 'Configure build'
-      uses: ashutoshvarma/action-cmake-build@master
+        # Install the Eigen Library
+        .\vcpkg.exe install eigen3:$env:VCPKG_DEFAULT_TRIPLET
+
+    - name: 'Configure build (Windows)'
+      if: runner.os == 'Windows'
       run: |
+        cd ${{ github.workspace }}
         mkdir buildDirectory_debug
         cd buildDirectory_debug
-        cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
+        cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=ON -DPYWRAP=OFF
         cd ..
         mkdir buildDirectory_release
         cd buildDirectory_release
-        cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DOMP=OFF -DPYWRAP=OFF
+        cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="$env:VCPKG_DEFAULT_TRIPLET" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=ON -DPYWRAP=OFF
+        cd ..
+
+    - name: 'Configure build (Unix)'
+      if: runner.os == 'Linux' || runner.os == 'macOS'
+      run: |
+        cd ${{ github.workspace }}
+        mkdir buildDirectory_debug
+        cd buildDirectory_debug
+        cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Debug" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=OFF -DPYWRAP=OFF
+        cd ..
+        mkdir buildDirectory_release
+        cd buildDirectory_release
+        cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE="Release" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=OFF -DPYWRAP=OFF
         cd ..
 
     - name: 'Build'
       run: |
+        cd ${{ github.workspace }}
         cd buildDirectory_debug
         cmake --build . --target install -- -j8
         cd ..

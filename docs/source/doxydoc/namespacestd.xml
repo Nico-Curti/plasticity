@@ -168,7 +168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/utils.h" line="229" column="13" declfile="/home/nico/Desktop/C++Code/plasticity/include/utils.h" declline="229" declcolumn="13"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/utils.h" line="229" column="13" declfile="/home/nico/Desktop/Code/plasticity/include/utils.h" declline="229" declcolumn="13"/>
       </memberdef>
       <memberdef kind="function" id="utils_8h_1a7555adcfa1d636d70f3804287e8242b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/nico/Desktop/C++Code/plasticity/include/utils.h" line="245" column="20" declfile="/home/nico/Desktop/C++Code/plasticity/include/utils.h" declline="245" declcolumn="20"/>
+        <location file="/home/nico/Desktop/Code/plasticity/include/utils.h" line="245" column="20" declfile="/home/nico/Desktop/Code/plasticity/include/utils.h" declline="245" declcolumn="20"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
