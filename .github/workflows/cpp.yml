@@ -55,7 +55,7 @@ jobs:
 #          - {os: windows-latest, cc: clang-cl, cxx: clang-cl, cpp-version: latest, generator: Ninja}
 #          - {os: windows-latest, cc: gcc, cxx: g++, cpp-version: latest, generator: Ninja}
 
-          - {os: macOS-10.15, cc: gcc, cxx: g++, cpp-version: 9, generator: Ninje}
+          - {os: macOS-10.15, cc: gcc, cxx: g++, cpp-version: 9, generator: Ninja}
           - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.2.1, generator: Ninja}
           - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.3.1, generator: Ninja}
           - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.4.1, generator: Ninja}
@@ -110,20 +110,6 @@ jobs:
 
         # Install the Eigen Library
         brew install eigen
-
-#    - name: Run vcpkg
-#      if: runner.os == 'Windows'
-#      run: |
-#
-#        # Install vcpkg
-#        cd ${{ github.workspace }}
-#        git clone https://github.com/Microsoft/vcpkg.git
-#        cd vcpkg
-#        git checkout --force 2020.01
-#        .\bootstrap-vcpkg.bat
-#
-#        # Install the Eigen Library
-#        .\vcpkg.exe install eigen3:x64-windows
 
     - name: Restore from cache and run vcpkg (Windows)
       if: runner.os == 'Windows'
