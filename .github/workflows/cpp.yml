@@ -77,7 +77,7 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         sudo apt-get update -y
-        sudo apt-get install -y ${{ matrix.cfg.cc }}-${{ matrix.cfg.cpp-version }}
+        sudo apt-get install -y ${{ matrix.cfg.cxx }}-${{ matrix.cfg.cpp-version }}
 
         echo "CC=${{ matrix.cfg.cc }}-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
         echo "CXX=${{ matrix.cfg.cxx }}-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
@@ -88,7 +88,7 @@ jobs:
     - name: Install (macOS)
       if: runner.os == 'macOS'
       run: |
-        brew reinstall ${{ matrix.cfg.cc }}@${{ matrix.cfg.cpp-version }}
+        brew reinstall ${{ matrix.cfg.cxx }}@${{ matrix.cfg.cpp-version }}
 
         echo "CC=${{ matrix.cfg.cc }}-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
         echo "CXX=${{ matrix.cfg.cxx }}-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
