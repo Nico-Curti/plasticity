@@ -48,8 +48,10 @@ jobs:
 #          - {os: ubuntu-20.04, cc: clang, cxx: clang++, cpp-version: 10,generator: Ninja} # WORKS
 
 
-          - {os: windows-latest, cc: cl, cxx: cl, cpp-version: latest, generator: Visual Studio 16 2019}
+          - {os: windows-latest, cc: cl, cxx: cl, cpp-version: latest, generator: Ninja}
+          - {os: windows-latest, cc: cl, cxx: cl, cpp-version: latest, generator: MinGW}
           - {os: windows-2016, cc: cl, cxx: cl, cpp-version: latest, generator: Ninja}
+          - {os: windows-2016, cc: cl, cxx: cl, cpp-version: latest, generator: MinGW}
 #          - {os: windows-latest, cc: clang-cl, cxx: clang-cl, cpp-version: latest, generator: Ninja}
 #          - {os: windows-latest, cc: gcc, cxx: g++, cpp-version: latest, generator: Ninja}
 
@@ -71,9 +73,7 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Get latest CMake and Ninja
-      if: matrix.cfg.generator == 'Ninja'
-      # Using 'latest' branch, the latest CMake and ninja are installed.
+    - name: Get latest CMake
       uses: lukka/get-cmake@latest
 
     - name: Install (Ubuntu)
@@ -111,67 +111,37 @@ jobs:
         # Install the Eigen Library
         brew install eigen
 
-    - name: Install (Windows)
+    - name: Restore from cache and run vcpkg
       if: runner.os == 'Windows'
-      run: |
+      env:
+        vcpkgResponseFile: ${{ github.workspace }}/cmake/vcpkg_windows.diff
+      uses: lukka/run-vcpkg@v2
+      with:
+        vcpkgArguments: '@${{ env.vcpkgResponseFile }}'
+        vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+        vcpkgGitCommitId: '8121b4ec3d6a11353daf7639ed9082a78e617a2e'
+        appendedCacheKey: ${{ hashFiles(env.vcpkgResponseFile) }}
 
-        echo CC=${{ matrix.cfg.cc }}.exe | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
-        echo CXX=${{ matrix.cfg.cxx }}.exe | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+    - name: 'Build with CMake and Ninja'
+      if: runner.os == 'Ninja'
+      uses: lukka/run-cmake@v2
+      with:
+        cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
+        cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
+        useVcpkgToolchainFile: true
+        buildDirectory: '${{ runner.workspace }}/buildDirectory'
+        cmakeAppendedArgs: "-DCMAKE_BUILD_TYPE=Release -DBUILD_DOCS=OFF -DBUILD_TEST==ON -DPYWRAP=OFF"
+        cmakeBuildType: 'Release'
+        buildWithCMakeArgs: '--config Release --target install'
 
-        # Install vcpkg
-        cd ..
-        git clone https://github.com/Microsoft/vcpkg.git
-        cd vcpkg
-        git checkout --force 2020.01
-        .\bootstrap-vcpkg.bat
-
-        # Install the Eigen Library
-        .\vcpkg.exe install eigen3:x64-windows
-
-    - name: 'Configure build (Windows)'
-      if: runner.os == 'Windows'
-      run: |
-
-        cd ${{ github.workspace }}
-        mkdir buildDirectory_debug
-        cd buildDirectory_debug
-        cmake .. -G "${{ matrix.cfg.generator }}" -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}/../vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="x64-windows" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=ON -DPYWRAP=OFF
-        cd ..
-        mkdir buildDirectory_release
-        cd buildDirectory_release
-        cmake .. -G "${{ matrix.cfg.generator }}" -DCMAKE_BUILD_TYPE="Release" -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}/../vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="x64-windows" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=ON -DPYWRAP=OFF
-        cd ..
-
-    - name: 'Configure build (Unix)'
-      if: runner.os == 'Linux' || runner.os == 'macOS'
-      run: |
-
-        mkdir buildDirectory_debug
-        cd buildDirectory_debug
-        cmake .. -G "${{ matrix.cfg.generator }}" -DCMAKE_BUILD_TYPE="Debug" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=OFF -DPYWRAP=OFF
-        cd ..
-        mkdir buildDirectory_release
-        cd buildDirectory_release
-        cmake .. -G "${{ matrix.cfg.generator }}" -DCMAKE_BUILD_TYPE="Release" -DBUILD_DOCS=OFF -DBUILD_TEST=ON -DOMP=OFF -DPYWRAP=OFF
-        cd ..
-
-    - name: 'Build (Windows)'
-      if: runner.os == 'Windows'
-      run: |
-        cd buildDirectory_debug
-        cmake --build . --target install --config Debug -- -j8
-        cd ..
-        cd buildDirectory_release
-        cmake --build . --target install --config Release -- -j8
-        cd ..
-
-    - name: 'Build (Unix)'
-      if: runner.os == 'Linux' || runner.os == 'macOS'
-      run: |
-
-        cd buildDirectory_debug
-        cmake --build . --target install -- -j8
-        cd ..
-        cd buildDirectory_release
-        cmake --build . --target install -- -j8
-        cd ..
+    - name: 'Build with CMake and Ninja'
+      if: runner.os == 'MinGW'
+      uses: lukka/run-cmake@v2
+      with:
+        cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
+        cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
+        useVcpkgToolchainFile: true
+        buildDirectory: '${{ runner.workspace }}/buildDirectory'
+        cmakeAppendedArgs: "-G\"MinGW Makefiles\" -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCS=OFF -DBUILD_TEST==ON -DPYWRAP=OFF"
+        cmakeBuildType: 'Release'
+        buildWithCMakeArgs: '--config Release --target install'
