@@ -138,7 +138,7 @@ jobs:
 
     - name: 'Build with CMake and vcpkg'
       if: runner.os == 'Windows'
-      uses: lukka/run-cmake@v2
+      uses: lukka/run-cmake@v3
       with:
         cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
         cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
@@ -150,7 +150,7 @@ jobs:
 
     - name: 'Build with CMake'
       if: runner.os == 'Linux' || runner.os == 'macOS'
-      uses: lukka/run-cmake@v2
+      uses: lukka/run-cmake@v3
       with:
         cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
         cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
