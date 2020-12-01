@@ -156,6 +156,6 @@ jobs:
         cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
         useVcpkgToolchainFile: false
         buildDirectory: '${{ runner.workspace }}/buildDirectory'
-        cmakeAppendedArgs: "-G\"${{ matrix.cfg.generator }}\" -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCS=OFF -DBUILD_TEST==ON -DPYWRAP=OFF -DOMP=ON"
+        cmakeAppendedArgs: "-G\"${{ matrix.cfg.generator }}\" -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCS=OFF -DBUILD_TEST==ON -DPYWRAP=OFF -DOMP=OFF"
         cmakeBuildType: 'Release'
         buildWithCMakeArgs: '--config Release --target install'
