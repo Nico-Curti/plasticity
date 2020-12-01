@@ -48,21 +48,22 @@ jobs:
 #          - {os: ubuntu-20.04, cc: clang, cxx: clang++, cpp-version: 10} # WORKS
 
 
-#          - {os: windows-latest, cc: cl, cxx: cl, cpp-version: latest}
+          - {os: windows-latest, cc: cl, cxx: cl, cpp-version: latest}
+          - {os: windows-2016, cc: cl, cxx: cl, cpp-version: latest}
 #          - {os: windows-latest, cc: clang-cl, cxx: clang-cl, cpp-version: latest}
-#          - {os: windows-latest, cc: gcc, cxx: g++, cpp-version: latest}
+          - {os: windows-latest, cc: gcc, cxx: g++, cpp-version: latest}
 
-          - {os: macOS-10.15, cc: gcc, cxx: g++, cpp-version: 9}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.2.1}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.3.1}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.4.1}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.5}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.6}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.7}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.0.1}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.1}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.1.1}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.2}
+#          - {os: macOS-10.15, cc: gcc, cxx: g++, cpp-version: 9} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.2.1} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.3.1} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.4.1} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.5} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.6} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.7} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.0.1} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.1} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.1.1} # WORKS
+#          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.2} # WORKS
 
     steps:
     - name: Checkout
@@ -118,6 +119,9 @@ jobs:
     - name: Install (Windows)
       if: runner.os == 'Windows'
       run: |
+
+        echo CC=${{ matrix.cfg.cc }} | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
+        echo CXX=${{ matrix.cfg.cxx }} | Add-Content -Path $env:GITHUB_ENV -Encoding utf8
 
         # Install vcpkg
         cd $env:WORKSPACE
