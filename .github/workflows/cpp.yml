@@ -49,9 +49,9 @@ jobs:
 
 
           - {os: windows-latest, cc: cl, cxx: cl, cpp-version: latest, generator: Ninja}
-          - {os: windows-latest, cc: cl, cxx: cl, cpp-version: latest, generator: MinGW}
+          - {os: windows-latest, cc: cl, cxx: cl, cpp-version: latest, generator: MinGW Makefiles}
           - {os: windows-2016, cc: cl, cxx: cl, cpp-version: latest, generator: Ninja}
-          - {os: windows-2016, cc: cl, cxx: cl, cpp-version: latest, generator: MinGW}
+          - {os: windows-2016, cc: cl, cxx: cl, cpp-version: latest, generator: MinGW Makefiles}
 #          - {os: windows-latest, cc: clang-cl, cxx: clang-cl, cpp-version: latest, generator: Ninja}
 #          - {os: windows-latest, cc: gcc, cxx: g++, cpp-version: latest, generator: Ninja}
 
@@ -68,6 +68,8 @@ jobs:
 #          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.2, generator: Ninja} # WORKS
 
     steps:
+    - uses: actions/core@v1.2.6
+
     - name: Checkout
       uses: actions/checkout@v1
       with:
@@ -122,26 +124,26 @@ jobs:
         vcpkgGitCommitId: '8121b4ec3d6a11353daf7639ed9082a78e617a2e'
         appendedCacheKey: ${{ hashFiles(env.vcpkgResponseFile) }}
 
-    - name: 'Build with CMake and Ninja'
-      if: runner.os == 'Ninja'
+    - name: 'Build with CMake and vcpkg'
+      if: runner.os == 'Windows'
       uses: lukka/run-cmake@v2
       with:
         cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
         cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
         useVcpkgToolchainFile: true
         buildDirectory: '${{ runner.workspace }}/buildDirectory'
-        cmakeAppendedArgs: "-DCMAKE_BUILD_TYPE=Release -DBUILD_DOCS=OFF -DBUILD_TEST==ON -DPYWRAP=OFF"
+        cmakeAppendedArgs: "-G\"${{ matrix.cfg.generator }}\" -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCS=OFF -DBUILD_TEST==ON -DPYWRAP=OFF -DOMP=OFF"
         cmakeBuildType: 'Release'
         buildWithCMakeArgs: '--config Release --target install'
 
-    - name: 'Build with CMake and Ninja'
-      if: runner.os == 'MinGW'
+    - name: 'Build with CMake'
+      if: runner.os == 'Linux' || runner.os == 'macOS'
       uses: lukka/run-cmake@v2
       with:
         cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
         cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
-        useVcpkgToolchainFile: true
+        useVcpkgToolchainFile: false
         buildDirectory: '${{ runner.workspace }}/buildDirectory'
-        cmakeAppendedArgs: "-G\"MinGW Makefiles\" -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCS=OFF -DBUILD_TEST==ON -DPYWRAP=OFF"
+        cmakeAppendedArgs: "-G\"${{ matrix.cfg.generator }}\" -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCS=OFF -DBUILD_TEST==ON -DPYWRAP=OFF -DOMP=ON"
         cmakeBuildType: 'Release'
         buildWithCMakeArgs: '--config Release --target install'
