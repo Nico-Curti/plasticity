@@ -42,9 +42,9 @@ jobs:
           #- {os: ubuntu-16.04, cc: clang, cxx: clang, cpp-version: 4.0}
           #- {os: ubuntu-18.04, cc: clang, cxx: clang, cpp-version: 5.0}
           #- {os: ubuntu-18.04, cc: clang, cxx: clang, cpp-version: 6.0}
-          - {os: ubuntu-20.04, cc: clang, cxx: clang, cpp-version: 7.0}
-          - {os: ubuntu-20.04, cc: clang, cxx: clang, cpp-version: 8.0}
-          - {os: ubuntu-20.04, cc: clang, cxx: clang, cpp-version: 9.0}
+          - {os: ubuntu-20.04, cc: clang, cxx: clang, cpp-version: 7}
+          - {os: ubuntu-20.04, cc: clang, cxx: clang, cpp-version: 8}
+          - {os: ubuntu-20.04, cc: clang, cxx: clang, cpp-version: 9}
           - {os: ubuntu-20.04, cc: clang, cxx: clang, cpp-version: 10}
 
 
@@ -81,6 +81,10 @@ jobs:
       run: |
         sudo apt-get update -y
         sudo apt-get install -y ${{ matrix.cfg.cxx }}-${{ matrix.cfg.cpp-version }}
+
+        if [[ "${{ matrix.cfg.cxx }}" == "clang" ]]; then
+          sudo apt-get install -y lld-${{ matrix.cfg.cpp-version }} libc++-${{ matrix.cfg.cpp-version }}-dev libc++abi-${{ matrix.cfg.cpp-version }}-dev clang-tools-${{ matrix.cfg.cpp-version }}
+        fi
 
         echo "CC=${{ matrix.cfg.cc }}-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
         echo "CXX=${{ matrix.cfg.cxx }}-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
