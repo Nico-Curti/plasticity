@@ -300,48 +300,4 @@ void BasePlasticity :: _fit (float * X, const int & num_epochs, const int & n_fe
 
 void BasePlasticity :: _predict (const float * A, const float * B, float * C, const int & N, const int & M, const int & K)
 {
-#ifdef __avx__
-
-const int prev_end = (K % 8 == 0) ? (K - 8) : (K >> 3) << 3;
-
-#endif
-
-  // weights @ X.T
-  // weights (outputs x n_features)
-  // X (batch x n_features)
-  // out (outputs x batch)
-
-#ifdef _OPENMP
-#pragma omp for collapse (2)
-#endif
-  for (int i = 0; i < M; ++i)
-    for (int j = 0; j < N; ++j)
-    {
-      const int index = i * N + j;
-      const int idx1 = i * K;
-      const int idx2 = j * K;
-
-  #ifdef __avx__ // TO CHECK
-
-      float sum = 0.f;
-
-      for (int k = 0; k < prev_end; k += 8)
-      {
-        __m256 a256 = _mm256_load_ps(A + idx1 + k);
-        __m256 b256 = _mm256_load_ps(B + idx2 + k);
-        __m256 c256 = _mm256_dp_ps(a256, b256, 0xff);
-        sum += ((float*)&c256)[0];
-      }
-
-      sum += std :: inner_product(A + idx1 + prev_end, A + idx1 + prev_end + K,
-                                  B + idx2 + prev_end, 0.f);
-  #else
-
-      const float sum  = std :: inner_product(A + idx1, A + idx1 + K,
-                                              B + idx2, 0.f);
-
-  #endif // __avx__
-
-      C[index] = this->activation(sum);
-    }
 }

@@ -123,6 +123,22 @@ private:
   */
   void normalize_weights ();
 
+  /**
+  * @brief Core function of the predict formula
+  *
+  * @note The function computes the output as W @ X.T.
+  * We use the GEMM algorithm with OpenMP support for a fast evaluation
+  *
+  * @param A Input matrix (N x M)
+  * @param B Input matrix (M x K)
+  * @param C Output matrix (N x K)
+  * @param N Number of rows of A
+  * @param M Number of cols/rows of A/B
+  * @param K NUmber of cols of B
+  *
+  */
+  void _predict (const float * A, const float * B, float * C, const int & N, const int & M, const int & K);
+
 };
 
 

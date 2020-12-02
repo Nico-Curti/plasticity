@@ -9,43 +9,103 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.cfg.os }}
+    name: ${{ matrix.cfg.os }}@${{ matrix.cfg.python-version }}
+
     strategy:
       matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8]
+        cfg:
+          - {os: ubuntu-latest, cc: gcc, cxx: g++, python-version: 3.5}
+          - {os: ubuntu-latest, cc: gcc, cxx: g++, python-version: 3.6}
+          - {os: ubuntu-latest, cc: gcc, cxx: g++, python-version: 3.7}
+          - {os: ubuntu-latest, cc: gcc, cxx: g++, python-version: 3.8}
+
+          - {os: windows-latest, cc: cl, cxx: MSVC19.28.29333.0, python-version: 3.5}
+          - {os: windows-latest, cc: cl, cxx: MSVC19.28.29333.0, python-version: 3.6}
+          - {os: windows-latest, cc: cl, cxx: MSVC19.28.29333.0, python-version: 3.7}
+          - {os: windows-latest, cc: cl, cxx: MSVC19.28.29333.0, python-version: 3.8}
+
+          - {os: macOS-10.15, cc: xcode, cxx: xcode11.2.1, python-version: 3.5}
+          - {os: macOS-10.15, cc: xcode, cxx: xcode11.2.1, python-version: 3.6}
+          - {os: macOS-10.15, cc: xcode, cxx: xcode11.2.1, python-version: 3.7}
+          - {os: macOS-10.15, cc: xcode, cxx: xcode11.2.1, python-version: 3.8}
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
+
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
+        submodules: recursive
+
+    - name: Set up Python ${{ matrix.cfg.python-version }}
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ matrix.cfg.python-version }}
+
+    - name: Get latest CMake
+      uses: lukka/get-cmake@latest
+
+    - name: Install compiler and dependencies (Ubuntu)
+      if: runner.os == 'Linux'
+      shell: bash
+      run: |
+        sudo apt-get update -y
+        sudo apt-get install -y ${{ matrix.cfg.cxx }}
+
+        echo "CC=${{ matrix.cfg.cc }}-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
+        echo "CXX=${{ matrix.cfg.cxx }}-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
+
+        # Install the Eigen Library
+        sudo apt-get install -y libeigen3-dev
+
+    - name: Install compiler and dependencies (macOS)
+      if: runner.os == 'macOS'
+      run: |
+        curl -LO https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci; source ./macports-ci install
+
+        sudo xcode-select -switch /Applications/Xcode_11.2.1.app
+        echo "CC=clang" >> $GITHUB_ENV
+        echo "CXX=clang++" >> $GITHUB_ENV
+
+        # Install the Eigen Library
+        brew install eigen
+
+    - name: Restore from cache and run vcpkg (Windows)
+      if: runner.os == 'Windows'
+      env:
+        vcpkgResponseFile: ${{ github.workspace }}/cmake/vcpkg_windows.diff
+      uses: lukka/run-vcpkg@v6
+      with:
+        vcpkgArguments: '@${{ env.vcpkgResponseFile }}'
+        vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+        vcpkgGitCommitId: '8121b4ec3d6a11353daf7639ed9082a78e617a2e'
+        appendedCacheKey: ${{ hashFiles(env.vcpkgResponseFile) }}
 
     - name: Install dependencies
       run: |
-        git submodule update --init --recursive
+
         python -m pip install --upgrade pip
-        pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-    - name: 'Install CMake'
-      run: sudo apt install cmake
-
-    - name: 'Install Eigen3'
-      run: sudo apt install libeigen3-dev
+        python -m pip install flake8 pytest
+        if [ -f requirements.txt ]; then
+          python -m pip install -r requirements.txt;
+        fi
 
     - name: Install testing dependencies
       run: |
-        pip install codecov pytest-cov
+        python -m pip install codecov pytest-cov
+
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        python -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        # flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        # python -m flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
     - name: Install plasticity
       run: |
         python setup.py develop --user
+
     #- name: Test with pytest
     #  run: |
-    #    pytest ./test/ --cov=plasticity --cov-config=.coveragerc
+    #    python -m pytest ./plasticity/test/ --cov=plasticity --cov-config=.coveragerc
+

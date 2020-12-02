@@ -355,6 +355,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     if y is not None:
       X = self._join_input_label(X=X, y=y)
 
+      # return (self.weights @ X).transpose()
       return np.einsum('ij, kj -> ik', self.weights, X, optimize=True).transpose() # without activation
 
     X = check_array(X)

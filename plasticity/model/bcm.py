@@ -193,6 +193,7 @@ class BCM (BasePlasticity):
     Core function for the predict member
     '''
 
+    # return self.activation.activation( self._interaction_matrix @ self.weights @ X.T, copy=True)
     return self.activation.activate(np.einsum('ij, jk, lk -> il', self._interaction_matrix, self.weights, X, optimize=True), copy=True)
 
 

@@ -306,7 +306,7 @@ private:
   * @param K NUmber of cols of B
   *
   */
-  void _predict (const float * A, const float * B, float * C, const int & N, const int & M, const int & K);
+  virtual void _predict (const float * A, const float * B, float * C, const int & N, const int & M, const int & K);
 
 };
 

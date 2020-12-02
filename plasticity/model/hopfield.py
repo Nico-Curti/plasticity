@@ -168,7 +168,8 @@ class Hopfield (BasePlasticity):
     Core function for the predict member
     '''
 
-    return self.activation.activate(np.einsum('ij, kj -> ik', self.weights, X, optimize=True), copy=True)
+    # return self.weights @ X
+    return np.einsum('ij, kj -> ik', self.weights, X, optimize=True)
 
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 #include <bcm.h>
 
-int main (int argc, char ** argv)
+int main (__unused int argc, __unused char ** argv)
 {
 
   const int n_samples = 10;
