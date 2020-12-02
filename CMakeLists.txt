@@ -168,6 +168,7 @@ endif ()
 set(plasticity_INSTALL_INCLUDE_DIR ${INSTALL_INCLUDE_DIR})
 
 configure_file(${CMAKE_SOURCE_DIR}/plasticity.pc.in ${CMAKE_SOURCE_DIR}/plasticity.pc @ONLY)
+configure_file(${PYC_DIR}/__version__.py.in ${PYC_DIR}/__version__.py @ONLY)
 message(STATUS "Pkg-config generated")
 
 #################################################################
