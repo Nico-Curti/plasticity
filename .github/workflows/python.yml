@@ -81,6 +81,12 @@ jobs:
         vcpkgGitCommitId: '8121b4ec3d6a11353daf7639ed9082a78e617a2e'
         appendedCacheKey: ${{ hashFiles(env.vcpkgResponseFile) }}
 
+    - name: Set env variables (Windows)
+      if: runner.os == 'Windows'
+      run: |
+        echo "VCPKG_ROOT=${{ github.workspace }}/vcpkg" >> $GITHUB_ENV
+        echo "VCPKG_DEFAULT_TRIPLET=x64-windows" >> $GITHUB_ENV
+
     - name: Install dependencies
       run: |
 
