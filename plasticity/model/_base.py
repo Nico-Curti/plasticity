@@ -94,7 +94,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       X : array-like (2D)
         Input array of data
 
-      output : array-like (1D)
+      output : array-like (2D)
         Output of the model estimated by the predict function
 
     Returns
