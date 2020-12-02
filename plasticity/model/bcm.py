@@ -171,8 +171,8 @@ class BCM (BasePlasticity):
     theta = np.mean(output**2, axis=1, keepdims=True)
     phi = output * (output - theta) * (1. / (theta + self.precision))
 
-    #dw = phi @ X
-    dw = np.einsum('ij, jk -> ik', phi, X, optimize=True)
+    #dw = self._interaction_matrix @ phi @ X
+    dw = np.einsum('ij, jk, kl -> il', self._interaction_matrix, phi, X, optimize=True)
 
     nc = np.max(np.abs(dw))
     nc = 1. / max(nc, self.precision)
@@ -186,15 +186,6 @@ class BCM (BasePlasticity):
     '''
 
     return super(BCM, self)._fit(X=X, norm=False)
-
-
-  def _predict (self, X):
-    '''
-    Core function for the predict member
-    '''
-
-    # return self.activation.activation( self._interaction_matrix @ self.weights @ X.T, copy=True)
-    return self.activation.activate(np.einsum('ij, jk, lk -> il', self._interaction_matrix, self.weights, X, optimize=True), copy=True)
 
 
 if __name__ == '__main__':

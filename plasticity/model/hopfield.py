@@ -163,15 +163,6 @@ class Hopfield (BasePlasticity):
     return super(Hopfield, self)._fit(X=X, norm=True)
 
 
-  def _predict (self, X):
-    '''
-    Core function for the predict member
-    '''
-
-    # return self.weights @ X
-    return np.einsum('ij, kj -> ik', self.weights, X, optimize=True)
-
-
 if __name__ == '__main__':
 
   import pylab as plt

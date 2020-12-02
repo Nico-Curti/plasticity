@@ -324,7 +324,9 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     '''
     Core function for the predict member
     '''
-    raise NotImplementedError
+
+    # return self.activation.activation( self.weights @ X.T, copy=True)
+    return self.activation.activate(np.einsum('ij, kj -> ik', self.weights, X, optimize=True), copy=True)
 
   def predict (self, X, y=None):
     '''
