@@ -132,15 +132,15 @@ endif ()
 #                         SETTING DIRECTORIES                   #
 #################################################################
 
-set(SRC_DIR  ${CMAKE_SOURCE_DIR}/src                                 CACHE PATH "Path where find cpp files"                        )
-set(INC_DIR  ${CMAKE_SOURCE_DIR}/include                             CACHE PATH "Path where find header files"                     )
-set(HPP_DIR  ${CMAKE_SOURCE_DIR}/hpp                                 CACHE PATH "Path where find hpp files"                        )
-set(EXAMPLE  ${CMAKE_SOURCE_DIR}/example                             CACHE PATH "Path where find main files"                       )
-set(TEST_DIR ${CMAKE_SOURCE_DIR}/testing                             CACHE PATH "Path where find test files"                       )
-set(PYC_DIR  ${CMAKE_SOURCE_DIR}/plasticity                          CACHE PATH "Path where find cython files"                     )         # cython directory
-set(LIB_DIR  ${CMAKE_SOURCE_DIR}/lib                                 CACHE PATH "Path where lib will be installed"            FORCE)
-set(INST_DIR ${CMAKE_SOURCE_DIR}/share/plasticity                    CACHE PATH "Path where cmake configs will be installed"  FORCE)
-set(OUT_DIR  ${CMAKE_SOURCE_DIR}/bin                                 CACHE PATH "Path where outputs will be installed"        FORCE)
+set(SRC_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/src                                 CACHE PATH "Path where find cpp files"                        )
+set(INC_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/include                             CACHE PATH "Path where find header files"                     )
+set(HPP_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/hpp                                 CACHE PATH "Path where find hpp files"                        )
+set(EXAMPLE  ${CMAKE_CURRENT_SOURCE_DIR}/example                             CACHE PATH "Path where find main files"                       )
+set(TEST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/testing                             CACHE PATH "Path where find test files"                       )
+set(PYC_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/plasticity                          CACHE PATH "Path where find cython files"                     )         # cython directory
+set(LIB_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/lib                                 CACHE PATH "Path where lib will be installed"            FORCE)
+set(INST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/share/plasticity                    CACHE PATH "Path where cmake configs will be installed"  FORCE)
+set(OUT_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/bin                                 CACHE PATH "Path where outputs will be installed"        FORCE)
 set(OUT_TEST ${TEST_DIR}/bin                                         CACHE PATH "Path where test outputs will be installed"   FORCE)
 
 set(INSTALL_INCLUDE_DIR  "${CMAKE_CURRENT_LIST_DIR}/share/include/plasticity"  CACHE PATH "Path where headers will be installed")
