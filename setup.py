@@ -141,6 +141,63 @@ def read_description (readme_filename):
   except IOError:
     return ''
 
+def read_version (CMakeLists):
+  '''
+  Read version from variables set in CMake file
+
+  Parameters
+  ----------
+    CMakeLists : string
+      Main CMakefile filename or path
+
+  Returns
+  -------
+    version : tuple
+      Version as (major, minor, revision) of strings
+  '''
+  major = re.compile(r'set\s+\(PLASTICITY_MAJOR\s+(\d+)\)')
+  minor = re.compile(r'set\s+\(PLASTICITY_MINOR\s+(\d+)\)')
+  revision = re.compile(r'set\s+\(PLASTICITY_REVISION\s+(\d+)\)')
+
+  with open(CMakeLists, 'r') as fp:
+    cmake = fp.read()
+
+  major_v = major.findall(cmake)[0]
+  minor_v = minor.findall(cmake)[0]
+  revision_v = revision.findall(cmake)[0]
+
+  version = map(int, (major_v, minor_v, revision_v))
+
+  return tuple(version)
+
+
+def dump_version_file (here, version_filename):
+  '''
+  Dump the __version__.py file as python script
+
+  Parameters
+  ----------
+    here : string
+      Local path where the CMakeLists.txt file is stored
+
+    version_filename: string
+      Filename or path where to save the __version__.py filename
+  '''
+
+  VERSION = read_version(os.path.join(here, './CMakeLists.txt'))
+
+  script = '''#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+__author__  = ['Nico Curti', 'SimoneGasperini', 'Mattia Ceccarelli']
+__email__ = ['nico.curti2@unibo.it', 'simone.gasperini2@studio.unibo.it', 'mattia.ceccarelli5@unibo.it']
+
+__version__ = '{}.{}.{}'
+'''.format(*VERSION)
+
+  with open(version_filename, 'w') as fp:
+    fp.write(script)
+
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -173,6 +230,7 @@ try:
 except IOError:
   LONG_DESCRIPTION = DESCRIPTION
 
+dump_version_file(here, VERSION_FILENAME)
 
 # Load the package's __version__.py module as a dictionary.
 about = {}

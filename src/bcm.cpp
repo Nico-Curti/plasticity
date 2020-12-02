@@ -101,7 +101,7 @@ void BCM :: weights_update (float * X, const int & n_features, float * weights_u
       float * wi = weights_update + i * n_features;
 
       for (int k = 0; k < n_features; ++k)
-        wi[k] += out * xi[k];
+        wi[k] += phi * xi[k];
     }
 
 #ifdef _OPENMP

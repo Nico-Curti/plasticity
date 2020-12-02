@@ -298,6 +298,6 @@ void BasePlasticity :: _fit (float * X, const int & num_epochs, const int & n_fe
   } // end for epoch
 }
 
-void BasePlasticity :: _predict (const float * A, const float * B, float * C, const int & N, const int & M, const int & K)
+void BasePlasticity :: _predict (__unused const float * A, __unused const float * B, __unused float * C, __unused const int & N, __unused const int & M, __unused const int & K)
 {
 }
