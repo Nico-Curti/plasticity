@@ -280,6 +280,8 @@ See [here](https://github.com/Nico-Curti/plasticity/blob/master/.github/CONTRIBU
 
 <blockquote>1- Castellani G., Intrator N., Shouval H.Z., Cooper L.N. Solutions of the BCM learning rule in a network of lateral interacting nonlinear neurons, Network Computation in Neural Systems, 10.1088/0954-898X/10/2/001. </blockquote>
 
+<blockquote>2- Blais B., Shouval H., Cooper L. Time Dependence of Visual Deprivation: A Comparison between Models of Plasticity and Experimental Results, Psychology, 1996, 10.21236/ada316967. </blockquote>
+
 <blockquote>2- Dmitry Krotov, and John J. Hopfield. Unsupervised learning by competing hidden units, PNAS, 2019, www.pnas.org/cgi/doi/10.1073/pnas.1820458116. </blockquote>
 
 ## Authors
@@ -288,7 +290,7 @@ See [here](https://github.com/Nico-Curti/plasticity/blob/master/.github/CONTRIBU
 
 * <img src="https://avatars2.githubusercontent.com/u/71086758?s=400&v=4" width="25px;"/> **Simone Gasperini** [git](https://github.com/SimoneGasperini)
 
-* <img src="https://avatars0.githubusercontent.com/u/41483077?s=400&v=4" width="25px;"/> **Mattia Ceccarelli** [git](https://github.com/Mat092)
+* <img src="https://avatars0.githubusercontent.com/u/41483077?s=400&v=4" width="25px;"/> **Mattia Ceccarelli** [git](https://github.com/Mat092), [unibo](https://www.unibo.it/sitoweb/mattia.ceccarelli5/)
 
 See also the list of [contributors](https://github.com/Nico-Curti/plasticity/contributors) [![GitHub contributors](https://img.shields.io/github/contributors/Nico-Curti/plasticity.svg?style=plastic)](https://github.com/Nico-Curti/plasticity/graphs/contributors/) who participated in this project.
 

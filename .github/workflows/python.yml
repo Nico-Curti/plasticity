@@ -81,12 +81,6 @@ jobs:
         vcpkgGitCommitId: '8121b4ec3d6a11353daf7639ed9082a78e617a2e'
         appendedCacheKey: ${{ hashFiles(env.vcpkgResponseFile) }}
 
-    - name: Set env variables (Windows)
-      if: runner.os == 'Windows'
-      run: |
-        echo "VCPKG_ROOT=${{ github.workspace }}/vcpkg" >> $GITHUB_ENV
-        echo "VCPKG_DEFAULT_TRIPLET=x64-windows" >> $GITHUB_ENV
-
     - name: Install dependencies
       run: |
 
@@ -106,6 +100,10 @@ jobs:
         # python -m flake8 ./plasticity --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
     - name: Install plasticity
+      env:
+        WORKSPACE: ${{ github.workspace }}/
+        VCPKG_ROOT: ${{ github.workspace }}/vcpkg/
+        VCPKG_DEFAULT_TRIPLET: x64-windows
       run: |
         python setup.py develop --user
 

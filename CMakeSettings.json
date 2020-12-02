@@ -18,7 +18,7 @@
           "value": "${env.VCPKG_DEFAULT_TRIPLET}"
         },
         {
-          "name": "CMAKE_BIULD_TYPE",
+          "name": "CMAKE_BUILD_TYPE",
           "value": "Debug"
         }
       ]
@@ -40,7 +40,7 @@
           "value": "${env.VCPKG_DEFAULT_TRIPLET}"
         },
         {
-          "name": "CMAKE_BIULD_TYPE",
+          "name": "CMAKE_BUILD_TYPE",
           "value": "Release"
         }
       ]

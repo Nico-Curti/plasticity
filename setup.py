@@ -69,6 +69,21 @@ class cmake_build_ext (build_ext):
         '-DOMP={}'.format('ON' if ENABLE_OMP else 'OFF')
     ]
 
+    if platform.system() == 'Windows':
+      vcpkg_root = os.environ.get('VCPKG_ROOT').replace('\\', '/')
+
+      if not vcpkg_root:
+        raise ValueError('VCPKG not found. '
+                         'Please set the environment variable to the path in which vcpkg can be found. '
+                         '(E.g $env:VCPKG_ROOT=C:/Users/Myuser/vcpkg/')
+
+      vcpk_triplet = os.environ.get('VCPKG_DEFAULT_TRIPLET')
+      vcpk_triplet = vcpk_triplet if vcpk_triplet else 'x64-windows'
+
+      cmake_args.extend(['-DCMAKE_TOOLCHAIN_FILE={}/scripts/buildsystems/vcpkg.cmake'.format(vcpkg_root),
+                         '-DVCPKG_TARGET_TRIPLET={}'.format(vcpk_triplet)
+                         ])
+
     # example of build args
     build_args = [
         '--target', 'install',
