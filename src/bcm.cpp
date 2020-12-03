@@ -128,7 +128,7 @@ void BCM :: weights_update (float * X, const int & n_features, float * weights_u
 
 
 
-void BCM :: _predict (const float * A, const float * B, float * C, const int & N, const int & M, const int & K)
+void BCM :: _predict (float * A, float * B, float * C, const int & N, const int & M, const int & K, float * buffer)
 {
 
   // A = weights (outputs x n_features) (M x K)
@@ -137,10 +137,35 @@ void BCM :: _predict (const float * A, const float * B, float * C, const int & N
   // N = batch
   // M = outputs
   // K = n_features
+  // buffer = weights_update (outputs x n_features) (M x K)
 
   // interaction_matrix (outputs, outputs)
 
-  // TODO: miss interaction matrix in the evaluation
+  // interaction_matrix @ weights @ X.T
+  // 1. (outputs x outputs) @ (outputs x n_features) => it has the same shape of weights_update so we can temporary use this buffer to store the result
+  // 2. (outputs x n_features) @ (n_features x batch) => it remains the old predict function with weights_update as A-matrix
+
+#ifdef _OPENMP
+  #pragma omp for
+#endif
+  for (int i = 0; i < M * K; ++i)
+    buffer[i] = 0.f;
+
+#ifdef _OPENMP
+  #pragma omp for collapse (2)
+#endif
+  for (int i = 0; i < M; ++i)
+    for (int j = 0; j < M; ++j)
+    {
+      const int idx = i * M + j;
+      const float Ai = this->interaction_matrix[idx];
+
+      float * Bi = A + j * K;
+      float * buff = buffer + i * K;
+
+      for (int k = 0; k < K; ++k)
+        buff[k] += Ai * Bi[k];
+    }
 
 #ifdef __avx__
 
@@ -169,17 +194,17 @@ const int prev_end = (K % 8 == 0) ? (K - 8) : (K >> 3) << 3;
 
       for (int k = 0; k < prev_end; k += 8)
       {
-        __m256 a256 = _mm256_load_ps(A + idx1 + k);
+        __m256 a256 = _mm256_load_ps(buffer + idx1 + k);
         __m256 b256 = _mm256_load_ps(B + idx2 + k);
         __m256 c256 = _mm256_dp_ps(a256, b256, 0xff);
         sum += ((float*)&c256)[0];
       }
 
-      sum += std :: inner_product(A + idx1 + prev_end, A + idx1 + prev_end + K,
+      sum += std :: inner_product(buffer + idx1 + prev_end, buffer + idx1 + prev_end + K,
                                   B + idx2 + prev_end, 0.f);
   #else
 
-      const float sum  = std :: inner_product(A + idx1, A + idx1 + K,
+      const float sum  = std :: inner_product(buffer + idx1, buffer + idx1 + K,
                                               B + idx2, 0.f);
 
   #endif // __avx__

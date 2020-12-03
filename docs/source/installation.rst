@@ -33,7 +33,6 @@ The `Python` wrap of the library was written according to `scikit-optimize` `Pyt
 .. |clang version| image:: https://img.shields.io/badge/clang-3.8+%20|%204.*%20|%205.*%20|%206.*%20|%207.*%20|%208.*%20|%209.*%20|%2010.*-red.svg
 .. |msvc version| image:: https://img.shields.io/badge/msvc-vs2017%20x86%20|%20vs2017%20x64|%20vs2019%20x86%20|%20vs2019%20x64-blue.svg
 .. _CMake: https://github.com/Nico-Curti/plasticity/blob/master/CMakeLists.txt
-.. _Makefile: https://github.com/Nico-Curti/plasticity/blob/master/Makefile
 
 .. toctree::
    :maxdepth: 2

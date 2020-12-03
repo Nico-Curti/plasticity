@@ -6,6 +6,7 @@ from tqdm import tqdm
 from collections import deque
 
 from plasticity.utils import _check_activation
+from plasticity.utils.activations import Linear
 from .optimizer import Optimizer
 from .weights import BaseWeights
 
@@ -324,9 +325,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     '''
     Core function for the predict member
     '''
-
-    # return self.activation.activation( self.weights @ X.T, copy=True)
-    return self.activation.activate(np.einsum('ij, kj -> ik', self.weights, X, optimize=True), copy=True)
+    raise NotImplementedError
 
   def predict (self, X, y=None):
     '''
@@ -358,7 +357,11 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       X = self._join_input_label(X=X, y=y)
 
       # return (self.weights @ X).transpose()
-      return np.einsum('ij, kj -> ik', self.weights, X, optimize=True).transpose() # without activation
+      old_activation = self.activation
+      self.activation = Linear()
+      result = self._predict(X).transpose()#np.einsum('ij, kj -> ik', self.weights, X, optimize=True).transpose() # without activation
+      self.activation = old_activation
+      return result
 
     X = check_array(X)
     return self._predict(X)

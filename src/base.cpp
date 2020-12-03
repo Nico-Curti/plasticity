@@ -86,7 +86,7 @@ void BasePlasticity :: fit (float * X, const int & n_samples, const int & n_feat
   this->_fit (X, num_epochs, n_features, n_samples, seed);
 }
 
-float * BasePlasticity :: predict (const float * X, const int & n_samples, const int & n_features)
+float * BasePlasticity :: predict (float * X, const int & n_samples, const int & n_features)
 {
   this->check_is_fitted ();
   this->check_dims (n_features);
@@ -251,7 +251,7 @@ void BasePlasticity :: _fit (float * X, const int & num_epochs, const int & n_fe
         float * batch_data = X + i * n_features * this->batch;
 
         this->normalize_weights();
-        this->_predict(this->weights.get(), batch_data, this->output.get(), this->batch, this->outputs, n_features);
+        this->_predict(this->weights.get(), batch_data, this->output.get(), this->batch, this->outputs, n_features, weights_update.get());
         this->weights_update(batch_data, n_features, weights_update.get());
 
         // update weights
@@ -298,6 +298,6 @@ void BasePlasticity :: _fit (float * X, const int & num_epochs, const int & n_fe
   } // end for epoch
 }
 
-void BasePlasticity :: _predict (__unused const float * A, __unused const float * B, __unused float * C, __unused const int & N, __unused const int & M, __unused const int & K)
+void BasePlasticity :: _predict (__unused float * A, __unused float * B, __unused float * C, __unused const int & N, __unused const int & M, __unused const int & K, __unused float * buffer)
 {
 }

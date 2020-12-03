@@ -181,7 +181,7 @@ public:
   * @return The array of encoded features.
   *
   */
-  float * predict (const float * X, const int & n_samples, const int & n_features);
+  float * predict (float * X, const int & n_samples, const int & n_features);
 
   /**
   * @brief Save the current weight matrix.
@@ -298,15 +298,16 @@ private:
   * @note The function computes the output as W @ X.T.
   * We use the GEMM algorithm with OpenMP support for a fast evaluation
   *
-  * @param A Input matrix (N x M)
-  * @param B Input matrix (M x K)
-  * @param C Output matrix (N x K)
-  * @param N Number of rows of A
-  * @param M Number of cols/rows of A/B
-  * @param K NUmber of cols of B
+  * @param A Input matrix (M x K)
+  * @param B Input matrix (N x K)
+  * @param C Output matrix (M x N)
+  * @param N Number of rows of B
+  * @param M Number of rows of A
+  * @param K Number of cols of A and B
+  * @param buffer extra array buffer with shape (M x K) to use if necessary
   *
   */
-  virtual void _predict (const float * A, const float * B, float * C, const int & N, const int & M, const int & K);
+  virtual void _predict (float * A, float * B, float * C, const int & N, const int & M, const int & K, float * buffer=nullptr);
 
 };
 

@@ -219,7 +219,7 @@ void Hopfield :: normalize_weights ()
 }
 
 
-void Hopfield :: _predict (const float * A, const float * B, float * C, const int & N, const int & M, const int & K)
+void Hopfield :: _predict (float * A, float * B, float * C, const int & N, const int & M, const int & K, __unused float * buffer)
 {
 
 #ifdef __avx__
