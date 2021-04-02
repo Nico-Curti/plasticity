@@ -5,6 +5,7 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
+from scipy.special import expit
 
 __author__ = ['Mattia Ceccarelli', 'Nico Curti']
 __email__ = ['mattia.ceccarelli5@unibo.it', 'nico.curti2@unibo.it']
@@ -103,7 +104,8 @@ class Logistic (Activations):
 
   @staticmethod
   def activate (x, copy=False):
-    return 1. / (1. + np.exp(-x))
+    return expit(x)
+    #return 1. / (1. + np.exp(-x))
 
   @staticmethod
   def gradient (x, copy=False):
@@ -497,12 +499,12 @@ class SoftSign (Activations):
     fy = np.abs(x) + 1.
     return 1. / (fy * fy)
 
-class AsymmetricLogistic (Activations):
+class Asymmetriclogistic (Activations):
 
   ACTIVATION_INDEX = 18
 
   def __init__ (self):
-    super(AsymmetricLogistic, self).__init__('AsymmetricLogistic')
+    super(Asymmetriclogistic, self).__init__('Asymmetriclogistic')
 
   @staticmethod
   def activate (x, copy=False):

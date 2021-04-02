@@ -3,9 +3,9 @@
 
 import numpy as np
 
-from ._base import BasePlasticity
-from .optimizer import SGD
-from .weights import Normal
+from plasticity.model._base import BasePlasticity
+from plasticity.model.optimizer import SGD
+from plasticity.model.weights import Normal
 
 __author__  = ['Nico Curti', 'SimoneGasperini']
 __email__ = ['nico.curit2@unibo.it', 'simone.gasperini2@studio.unibo.it']
@@ -174,7 +174,7 @@ class Hopfield (BasePlasticity):
 
 if __name__ == '__main__':
 
-  import pylab as plt
+  from plasticity.utils import view_weights
   from sklearn.datasets import fetch_openml
 
   # Download the MNIST dataset
@@ -186,12 +186,5 @@ if __name__ == '__main__':
   model = Hopfield(outputs=100, num_epochs=10)
   model.fit(X)
 
-  weights = model.weights.reshape(-1, 28, 28)
-  w = weights[0]
-  nc = np.max(np.abs(w))
+  view_weights (model.weights, dims=(28, 28))
 
-  fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(8, 8))
-  im = ax.imshow(w, cmap='bwr', vmin=-nc, vmax=nc)
-  fig.colorbar(im, ticks=[np.min(w), 0, np.max(w)])
-  ax.axis('off')
-  plt.show()

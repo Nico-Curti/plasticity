@@ -213,7 +213,7 @@ The `plasticity` classes are totally equivalent to a `scikit-learn` feature-enco
 First of all you need to import the desired `plasticity` class and then simply call the training/testing functions.
 
 ```python
-from plasticity.models import BCM
+from plasticity.model import BCM
 from sklearn.datasets import fetch_openml
 
 # Download the MNIST dataset
@@ -221,8 +221,6 @@ X, y = fetch_openml(name='mnist_784', version=1, data_id=None, return_X_y=True)
 
 # normalize the sample into [0, 1]
 X *= 1. / 255
-
-from plasticity.model import BCM
 
 model = BCM(outputs=100, num_epochs=10, batch_size=100, interaction_strenght=0.)
 model.fit(X)

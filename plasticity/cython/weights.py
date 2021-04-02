@@ -108,13 +108,14 @@ class Normal (BaseWeights):
 
   Parameters
   ----------
-    mu : float.
+    mu : float (default=0.)
       Mean of initial parameters.
-    std : float.
+
+    std : float (default=1.)
       Std of initial parameters.
   '''
 
-  def __init__ (self, mu, std):
+  def __init__ (self, mu=0., std=1.):
 
     super(Normal, self).__init__(init_type='Normal', mu=mu, sigma=std)
 

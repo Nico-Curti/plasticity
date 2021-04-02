@@ -311,13 +311,13 @@ def view_weights (weights, dims):
   image = np.hstack(np.hstack(selected_weights.reshape(num_images, num_images, *dims)))
 
   # colormap range
-  nc = np.amax(np.abs(selected_weights))
+  nc = np.max(np.abs(selected_weights))
 
   # plot the results
   fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(10, 10))
   ax.axis('off')
   im = ax.imshow(image, cmap='bwr', vmin=-nc, vmax=nc)
-  fig.colorbar(im, ticks=[np.amin(selected_weights), 0, np.amax(selected_weights)])
+  fig.colorbar(im, ticks=[np.min(selected_weights), 0, np.max(selected_weights)])
 
   plt.show()
 

@@ -3,9 +3,9 @@
 
 import numpy as np
 
-from ._base import BasePlasticity
-from .optimizer import SGD
-from .weights import Normal
+from plasticity.model._base import BasePlasticity
+from plasticity.model.optimizer import SGD
+from plasticity.model.weights import Normal
 
 __author__  = ['Nico Curti', 'SimoneGasperini']
 __email__ = ['nico.curit2@unibo.it', 'simone.gasperini2@studio.unibo.it']
@@ -199,23 +199,17 @@ class BCM (BasePlasticity):
 
 if __name__ == '__main__':
 
-  import pylab as plt
   from sklearn.datasets import fetch_openml
+  from plasticity.utils import view_weights
 
   # Download the MNIST dataset
   X, y = fetch_openml(name='mnist_784', version=1, data_id=None, return_X_y=True)
-
+  #X = np.where(X != 0, 1, 0).astype('float')
   # normalize the sample into [0, 1]
   X *= 1. / 255
 
-  model = BCM(outputs=100, num_epochs=10, activation='Logistic')
+  model = BCM(outputs=100, num_epochs=10, batch_size=2, activation='logistic',
+              interaction_strength=-0.05, optimizer=SGD(lr=2e-2))
   model.fit(X)
 
-  w = model.weights[0].reshape(28, 28)
-  nc = np.max(np.abs(w))
-
-  fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(8, 8))
-  im = ax.imshow(w, cmap='bwr', vmin=-nc, vmax=nc)
-  fig.colorbar(im, ticks=[np.min(w), 0, np.max(w)])
-  ax.axis('off')
-  plt.show()
+  view_weights (model.weights, dims=(28, 28))

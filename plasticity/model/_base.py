@@ -7,8 +7,8 @@ from collections import deque
 
 from plasticity.utils import _check_activation
 from plasticity.utils.activations import Linear
-from .optimizer import Optimizer
-from .weights import BaseWeights
+from plasticity.model.optimizer import Optimizer
+from plasticity.model.weights import BaseWeights
 
 from sklearn.base import BaseEstimator
 from sklearn.base import TransformerMixin
@@ -108,7 +108,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     '''
     raise NotImplementedError
 
-  def _lebesque_norm (self):
+  def _lebesgue_norm (self):
     '''
     Apply the Lebesgue norm to the weights.
     '''
@@ -137,7 +137,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     '''
 
     if norm:
-      self._lebesque_norm()
+      self._lebesgue_norm()
 
     # predict the encoded values
     output = self._predict(X)
@@ -446,6 +446,11 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     '''
     with open(filename, 'rb') as fp:
       self.weights = np.fromfile(fp, dtype=np.float, count=-1)
+
+    # reshape the loaded weights since the numpy function loads
+    # only in ravel format!!
+    self.weights = self.weights.reshape(self.outputs, -1)
+
     return self
 
   def __repr__(self):

@@ -8,7 +8,7 @@
 
 #define ERROR_WEIGHTS_INITIALIZATION 001
 
-enum weights_init_t{ _zeros_ = 0, _ones_, _uniform_, _normal_, _lecun_uniform_, _glorot_uniform_, _glorot_normal_, _he_uniform_, _he_normal_
+enum weights_init_t { _zeros_ = 0, _ones_, _uniform_, _normal_, _lecun_uniform_, _glorot_uniform_, _glorot_normal_, _he_uniform_, _he_normal_
 };///< weights initialization types
 
 

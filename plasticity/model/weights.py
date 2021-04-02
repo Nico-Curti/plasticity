@@ -117,9 +117,10 @@ class Normal (BaseWeights):
 
   Parameters
   ----------
-    mu : float.
+    mu : float (default=0.)
       Mean of initial parameters.
-    std : float.
+
+    std : float (default=1.)
       Std of initial parameters.
   '''
 
