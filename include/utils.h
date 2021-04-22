@@ -9,6 +9,7 @@
 #include <algorithm> // std :: sort       (if necessary)
 #include <memory>    // std :: unique_ptr (if necessary)
 #include <string>    // MSVC compatibility
+#include <iterator>  // std :: begin
 
 #include <fmath.h>   // fast math function
 

@@ -50,7 +50,7 @@ Eigen :: MatrixXf Hopfield :: weights_update (const Eigen :: MatrixXf & X, const
   for (auto && col : output.colwise())
   {
     Eigen :: VectorXi order = Eigen :: VectorXi :: LinSpaced(this->outputs, 0, this->outputs);
-    std :: sort(order.data(), order.data() + this->outputs,
+    std :: sort(order.begin(), order.end(),
                 [&](const int & xi, const int & xj)
                 {
                   return col[xi] < col[xj];
