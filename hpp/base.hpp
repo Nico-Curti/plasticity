@@ -48,13 +48,9 @@ void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int & num_epochs
   std :: iota(batch_indices.begin(), batch_indices.end(), 0);
 #else
   // The solution with eigen permutation is very very very slow...
-  // Eigen :: PermutationMatrix < Eigen :: Dynamic, Eigen :: Dynamic > permutation (n_samples);
+  Eigen :: PermutationMatrix < Eigen :: Dynamic, Eigen :: Dynamic > permutation (n_samples);
   // init with the identity mat
-  // permutation.setIdentity();
-  std :: vector < int > batch_indices(n_samples);
-  std :: vector < int > col_indices(n_features);
-  std :: iota(batch_indices.begin(), batch_indices.end(), 0);
-  std :: iota(col_indices.begin(), col_indices.end(), 0);
+  permutation.setIdentity();
 #endif
 
   // init the random number generator for the permutation
@@ -64,15 +60,16 @@ void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int & num_epochs
   for (int epoch = 0; epoch < num_epochs; ++epoch)
   {
 
-    // Perform an index permutation at each epoch
-    std :: shuffle(batch_indices.begin(), batch_indices.end(), engine);
 
 #if EIGEN_VERSION_AT_LEAST(3, 3, 9)
+    // Perform an index permutation at each epoch
+    std :: shuffle(batch_indices.begin(), batch_indices.end(), engine);
     // apply the index permutation on the data
     auto X_perm = X(batch_indices, Eigen :: all); // permute rows
 #else
+    std :: random_shuffle(permutation.indices().data(), permutation.indices().data() + permutation.indices().size());
     // apply the index permutation on the data
-    auto X_perm = X(batch_indices, col_indices); // permute rows
+    auto X_perm = permutation * X; // permute rows
 #endif
 
 #ifdef __verbose__
