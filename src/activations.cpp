@@ -287,26 +287,26 @@ namespace transfer
   {
     switch (active)
     {
-      case _logistic_:       return transfer :: logistic;
-      case _loggy_:          return transfer :: loggy;
-      case _relu_:           return transfer :: relu;
-      case _elu_:            return transfer :: elu;
-      case _relie_:          return transfer :: relie;
-      case _ramp_:           return transfer :: ramp;
-      case _linear_:         return transfer :: linear;
-      case _tanh_:           return transfer :: tanhy;
-      case _plse_:           return transfer :: plse;
-      case _leaky_:          return transfer :: leaky;
-      case _stair_:          return transfer :: stair;
-      case _hardtan_:        return transfer :: hardtan;
-      case _lhtan_:          return transfer :: lhtan;
-      case _selu_:           return transfer :: selu;
-      case _elliot_:         return transfer :: elliot;
-      case _symm_elliot_:    return transfer :: symm_elliot;
-      case _softplus_:       return transfer :: softplus;
-      case _softsign_:       return transfer :: softsign;
-      case _asymm_logistic_: return transfer :: asymm_logistic;
-      default:               return nullptr;
+      case transfer_t :: logistic:       return transfer :: logistic;
+      case transfer_t :: loggy:          return transfer :: loggy;
+      case transfer_t :: relu:           return transfer :: relu;
+      case transfer_t :: elu:            return transfer :: elu;
+      case transfer_t :: relie:          return transfer :: relie;
+      case transfer_t :: ramp:           return transfer :: ramp;
+      case transfer_t :: linear:         return transfer :: linear;
+      case transfer_t :: Tanh:           return transfer :: tanhy;
+      case transfer_t :: plse:           return transfer :: plse;
+      case transfer_t :: leaky:          return transfer :: leaky;
+      case transfer_t :: stair:          return transfer :: stair;
+      case transfer_t :: hardtan:        return transfer :: hardtan;
+      case transfer_t :: lhtan:          return transfer :: lhtan;
+      case transfer_t :: selu:           return transfer :: selu;
+      case transfer_t :: elliot:         return transfer :: elliot;
+      case transfer_t :: symm_elliot:    return transfer :: symm_elliot;
+      case transfer_t :: softplus:       return transfer :: softplus;
+      case transfer_t :: softsign:       return transfer :: softsign;
+      case transfer_t :: asymm_logistic: return transfer :: asymm_logistic;
+      default:                           return nullptr;
     }
   }
 
@@ -314,26 +314,26 @@ namespace transfer
   {
     switch (active)
     {
-      case _logistic_:       return transfer :: g_logistic;
-      case _loggy_:          return transfer :: g_loggy;
-      case _relu_:           return transfer :: g_relu;
-      case _elu_:            return transfer :: g_elu;
-      case _relie_:          return transfer :: g_relie;
-      case _ramp_:           return transfer :: g_ramp;
-      case _linear_:         return transfer :: g_linear;
-      case _tanh_:           return transfer :: g_tanhy;
-      case _plse_:           return transfer :: g_plse;
-      case _leaky_:          return transfer :: g_leaky;
-      case _stair_:          return transfer :: g_stair;
-      case _hardtan_:        return transfer :: g_hardtan;
-      case _lhtan_:          return transfer :: g_lhtan;
-      case _selu_:           return transfer :: g_selu;
-      case _elliot_:         return transfer :: g_elliot;
-      case _symm_elliot_:    return transfer :: g_symm_elliot;
-      case _softplus_:       return transfer :: g_softplus;
-      case _softsign_:       return transfer :: g_softsign;
-      case _asymm_logistic_: return transfer :: g_asymm_logistic;
-      default:               return nullptr;
+      case transfer_t :: logistic:       return transfer :: g_logistic;
+      case transfer_t :: loggy:          return transfer :: g_loggy;
+      case transfer_t :: relu:           return transfer :: g_relu;
+      case transfer_t :: elu:            return transfer :: g_elu;
+      case transfer_t :: relie:          return transfer :: g_relie;
+      case transfer_t :: ramp:           return transfer :: g_ramp;
+      case transfer_t :: linear:         return transfer :: g_linear;
+      case transfer_t :: Tanh:           return transfer :: g_tanhy;
+      case transfer_t :: plse:           return transfer :: g_plse;
+      case transfer_t :: leaky:          return transfer :: g_leaky;
+      case transfer_t :: stair:          return transfer :: g_stair;
+      case transfer_t :: hardtan:        return transfer :: g_hardtan;
+      case transfer_t :: lhtan:          return transfer :: g_lhtan;
+      case transfer_t :: selu:           return transfer :: g_selu;
+      case transfer_t :: elliot:         return transfer :: g_elliot;
+      case transfer_t :: symm_elliot:    return transfer :: g_symm_elliot;
+      case transfer_t :: softplus:       return transfer :: g_softplus;
+      case transfer_t :: softsign:       return transfer :: g_softsign;
+      case transfer_t :: asymm_logistic: return transfer :: g_asymm_logistic;
+      default:                           return nullptr;
     }
   }
 

@@ -19,10 +19,6 @@ cdef extern from "weights.h" nogil:
     float sigma;
     float scale;
 
-    ## Methods
-
-    void init (float * weights, const int & inputs, const int & outputs)
-
 
 cdef extern from "<utility>" namespace "std" nogil:
 

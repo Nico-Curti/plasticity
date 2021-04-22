@@ -1,28 +1,29 @@
 #ifndef __update_args_h__
 #define __update_args_h__
 
-#include <utils.hpp> // useful macros
+#include <fmath.h>       // fast math functions
 
+#include <iostream>      // std :: cerr
 #include <unordered_map> // std :: unordered_map
-#include <numeric>       // std :: inner_product
+#include <Eigen/Dense>   // Eigen classes
 
 #define ERROR_NWEIGHTS 201 ///< The weights dimension is incorrect
 
-enum optimizer_t { _adam = 0, _momentum, _nesterov_momentum, _adagrad, _rmsprop, _adadelta, _adamax, _sgd
+enum optimizer_t { adam = 0, momentum, nesterov_momentum, adagrad, rmsprop, adadelta, adamax, sgd
 }; ///< optimizer types
 
 namespace optimizer
 {
 
 static const std :: unordered_map < std :: string, int > get_optimizer {
-                                                                          {"adam"              , _adam},
-                                                                          {"momentum"          , _momentum},
-                                                                          {"nesterov_momentum" , _nesterov_momentum},
-                                                                          {"adagrad"           , _adagrad},
-                                                                          {"rmsprop"           , _rmsprop},
-                                                                          {"adadelta"          , _adadelta},
-                                                                          {"adamax"            , _adamax},
-                                                                          {"sgd"               , _sgd},
+                                                                          {"adam"              , adam},
+                                                                          {"momentum"          , momentum},
+                                                                          {"nesterov_momentum" , nesterov_momentum},
+                                                                          {"adagrad"           , adagrad},
+                                                                          {"rmsprop"           , rmsprop},
+                                                                          {"adadelta"          , adadelta},
+                                                                          {"adamax"            , adamax},
+                                                                          {"sgd"               , sgd},
                                                                         }; ///< Utility for the optimizer management
 
 }
@@ -55,10 +56,8 @@ class update_args
 
 protected:
 
-  std :: unique_ptr < float [] > m; ///< Adam supporting array
-  std :: unique_ptr < float [] > v; ///< Adam supporting array
-
-  int nweights;        ///< Number of weights and thus the length of m and v arrays
+  Eigen :: MatrixXf m; ///< Adam supporting array
+  Eigen :: MatrixXf v; ///< Adam supporting array
 
 public:
 
@@ -70,9 +69,6 @@ public:
   float B1;            ///< Adam-like parameter
   float B2;            ///< Adam-like parameter
   float rho;           ///< Decay factor
-
-  bool l2norm;         ///< Normalize the gradient values according to their l2 norms
-  bool clip;           ///< Clip gradient values between -1 and 1
 
   // Constructors
 
@@ -98,11 +94,9 @@ public:
   * @param B1 Adam parameter.
   * @param B2 Adam parameter.
   * @param rho TODO.
-  * @param l2norm Switch if normalize the weights before update them.
-  * @param clip Switch if clip the weights before update them.
   *
   */
-  update_args (const int & type, float learning_rate=2e-2f, float momentum=.9f, float decay=1e-4f, float B1=.9f, float B2=.999f, float rho=0.f, bool l2norm=false, bool clip=false);
+  update_args (const int & type, float learning_rate=2e-2f, float momentum=.9f, float decay=1e-4f, float B1=.9f, float B2=.999f, float rho=0.f);
 
   // Destructors
 
@@ -146,9 +140,10 @@ public:
   * @details This function init the member arrays used for the
   * optimization steps.
   *
-  * @param nweights Number of weights/parameters to update.
+  * @param rows Number of weights/parameters rows to update.
+  * @param cols Number of weights/parameters cols to update.
   */
-  void init_arrays (const int & nweights);
+  void init_arrays (const int & rows, const int & cols);
 
   /**
   * @brief Update the given parameters using the optimization algorithm
@@ -158,10 +153,9 @@ public:
   * @param iteration Current iteration number
   * @param weights Array of input parameters
   * @param weights_update Array of input gradients.
-  * @param nweights Size of the given arrays.
   *
   */
-  void update ( const int & iteration, float * weights, float * weights_update, const int & nweights );
+  void update ( const int & iteration, Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update );
 
 private:
 
@@ -173,7 +167,7 @@ private:
   * @param weights_update Array of input gradients.
   *
   */
-  void adam_update ( const int & iteration, float * weights, float * weights_update );
+  void adam_update ( const int & iteration, Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update );
 
   /**
   * @brief Stochastic Gradient Descent optimization step
@@ -182,7 +176,7 @@ private:
   * @param weights_update Array of input gradients.
   *
   */
-  void sgd_update ( float * weights, float * weights_update );
+  void sgd_update ( Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update );
 
   /**
   * @brief Momentum optimization step
@@ -191,7 +185,7 @@ private:
   * @param weights_update Array of input gradients.
   *
   */
-  void momentum_update ( float * weights, float * weights_update );
+  void momentum_update ( Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update );
 
   /**
   * @brief Nesterov momentum optimization step
@@ -200,7 +194,7 @@ private:
   * @param weights_update Array of input gradients.
   *
   */
-  void nesterov_momentum_update ( float * weights, float * weights_update );
+  void nesterov_momentum_update ( Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update );
 
   /**
   * @brief AdaDrad optimization step
@@ -209,7 +203,7 @@ private:
   * @param weights_update Array of input gradients.
   *
   */
-  void adagrad_update ( float * weights, float * weights_update );
+  void adagrad_update ( Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update );
 
   /**
   * @brief RMSProp optimization step
@@ -218,7 +212,7 @@ private:
   * @param weights_update Array of input gradients.
   *
   */
-  void rmsprop_update ( float * weights, float * weights_update );
+  void rmsprop_update ( Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update );
 
   /**
   * @brief AdaDelta optimization step
@@ -227,7 +221,7 @@ private:
   * @param weights_update Array of input gradients.
   *
   */
-  void adadelta_update ( float * weights, float * weights_update );
+  void adadelta_update ( Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update );
 
   /**
   * @brief AdaMax optimization step
@@ -237,25 +231,7 @@ private:
   * @param weights_update Array of input gradients.
   *
   */
-  void adamax_update ( const int & iteration, float * weights, float * weights_update );
-
-  /**
-  * @brief Normalize the array with l2 norm
-  *
-  * @param arr Input array
-  * @param size Lenght of the given array
-  *
-  */
-  void norm_value ( float * arr, const int & size );
-
-  /**
-  * @brief Clip the array values between [-1, 1]
-  *
-  * @param arr Input array
-  * @param size Lenght of the given array
-  *
-  */
-  void clip_value ( float * arr, const int & size );
+  void adamax_update ( const int & iteration, Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update );
 
 };
 

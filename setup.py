@@ -60,13 +60,13 @@ class cmake_build_ext (build_ext):
     # example of cmake args
     config = 'Debug' if self.debug else 'Release'
     cmake_args = [
-        '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + str(extdir.parent.absolute()),
-        '-DCMAKE_BUILD_TYPE=' + config,
-        '-DPYWRAP=ON',
-        '-DBUILD_DOCS={}'.format('ON' if os.environ.get('READTHEDOCS', None) == 'True' else 'OFF'),
-        '-DBUILD_TEST=OFF',
-        '-DVERBOSE=ON',
-        '-DOMP={}'.format('ON' if ENABLE_OMP else 'OFF')
+        '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY:FILEPATH=' + str(extdir.parent.absolute()) + '/lib',
+        '-DCMAKE_BUILD_TYPE:STRING=' + config,
+        '-DPYWRAP:BOOL=ON',
+        '-DBUILD_DOCS:BOOL={}'.format('ON' if os.environ.get('READTHEDOCS', None) == 'True' else 'OFF'),
+        '-DBUILD_TEST:BOOL=OFF',
+        '-DVERBOSE:BOOL=ON',
+        '-DVIEW:BOOL=OFF',
     ]
 
     if platform.system() == 'Windows':
@@ -230,12 +230,6 @@ CPP_COMPILER = platform.python_compiler()
 README_FILENAME = os.path.join(here, 'README.md')
 REQUIREMENTS_FILENAME = os.path.join(here, 'requirements.txt')
 VERSION_FILENAME = os.path.join(here, 'plasticity', '__version__.py')
-
-ENABLE_OMP = False
-
-if '--omp' in sys.argv:
-  ENABLE_OMP = True
-  sys.argv.remove('--omp')
 
 # Import the README and use it as the long-description.
 # Note: this will only work if 'README.md' is present in your MANIFEST.in file!

@@ -15,9 +15,19 @@
 
 #include <iostream>
 
-#define ERROR_K_POSITIVE 101
-#define ERROR_FITTED     102
-#define ERROR_DIMENSIONS 103
+#include <Eigen/Dense>
+
+#if EIGEN_VERSION_AT_LEAST(3, 3, 9)
+
+  #include <Eigen/Core> // Eigen :: all slicing
+
+#endif
+
+
+#define ERROR_FILENOTFOUND         100
+#define ERROR_K_POSITIVE           101
+#define ERROR_FITTED               102
+#define ERROR_DIMENSIONS           103
 #define ERROR_CONVERGENCY_POSITIVE 104
 
 /**
@@ -43,34 +53,25 @@ protected:
   update_args optimizer;                 ///< optimizer object
   weights_initialization w_init;         ///< weights initialization object
 
-  std :: unique_ptr < float[] > output;  ///< array of outputs
-
-#ifdef __testing__
 public:
-#endif
 
-  std :: unique_ptr < float[] > weights; ///< array-matrix of weights
+  Eigen :: MatrixXf weights;             ///< array-matrix of weights
 
-#ifdef __testing__
 protected:
-#endif
 
-  std :: deque < std :: unique_ptr < float[] > > history; ///< deque for the convergency monitoring
-  std :: unique_ptr < float[] > theta; ///< array of means
+  std :: deque < Eigen :: VectorXf > history; ///< deque for the convergency monitoring
+  Eigen :: VectorXf theta;                    ///< array of means
 
   std :: function < float(const float &) > activation; ///< pointer to activation function
   std :: function < float(const float &) > gradient;   ///< pointer to gradient function
 
-protected:
-
-  static float precision; ///< Parameter that controls numerical precision of the weight updates.
-
   int batch;                  ///< batch size
   int outputs;                ///< number of hidden units
-  int nweights;               ///< number of weights
   int epochs_for_convergency; ///< number of stable epochs requested for the convergency
 
-  float convergency_atol; ///< Absolute tolerance requested for the convergency
+  float convergency_atol;     ///< Absolute tolerance requested for the convergency
+
+  static float precision;     ///< Parameter that controls numerical precision of the weight updates.
 
 public:
 
@@ -100,9 +101,9 @@ public:
   * @param convergency_atol Absolute tolerance requested for the convergency.
   *
   */
-  BasePlasticity (const int & outputs, const int & batch_size, int activation=transfer :: _linear_,
-                  update_args optimizer=update_args(optimizer_t :: _sgd),
-                  weights_initialization weights_init=weights_initialization(weights_init_t :: _uniform_),
+  BasePlasticity (const int & outputs, const int & batch_size, int activation=transfer_t :: linear,
+                  update_args optimizer=update_args(optimizer_t :: sgd),
+                  weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
                   int epochs_for_convergency=1, float convergency_atol=1e-2f);
 
 
@@ -159,12 +160,32 @@ public:
   * @param n_features dimension of the X matrix, i.e. the number of cols
   * @param num_epochs Number of epochs for model convergency.
   * @param seed Random seed number for the batch subdivisions.
+  * @param callback Callback function to call at each batch evaluation.
+  *
+  * @tparam Callback void lambda function which can use member variables.
   *
   */
-  void fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs, int seed=42);
+  template < class Callback = std :: function < void (BasePlasticity *) > >
+  void fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs, int seed=42, Callback callback=[](BasePlasticity *){});
 
   /**
   * @brief Train the model/encoder
+  *
+  * @details Proxy function for a user interface compatible with Eigen matrix.
+  *
+  * @param X Eigen matrix of the input variables/features.
+  * @param num_epochs Number of epochs for model convergency.
+  * @param seed Random seed number for the batch subdivisions.
+  * @param callback Callback function to call at each batch evaluation.
+  *
+  * @tparam Callback void lambda function which can use member variables.
+  *
+  */
+  template < class Callback = std :: function < void (BasePlasticity *) > >
+  void fit (const Eigen :: MatrixXf & X, const int & num_epochs, int seed=42, Callback callback=[](BasePlasticity *){});
+
+  /**
+  * @brief Predict the model/encoder
   *
   * @details The model computes the weights and thus the encoded features
   * using the given plasticity rule.
@@ -182,6 +203,18 @@ public:
   *
   */
   float * predict (float * X, const int & n_samples, const int & n_features);
+
+  /**
+  * @brief Predict the model/encoder
+  *
+  * @details Proxy function for a user interface compatible with Eigen matrix.
+  *
+  * @param X Eigen matrix of the input variables/features.
+  *
+  * @return The array of encoded features.
+  *
+  */
+  float * predict (const Eigen :: MatrixXf & X);
 
   /**
   * @brief Save the current weight matrix.
@@ -226,12 +259,13 @@ private:
   *
   * @note Compute the weights update using the given learning rule.
   *
-  * @param X array in ravel format of the input variables/features.
-  * @param n_features dimension of the X matrix, i.e. the number of cols.
-  * @param weights_update Array/matrix of updates for weights.
+  * @param X Batch of data.
+  * @param output Output of the model as computed by the _predict function
+  *
+  * @return Matrix of updates (aka dW) for weights.
   *
   */
-  virtual void weights_update (float * X, const int & n_features, float * weights_update) = 0;
+  virtual Eigen :: MatrixXf weights_update (const Eigen :: MatrixXf & X, const Eigen :: MatrixXf & output) = 0;
 
   /**
   * @brief Check the input dimensions.
@@ -281,33 +315,32 @@ private:
   /**
   * @brief Core function of the fit formula
   *
-  * @note
+  * @note This is the core function of the fit procedure, i.e the
+  * function in which the computation of the training step is performed
   *
-  * @param X array in ravel format of the input variables/features.
+  * @param X Eigen matrix of the input variables/features.
   * @param num_epochs Number of epochs for model convergency.
-  * @param n_samples dimension of the X matrix, i.e. the number of rows
-  * @param n_features dimension of the X matrix, i.e. the number of cols
   * @param seed Random seed number for the batch subdivisions.
+  * @param callback Callback function to call at each batch evaluation.
+  *
+  * @tparam Callback void lambda function which can use member variables.
   *
   */
-  void _fit (float * X, const int & num_epochs, const int & n_features, const int & n_samples, const int & seed);
+  template < class Callback >
+  void _fit (const Eigen :: MatrixXf & X, const int & num_epochs, const int & seed, Callback callback);
 
   /**
   * @brief Core function of the predict formula
   *
-  * @note The function computes the output as W @ X.T.
-  * We use the GEMM algorithm with OpenMP support for a fast evaluation
+  * @note This abstract function implements the predict rule of
+  * the model given the data matrix.
   *
-  * @param A Input matrix (M x K)
-  * @param B Input matrix (N x K)
-  * @param C Output matrix (M x N)
-  * @param N Number of rows of B
-  * @param M Number of rows of A
-  * @param K Number of cols of A and B
-  * @param buffer extra array buffer with shape (M x K) to use if necessary
+  * @param data Input matrix of data
+  *
+  * @return Output matrix of the model.
   *
   */
-  virtual void _predict (float * A, float * B, float * C, const int & N, const int & M, const int & K, float * buffer=nullptr);
+  virtual Eigen :: MatrixXf _predict (const Eigen :: MatrixXf & data);
 
 };
 

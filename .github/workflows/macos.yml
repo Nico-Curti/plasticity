@@ -1,0 +1,66 @@
+name: MacOS plasticity CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.cfg.os }}
+    name: ${{ matrix.cfg.os }}@${{ matrix.cfg.cxx }}-${{ matrix.cfg.cpp-version }}
+
+    strategy:
+      matrix:
+        cfg:
+
+          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.2.1, generator: Ninja}
+          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.3.1, generator: Ninja}
+          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.4.1, generator: Ninja}
+          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.5, generator: Ninja}
+          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.6, generator: Ninja}
+          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.7, generator: Ninja}
+          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.0.1, generator: Ninja}
+          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.1, generator: Ninja}
+          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.1.1, generator: Ninja}
+          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.2, generator: Ninja}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
+        submodules: recursive
+
+    - name: Get latest CMake
+      uses: lukka/get-cmake@latest
+
+    - name: Install compiler and dependencies
+      run: |
+        curl -LO https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci; source ./macports-ci install
+
+        if [ "${{ matrix.cfg.cc }}" = "gcc" ]; then
+          brew install gcc@${{ matrix.cfg.cpp-version }}
+          echo "CC=gcc-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
+          echo "CXX=g++-${{ matrix.cfg.cpp-version }}" >> $GITHUB_ENV
+        else
+          sudo xcode-select -switch /Applications/Xcode_${{ matrix.cfg.cpp-version }}.app
+          echo "CC=clang" >> $GITHUB_ENV
+          echo "CXX=clang++" >> $GITHUB_ENV
+        fi
+
+        # Install the Eigen Library
+        brew install eigen
+
+    - name: Build with CMake
+      uses: lukka/run-cmake@v3
+      with:
+        cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
+        cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
+        useVcpkgToolchainFile: false
+        buildDirectory: '${{ runner.workspace }}/buildDirectory'
+        cmakeAppendedArgs: "-G\"${{ matrix.cfg.generator }}\" -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_DOCS:BOOL=OFF -DBUILD_TEST:BOOL=ON -DPYWRAP:BOOL=OFF -DVIEW:BOOL=OFF"
+        cmakeBuildType: 'Release'
+        buildWithCMakeArgs: '--config Release --target install'

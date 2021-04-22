@@ -4,6 +4,9 @@
 from cython.operator cimport dereference as deref
 from libcpp.string cimport string
 
+cimport numpy as np
+import numpy as np
+
 from bcm cimport BCM
 from update_args cimport _update_args
 from weights_initialization cimport _weights_initialization
@@ -24,7 +27,7 @@ cdef class _BCM:
   def predict (self, float[::1] X, int n_samples, int n_features):
 
     cdef float * res = deref(self.thisptr).predict(&X[0], n_samples, n_features)
-    return [res[i] for i in range(self.outputs * n_samples)]
+    return np.asarray(<np.float32_t[: self.outputs * n_samples]> res)
 
   def get_weights (self):
 
@@ -32,7 +35,8 @@ cdef class _BCM:
       return (None, None)
 
     cdef float * w = deref(self.thisptr).get_weights()
-    return ([w[i] for i in range(self.outputs * self.n_features)], (self.outputs, self.n_features))
+    weights = np.asarray(<np.float32_t[:self.outputs * self.n_features]> w)
+    return weights.reshape(self.outputs, self.n_features)
 
   def save_weights (self, string filename):
     deref(self.thisptr).save_weights(filename)

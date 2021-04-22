@@ -1,7 +1,7 @@
 #ifndef __hopfield_h__
 #define __hopfield_h__
 
-#include <base.h>
+#include <base.hpp>
 
 /**
 * @class Hopfield
@@ -14,13 +14,9 @@
 class Hopfield : public BasePlasticity
 {
 
-  std :: unique_ptr < float[] > yl;          ///< matrix of updates
-  std :: unique_ptr < int[] > fire_indices;  ///< array of indices related to the maximum output
-
-  int k; ///< ranking parameter
-
-  float delta; ///< Strength of the anti-hebbian learning
-  float p;     ///< Lebesque norm of weights
+  int k;        ///< ranking parameter
+  float delta;  ///< Strength of the anti-hebbian learning
+  float p;      ///< Lebesque norm of weights
 
 
 public:
@@ -47,8 +43,8 @@ public:
   *
   */
   Hopfield (const int & outputs, const int & batch_size,
-            update_args optimizer=update_args(optimizer_t :: _sgd),
-            weights_initialization weights_init=weights_initialization(weights_init_t :: _uniform_),
+            update_args optimizer=update_args(optimizer_t :: sgd),
+            weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
             int epochs_for_convergency=1, float convergency_atol=1e-2f,
             float delta=.4f, float p=2.f,
             int k=2);
@@ -109,12 +105,12 @@ private:
   * @param weights_update Array/matrix of updates for weights.
   *
   */
-  void weights_update (float * X, const int & n_features, float * weights_update);
+  Eigen :: MatrixXf weights_update (const Eigen :: MatrixXf & X, const Eigen :: MatrixXf & output);
 
   /**
   * @brief Apply the Lebesgue norm to the weights.
   *
-  * @note The function implements the Lebesque norm on the weight matrix following the equation:
+  * @note The function implements the Lebesgue norm on the weight matrix following the equation:
   *
   * \code{.py}
   * W = sign(W) * abs(W)**(p - 1)
@@ -129,16 +125,12 @@ private:
   * @note The function computes the output as W @ X.T.
   * We use the GEMM algorithm with OpenMP support for a fast evaluation
   *
-  * @param A Input matrix (M x K)
-  * @param B Input matrix (N x K)
-  * @param C Output matrix (M x N)
-  * @param N Number of rows of B
-  * @param M Number of rows of A
-  * @param K Number of cols of A and B
-  * @param buffer extra array buffer with shape (M x K) to use if necessary
+  * @param data Input matrix of data
+  *
+  * @return Output matrix of the model.
   *
   */
-  void _predict (float * A, float * B, float * C, const int & N, const int & M, const int & K, float * buffer);
+  Eigen :: MatrixXf _predict (const Eigen :: MatrixXf & data);
 
 };
 

@@ -2,8 +2,8 @@
 
 float BasePlasticity :: precision = 1e-30f;
 
-BasePlasticity :: BasePlasticity () : optimizer (), w_init (), output (nullptr), weights (nullptr), history (), theta (nullptr), activation (nullptr), gradient (nullptr),
-                                      batch (100), outputs (100), nweights (0), epochs_for_convergency (0), convergency_atol (0.f)
+BasePlasticity :: BasePlasticity () : optimizer (), w_init (), weights (), history (), theta (), activation (nullptr), gradient (nullptr),
+                                      batch (100), outputs (100), epochs_for_convergency (0), convergency_atol (0.f)
 {
 }
 
@@ -11,27 +11,23 @@ BasePlasticity :: BasePlasticity (const int & outputs, const int & batch_size, i
                                   update_args optimizer,
                                   weights_initialization weights_init,
                                   int epochs_for_convergency, float convergency_atol
-                                  ) : optimizer (optimizer), w_init (weights_init), output (nullptr), weights (nullptr), history (), theta (nullptr), activation (nullptr), gradient (nullptr),
-                                      batch (batch_size), outputs (outputs), nweights (0), epochs_for_convergency (epochs_for_convergency), convergency_atol (convergency_atol)
+                                  ) : optimizer (optimizer), w_init (weights_init), weights (), history (), theta (), activation (nullptr), gradient (nullptr),
+                                      batch (batch_size), outputs (outputs), epochs_for_convergency (epochs_for_convergency), convergency_atol (convergency_atol)
 {
-  //// correct epochs_for_convergency
-  ////this->epochs_for_convergency = std :: max(this->epochs_for_convergency, 1);
+  // correct epochs_for_convergency
+  //this->epochs_for_convergency = std :: max(this->epochs_for_convergency, 1);
 
   this->activation = transfer :: activate( activation );
   this->gradient   = transfer :: gradient( activation );
-
-  this->theta.reset(new float[this->outputs]);
 }
 
 BasePlasticity :: BasePlasticity (const BasePlasticity & b)
 {
-  this->nweights   = b.nweights;
   this->activation = b.activation;
   this->gradient   = b.gradient;
 
   this->batch    = b.batch;
   this->outputs  = b.outputs;
-  this->nweights = b.nweights;
   this->epochs_for_convergency = b.epochs_for_convergency;
 
   this->convergency_atol = b.convergency_atol;
@@ -39,22 +35,18 @@ BasePlasticity :: BasePlasticity (const BasePlasticity & b)
   this->optimizer = b.optimizer;
   this->w_init = b.w_init;
 
-  this->weights.reset(new float[b.nweights]);
-  std :: copy_n (b.weights.get(), b.nweights, this->weights.get());
+  this->weights = b.weights;
 
-  this->theta.reset(new float[b.outputs]);
-  //std :: copy_n (b.theta.get(), b.outputs, this->theta.get()); // it is useless
+  //this->theta = b.theta; // it is useless
 }
 
 BasePlasticity & BasePlasticity :: operator = (const BasePlasticity & b)
 {
-  this->nweights   = b.nweights;
   this->activation = b.activation;
   this->gradient   = b.gradient;
 
   this->batch    = b.batch;
   this->outputs  = b.outputs;
-  this->nweights = b.nweights;
   this->epochs_for_convergency = b.epochs_for_convergency;
 
   this->convergency_atol = b.convergency_atol;
@@ -62,90 +54,87 @@ BasePlasticity & BasePlasticity :: operator = (const BasePlasticity & b)
   this->optimizer = b.optimizer;
   this->w_init = b.w_init;
 
-  this->weights.reset(new float[b.nweights]);
-  std :: copy_n (b.weights.get(), b.nweights, this->weights.get());
+  this->weights = b.weights;
 
-  this->theta.reset(new float[b.outputs]);
-  //std :: copy_n (b.theta.get(), b.outputs, this->theta.get()); // it is useless
+  //this->theta = b.theta; // it is useless
 
   return *this;
 }
 
-
-void BasePlasticity :: fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs, int seed)
-{
-  this->nweights = this->outputs * n_features;
-  this->weights.reset(new float[this->nweights]);
-
-  const int outputs = this->outputs * this->batch;
-  this->output.reset(new float[outputs]);
-
-  this->w_init.init(this->weights.get(), this->outputs, n_features);
-  this->optimizer.init_arrays(this->nweights);
-
-  this->_fit (X, num_epochs, n_features, n_samples, seed);
-}
-
 float * BasePlasticity :: predict (float * X, const int & n_samples, const int & n_features)
 {
+  // convert the input array to Eigen matrix
+  Eigen :: Map < Eigen :: Matrix < float, Eigen :: Dynamic, Eigen :: Dynamic, Eigen :: RowMajor > > data(X, n_samples, n_features);
+  // call the "real" function
+  return this->predict(data);
+}
+
+float * BasePlasticity :: predict (const Eigen :: MatrixXf & X)
+{
+  // extracthe the number of features as the number of columns of the input matrix
+  const int n_features = X.cols();
+
+  // check if the model has already stored the weights matrix (aka the fit function has already run)
   this->check_is_fitted ();
+  // check if the input dimensions are consistent with the training ones
   this->check_dims (n_features);
 
-  const int outputs = this->outputs * n_samples;
-  this->output.reset(new float[outputs]);
+  // perform the prediction using the core (overrided) function
+  Eigen :: MatrixXf output = this->_predict (X);
 
-#ifdef _OPENMP
-
-  #pragma omp parallel
-  {
-
-#endif
-
-    this->_predict (this->weights.get(), X, this->output.get(), n_samples, this->outputs, n_features);
-
-#ifdef _OPENMP
-
-  } // end parallel section
-
-#endif
-
-  return this->output.get();
+  return output.data();
 }
 
 void BasePlasticity :: save_weights (const std :: string & filename)
 {
+  // check if the model has already stored the weights matrix (aka the fit function has already run)
   this->check_is_fitted ();
 
-  std :: ofstream os(filename, std :: ios :: out | std :: ios :: binary);
+  // open the output stream file as binary
+  std :: ofstream os(filename, std :: ios :: out | std :: ios :: binary | std :: ios :: trunc);
 
-  os.write( (const char *) &this->nweights, sizeof( int ));
-  os.write( reinterpret_cast < char* >(this->weights.get()), sizeof(float) * this->nweights);
+  // temporary variables for the matrix shape
+  typename Eigen :: MatrixXf :: Index rows = this->weights.rows();
+  typename Eigen :: MatrixXf :: Index cols = this->weights.cols();
 
+  // dump the shape variables
+  os.write((char *) (&rows), sizeof ( typename Eigen :: MatrixXf :: Index ) );
+  os.write((char *) (&cols), sizeof ( typename Eigen :: MatrixXf :: Index ) );
+  // dump the matrix data buffer
+  os.write((char *) this->weights.data(), rows * cols * sizeof ( typename Eigen :: MatrixXf :: Scalar) );
+  // close the file stream
   os.close();
 }
 
 void BasePlasticity :: load_weights (const std :: string & filename)
 {
-
+  // check if the provided file exists trying to open it
   if ( ! utils :: file_exists(filename) )
-  {
-    std :: cerr << "File not found. Given : " << filename << std :: endl;
-    throw 1;
-  }
+    // throw the exception with the appropriated error
+    throw std :: runtime_error("File not found. Given : " + filename);
 
+  // open the file stream as binary
   std :: ifstream is(filename, std :: ios :: in | std :: ios :: binary);
 
-  is.read(reinterpret_cast < char* >(&this->nweights), sizeof(int));
+  // temporary variables for the matrix shape
+  typename Eigen :: MatrixXf :: Index rows = 0;
+  typename Eigen :: MatrixXf :: Index cols = 0;
 
-  this->weights.reset(new float[this->nweights]);
-  is.read(reinterpret_cast < char* >(this->weights.get()), sizeof(float) * this->nweights);
-
+  // read the shape variables
+  is.read((char*) (&rows), sizeof ( typename Eigen :: MatrixXf :: Index ) );
+  is.read((char*) (&cols), sizeof ( typename Eigen :: MatrixXf :: Index ) );
+  // resize the weights matrix
+  this->weights.resize(rows, cols);
+  // read the matrix data buffer
+  is.read( (char *) this->weights.data(), rows * cols * sizeof ( typename Eigen :: MatrixXf :: Scalar) );
+  // close the file stream
   is.close();
 }
 
 float * BasePlasticity :: get_weights ()
 {
-  return this->weights.get();
+  // extract the pointer to the data stored into the weight Eigen Matrix
+  return this->weights.data();
 }
 
 
@@ -153,151 +142,67 @@ float * BasePlasticity :: get_weights ()
 
 void BasePlasticity :: check_dims (const int & n_features)
 {
-  if ( this->outputs * n_features != this->nweights )
-  {
-    std :: cerr << "Invalid dimensions found. The input (n_samples, n_features) shape is inconsistent with the number of weights (" << this->nweights << ")" << std :: endl;
-    throw ERROR_DIMENSIONS;
-  }
+  // Check the shape consistency between the input data (n_samples, n_features)
+  // and the weights matrix (outputs, n_features)
+  // This function is used just to be sure that the dataset provided for the
+  // prediction are consistent with the data (shape) provided for the training
+  if ( this->outputs * n_features != this->weights.size() )
+    throw std :: runtime_error("Invalid dimensions found. The input (n_samples, n_features) shape is inconsistent with the number of weights (" + std :: to_string(this->weights.size()) + ")");
 }
 
 void BasePlasticity :: check_is_fitted ()
 {
-  if ( ! this->weights )
-  {
-    std :: cerr << "Fitted error. The model is not fitted yet." << std :: endl
-                << "Please call the fit function before using the predict member." << std :: endl;
-    throw ERROR_FITTED;
-  }
+  // If the model has not yet called the fit function the weights matrix is empty!
+  if ( this->weights.rows() == 0 && this->weights.cols() == 0 )
+    throw std :: runtime_error("Fitted error. The model is not fitted yet.\n"
+                               "Please call the fit function before using the predict member.");
 }
 
 void BasePlasticity :: check_params ()
 {
+  // the number of epochs for the convergency must be a positive non null integer!
   if ( this->epochs_for_convergency <= 0 )
-  {
-    std :: cerr << "epochs_for_convergency must be an integer bigger or equal than 1" << std :: endl;
-    std :: exit(ERROR_CONVERGENCY_POSITIVE);
-  }
+    throw std :: runtime_error("epochs_for_convergency must be an integer bigger or equal than 1");
 }
 
 bool BasePlasticity :: check_convergency ()
 {
+  // If the history queue is not full append the last (current) theta vector to the history
   if ( static_cast < int >(this->history.size()) < this->epochs_for_convergency )
   {
-    this->history.emplace_back(new float[this->outputs]);
-    std :: copy_n(this->theta.get(), this->outputs, this->history[this->history.size() - 1].get());
+    this->history.emplace_back(this->theta);
     return false;
   }
 
-  int check = 0;
-  const float toll = this->convergency_atol;
+  // Otherwise evaluate the distances between the current theta vector
+  // and the history arrays. The distance is evaluated as the abs differences
+  // between each historical vector and the current theta.
+  // If the maximum value of the differences is lower than the given tollerance
+  // the convergency is reached and a stop is returned.
 
   for (int i = 0; i < this->epochs_for_convergency; ++i)
   {
-    check = std :: inner_product(this->theta.get(), this->theta.get() + this->outputs,
-                                 this->history[i].get(), 0,
-                                 std :: plus < float >(),
-                                 [&](const float & theta, const float & history)
-                                 {
-                                   return static_cast < int >(std :: fabs(theta - history) < toll);
-                                 });
+    // compute the vector of abs differences
+    const bool equal = this->theta.isApprox(this->history[i], this->convergency_atol);
 
-    if ( check == this->outputs )
-      goto stop;
+    if ( !equal )
+      return true;
   }
 
+  // Since this is the case in which the history queue is full
+  // we have to remove the older vector and append the current one (LIFO behavior)
   this->history.pop_front();
-  this->history.emplace_back(new float[this->outputs]);
-  std :: copy_n(this->theta.get(), this->outputs, this->history[this->history.size() - 1].get());
+  this->history.emplace_back(this->theta);
 
-  stop:
-  return check == this->outputs;
+  return false;
 }
 
 void BasePlasticity :: normalize_weights ()
 {
 }
 
-
-void BasePlasticity :: _fit (float * X, const int & num_epochs, const int & n_features, const int & n_samples, const int & seed)
+Eigen :: MatrixXf BasePlasticity :: _predict (__unused const Eigen :: MatrixXf & data)
 {
-  const int num_batches = n_samples / this->batch;
-
-  std :: unique_ptr < float[] > weights_update (new float[this->nweights]);
-  std :: unique_ptr < int[] > batch_indices(new int [num_batches]);
-  std :: iota(batch_indices.get(), batch_indices.get() + num_batches, 0);
-
-  std :: mt19937 engine(seed);
-
-  for (int epoch = 0; epoch < num_epochs; ++epoch)
-  {
-    std :: shuffle(batch_indices.get(), batch_indices.get() + num_batches, engine);
-
-#ifdef __verbose__
-
-    std :: cout << RESET_COUT << "Epoch " << epoch + 1 << "/" << num_epochs << std :: endl;
-    auto timer  = utils :: what_time_is_it_now();
-
-#endif // __verbose__
-
-    for (int i = 0; i < num_batches; ++i)
-    {
-
-#ifdef _OPENMP
-
-      #pragma omp parallel
-      {
-
-#endif
-        float * batch_data = X + i * n_features * this->batch;
-
-        this->normalize_weights();
-        this->_predict(this->weights.get(), batch_data, this->output.get(), this->batch, this->outputs, n_features, weights_update.get());
-        this->weights_update(batch_data, n_features, weights_update.get());
-
-        // update weights
-
-        //const float epsil = 2e-2f * (1.f - epoch / num_epochs);
-        //for (int i = 0; i < this->nweights; ++i)
-        //  this->weights[i] += epsil * weights_update[i];
-        this->optimizer.update(epoch + 1, this->weights.get(), weights_update.get(), this->nweights);
-
-#ifdef _OPENMP
-
-      } // end parallel section
-
-#endif
-
-#ifdef __verbose__
-
-      utils :: print_progress (i + 1, num_batches, timer);
-
-#endif // __verbose__
-
-    } // end for batches
-
-#ifdef __verbose__
-
-    std :: cout << std :: endl;
-
-#endif // __verbose__
-
-
-    if ( this->check_convergency() )
-    {
-
-#ifdef __verbose__
-
-      std :: cout << "Early stopping: the training has reached the convergency criteria" << std :: endl;
-
-#endif // __verbose__
-
-      break;
-    }
-
-
-  } // end for epoch
+  return Eigen :: MatrixXf {};
 }
 
-void BasePlasticity :: _predict (__unused float * A, __unused float * B, __unused float * C, __unused const int & N, __unused const int & M, __unused const int & K, __unused float * buffer)
-{
-}

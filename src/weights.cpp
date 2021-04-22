@@ -9,7 +9,7 @@ weights_initialization :: weights_initialization (const int & type, float mu, fl
   this->engine = std :: mt19937(seed);
 
   // check the initialization type (greater than zero and included into the get map of available values)
-  if ( type < 0 || type >= static_cast < int >(weights_init :: get.size()) )
+  if ( type < 0 || type >= static_cast < int >(weights_init :: get_weights.size()) )
   {
     std :: cerr << "Invalid initialization function" << std :: endl;
     throw ERROR_WEIGHTS_INITIALIZATION;
@@ -35,15 +35,15 @@ void weights_initialization :: init (float * weights, const int & inputs, const 
 {
   switch (this->type)
   {
-    case _zeros_ :          return this->zeros(weights, inputs, outputs);
-    case _ones_ :           return this->ones(weights, inputs, outputs);
-    case _uniform_ :        return this->uniform(weights, inputs, outputs);
-    case _normal_ :         return this->normal(weights, inputs, outputs);
-    case _lecun_uniform_ :  return this->lecun_uniform(weights, inputs, outputs);
-    case _glorot_uniform_ : return this->glorot_uniform(weights, inputs, outputs);
-    case _glorot_normal_ :  return this->glorot_normal(weights, inputs, outputs);
-    case _he_uniform_ :     return this->he_uniform(weights, inputs, outputs);
-    case _he_normal_ :      return this->he_normal(weights, inputs, outputs);
+    case weights_init_t :: zeros :          return this->zeros(weights, inputs, outputs);
+    case weights_init_t :: ones :           return this->ones(weights, inputs, outputs);
+    case weights_init_t :: uniform :        return this->uniform(weights, inputs, outputs);
+    case weights_init_t :: normal :         return this->normal(weights, inputs, outputs);
+    case weights_init_t :: lecun_uniform :  return this->lecun_uniform(weights, inputs, outputs);
+    case weights_init_t :: glorot_uniform : return this->glorot_uniform(weights, inputs, outputs);
+    case weights_init_t :: glorot_normal :  return this->glorot_normal(weights, inputs, outputs);
+    case weights_init_t :: he_uniform :     return this->he_uniform(weights, inputs, outputs);
+    case weights_init_t :: he_normal :      return this->he_normal(weights, inputs, outputs);
     default:
     {
       std :: cerr << "Invalid initialization function" << std :: endl;

@@ -6,31 +6,35 @@
 #include <unordered_map> // std :: unordered_map
 #include <functional>    // std :: function
 
+
+enum transfer_t { logistic = 0, loggy, relu, elu, relie, ramp, linear, Tanh, plse, leaky, stair, hardtan, lhtan, selu, elliot, symm_elliot, softplus, softsign, asymm_logistic, sigmoid = logistic
+}; ///< activation types
+
+
 namespace transfer
 {
 
-  enum{ _logistic_ = 0, _loggy_, _relu_, _elu_, _relie_, _ramp_, _linear_, _tanh_, _plse_, _leaky_, _stair_, _hardtan_, _lhtan_, _selu_, _elliot_, _symm_elliot_, _softplus_, _softsign_, _asymm_logistic_
-  };///< activation types
 
-  static const std :: unordered_map < std :: string, int > get_activation { {"logistic"    , _logistic_},
-                                                                            {"loggy"       , _loggy_},
-                                                                            {"relu"        , _relu_},
-                                                                            {"elu"         , _elu_},
-                                                                            {"relie"       , _relie_},
-                                                                            {"ramp"        , _ramp_},
-                                                                            {"linear"      , _linear_},
-                                                                            {"tanh"        , _tanh_},
-                                                                            {"plse"        , _plse_},
-                                                                            {"leaky"       , _leaky_},
-                                                                            {"stair"       , _stair_},
-                                                                            {"hardtan"     , _hardtan_},
-                                                                            {"lhtan"       , _lhtan_},
-                                                                            {"selu"        , _selu_},
-                                                                            {"elliot"      , _elliot_},
-                                                                            {"s_elliot"    , _symm_elliot_},
-                                                                            {"softplus"    , _softplus_},
-                                                                            {"softsign"    , _softsign_},
-                                                                            {"as_logistic" , _asymm_logistic_} }; ///< Utility for the activations management
+  static const std :: unordered_map < std :: string, int > get_activation { {"logistic"    , transfer_t :: logistic},
+                                                                            {"sigmoid"     , transfer_t :: logistic},
+                                                                            {"loggy"       , transfer_t :: loggy},
+                                                                            {"relu"        , transfer_t :: relu},
+                                                                            {"elu"         , transfer_t :: elu},
+                                                                            {"relie"       , transfer_t :: relie},
+                                                                            {"ramp"        , transfer_t :: ramp},
+                                                                            {"linear"      , transfer_t :: linear},
+                                                                            {"tanh"        , transfer_t :: Tanh},
+                                                                            {"plse"        , transfer_t :: plse},
+                                                                            {"leaky"       , transfer_t :: leaky},
+                                                                            {"stair"       , transfer_t :: stair},
+                                                                            {"hardtan"     , transfer_t :: hardtan},
+                                                                            {"lhtan"       , transfer_t :: lhtan},
+                                                                            {"selu"        , transfer_t :: selu},
+                                                                            {"elliot"      , transfer_t :: elliot},
+                                                                            {"s_elliot"    , transfer_t :: symm_elliot},
+                                                                            {"softplus"    , transfer_t :: softplus},
+                                                                            {"softsign"    , transfer_t :: softsign},
+                                                                            {"as_logistic" , transfer_t :: asymm_logistic} }; ///< Utility for the activations management
 
   /**
   * @brief Linear activation function.

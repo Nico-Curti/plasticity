@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 3.9.0)
 # rFBP Version
 set (PLASTICITY_MAJOR    1)
 set (PLASTICITY_MINOR    0)
-set (PLASTICITY_REVISION 0)
+set (PLASTICITY_REVISION 1)
 set (PLASTICITY_VERSION ${PLASTICITY_MAJOR}.${PLASTICITY_MINOR}.${PLASTICITY_REVISION})
 
 project (plasticity LANGUAGES CXX VERSION ${PLASTICITY_VERSION} DESCRIPTION "Encoding models")
@@ -20,11 +20,11 @@ add_definitions (-DMAJOR=${PLASTICITY_MAJOR} -DMINOR=${PLASTICITY_MINOR} -DREVIS
 #                         COMPILE OPTIONS                       #
 #################################################################
 
-option (OMP        "Enable OpenMP                support" OFF)
 option (BUILD_TEST "Enable tests build           support" OFF)
 option (PYWRAP     "Enable Python wrap compilation      " OFF)
 option (BUILD_DOCS "Enable Documentaion builid   support" OFF)
 option (VERBOSE    "Enable verbosity             support" ON)
+option (VIEW       "Enable OpenCV                support" OFF)
 
 #################################################################
 #                         SETTING VARIABLES                     #
@@ -98,27 +98,14 @@ endif()
 #                         PARSE OPTIONS                         #
 #################################################################
 
-if (OMP)
-  find_package(OpenMP REQUIRED)
-  if (OPENMP_FOUND)
-    message(STATUS "OpenMP found")
-    if (OpenMP_CXX_VERSION_MAJOR LESS_EQUAL 4 AND OpenMP_CXX_VERSION_MINOR LESS 5)
-      message(FATAL_ERROR " Your OpenMP is too old. Required OpenMP 4.5. Please upgrade.")
-    endif()
-    message(STATUS "OpenMP found")
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-    if (APPLE)
-      list(APPEND linked_libs OpenMP::OpenMP_CXX)
-    endif()
-  endif()
-else()
-  message(STATUS "OpenMP disabled")
-endif()
-
-
 find_package (Eigen3 REQUIRED NO_MODULE)
 if (EIGEN3_FOUND)
-  message(STATUS "Eigen found")
+  message(STATUS "Eigen found: version ${EIGEN3_VERSION_STRING}")
+
+  if (${EIGEN3_VERSION_STRING} VERSION_LESS "3.3.9")
+    message (STATUS "WARNING! Slicing optimization disabled (available from Eigen version >= 3.3.9)")
+  endif ()
+
   include_directories(${EIGEN3_INCLUDE_DIR})
 else ()
   message(FATAL_ERROR "Eigen not found")
@@ -126,6 +113,15 @@ endif ()
 
 if (VERBOSE)
   add_definitions (-D__verbose__)
+endif ()
+
+if (VIEW)
+  find_package (OpenCV REQUIRED COMPONENTS core highgui)
+  message(STATUS "OpenCV found: version ${OpenCV_VERSION}")
+  include_directories (${OpenCV_INCLUDE_DIRS})
+  list(APPEND linked_libs "opencv_core")
+  list(APPEND linked_libs "opencv_highgui")
+  add_definitions (-D__view__)
 endif ()
 
 #################################################################
@@ -169,6 +165,7 @@ set(plasticity_INSTALL_INCLUDE_DIR ${INSTALL_INCLUDE_DIR})
 
 configure_file(${CMAKE_SOURCE_DIR}/plasticity.pc.in ${CMAKE_SOURCE_DIR}/plasticity.pc @ONLY)
 configure_file(${PYC_DIR}/__version__.py.in ${PYC_DIR}/__version__.py @ONLY)
+configure_file(${INC_DIR}/version.h.in ${INC_DIR}/version.h @ONLY)
 message(STATUS "Pkg-config generated")
 
 #################################################################
@@ -202,8 +199,9 @@ foreach(FLAG ${linked_libs})
   message(STATUS "                    * ${FLAG}"                                     )
 endforeach(FLAG)
 message(STATUS ""                                                                    )
-message(STATUS "   OpenMP support : ${OMP}"                                          )
-message(STATUS "   BUILD_TEST     : ${BUILD_TEST}"                                   )
+message(STATUS "   Enable build testing : ${BUILD_TEST}"                             )
+message(STATUS "   Enable Progress bar during training : ${VERBOSE}"                 )
+message(STATUS "   Enable OpenCV support : ${VIEW}"                                  )
 message(STATUS "   Compile Pythonize version : ${PYWRAP}"                            )
 message(STATUS "   Documentation support : ${BUILD_DOCS}"                            )
 message(STATUS ""                                                                    )
@@ -227,12 +225,18 @@ list (APPEND ALL_HEADER ${HEADER})
 list (APPEND ALL_HEADER ${HPP})
 set_target_properties(${plasticitylib} PROPERTIES PUBLIC_HEADER "${ALL_HEADER}")
 
-
 add_executable(example_bcm ${EXAMPLE}/run_bcm.cpp)
 target_link_libraries(example_bcm ${linked_libs} ${plasticitylib})
 
 add_executable(example_hopfield ${EXAMPLE}/run_hopfield.cpp)
 target_link_libraries(example_hopfield ${linked_libs} ${plasticitylib})
+
+add_executable(example_mnist ${EXAMPLE}/run_mnist.cpp)
+target_link_libraries(example_mnist ${linked_libs} ${plasticitylib})
+
+add_executable(plasticity_infos ${EXAMPLE}/plasticity_infos.cpp)
+target_link_libraries(plasticity_infos ${linked_libs} ${plasticitylib})
+
 
 if (BUILD_TEST)
   add_subdirectory(${TEST_DIR})
@@ -252,3 +256,5 @@ install(TARGETS ${plasticitylib}    EXPORT plasticityTargets
 
 install(TARGETS example_bcm        DESTINATION ${OUT_DIR})
 install(TARGETS example_hopfield   DESTINATION ${OUT_DIR})
+install(TARGETS example_mnist      DESTINATION ${OUT_DIR})
+install(TARGETS plasticity_infos   DESTINATION ${OUT_DIR})

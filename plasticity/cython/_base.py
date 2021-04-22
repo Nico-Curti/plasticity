@@ -175,8 +175,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     with redirect_stdout(self.verbose):
       self._obj.fit(X, num_samples, num_features, self.num_epochs, self.random_state)
 
-    self.weights, shape = self._obj.get_weights()
-    self.weights = np.asarray(self.weights).reshape(shape)
+    self.weights = self._obj.get_weights()
 
     return self
 

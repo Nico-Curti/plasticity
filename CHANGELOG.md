@@ -4,6 +4,46 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2021-04-22
+
+Porting of the full algorithm to the Eigen library.
+
+### Added
+
+- (C++) MNIST dataset loader class
+- (C++) Configuration file parser for the simulation
+- (C++) Add the OpenCV support for the weights visualization
+- (C++) Add (custom) `bwr` OpenCV colormap
+- (C++) Add examples for BCM and Hopfield usage with the MNIST dataset
+- (C++) Add version check utility in the examples
+- (C++) Add fit callback support for the visualization of the learning weights
+- (C++) Add a brief list of test for the BCM and Hopfield models
+
+### Changed
+
+- (C++) **Move** the activation function namespace to `transfer_t`
+- (C++) **Move** the optimizer function namespace to `optimizer_t`
+- (C++) **Move** the weights initialization function namespace to `weights_init_t`
+- (C++) **Remove** OpenMP support
+- (Global) Split the github-actions for the C++ support into different configuration files
+
+### Improvements
+
+- (C++) Revision of the BCM algorithm with the Eigen support
+- (C++) Revision of the Hopfield algorithm with the Eigen support
+- (C++) Revision of the Optimization algorithms with the Eigen support
+
+### TODO
+
+- (C++) Check the convergency method of the models
+- (C++) Improve the list of testing functions
+- (Python) Implement a series of tests for the package CI (see coverage)
+- (Global) Upload the package to PyPi at the first release
+- (Global) Improve the documentation of the project and the installation instructions
+
+--------------------------------------------------------------------------------------------------
+
+
 ## [1.0.0] - 2020-11-17
 
 First version of the algorithm.

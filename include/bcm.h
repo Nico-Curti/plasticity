@@ -1,8 +1,7 @@
 #ifndef __bcm_h__
 #define __bcm_h__
 
-#include <base.h>
-#include <Eigen/Dense>
+#include <base.hpp>
 
 /**
 * @class BCM
@@ -20,7 +19,7 @@
 class BCM : public BasePlasticity
 {
 
-  std :: unique_ptr < float[] > interaction_matrix; ///< interaction matrix between weights
+  Eigen :: MatrixXf interaction_matrix; ///< interaction matrix between weights
 
 public:
 
@@ -44,9 +43,9 @@ public:
   * @param interaction_strength Set the lateral interaction strength between weights.
   *
   */
-  BCM (const int & outputs, const int & batch_size, int activation=transfer :: _logistic_,
-       update_args optimizer=update_args(optimizer_t :: _sgd),
-       weights_initialization weights_init=weights_initialization(weights_init_t :: _uniform_),
+  BCM (const int & outputs, const int & batch_size, int activation=transfer_t :: logistic,
+       update_args optimizer=update_args(optimizer_t :: sgd),
+       weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
        int epochs_for_convergency=1, float convergency_atol=1e-2f,
        float interaction_strength=0.f);
 
@@ -91,20 +90,45 @@ private:
   /**
   * @brief Compute the weights update using the BCM learning rule.
   *
-  * @note
+  * @note Perform the updating rule of the BCM algorithm provided by
+  * the model of Law and Cooper(1994), i.e
   *
-  * @param X array in ravel format of the input variables/features.
-  * @param n_features dimension of the X matrix, i.e. the number of cols.
-  * @param weights_update Array/matrix of updates for weights.
+  * \f[
+  * \frac{dw_i}{dt} = y (y - \theta_M) x_i / \theta_M
+  * \theta_M = E[y^2]
+  * \f]
+  *
+  * The Law and Cooper form has all of the same fixed points as the Intrator and Cooper form,
+  * but speed of synaptic modification increases when the threshold is small, and decreases as
+  * the threshold increases.
+  * The practical result is that the simulation can be run with artificially high learning rates,
+  * and wild oscillations are reduced. This form has been used primarily when running simulations of networks,
+  * where the run-time of the simulation can be prohibitive.
+  *
+  * @param X Batch of data.
+  * @param output Output of the model as computed by the _predict function
+  *
+  * @return weights_update Matrix of updates (aka dW) for weights.
   *
   */
-  void weights_update (float * X, const int & n_features, float * weights_update);
+  Eigen :: MatrixXf weights_update (const Eigen :: MatrixXf & X, const Eigen :: MatrixXf & output);
 
   /**
   * @brief Initialize the weights interaction matrix.
   *
-  * @note This function is the only one which requires the Eigen library support.
-  * The Eigen library is used in the evaluation of the inverse matrix.
+  * @note Evaluate the interaction matrix between neurons. The default model doesn't
+  * provide lateral interactions between neurons, i.e the interaction matrix is the
+  * identity matrix. The case of negative interaction strenght corrensponds to an
+  * inhibition of the neurons, while a positive interaction strenght corresponds to
+  * a promotion.
+  * The interaction matrix is computed as
+  * \f[
+  * L = I - interaction
+  * \f]
+  * i.e a square matrix (outputs, outputs) with all the elements along the diagonal
+  * equal to 1 and all the other entries as -interaction_strenght.
+  * Since in the predict function the inverse of this matrix is required, the
+  * inverse computation is performed before the storing into this function.
   *
   * @param interaction_strenght Set the lateral interaction strenght between weights.
   *
@@ -114,19 +138,22 @@ private:
   /**
   * @brief Core function of the predict formula
   *
-  * @note The function computes the output as W @ X.T.
-  * We use the GEMM algorithm with OpenMP support for a fast evaluation
+  * @note The function computes the output
+  * \f[
+  * y = \sigma(\sum_i w_i x_i)
+  * \f]
+  * If the lateral interactions are set the output function becomes
+  * \f[
+  * y = \sigma(\sum_i L_i^{-1} w_i x_i)
+  * \f]
+  * where \f$L\f$ is the interaction matrix between the neurons.
   *
-  * @param A Input matrix (M x K)
-  * @param B Input matrix (N x K)
-  * @param C Output matrix (M x N)
-  * @param N Number of rows of B
-  * @param M Number of rows of A
-  * @param K Number of cols of A and B
-  * @param buffer extra array buffer with shape (M x K) to use if necessary
+  * @param data Input matrix of data.
+  *
+  * @return Output matrix of the model.
   *
   */
-  void _predict (float * A, float * B, float * C, const int & N, const int & M, const int & K, float * buffer);
+  Eigen :: MatrixXf _predict (const Eigen :: MatrixXf & data);
 
 
 };

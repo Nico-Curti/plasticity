@@ -139,6 +139,7 @@ venv.bak/
 plasticity/[Ss]ource/*.c*
 plasticity/[Ss]ource/*.h
 plasticity/__version__.py
+include/version.h
 __pycache__/
 [Dd]ata/
 [Dd]ist/
@@ -160,6 +161,7 @@ html*
 messages_*
 results_*
 *.pyd
+*.bin
 
 # .hypothesis
 .hypothesis

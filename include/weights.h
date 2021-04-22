@@ -8,23 +8,23 @@
 
 #define ERROR_WEIGHTS_INITIALIZATION 001
 
-enum weights_init_t { _zeros_ = 0, _ones_, _uniform_, _normal_, _lecun_uniform_, _glorot_uniform_, _glorot_normal_, _he_uniform_, _he_normal_
+enum weights_init_t { zeros = 0, ones, uniform, normal, lecun_uniform, glorot_uniform, glorot_normal, he_uniform, he_normal
 };///< weights initialization types
 
 
 namespace weights_init
 {
-  static const std :: unordered_map < std :: string, int > get {
-                                                                 {"zeros"          , _zeros_},
-                                                                 {"ones"           , _ones_},
-                                                                 {"uniform"        , _uniform_},
-                                                                 {"normal"         , _normal_},
-                                                                 {"lecun_uniform"  , _lecun_uniform_},
-                                                                 {"glorot_uniform" , _glorot_uniform_},
-                                                                 {"glorot_normal"  , _glorot_normal_},
-                                                                 {"he_uniform"     , _he_uniform_},
-                                                                 {"he_normal"      , _he_normal_},
-                                                               }; ///< Utility for the weight initialization functions management
+  static const std :: unordered_map < std :: string, int > get_weights {
+                                                                        {"zeros"          , zeros},
+                                                                        {"ones"           , ones},
+                                                                        {"uniform"        , uniform},
+                                                                        {"normal"         , normal},
+                                                                        {"lecun_uniform"  , lecun_uniform},
+                                                                        {"glorot_uniform" , glorot_uniform},
+                                                                        {"glorot_normal"  , glorot_normal},
+                                                                        {"he_uniform"     , he_uniform},
+                                                                        {"he_normal"      , he_normal},
+                                                                      }; ///< Utility for the weight initialization functions management
 } // end namespace
 
 
@@ -56,9 +56,9 @@ class weights_initialization
 
   std :: mt19937 engine; ///< Random number generator
 
-  int type; ///< Initialization type to use
+  int type;    ///< Initialization type to use
 
-  float mu; ///< mean of the weights distribution (used in normal distribution initializations)
+  float mu;    ///< mean of the weights distribution (used in normal distribution initializations)
   float sigma; ///< standard deviation of the weights distribution (used in normal distribution initialization)
   float scale; ///< bound of the distribution domain (used in uniform distribution initialization)
 

@@ -38,21 +38,13 @@ class Optimizer (object):
 
     rho : float (default=0.0)
       Decay factor in RMSProp and AdaDelta
-
-    l2norm : bool (default=False)
-      Normalize the gradient values according to their l2 norms
-
-    clip_value : bool (default=False)
-      Clip gradient values between -1 and 1
   '''
 
-  def __init__ (self, update_type, learning_rate=1e-3, momentum=.9, decay=1e-4, B1=.9, B2=.999, rho=0., l2norm=False, clip_value=False):
+  def __init__ (self, update_type, learning_rate=1e-3, momentum=.9, decay=1e-4, B1=.9, B2=.999, rho=0.):
 
     self.update_type, update_index = _check_update(update_type)
-    self.l2norm = l2norm
-    self.clip_value = clip_value
 
-    self._object = _update_args(update_index, learning_rate, momentum, decay, B1, B2, rho, l2norm, clip_value)
+    self._object = _update_args(update_index, learning_rate, momentum, decay, B1, B2, rho)
 
   @property
   def learning_rate (self):
@@ -95,20 +87,6 @@ class Optimizer (object):
     Return the current rho parameter
     '''
     return self._object.get_rho
-
-  @property
-  def is_norm (self):
-    '''
-    Return True if the gradient normalization is enabled
-    '''
-    return bool(self._object.get_l2norm)
-
-  @property
-  def is_clip (self):
-    '''
-    Return True if the gradient clipping is enabled
-    '''
-    return bool(self._object.get_clip)
 
   def __repr__ (self):
     '''

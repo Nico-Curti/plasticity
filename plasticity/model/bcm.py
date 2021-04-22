@@ -177,6 +177,15 @@ class BCM (BasePlasticity):
     nc = np.max(np.abs(dw))
     nc = 1. / max(nc, self.precision)
 
+    print("outputs", self.outputs)
+    print("batch", self.batch_size)
+    print("output", output.shape)
+    print("weights", self.weights.shape)
+    print("dw", dw.shape)
+    print("phi", phi.shape)
+    print("theta", theta.shape)
+    print("X", X.shape)
+
     return dw * nc, theta
 
 
@@ -208,7 +217,7 @@ if __name__ == '__main__':
   # normalize the sample into [0, 1]
   X *= 1. / 255
 
-  model = BCM(outputs=100, num_epochs=10, batch_size=2, activation='logistic',
+  model = BCM(outputs=100, num_epochs=10, batch_size=100, activation='logistic',
               interaction_strength=-0.05, optimizer=SGD(lr=2e-2))
   model.fit(X)
 

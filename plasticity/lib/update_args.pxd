@@ -9,7 +9,7 @@ cdef extern from "optimizer.h" nogil:
   cppclass update_args:
 
     update_args () except +
-    update_args (const int & type, float learning_rate, float momentum, float decay, float B1, float B2, float rho, bool l2norm, bool clip) except +
+    update_args (const int & type, float learning_rate, float momentum, float decay, float B1, float B2, float rho) except +
 
     ## Attributes
 
@@ -22,13 +22,6 @@ cdef extern from "optimizer.h" nogil:
     float B2;
     float rho;
 
-    bool l2norm;
-    bool clip;
-
-    ## Methods
-
-    void init_arrays (const int & nweights)
-    void update (const int & iteration, float * weights, float * weights_update, const int & nweights)
 
 
 cdef extern from "<utility>" namespace "std" nogil:

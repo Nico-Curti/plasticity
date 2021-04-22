@@ -1,0 +1,36 @@
+#ifndef __version_h__
+#define __version_h__
+
+#define __plasticity_major_version__ @PLASTICITY_MAJOR@
+#define __plasticity_minor_version__ @PLASTICITY_MINOR@
+#define __plasticity_revision_version__ @PLASTICITY_REVISION@
+
+#include <iostream>
+#include <string>
+
+namespace info
+{
+
+/**
+* @brief Get the current library version.
+*
+* @details Utility function for the printing of package version.
+*
+* @return The current library version as string.
+*
+*/
+std :: string get_version ();
+
+/**
+* @brief Check if the viewer support is enabled.
+*
+* @details Utility function for check of the viewer (OpenCV) support.
+*
+* @return True if enabled, false otherwise.
+*
+*/
+bool get_viewer_support ();
+
+} // end namespace
+
+#endif // __version_h__

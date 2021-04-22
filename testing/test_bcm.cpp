@@ -2,30 +2,46 @@
 #include <catch.hpp>
 
 #include <bcm.h>
-#include <optimizer.h>
-#include <Eigen/Dense>
 
 
 #define PRECISION 1e-4f
 #define SEED 42
 #define isclose(x, y) ( std :: fabs((x) - (y)) < PRECISION )
 
+std :: mt19937 engine(SEED);
 
-TEST_CASE ( "Test fit" )
+
+TEST_CASE ( "Constructor" )
 {
-  std :: mt19937 engine(SEED);
-
   const int outputs = 10;
   const int batch_size = 10;
-  const int activation = transfer :: _linear_;
-  const float mu = 1.f;
-  const float sigma = 2.5f;
+  const int activation = transfer_t :: linear;
   const float strenght = 0.f;
-  const int seed = SEED;
 
-  update_args optimizer(optimizer_t :: _sgd);
+  update_args optimizer(optimizer_t :: sgd);
+  weights_initialization weights_init(weights_init_t :: normal);
 
-  BCM model(outputs, batch_size, activation, optimizer, mu, sigma, strenght, seed);
+  BCM model(outputs, batch_size, activation, optimizer, weights_init, 1., 1e-2f, strenght);
+
+  REQUIRE (model.weights.rows() == 0);
+  REQUIRE (model.weights.cols() == 0);
+}
+
+
+TEST_CASE ( "Save/Load weights" )
+{
+  const int outputs = 10;
+  const int batch_size = 10;
+  const int activation = transfer_t :: linear;
+  const float strenght = 0.f;
+
+  update_args optimizer(optimizer_t :: sgd);
+  weights_initialization weights_init(weights_init_t :: normal);
+
+  BCM model(outputs, batch_size, activation, optimizer, weights_init, 1., 1e-2f, strenght);
+
+  REQUIRE_THROWS_AS (model.save_weights("dummy"), std :: runtime_error);
+  REQUIRE_THROWS_WITH (model.save_weights("dummy"), "Fitted error. The model is not fitted yet.\nPlease call the fit function before using the predict member.");
 
   const int num_epochs = 1;
   const int num_samples = batch_size;
@@ -41,28 +57,196 @@ TEST_CASE ( "Test fit" )
                        return random_normal(engine);
                      });
 
-  REQUIRE_THROWS (model.predict(data.get(), num_samples, num_features), ERROR_FITTED);
-  REQUIRE_THROWS (model.predict(data.get(), num_samples, num_samples), ERROR_DIMENSIONS);
+  model.fit(data.get(), num_samples, num_features, num_epochs);
+
+  REQUIRE (model.weights.rows() == outputs);
+  REQUIRE (model.weights.cols() == num_features);
+
+  REQUIRE_THROWS_AS (model.load_weights("dummy"), std :: runtime_error);
+  REQUIRE_THROWS_WITH (model.load_weights("dummy"), "File not found. Given : dummy");
+
+  Eigen :: MatrixXf Winit = model.weights;
+
+  model.save_weights("dummy.bin");
+  model.load_weights("dummy.bin");
+
+  Eigen :: MatrixXf Wafter = model.weights;
+
+  REQUIRE (Winit.isApprox(Wafter, PRECISION));
+}
+
+
+TEST_CASE ( "Fale prediction" )
+{
+  const int outputs = 10;
+  const int batch_size = 10;
+  const int activation = transfer_t :: linear;
+  const float strenght = 0.f;
+
+  update_args optimizer(optimizer_t :: sgd);
+  weights_initialization weights_init(weights_init_t :: normal);
+
+  BCM model(outputs, batch_size, activation, optimizer, weights_init, 1., 1e-2f, strenght);
+
+  const int num_epochs = 1;
+  const int num_samples = batch_size;
+  const int num_features = 5;
+
+  std :: unique_ptr < float[] > data(new float[num_samples * num_features]);
+
+  std :: normal_distribution < float > random_normal (0.f, 1.f);
+
+  std :: generate_n (data.get(), num_samples * num_features,
+                     [&]()
+                     {
+                       return random_normal(engine);
+                     });
+
+  REQUIRE_THROWS_WITH (model.predict(data.get(), num_samples, num_features), "Fitted error. The model is not fitted yet.\nPlease call the fit function before using the predict member.");
+
+  model.fit(data.get(), num_samples, num_features, num_epochs);
+  REQUIRE (model.weights.rows() == outputs);
+  REQUIRE (model.weights.cols() == num_features);
+
+  REQUIRE_THROWS_WITH (model.predict(data.get(), num_samples, num_samples), "Invalid dimensions found. The input (n_samples, n_features) shape is inconsistent with the number of weights (" + std :: to_string(outputs * num_features) + ")");
+}
+
+
+TEST_CASE ( "Fit buffer" )
+{
+  const int outputs = 10;
+  const int batch_size = 10;
+  const int activation = transfer_t :: linear;
+  const float strenght = 0.f;
+
+  update_args optimizer(optimizer_t :: sgd);
+  weights_initialization weights_init(weights_init_t :: normal);
+
+  BCM model(outputs, batch_size, activation, optimizer, weights_init, 1., 1e-2f, strenght);
+
+  const int num_epochs = 1;
+  const int num_samples = batch_size;
+  const int num_features = 5;
+
+  std :: unique_ptr < float[] > data(new float[num_samples * num_features]);
+
+  std :: normal_distribution < float > random_normal (0.f, 1.f);
+
+  std :: generate_n (data.get(), num_samples * num_features,
+                     [&]()
+                     {
+                       return random_normal(engine);
+                     });
 
   model.fit(data.get(), num_samples, num_features, num_epochs);
 
-  SECTION ( "Test prediction" )
-  {
-    float * prediction = model.predict(data.get(), num_samples, num_features);
+  REQUIRE (model.weights.rows() == outputs);
+  REQUIRE (model.weights.cols() == num_features);
 
-    Eigen :: Map < Eigen :: Matrix < float, outputs, num_features, Eigen :: RowMajor > > W(model.weights.get(), outputs, num_features);
-    Eigen :: Map < Eigen :: Matrix < float, num_samples, num_features, Eigen :: RowMajor > > X(data.get(), num_samples, num_features);
-
-    auto gt = W * X.transpose();
-
-    for (int i = 0; i < outputs; ++i)
-      for (int j = 0; j < batch_size; ++j)
-      {
-        const int idx = i * batch_size + j;
-        REQUIRE(isclose(gt(i, j), prediction[idx]));
-      }
-
-  }
+}
 
 
+TEST_CASE ( "Fit with null weights" )
+{
+  const int outputs = 10;
+  const int batch_size = 10;
+  const int activation = transfer_t :: linear;
+  const float strenght = 0.f;
+
+  update_args optimizer(optimizer_t :: sgd);
+  weights_initialization weights_init(weights_init_t :: zeros);
+
+  BCM model(outputs, batch_size, activation, optimizer, weights_init, 1., 1e-2f, strenght);
+
+  const int num_epochs = 1;
+  const int num_samples = batch_size;
+  const int num_features = 5;
+
+  std :: unique_ptr < float[] > data(new float[num_samples * num_features]);
+
+  std :: normal_distribution < float > random_normal (0.f, 1.f);
+
+  std :: generate_n (data.get(), num_samples * num_features,
+                     [&]()
+                     {
+                       return random_normal(engine);
+                     });
+
+
+  model.fit(data.get(), num_samples, num_features, num_epochs);
+
+  REQUIRE (model.weights.isZero(PRECISION));
+}
+
+
+TEST_CASE ( "Predict" )
+{
+  const int outputs = 10;
+  const int batch_size = 10;
+  const int activation = transfer_t :: linear;
+  const float strenght = 0.f;
+
+  update_args optimizer(optimizer_t :: sgd);
+  weights_initialization weights_init(weights_init_t :: normal);
+
+  BCM model(outputs, batch_size, activation, optimizer, weights_init, 1., 1e-2f, strenght);
+
+  const int num_epochs = 1;
+  const int num_samples = batch_size;
+  const int num_features = 5;
+
+  std :: unique_ptr < float[] > data(new float[num_samples * num_features]);
+
+  std :: normal_distribution < float > random_normal (0.f, 1.f);
+
+  std :: generate_n (data.get(), num_samples * num_features,
+                     [&]()
+                     {
+                       return random_normal(engine);
+                     });
+
+
+  model.fit(data.get(), num_samples, num_features, num_epochs);
+
+  float * output_ptr = model.predict(data.get(), num_samples, num_features);
+  Eigen :: Map < Eigen :: Matrix < float, outputs, num_samples, Eigen :: RowMajor > > output(output_ptr, outputs, num_samples);
+
+  REQUIRE (output.rows() == outputs);
+  REQUIRE (output.cols() == num_samples);
+}
+
+
+TEST_CASE ( "Predict null weights" )
+{
+  const int outputs = 10;
+  const int batch_size = 10;
+  const int activation = transfer_t :: linear;
+  const float strenght = 0.f;
+
+  update_args optimizer(optimizer_t :: sgd);
+  weights_initialization weights_init(weights_init_t :: zeros);
+
+  BCM model(outputs, batch_size, activation, optimizer, weights_init, 1., 1e-2f, strenght);
+
+  const int num_epochs = 1;
+  const int num_samples = batch_size;
+  const int num_features = 5;
+
+  std :: unique_ptr < float[] > data(new float[num_samples * num_features]);
+
+  std :: normal_distribution < float > random_normal (0.f, 1.f);
+
+  std :: generate_n (data.get(), num_samples * num_features,
+                     [&]()
+                     {
+                       return random_normal(engine);
+                     });
+
+
+  model.fit(data.get(), num_samples, num_features, num_epochs);
+
+  float * output_ptr = model.predict(data.get(), num_samples, num_features);
+  Eigen :: Map < Eigen :: Matrix < float, outputs, num_samples, Eigen :: RowMajor > > output(output_ptr, outputs, num_samples);
+
+  REQUIRE (output.isZero(PRECISION));
 }
