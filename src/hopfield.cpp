@@ -47,10 +47,17 @@ Eigen :: MatrixXf Hopfield :: weights_update (const Eigen :: MatrixXf & X, const
   int col_index = 0;
 
   // sort the output columns
-  for (auto && col : output.colwise())
+  // NOTE: the following for loop can be rewritten as for (auto && col : output.colwise())
+  //       using directly the col vector but it is available only with Eigen version > 3.3.90.
+  //       In the same way we can rewrite the sorting algorithm with the simplified .begin(), .end()
+  //       member functions.
+  //       We use the older version of the Eigen syntax just to improve the retro-compatibility of the
+  //       library
+  for (int i = 0; i < output.cols(); ++i)
   {
+    auto col = output.col(i);
     Eigen :: VectorXi order = Eigen :: VectorXi :: LinSpaced(this->outputs, 0, this->outputs);
-    std :: sort(order.begin(), order.end(),
+    std :: sort(order.data(), order.data() + this->outputs,
                 [&](const int & xi, const int & xj)
                 {
                   return col[xi] < col[xj];

@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.9.0)
 
-# rFBP Version
+# plasticity Version
 set (PLASTICITY_MAJOR    1)
 set (PLASTICITY_MINOR    0)
 set (PLASTICITY_REVISION 1)
@@ -154,7 +154,9 @@ include_directories(${INC_DIR} ${HPP_DIR} ${TEST_DIR})
 
 if (PYWRAP)
   include( UseCython )
-  find_package (Python COMPONENTS Interpreter)
+  find_package (Python REQUIRED COMPONENTS Interpreter NumPy)
+  include_directories(${Python_NumPy_INCLUDE_DIRS})
+  add_definitions (-DNPY_NO_DEPRECATED_API)
 endif()
 
 if (BUILD_DOCS)

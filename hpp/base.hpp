@@ -42,7 +42,7 @@ void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int & num_epochs
   const int n_samples = X.rows();
   const int n_features = X.cols();
 
-#if EIGEN_VERSION_AT_LEAST(3, 3, 9)
+#if EIGEN_VERSION_AT_LEAST(3, 3, 90)
   // Build the index permutation generator
   std :: vector < int > batch_indices(n_samples);
   std :: iota(batch_indices.begin(), batch_indices.end(), 0);
@@ -61,7 +61,7 @@ void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int & num_epochs
   {
 
 
-#if EIGEN_VERSION_AT_LEAST(3, 3, 9)
+#if EIGEN_VERSION_AT_LEAST(3, 3, 90)
     // Perform an index permutation at each epoch
     std :: shuffle(batch_indices.begin(), batch_indices.end(), engine);
     // apply the index permutation on the data

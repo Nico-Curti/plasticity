@@ -37,7 +37,7 @@ jobs:
       with:
         vcpkgArguments: '@${{ env.vcpkgResponseFile }}'
         vcpkgDirectory: '${{ github.workspace }}/vcpkg'
-        vcpkgGitCommitId: '8121b4ec3d6a11353daf7639ed9082a78e617a2e'
+        vcpkgGitCommitId: '30124253eecff36bc90f73341edbfb4f845e2a1e'
         appendedCacheKey: ${{ hashFiles(env.vcpkgResponseFile) }}
 
     - name: Build with CMake and vcpkg
