@@ -68,4 +68,5 @@ jobs:
     - name: Testing
       run: |
         cd testing
+        chmod +x ./run_test.sh
         ./run_test.sh
