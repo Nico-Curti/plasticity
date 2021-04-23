@@ -51,3 +51,7 @@ jobs:
         cmakeBuildType: 'Release'
         buildWithCMakeArgs: '--config Release --target install'
 
+    - name: Testing
+      run: |
+        cd cd ${{ runner.workspace }}/testing
+        ./run_test.ps1

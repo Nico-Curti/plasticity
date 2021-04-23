@@ -6,7 +6,6 @@
 #include <unordered_map> // std :: unordered_map
 #include <numeric>       // std :: inner_product
 
-#define ERROR_WEIGHTS_INITIALIZATION 001
 
 enum weights_init_t { zeros = 0, ones, uniform, normal, lecun_uniform, glorot_uniform, glorot_normal, he_uniform, he_normal
 };///< weights initialization types

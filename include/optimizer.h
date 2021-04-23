@@ -7,7 +7,6 @@
 #include <unordered_map> // std :: unordered_map
 #include <Eigen/Dense>   // Eigen classes
 
-#define ERROR_NWEIGHTS 201 ///< The weights dimension is incorrect
 
 enum optimizer_t { adam = 0, momentum, nesterov_momentum, adagrad, rmsprop, adadelta, adamax, sgd
 }; ///< optimizer types

@@ -17,18 +17,12 @@
 
 #include <Eigen/Dense>
 
-#if EIGEN_VERSION_AT_LEAST(3, 3, 9)
+#if EIGEN_VERSION_AT_LEAST(3, 3, 90)
 
   #include <Eigen/Core> // Eigen :: all slicing
 
 #endif
 
-
-#define ERROR_FILENOTFOUND         100
-#define ERROR_K_POSITIVE           101
-#define ERROR_FITTED               102
-#define ERROR_DIMENSIONS           103
-#define ERROR_CONVERGENCY_POSITIVE 104
 
 /**
 * @class BasePlasticity

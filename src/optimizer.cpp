@@ -11,7 +11,7 @@ update_args :: update_args (const int & type, float learning_rate, float momentu
 {
 #ifdef DEBUG
 
-  assert (type >= _adam && type <= _sgd);
+  assert (type >= optimizer_t :: adam && type <= optimizer_t :: sgd);
 
 #endif
 
@@ -50,10 +50,7 @@ void update_args :: update ( const int & iteration, Eigen :: MatrixXf & weights,
 {
 
   if ( this->m.size() != weights.size() )
-  {
-    std :: cerr << "Invalid number of weights found. Given " << weights.size() << ". Aspected " << this->m.size() << std :: endl;
-    throw ERROR_NWEIGHTS;
-  }
+    throw std :: runtime_error("Invalid number of weights found. Given " + std :: to_string(weights.size()) + ". Aspected " + std :: to_string(this->m.size()));
 
   switch ( this->type )
   {

@@ -64,3 +64,8 @@ jobs:
         cmakeAppendedArgs: "-G\"${{ matrix.cfg.generator }}\" -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_DOCS:BOOL=OFF -DBUILD_TEST:BOOL=ON -DPYWRAP:BOOL=OFF -DVIEW:BOOL=OFF"
         cmakeBuildType: 'Release'
         buildWithCMakeArgs: '--config Release --target install'
+
+    - name: Testing
+      run: |
+        cd cd ${{ runner.workspace }}/testing
+        ./run_test.sh

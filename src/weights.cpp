@@ -10,10 +10,7 @@ weights_initialization :: weights_initialization (const int & type, float mu, fl
 
   // check the initialization type (greater than zero and included into the get map of available values)
   if ( type < 0 || type >= static_cast < int >(weights_init :: get_weights.size()) )
-  {
-    std :: cerr << "Invalid initialization function" << std :: endl;
-    throw ERROR_WEIGHTS_INITIALIZATION;
-  }
+    throw std :: runtime_error("Invalid initialization function");
 }
 
 weights_initialization & weights_initialization :: operator = (const weights_initialization & args)
@@ -46,8 +43,7 @@ void weights_initialization :: init (float * weights, const int & inputs, const 
     case weights_init_t :: he_normal :      return this->he_normal(weights, inputs, outputs);
     default:
     {
-      std :: cerr << "Invalid initialization function" << std :: endl;
-      throw ERROR_WEIGHTS_INITIALIZATION;
+      throw std :: runtime_error("Invalid initialization function");
     } break;
   }
 }

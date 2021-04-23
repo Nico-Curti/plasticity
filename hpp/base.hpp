@@ -67,7 +67,7 @@ void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int & num_epochs
     // apply the index permutation on the data
     auto X_perm = X(batch_indices, Eigen :: all); // permute rows
 #else
-    std :: random_shuffle(permutation.indices().data(), permutation.indices().data() + permutation.indices().size());
+    std :: shuffle(permutation.indices().data(), permutation.indices().data() + permutation.indices().size(), engine);
     // apply the index permutation on the data
     auto X_perm = permutation * X; // permute rows
 #endif

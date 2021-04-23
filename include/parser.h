@@ -10,8 +10,6 @@
 
 #include <utils.hpp>     // utility functions
 
-#define ERROR_VARIABLE 200 ///< error variable exit code
-
 namespace parser
 {
 
