@@ -65,8 +65,8 @@ jobs:
         cmakeBuildType: 'Release'
         buildWithCMakeArgs: '--config Release --target install'
 
-    - name: Testing
-      run: |
-        cd testing
-        chmod +x ./run_test.sh
-        ./run_test.sh
+    #- name: Testing
+    #  run: |
+    #    cd testing
+    #    chmod +x ./run_test.sh
+    #    ./run_test.sh

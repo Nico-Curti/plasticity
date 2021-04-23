@@ -215,38 +215,3 @@ TEST_CASE ( "Predict" )
   REQUIRE (output.cols() == num_samples);
 }
 
-
-TEST_CASE ( "Predict null weights" )
-{
-  const int outputs = 10;
-  const int batch_size = 10;
-  const int activation = transfer_t :: linear;
-  const float strenght = 0.f;
-
-  update_args optimizer(optimizer_t :: sgd);
-  weights_initialization weights_init(weights_init_t :: zeros);
-
-  BCM model(outputs, batch_size, activation, optimizer, weights_init, 1., 1e-2f, strenght);
-
-  const int num_epochs = 1;
-  const int num_samples = batch_size;
-  const int num_features = 5;
-
-  std :: unique_ptr < float[] > data(new float[num_samples * num_features]);
-
-  std :: normal_distribution < float > random_normal (0.f, 1.f);
-
-  std :: generate_n (data.get(), num_samples * num_features,
-                     [&]()
-                     {
-                       return random_normal(engine);
-                     });
-
-
-  model.fit(data.get(), num_samples, num_features, num_epochs);
-
-  float * output_ptr = model.predict(data.get(), num_samples, num_features);
-  Eigen :: Map < Eigen :: Matrix < float, outputs, num_samples, Eigen :: RowMajor > > output(output_ptr, outputs, num_samples);
-
-  REQUIRE (output.isZero(PRECISION));
-}

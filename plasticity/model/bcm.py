@@ -177,15 +177,6 @@ class BCM (BasePlasticity):
     nc = np.max(np.abs(dw))
     nc = 1. / max(nc, self.precision)
 
-    print("outputs", self.outputs)
-    print("batch", self.batch_size)
-    print("output", output.shape)
-    print("weights", self.weights.shape)
-    print("dw", dw.shape)
-    print("phi", phi.shape)
-    print("theta", theta.shape)
-    print("X", X.shape)
-
     return dw * nc, theta
 
 
