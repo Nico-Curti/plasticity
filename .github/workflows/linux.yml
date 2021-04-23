@@ -75,5 +75,5 @@ jobs:
 
     - name: Testing
       run: |
-        cd ${{ runner.workspace }}/testing
+        cd testing
         ./run_test.sh

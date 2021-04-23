@@ -8,7 +8,7 @@ import re
 import sys
 import pathlib
 import platform
-import subprocess
+#import numpy as np
 
 try:
   from setuptools import setup
@@ -67,6 +67,9 @@ class cmake_build_ext (build_ext):
         '-DBUILD_TEST:BOOL=OFF',
         '-DVERBOSE:BOOL=ON',
         '-DVIEW:BOOL=OFF',
+        '-DPYTHON_EXECUTABLE:FILEPATH={}'.format(sys.executable),
+        '-DPYTHON_INCLUDE_DIR:FILEPATH={}'.format(sysconfig.get_python_inc()),
+        #'-DPYTHON_NUMPY_INCLUDE_DIR:FILEPATH={}'.format(np.get_include()),
     ]
 
     if platform.system() == 'Windows':

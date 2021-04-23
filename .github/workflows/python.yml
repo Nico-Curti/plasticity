@@ -20,15 +20,15 @@ jobs:
           - {os: ubuntu-latest, cc: gcc, cxx: g++, python-version: 3.7}
           - {os: ubuntu-latest, cc: gcc, cxx: g++, python-version: 3.8}
 
-          - {os: windows-latest, cc: cl, cxx: MSVC19.28.29333.0, python-version: 3.5}
-          - {os: windows-latest, cc: cl, cxx: MSVC19.28.29333.0, python-version: 3.6}
-          - {os: windows-latest, cc: cl, cxx: MSVC19.28.29333.0, python-version: 3.7}
-          - {os: windows-latest, cc: cl, cxx: MSVC19.28.29333.0, python-version: 3.8}
+          #- {os: windows-latest, cc: cl, cxx: MSVC19.28.29333.0, python-version: 3.5}
+          #- {os: windows-latest, cc: cl, cxx: MSVC19.28.29333.0, python-version: 3.6}
+          #- {os: windows-latest, cc: cl, cxx: MSVC19.28.29333.0, python-version: 3.7}
+          #- {os: windows-latest, cc: cl, cxx: MSVC19.28.29333.0, python-version: 3.8}
 
-          - {os: macOS-10.15, cc: xcode, cxx: xcode11.2.1, python-version: 3.5}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode11.2.1, python-version: 3.6}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode11.2.1, python-version: 3.7}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode11.2.1, python-version: 3.8}
+          #- {os: macOS-10.15, cc: xcode, cxx: xcode11.2.1, python-version: 3.5}
+          #- {os: macOS-10.15, cc: xcode, cxx: xcode11.2.1, python-version: 3.6}
+          #- {os: macOS-10.15, cc: xcode, cxx: xcode11.2.1, python-version: 3.7}
+          #- {os: macOS-10.15, cc: xcode, cxx: xcode11.2.1, python-version: 3.8}
 
     steps:
 
@@ -109,5 +109,5 @@ jobs:
 
     #- name: Test with pytest
     #  run: |
-    #    python -m pytest ./plasticity/test/ --cov=plasticity --cov-config=.coveragerc
+    #    python -m pytest ./testing/ --cov=plasticity --cov-config=.coveragerc
 
