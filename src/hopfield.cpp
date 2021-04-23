@@ -31,10 +31,7 @@ void Hopfield :: check_params ()
 {
   // The value of the K variable must be positive and greater than 2
   if ( this->k < 2 )
-  {
-    std :: cerr << "k must be an integer bigger or equal than 2" << std :: endl;
-    throw ERROR_K_POSITIVE;
-  }
+    throw std :: runtime_error("k must be an integer bigger or equal than 2");
 }
 
 
