@@ -65,11 +65,11 @@ void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int & num_epochs
     // Perform an index permutation at each epoch
     std :: shuffle(batch_indices.begin(), batch_indices.end(), engine);
     // apply the index permutation on the data
-    auto X_perm = X(batch_indices, Eigen :: all); // permute rows
+    Eigen :: MatrixXf X_perm = X(batch_indices, Eigen :: all); // permute rows
 #else
     std :: shuffle(permutation.indices().data(), permutation.indices().data() + permutation.indices().size(), engine);
     // apply the index permutation on the data
-    auto X_perm = permutation * X; // permute rows
+    Eigen :: MatrixXf X_perm = permutation * X; // permute rows
 #endif
 
 #ifdef __verbose__

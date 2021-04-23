@@ -146,39 +146,6 @@ TEST_CASE ( "Fit buffer" )
 }
 
 
-TEST_CASE ( "Fit with null weights" )
-{
-  const int outputs = 10;
-  const int batch_size = 10;
-  const int activation = transfer_t :: linear;
-  const float strenght = 0.f;
-
-  update_args optimizer(optimizer_t :: sgd);
-  weights_initialization weights_init(weights_init_t :: zeros);
-
-  BCM model(outputs, batch_size, activation, optimizer, weights_init, 1., 1e-2f, strenght);
-
-  const int num_epochs = 1;
-  const int num_samples = batch_size;
-  const int num_features = 5;
-
-  std :: unique_ptr < float[] > data(new float[num_samples * num_features]);
-
-  std :: normal_distribution < float > random_normal (0.f, 1.f);
-
-  std :: generate_n (data.get(), num_samples * num_features,
-                     [&]()
-                     {
-                       return random_normal(engine);
-                     });
-
-
-  model.fit(data.get(), num_samples, num_features, num_epochs);
-
-  REQUIRE (model.weights.isZero(PRECISION));
-}
-
-
 TEST_CASE ( "Predict" )
 {
   const int outputs = 10;
