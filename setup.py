@@ -67,9 +67,9 @@ class cmake_build_ext (build_ext):
         '-DBUILD_TEST:BOOL=OFF',
         '-DVERBOSE:BOOL=ON',
         '-DVIEW:BOOL=OFF',
-        '-DPYTHON_EXECUTABLE:FILEPATH={}'.format(sys.executable),
-        '-DPYTHON_INCLUDE_DIR:FILEPATH={}'.format(sysconfig.get_python_inc()),
-        '-DPYTHON_NUMPY_INCLUDE_DIR:FILEPATH={}'.format(np.get_include()),
+        '-DPython3_EXECUTABLE:FILEPATH={}'.format(sys.executable),
+        '-DPython3_INCLUDE_DIR:FILEPATH={}'.format(sysconfig.get_python_inc()),
+        '-DPython3_NumPy_INCLUDE_DIR:FILEPATH={}'.format(np.get_include()),
     ]
 
     if platform.system() == 'Windows':

@@ -1,8 +1,8 @@
-| **Authors**  | **Project** |  **Build Status** | **Code Quality** | **Coverage** |
-|:------------:|:-----------:|:-----------------:|:----------------:|:------------:|
-| [**N. Curti**](https://github.com/Nico-Curti) <br/> [**S. Gasperini**](https://github.com/SimoneGasperini) <br/> [**M. Ceccarelli**](https://github.com/Mat092)  |  **plasticity**  | **Windows:** [![Windows plasticity CI](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml) <br/> **MacOS:** [![MacOS plasticity CI](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml) <br/> **Linux:** [![Linux plasticity CI](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml) <br/> **Docs:** [![plasticity Docs CI](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml) <br/> **AppVeyor:** [![appveyor](https://ci.appveyor.com/api/projects/status/djnkyxc64dlm4r6p/branch/main?svg=true)](https://ci.appveyor.com/project/Nico-Curti/plasticity-9jr6a/branch/main) | **Codacy** : [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9879f0e8f90140eab79c338b46c00420)](https://www.codacy.com/gh/Nico-Curti/plasticity/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nico-Curti/plasticity&amp;utm_campaign=Badge_Grade) <br/> **Codebeat** : [![codebeat badge](https://codebeat.co/badges/941ebbcf-de5a-4ff0-b4c4-9674bfb20c69)](https://codebeat.co/projects/github-com-nico-curti-plasticity-main) | [![codecov](https://codecov.io/gh/Nico-Curti/plasticity/branch/master/graph/badge.svg)](https://codecov.io/gh/Nico-Curti/plasticity) |
+| **Authors**  | **Project** |  **Documentation** | **Build Status** | **Code Quality** | **Coverage** |
+|:------------:|:-----------:|:------------------:|:----------------:|:----------------:|:------------:|
+| [**N. Curti**](https://github.com/Nico-Curti) <br/> [**S. Gasperini**](https://github.com/SimoneGasperini) <br/> [**M. Ceccarelli**](https://github.com/Mat092)  | **plasticity** <br/> [![docs](https://readthedocs.org/projects/plasticity/badge/?version=latest)](https://plasticity.readthedocs.io/en/latest/?badge=latest) | **Docs:** [![plasticity Docs CI](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml) | **Windows:** <br/> [![Windows plasticity CI](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml) <br/> **Linux:** <br/> [![Linux plasticity CI](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml) <br/> **MacOS:** <br/> [![MacOS plasticity CI](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml) <br/> **Python/Cython:** <br/> [![plasticity Python CI](https://github.com/Nico-Curti/plasticity/actions/workflows/python.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/python.yml) | **Codacy:** <br/> [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9879f0e8f90140eab79c338b46c00420)](https://www.codacy.com/gh/Nico-Curti/plasticity/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nico-Curti/plasticity&amp;utm_campaign=Badge_Grade) <br/> **Codebeat:** <br/> [![codebeat badge](https://codebeat.co/badges/941ebbcf-de5a-4ff0-b4c4-9674bfb20c69)](https://codebeat.co/projects/github-com-nico-curti-plasticity-main) | **CodeCov:** <br/> [![codecov](https://codecov.io/gh/Nico-Curti/plasticity/branch/main/graph/badge.svg)](https://codecov.io/gh/Nico-Curti/plasticity) |
 
-[![docs](https://readthedocs.org/projects/plasticity/badge/?version=latest)](https://plasticity.readthedocs.io/en/latest/?badge=latest)
+[![appveyor](https://ci.appveyor.com/api/projects/status/djnkyxc64dlm4r6p/branch/main?svg=true)](https://ci.appveyor.com/project/Nico-Curti/plasticity-9jr6a/branch/main)
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/Nico-Curti/plasticity.svg?style=plastic)](https://github.com/Nico-Curti/plasticity/pulls)
 [![GitHub issues](https://img.shields.io/github/issues/Nico-Curti/plasticity.svg?style=plastic)](https://github.com/Nico-Curti/plasticity/issues)
 
@@ -38,8 +38,8 @@ Implementation and optimization of biological-inspired Neural Network models for
 
 ## Overview
 
-Despite the great success of backpropagation algorithm in deep learning, a question remains to what extent the computational properties of artificial neural networks are comparable to the plasticity rules of the human brain.
-Indeed, even if the architectures of real and artificial neural networks are similar, the supervised training based on backpropagation and the neurobiology learning rules are unrelated.
+Despite the great success of back-propagation algorithm in deep learning, a question remains to what extent the computational properties of artificial neural networks are comparable to the plasticity rules of the human brain.
+Indeed, even if the architectures of real and artificial neural networks are similar, the supervised training based on back-propagation and the neurobiology learning rules are unrelated.
 
 In the paper by [D. Krotov and J. J. Hopfield](https://arxiv.org/abs/1806.10181), it is proposed an unusual learning rule, which has a degree of biological plausibility and which is motivated by different well known ideas in neuroplasticity theory:
 
@@ -61,9 +61,10 @@ is the activation function of the unsupervised layer (ReLu for n=1), v<sub>i</su
 ## Theory
 
 In this project, a parallel approach founded on the same concepts is proposed.
-In particular, it has been developed a model based on the *BCM theory* (E. Bienenstock, L. Cooper, and P. Munro). An exhaustive theoretical description is provided by the original paper of [Castellani et al.](https://pubmed.ncbi.nlm.nih.gov/10378187/).
+In particular, it has been developed a model based on the *BCM theory* (E. Bienenstock, L. Cooper, and P. Munro).
+An exhaustive theoretical description is provided by the original paper of [Castellani et al.](https://pubmed.ncbi.nlm.nih.gov/10378187/).
 
-In general terms, BCM model proposes a sliding threshold for long-term potentiation (LTP) or long-term depression (LTD) induction, and states that synaptic plasticity is stabilized by a dynamic adaptation of the time-averaged postsynaptic activity.
+In general terms, BCM model proposes a sliding threshold for long-term potentiation (LTP) or long-term depression (LTD) induction, and states that synaptic plasticity is stabilized by a dynamic adaptation of the time-averaged post-synaptic activity.
 The BCM learning rule is described by the following equations:
 
 <img src="https://render.githubusercontent.com/render/math?math=\frac{dw_i}{dt}=y(y-\theta_M)x_i\sigma'(y)">
@@ -74,9 +75,9 @@ where <img src="https://render.githubusercontent.com/render/math?math=E[\cdot]">
 
 <img src="https://render.githubusercontent.com/render/math?math=y=\sigma\left(\sum_iw_ix_i\right)">
 
-In this case, the activation function <img src="https://render.githubusercontent.com/render/math?math=\sigma"> is a sigmoidal.
+In this case, the activation function <img src="https://render.githubusercontent.com/render/math?math=\sigma"> is a sigmoid.
 
-See [here](https://github.com/Nico-Curti/plasticity/blob/master/docs/source/theory.rst) for further details about the models.
+See [here](https://github.com/Nico-Curti/plasticity/blob/main/docs/source/theory.rst) for further details about the models.
 
 ## Prerequisites
 
@@ -89,9 +90,20 @@ C++ supported compilers:
 ![msvc version](https://img.shields.io/badge/msvc-vs2017%20x86%20|%20vs2017%20x64|%20vs2019%20x86%20|%20vs2019%20x64-blue.svg)
 
 The `plasticity` project is written in `C++` using simple c++14 features.
-The package installation can be performed via [`CMake`](https://github.com/Nico-Curti/plasticity/blob/master/CMakeLists.txt).
+The package installation can be performed via [`CMake`](https://github.com/Nico-Curti/plasticity/blob/main/CMakeLists.txt).
 
 The only requirement for the installation of the `C++` library is the `Eigen3` library.
+You can easily install the `Eigen3` library with the following commands:
+
+| **OS**       |  **Command**                      |
+|:------------:|:----------------------------------|
+| **Linux**    | `sudo apt install libeigen3-dev`  |
+| **MacOS**    | `brew install eigen`              |
+| **Windows**  | `vcpkg install eigen3`            |
+
+> **Note:** For Windows users we suggest to use [`vcpkg`](https://github.com/microsoft/vcpkg) for the library installation/management.
+> **Note:** You can easily `Eigen3` install the library from source at this [link](https://gitlab.com/libeigen/eigen.git) to get the latest (more efficient) release.
+
 If you want visualize the model weights you have to build the library with the `-DVIEW:BOOL=ON`: in this case the `OpenCV` support is required for the installation.
 
 The `CMake` installer provides also a `plasticity.pc`, useful if you want link to the `plasticity` using `pkg-config`.
@@ -114,7 +126,7 @@ The `Python` wrap of the library was written according to `scikit-optimize` `Pyt
 
 Follow the instruction about your needs.
 
-A complete list of instructions "for beginners" is also provided for both [cpp](https://github.com/Nico-Curti/plasticity/blob/master/docs/source/CMake.rst) and [python](https://github.com/Nico-Curti/plasticity/blob/master/docs/source/Python.rst) versions.
+A complete list of instructions "for beginners" is also provided for both [c++](https://github.com/Nico-Curti/plasticity/blob/main/docs/source/CMake.rst) and [python](https://github.com/Nico-Curti/plasticity/blob/main/docs/source/Python.rst) versions.
 
 ### CMake C++ installation
 
@@ -139,18 +151,23 @@ cd build && cmake .. && cmake --build . --target install
 or more easily
 
 ```bash
-./build.sh
+./build.sh Release
 ```
 
-if you are working on a Windows machine the right script to call is the [`build.ps1`](https://Nico-Curti/plasticity/blob/master/build.ps1).
+if you are working on a Windows machine the correct script to call is the [`build.ps1`](https://Nico-Curti/plasticity/blob/main/build.ps1) with the same command line arguments.
 
-**NOTE 1:** the only requirement of the library is Eigen3. Please pay attention to install this dependency before running the CMake installation to avoid any issue.
+**NOTE 1:** the only requirement of the library is `Eigen3`.
+Please pay attention to install this dependency before running the CMake installation to avoid any issue.
 
-**NOTE 2:** if you want enable the OpenMP support (*4.5 version is required*) compile the library with `-DOMP=ON`.
+**Note 2:** We support all the versions of the `Eigen3` library but we strongly recommend a version >= 3.3.90.
+
+**NOTE 3:** if you want enable the `Cython` support compile the library with `-DPYWRAP=ON`.
+The `Cython` packages will be compiled and correctly positioned in the `plasticity` Python package **BUT** you need to run also the setup before use it.
+An alternative is to install the `Python` package directly with the setup script: in this way the `CMake` is called inside the package building and all the dependencies automatically checked.
 
 ### Python installation
 
-Python version supported : ![Python version](https://img.shields.io/badge/python-3.5|3.6|3.7|3.8-blue.svg)
+Python version supported : ![Python version](https://img.shields.io/badge/python-3.5|3.6|3.7|3.8|3.9-blue.svg)
 
 The easiest way to install the package is to use `pip`
 
@@ -162,7 +179,7 @@ python -m pip install plasticity
 > We are working on some workarounds to solve this issue.
 
 The `Python` installation can be performed with or without the `C++` installation.
-The `Python` installation is always executed using [`setup.py`](https://github.com/Nico-Curti/plasticity/blob/master/setup.py) script.
+The `Python` installation is always executed using [`setup.py`](https://github.com/Nico-Curti/plasticity/blob/main/setup.py) script.
 
 If you have already built the `plasticity` `C++` library the installation is performed faster and the `Cython` wrap was already built using the `-DPYWRAP` definition.
 Otherwise the full list of dependencies is build.
@@ -189,6 +206,9 @@ python setup.py develop --user
 > If the already installed version of `setuptools` is `>= 50.*` you can find some troubles during the installation of our package (ref. [issue](https://github.com/Nico-Curti/rFBP/issues/5)).
 > We suggest to temporary downgrade the `setuptools` version to `49.3.0` to workaround this `setuptools` issue.
 
+**Note:** The requirement of the `Eigen3` library is mandatory also for the `Cython` installation!
+Make sure to have installed all the requirements before running the `setup.py` command.
+
 ## Efficiency
 
 ![Comparison of time performances between the pure-`Python` implementation and `Cython` version of the `BCM` model varying the input dimension sizes (number of samples and number of features). For each input configuration 10 runs of both algorithm were performed keeping fixed all the other parameters. In the simulation we used 10 epochs and a SGD optimization algorithm.](./img/BCM_timing.png)
@@ -208,12 +228,146 @@ You can use the `plasticity` library into pure-Python modules or inside your C++
 
 ### C++ Version
 
-**TODO**
+The easiest usage of `plasticity` library is given by the two examples provided in the [example](https://github.com/Nico-Curti/plasticity/blob/main/example) folder.
+Lets see in detail how you can use the models.
+
+**Load the MNIST dataset** (ref. [run_mnist](https://github.com/Nico-Curti/plasticity/blob/main/example/run_mnist.cpp))
+
+First of all you need to load your dataset.
+In all the [example](https://github.com/Nico-Curti/plasticity/blob/main/example) scripts we use the MNIST digit dataset as toy model.
+The `plasticity` library provides a simple class object for the MNIST dataset loading called `data_loader :: MNIST`: this object class allows to load both training and testing images/labels binary files related to the MNIST dataset.
+The core implementation was inspired by the [`mnist`](https://github.com/wichtounet/mnist) package: in the original project folder you can also find the required binary files for the MNIST dataset.
+
+The [`run_mnist`](https://github.com/Nico-Curti/plasticity/blob/main/example/run_mnist.cpp) allows also the visualization of a subset of images sampled by the MNIST dataset using the OpenCV support.
+You can enable the OpenCV support building the library with the `-DVIEW:BOOL=ON` define.
+
+The most important thing to take in mind is that all the `plasticty` models work with a 1D buffer of floating-point data as input.
+In the MNIST dataset case this buffer of data is already exposed by the `data_loader :: MNIST` class as the "ravel" buffer of image pixels.
+
+> :warning: For sake of clarity the `data_loader :: MNIST` class exposes a `uint8_t` buffer of data which must be converted into a floating-point buffer.
+
+**Train the model** (ref. [run_bcm](https://github.com/Nico-Curti/plasticity/blob/main/example/run_bcm.cpp))
+
+The [`run_bcm`](https://github.com/Nico-Curti/plasticity/blob/main/example/run_bcm.cpp) and [`run_hopfield`](https://github.com/Nico-Curti/plasticity/blob/main/example/run_hopfield.cpp) scripts show two possible usage-examples of the BCM and Hopfield models, respectively.
+The model simulations can be performed using a simple configuration file as the following one:
+
+```
+# Dataset parameters
+
+MNIST_training_image = /path/to/train-images-idx3-ubyte
+MNIST_training_label = /path/to/train-labels-idx1-ubyte
+MNIST_testing_image = /path/to/t10k-images-idx3-ubyte
+MNIST_testing_label = /path/to/t10k-labels-idx1-ubyte
+normalize = 1
+binarize = 0
+
+# Model parameters
+
+outputs = 100
+batch_size = 1000
+epochs_for_convergency = 100000
+convergency_atol = 1e10
+interaction_strength = 0.0
+seed = 42
+epochs = 20
+
+# Activation function
+
+activation = relu
+
+# Optimizer parameters
+
+optimizer = sgd
+learning_rate = 2e-2
+momentum = 0.9
+decay = 0
+B1 = 0.9
+B2 = 0.999
+rho = 0.0
+
+# Weights parameters
+
+weights = normal
+mean = 0.0
+std = 1.0
+scale = 1.0
+weights_seed = 42
+```
+
+The configuration file includes all the required parameters for the model training and the instructions related to the MNIST dataset.
+The usage of the configuration file is not mandatory for the model usage but strongly recommended for the reproducibility.
+
+The model initialization is performed for all the `plasticity` models into the constructors.
+In particular, the BCM model is defined as
+
+```c++
+BCM (const int & outputs, const int & batch_size, int activation=transfer_t :: logistic,
+     update_args optimizer=update_args(optimizer_t :: sgd),
+     weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
+     int epochs_for_convergency=1, float convergency_atol=1e-2f,
+     float interaction_strength=0.f)
+```
+
+while the Hopfield model is defined as
+
+```c++
+Hopfield (const int & outputs, const int & batch_size,
+          update_args optimizer=update_args(optimizer_t :: sgd),
+          weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
+          int epochs_for_convergency=1, float convergency_atol=1e-2f,
+          float delta=.4f, float p=2.f,
+          int k=2)
+```
+
+ref. to the [documentation](https://plasticity.readthedocs.io/en/latest/cppAPI/modules.html) for a deeper explanation of the model parameters.
+
+After the model initialization the core of the simulation is performed inside the `fit` member-function.
+The function signature is the following:
+
+```c++
+template < class Callback = std :: function < void (BasePlasticity *) > >
+void fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs, int seed=42, Callback callback=[](BasePlasticity *){});
+```
+
+where `X` is the buffer of data (in ravel format) and (`n_samples`, `n_features`) is the shape of the `X` matrix.
+The last variable of the function is a (possible) `callback` function which takes the model object as input.
+This function will be called as each batch subdivision and for each epoch of the training.
+In the example we use as `callback` function a lambda-function for the visualization of the neurons weight matrix.
+
+In summary, a minimal working example of a simulation on the MNIST dataset can be written as
+
+```c++
+#include <mnist.h>
+#include <bcm.h>
+
+int main (int argc, char ** argv)
+{
+  data_loader :: MNIST dataset;
+  dataset.load_training_images(training_file);
+
+  std :: unique_ptr < float [] > training(new float[dataset.train_size()]);
+
+  for (int i = 0; i < dataset.train_size(); ++i)
+    training[i] = static_cast < float >(dataset.training_images[i]) / 255.f;
+
+  BCM bcm (100, 100, transfer_t :: relu, update_args(optimizer_t :: sgd));
+
+  bcm.fit(training.get(), dataset.num_train_sample, dataset.rows * dataset.cols, 10);
+  bcm.save_weights("BCM_MNIST_simulation.bin")
+
+  return 0;
+}
+```
 
 ### Python Version
 
-The `plasticity` classes are totally equivalent to a `scikit-learn` feature-encoder method and thus they provide the member functions `fit` (to train your model) and `predict` (to test a trained model on new samples).
-First of all you need to import the desired `plasticity` class and then simply call the training/testing functions.
+The `plasticity` classes are totally equivalent to a `scikit-learn` feature-encoder object and thus they provide the member functions `fit` (to train your model) and `predict` (to test a trained model on new samples).
+First of all you need to import the desired `plasticity` model.
+The you can call the `fit` member function with the desired parameters.
+
+> **NOTE:** following the scikit-learn philosophy all the class parameters (a lot of possible parameters!) are initialized by default values.
+> In this way you can build the object without any preliminary knowledge about the model.
+> However, we strongly recommend to read the full list of possible variables using the `help` command.
 
 ```python
 from plasticity.model import BCM
@@ -229,7 +383,8 @@ model = BCM(outputs=100, num_epochs=10, batch_size=100, interaction_strenght=0.)
 model.fit(X)
 ```
 
-You can also visualize the weights connections using the utility functions provided by the package as
+Now you have trained the model on the MNIST digit dataset and thus the internal neurons have reached a precise configuration state.
+You can easily visualize the neuron-weights matrix using the (utility) function `view_weights` provided by the `utils` submodule.
 
 ```python
 
@@ -238,44 +393,53 @@ from plasticity.utils import view_weights
 view_weights (model.weights, dims=(28, 28))
 ```
 
-The results should be something like
+The results should appear like this
 
-<a href="https://github.com/Nico-Curti/plasticity/blob/master/img/BCM_weights.gif">
+<a href="https://github.com/Nico-Curti/plasticity/blob/main/img/BCM_weights.gif">
   <div class="image">
     <img src="img/BCM_weights.gif" width="392" height="392">
   </div>
 </a>
 
+> **Note:** The above image was generated by a series of simulations!
+> The `view_weights` function just plots the final version of the weights matrix.
+> You can obtained an animation plot of the neuron convergency using the C++ version of the code with an appropriated callback function (ref. [here](https://github.com/Nico-Curti/plasticity/blob/main/example/run_bcm.cpp) for an example code) or with a little hack of the library code.
+> We intentionally do not provide a callback support in the Python version of the model since its user interface must be as much as possible equivalent to a scikit-learn object.
 
 ## Testing
 
-**TODO**
+`plasticity` uses CMake to build a full list of tests.
+You can enable/disable tests setting the `-DBUILD_TEST:BOOL=ON` during the building.
+All the test are performed using the [`Catch2`](https://github.com/catchorg/Catch2/) (v2.11.0) library.
+
+The test scripts can be found [here](https://github.com/Nico-Curti/plasticity/blob/main/testing).
+You can easily run the full list of C++ tests using the scripts [run_test.sh](https://github.com/Nico-Curti/plasticity/blob/main/testing/run_test.sh) and [run_test.ps1](https://github.com/Nico-Curti/plasticity/blob/main/testing/run_test.ps1) if you are working on a Unix-like or Windows machine, rispectively.
 
 ## Table of contents
 
 Description of the folders related to the `C++` version.
 
-| **Directory**  |  **Description** |
-|:--------------:|:-----------------|
-| [hpp](https://github.com/Nico-Curti/plasticity/blob/master/hpp)         | Implementation of the C++ template functions and objects used in the `plasticity` library |
-| [include](https://github.com/Nico-Curti/plasticity/blob/master/include) | Definition of the C++ function and objects used in the `plasticity` library |
-| [src](https://github.com/Nico-Curti/plasticity/blob/master/src)         | Implementation of the C++ functions and objects used in the `plasticity` library |
+| **Directory**                                                           |  **Description**                                                                          |
+|:-----------------------------------------------------------------------:|:------------------------------------------------------------------------------------------|
+| [hpp](https://github.com/Nico-Curti/plasticity/blob/main/hpp)           | Implementation of the C++ template functions and objects used in the `plasticity` library |
+| [include](https://github.com/Nico-Curti/plasticity/blob/main/include)   | Definition of the C++ function and objects used in the `plasticity` library               |
+| [src](https://github.com/Nico-Curti/plasticity/blob/main/src)           | Implementation of the C++ functions and objects used in the `plasticity` library          |
 
 Description of the folders related to the `Python` version.
 
-| **Directory**  |  **Description** |
-|:--------------:|:-----------------|
-| [example](https://github.com/Nico-Curti/plasticity/blob/master/plasticity/example) | `Jupyter` notebook with some examples on the MNIST (digit) dataset. |
-| [lib](https://github.com/Nico-Curti/plasticity/blob/master/plasticity/lib)         | List of `Cython` definition files |
-| [source](https://github.com/Nico-Curti/plasticity/blob/master/plasticity/source)   | List of `Cython` implementation objects |
-| [model](https://github.com/Nico-Curti/plasticity/blob/master/plasticity/model)     | pure-`Python` implementation of the classes |
-| [cython](https://github.com/Nico-Curti/plasticity/blob/master/plasticity/cython)   | `Cython`-wraps of the classes |
+| **Directory**                                                                      |  **Description**                                                               |
+|:----------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------|
+| [example](https://github.com/Nico-Curti/plasticity/blob/main/plasticity/example)   | `Jupyter` notebook with some examples on the MNIST (digit) dataset.            |
+| [lib](https://github.com/Nico-Curti/plasticity/blob/main/plasticity/lib)           | List of `Cython` definition files                                              |
+| [source](https://github.com/Nico-Curti/plasticity/blob/main/plasticity/source)     | List of `Cython` implementation objects                                        |
+| [model](https://github.com/Nico-Curti/plasticity/blob/main/plasticity/model)       | pure-`Python` implementation of the classes                                    |
+| [cython](https://github.com/Nico-Curti/plasticity/blob/main/plasticity/cython)     | `Cython`-wraps of the classes                                                  |
 
 ## Contribution
 
-Any contribution is more than welcome :heart:. Just fill an [issue](https://github.com/Nico-Curti/plasticity/blob/master/.github/ISSUE_TEMPLATE/ISSUE_TEMPLATE.md) or a [pull request](https://github.com/Nico-Curti/plasticity/blob/master/.github/PULL_REQUEST_TEMPLATE/PULL_REQUEST_TEMPLATE.md) and we will check ASAP!
+Any contribution is more than welcome :heart:. Just fill an [issue](https://github.com/Nico-Curti/plasticity/blob/main/.github/ISSUE_TEMPLATE/ISSUE_TEMPLATE.md) or a [pull request](https://github.com/Nico-Curti/plasticity/blob/main/.github/PULL_REQUEST_TEMPLATE/PULL_REQUEST_TEMPLATE.md) and we will check ASAP!
 
-See [here](https://github.com/Nico-Curti/plasticity/blob/master/.github/CONTRIBUTING.md) for further informations about how to contribute with this project.
+See [here](https://github.com/Nico-Curti/plasticity/blob/main/.github/CONTRIBUTING.md) for further informations about how to contribute with this project.
 
 ## References
 
@@ -303,7 +467,7 @@ See also the list of [contributors](https://github.com/Nico-Curti/plasticity/con
 
 ## License
 
-The `plasticity` package is licensed under the MIT "Expat" License. [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/Nico-Curti/plasticity/blob/master/LICENSE)
+The `plasticity` package is licensed under the MIT "Expat" License. [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/Nico-Curti/plasticity/blob/main/LICENSE)
 
 ## Acknowledgments
 

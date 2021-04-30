@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.1] - 2021-04-22
+## [1.0.1] - 2021-04-30
 
 Porting of the full algorithm to the Eigen library.
 
@@ -32,6 +32,7 @@ Porting of the full algorithm to the Eigen library.
 - (C++) Revision of the BCM algorithm with the Eigen support
 - (C++) Revision of the Hopfield algorithm with the Eigen support
 - (C++) Revision of the Optimization algorithms with the Eigen support
+- (Global) Improve the README documentation
 
 ### TODO
 
@@ -39,7 +40,7 @@ Porting of the full algorithm to the Eigen library.
 - (C++) Improve the list of testing functions
 - (Python) Implement a series of tests for the package CI (see coverage)
 - (Global) Upload the package to PyPi at the first release
-- (Global) Improve the documentation of the project and the installation instructions
+- (Global) Improve/Update the documentation of the project on Read-the-Docs
 
 --------------------------------------------------------------------------------------------------
 
