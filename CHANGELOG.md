@@ -44,6 +44,7 @@ Porting of the full algorithm to the Eigen library.
 - (Global) Upload the package to PyPi at the first release
 - (Global) Improve/Update the documentation of the project on Read-the-Docs
 - (Global) Improve README documentation about the models' theories
+- (Global) Fix Doxygen error on lambda function as default argument
 
 --------------------------------------------------------------------------------------------------
 

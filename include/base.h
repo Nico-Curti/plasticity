@@ -160,7 +160,7 @@ public:
   *
   */
   template < class Callback = std :: function < void (BasePlasticity *) > >
-  void fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs, int seed=42, Callback callback=Callback());
+  void fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs, int seed=42, Callback callback=[](BasePlasticity *) -> void {});
 
   /**
   * @brief Train the model/encoder
@@ -176,7 +176,7 @@ public:
   *
   */
   template < class Callback = std :: function < void (BasePlasticity *) > >
-  void fit (const Eigen :: MatrixXf & X, const int & num_epochs, int seed=42, Callback callback=Callback());
+  void fit (const Eigen :: MatrixXf & X, const int & num_epochs, int seed=42, Callback callback=[](BasePlasticity *) -> void {});
 
   /**
   * @brief Predict the model/encoder

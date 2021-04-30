@@ -23,7 +23,7 @@ namespace weights_init
                                                                         {"glorot_normal"  , glorot_normal},
                                                                         {"he_uniform"     , he_uniform},
                                                                         {"he_normal"      , he_normal},
-                                                                      }; ///< Utility for the weight initialization functions management
+                                                                       }; ///< Utility for the weight initialization functions management
 } // end namespace
 
 
