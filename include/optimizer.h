@@ -95,7 +95,7 @@ public:
   * @param rho TODO.
   *
   */
-  update_args (const int & type, float learning_rate=2e-2f, float momentum=.9f, float decay=1e-4f, float B1=.9f, float B2=.999f, float rho=0.f);
+  update_args (const int & type, float learning_rate=0.02, float momentum=.9f, float decay=0.0001, float B1=.9f, float B2=.999f, float rho=0.f);
 
   // Destructors
 

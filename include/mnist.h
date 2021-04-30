@@ -114,7 +114,7 @@ public:
   * file. Some tests are internally performed to check the validity of the provided
   * files. A runtime error is raised if something goes wrong in the loading.
   *
-  * @param training_images Filename/Path of the training labels binary file.
+  * @param training_labels Filename/Path of the training labels binary file.
   *
   */
   void load_training_labels (const std :: string & training_labels);
@@ -127,7 +127,7 @@ public:
   * file. Some tests are internally performed to check the validity of the provided
   * files. A runtime error is raised if something goes wrong in the loading.
   *
-  * @param training_images Filename/Path of the testing image binary file.
+  * @param testing_images Filename/Path of the testing image binary file.
   *
   */
   void load_testing_images (const std :: string & testing_images);
@@ -140,7 +140,7 @@ public:
   * file. Some tests are internally performed to check the validity of the provided
   * files. A runtime error is raised if something goes wrong in the loading.
   *
-  * @param training_images Filename/Path of the testing labels binary file.
+  * @param testing_labels Filename/Path of the testing labels binary file.
   *
   */
   void load_testing_labels (const std :: string & testing_labels);
@@ -229,7 +229,7 @@ private:
   * @param filename Filename/Path of the MNIST binary file.
   * @param buffer Corresponding buffer to fill.
   * @param magic_key Magic key for image/label loading.
-  * @param sample Number of training/test variable set into this function.
+  * @param nsample Number of training/test variable set into this function.
   *
   */
   void load_file (const std :: string & filename, std :: unique_ptr < uint8_t [] > & buffer, const uint32_t & magic_key, int32_t & nsample);

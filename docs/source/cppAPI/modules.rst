@@ -8,4 +8,3 @@ C++ API
    BCM
    Hopfield
    Activations
-   data_dispatcher

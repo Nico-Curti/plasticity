@@ -31,8 +31,6 @@ public:
   *
   * @details The constructor follows the same nomenclature of the Python counterpart.
   *
-  * @note
-  *
   * @param outputs Number of hidden units.
   * @param batch_size Size of the minibatch.
   * @param activation Index of the activation function.
@@ -46,7 +44,7 @@ public:
   BCM (const int & outputs, const int & batch_size, int activation=transfer_t :: logistic,
        update_args optimizer=update_args(optimizer_t :: sgd),
        weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
-       int epochs_for_convergency=1, float convergency_atol=1e-2f,
+       int epochs_for_convergency=1, float convergency_atol=0.01,
        float interaction_strength=0.f);
 
   // Copy Operator and Copy Constructor

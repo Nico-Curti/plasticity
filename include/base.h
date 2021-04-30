@@ -98,7 +98,7 @@ public:
   BasePlasticity (const int & outputs, const int & batch_size, int activation=transfer_t :: linear,
                   update_args optimizer=update_args(optimizer_t :: sgd),
                   weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
-                  int epochs_for_convergency=1, float convergency_atol=1e-2f);
+                  int epochs_for_convergency=1, float convergency_atol=0.01);
 
 
   // Copy Operator and Copy Constructor
@@ -160,7 +160,7 @@ public:
   *
   */
   template < class Callback = std :: function < void (BasePlasticity *) > >
-  void fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs, int seed=42, Callback callback=[](BasePlasticity *){});
+  void fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs, int seed=42, Callback callback=Callback());
 
   /**
   * @brief Train the model/encoder
@@ -176,7 +176,7 @@ public:
   *
   */
   template < class Callback = std :: function < void (BasePlasticity *) > >
-  void fit (const Eigen :: MatrixXf & X, const int & num_epochs, int seed=42, Callback callback=[](BasePlasticity *){});
+  void fit (const Eigen :: MatrixXf & X, const int & num_epochs, int seed=42, Callback callback=Callback());
 
   /**
   * @brief Predict the model/encoder

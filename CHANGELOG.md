@@ -33,6 +33,8 @@ Porting of the full algorithm to the Eigen library.
 - (C++) Revision of the Hopfield algorithm with the Eigen support
 - (C++) Revision of the Optimization algorithms with the Eigen support
 - (Global) Improve the README documentation
+- (Global) Minor fix on the Doxygen documentation
+- (Global) Add FindNumPy CMake module from scikit-build (ref. [FindNumPy.cmake](https://github.com/scikit-build/scikit-build/blob/master/skbuild/resources/cmake/FindNumPy.cmake))
 
 ### TODO
 
@@ -41,6 +43,7 @@ Porting of the full algorithm to the Eigen library.
 - (Python) Implement a series of tests for the package CI (see coverage)
 - (Global) Upload the package to PyPi at the first release
 - (Global) Improve/Update the documentation of the project on Read-the-Docs
+- (Global) Improve README documentation about the models' theories
 
 --------------------------------------------------------------------------------------------------
 

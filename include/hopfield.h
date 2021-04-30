@@ -45,7 +45,7 @@ public:
   Hopfield (const int & outputs, const int & batch_size,
             update_args optimizer=update_args(optimizer_t :: sgd),
             weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
-            int epochs_for_convergency=1, float convergency_atol=1e-2f,
+            int epochs_for_convergency=1, float convergency_atol=0.01,
             float delta=.4f, float p=2.f,
             int k=2);
 
@@ -101,8 +101,7 @@ private:
   * for ranking of the final activities.
   *
   * @param X array in ravel format of the input variables/features.
-  * @param n_features dimension of the X matrix, i.e. the number of cols.
-  * @param weights_update Array/matrix of updates for weights.
+  * @param output Output of the model as computed by the _predict function
   *
   */
   Eigen :: MatrixXf weights_update (const Eigen :: MatrixXf & X, const Eigen :: MatrixXf & output);
