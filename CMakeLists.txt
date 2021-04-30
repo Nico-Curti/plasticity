@@ -154,8 +154,9 @@ include_directories(${INC_DIR} ${HPP_DIR} ${TEST_DIR})
 
 if (PYWRAP)
   include( UseCython )
-  find_package (Python3 REQUIRED COMPONENTS Interpreter NumPy)
-  include_directories(${Python_NumPy_INCLUDE_DIRS})
+  find_package (Python3 REQUIRED COMPONENTS Interpreter)
+  find_package(NumPy REQUIRED)
+  include_directories(${NumPy_INCLUDE_DIRS})
   add_definitions (-DNPY_NO_DEPRECATED_API)
 endif()
 
