@@ -70,6 +70,7 @@ class cmake_build_ext (build_ext):
         '-DPython3_EXECUTABLE:FILEPATH={}'.format(sys.executable),
         '-DPython3_INCLUDE_DIR:FILEPATH={}'.format(sysconfig.get_python_inc()),
         '-DPython3_NumPy_INCLUDE_DIR:FILEPATH={}'.format(np.get_include()),
+        '-DOMP:BOOL={}'.format('ON' if ENABLE_OMP else 'OFF'),
     ]
 
     if platform.system() == 'Windows':
@@ -233,6 +234,12 @@ CPP_COMPILER = platform.python_compiler()
 README_FILENAME = os.path.join(here, 'README.md')
 REQUIREMENTS_FILENAME = os.path.join(here, 'requirements.txt')
 VERSION_FILENAME = os.path.join(here, 'plasticity', '__version__.py')
+
+ENABLE_OMP = False
+
+if '--omp' in sys.argv:
+  ENABLE_OMP = True
+  sys.argv.remove('--omp')
 
 # Import the README and use it as the long-description.
 # Note: this will only work if 'README.md' is present in your MANIFEST.in file!

@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.1] - 2021-04-30
+## [1.0.1] - 2021-05-03
 
 Porting of the full algorithm to the Eigen library.
 
@@ -24,7 +24,8 @@ Porting of the full algorithm to the Eigen library.
 - (C++) **Move** the activation function namespace to `transfer_t`
 - (C++) **Move** the optimizer function namespace to `optimizer_t`
 - (C++) **Move** the weights initialization function namespace to `weights_init_t`
-- (C++) **Remove** OpenMP support
+- (C++) **Move** OpenMP support to Eigen
+- (C++) **Remove** useless utility templates and functions for the timing and printing
 - (Global) Split the github-actions for the C++ support into different configuration files
 
 ### Improvements
@@ -42,7 +43,7 @@ Porting of the full algorithm to the Eigen library.
 - (C++) Improve the list of testing functions
 - (Python) Implement a series of tests for the package CI (see coverage)
 - (Global) Upload the package to PyPi at the first release
-- (Global) Improve/Update the documentation of the project on Read-the-Docs
+- (Global) Improve/Update the documentation of the project's theory on Read-the-Docs
 - (Global) Improve README documentation about the models' theories
 - (Global) Fix Doxygen error on lambda function as default argument
 

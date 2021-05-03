@@ -12,23 +12,7 @@
 #include <iterator>  // std :: begin
 
 #include <fmath.h>   // fast math function
-
-#if defined _OPENMP
-
-  #include <omp.h>      // omp_get_num_threads, timing function
-
-  #include <utility>    // std :: pair for argsort
-  #include <functional> // std :: greater
-
-#elif defined _MPI
-
-  #include <boost/mpi/timer.hpp> // boost :: mpi :: timer()
-
-#else
-
-  #include <chrono>     // timing function
-
-#endif
+#include <chrono>    // timing function
 
 #ifdef DEBUG
 
@@ -82,32 +66,6 @@ namespace utils
 
   // Timing functions
 
-#if defined _OPENMP
-
-  /**
-  * @brief Return the current time (OpenMP format).
-  *
-  * @details There are many specialization of this function according to different parallel environments.
-  *
-  * @return The current time as double value.
-  *
-  */
-  double what_time_is_it_now ();
-
-#elif defined _MPI
-
-  /**
-  * @brief Return the current time (MPI format).
-  *
-  * @details There are many specialization of this function according to different parallel environments.
-  *
-  * @return The current time as MPI timer.
-  *
-  */
-  boost :: mpi :: timer what_time_is_it_now ();
-
-#else
-
   /**
   * @brief Return the current time (STD format).
   *
@@ -118,22 +76,19 @@ namespace utils
   */
   std :: chrono :: time_point < std :: chrono :: high_resolution_clock > what_time_is_it_now ();
 
-#endif
-
   /**
   * @brief Get the elapsed time from the start.
   *
-  * @details This function is related to the what_time_is_it_now function and thus
-  * its templates must be set according to the output of the what_time_is_it_now function.
+  * @details This function is related to the what_time_is_it_now function and it returns
+  * the elapsed time as seconds. For an accurate computation the time evaluation is performed
+  * using milliseconds as template.
   *
-  * @tparam Time Timer type returned by the what_time_is_it_now function
-  * @param start_time Start time.
+  * @param start_time Starting time.
   *
   * @return The elapsed time as double.
   *
   */
-  template < typename Time >
-  double elapsed_time (const Time & start_time);
+  double elapsed_time (const std :: chrono :: time_point < std :: chrono :: high_resolution_clock > & start_time);
 
   /**
   * @brief Print progress bar
@@ -141,14 +96,12 @@ namespace utils
   * @details This function is used to progressively print a progress bar
   * with timer.
   *
-  * @tparam Time Timer type returned by the what_time_is_it_now function
   * @param i Current iteration value.
-  * @param num_batches Maximum number of iterations, i.e the width of the progress bar.
+  * @param num_iter Maximum number of iterations, i.e the width of the progress bar.
   * @param timer Start time (the timer is reset at the end of the function).
   *
   */
-  template < typename Time >
-  void print_progress (const int & i, const int & num_batches, Time & timer);
+  void print_progress (const int & i, const int & num_iter, std :: chrono :: time_point < std :: chrono :: high_resolution_clock > & timer);
 
   // OS functions
 
@@ -203,52 +156,5 @@ std :: basic_string < Char, Traits, Allocator > operator * (const std :: basic_s
 */
 template < typename Char, typename Traits, typename Allocator >
 std :: basic_string < Char, Traits, Allocator > operator * (std :: size_t n, const std :: basic_string < Char, Traits, Allocator > & s);
-
-
-
-#if __cplusplus < 201700 && !defined _MSC_VER // no std=c++17 support
-
-namespace std
-{
-
-
-/**
-* @brief Clamp the given value between the two extrema
-*
-* @details C++11 compatible implementation of clap function with template
-* values.
-*
-* @tparam type Value data type
-* @param v Input value.
-* @param lo Low value of the domain.
-* @param hi High value of the domain.
-*
-* @return Value clamped between the two extrema.
-*
-*/
-template < class type >
-const type & clamp ( const type & v, const type & lo, const type & hi );
-
-#if ( ( __cplusplus < 201100 && !(_MSC_VER) ) || ( __GNUC__ == 4 && __GNUC_MINOR__ < 9) && !(__clang__) )
-/**
-* @brief Retro-compatibility solution for smart-pointers.
-*
-* @details C++11 compatible implementation of make_unique function for unique_ptr
-* with array as template.
-*
-* @tparam type Array data type.
-* @param size Length of the array,
-*
-* @return Unique_ptr with any data type (e.g std :: unique_ptr < float[] > x = std :: make_unique < float >(10);).
-*
-*/
-template < typename type >
-std :: unique_ptr < type > make_unique ( int size );
-
-#endif
-
-}
-
-#endif // no std=c++17 support
 
 #endif // __utils_h__

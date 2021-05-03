@@ -52,11 +52,11 @@ jobs:
       run: |
         mkdir buildDirectory_debug
         cd buildDirectory_debug
-        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE:STRING="Debug" -DBUILD_DOCS:BOOL=ON -DPYWRAP:BOOL=ON  -DVIEW:BOOL=OFF
+        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE:STRING="Debug" -DBUILD_DOCS:BOOL=ON -DPYWRAP:BOOL=ON  -DVIEW:BOOL=OFF -DOMP:BOOL=OFF
         cd ..
         mkdir buildDirectory_release
         cd buildDirectory_release
-        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE:STRING="Release" -DBUILD_DOCS:BOOL=ON -DPYWRAP:BOOL=ON  -DVIEW:BOOL=OFF
+        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE:STRING="Release" -DBUILD_DOCS:BOOL=ON -DPYWRAP:BOOL=ON  -DVIEW:BOOL=OFF -DOMP:BOOL=OFF
         cd ..
 
     - name: 'Build'

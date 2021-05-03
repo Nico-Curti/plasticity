@@ -46,5 +46,5 @@ or for installing in development mode:
 
 
 .. |Python version| image:: https://img.shields.io/badge/python-3.5|3.6|3.7|3.8-blue.svg
-.. _`setup.py`: https://github.com/Nico-Curti/blob/master/setup.py
+.. _`setup.py`: https://github.com/Nico-Curti/plasticity/blob/main/setup.py
 .. _issue: https://github.com/Nico-Curti/rFBP/issues/5

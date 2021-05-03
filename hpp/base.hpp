@@ -56,6 +56,9 @@ void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int & num_epochs
   // init the random number generator for the permutation
   std :: mt19937 engine(seed);
 
+  // initialize the (possible) parallel environment
+  Eigen :: initParallel();
+
   // start the loop along the epochs
   for (int epoch = 0; epoch < num_epochs; ++epoch)
   {

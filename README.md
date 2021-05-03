@@ -124,8 +124,6 @@ The `Python` wrap of the library was written according to `scikit-optimize` `Pyt
 
 ## Installation
 
-Follow the instruction about your needs.
-
 A complete list of instructions "for beginners" is also provided for both [c++](https://github.com/Nico-Curti/plasticity/blob/main/docs/source/CMake.rst) and [python](https://github.com/Nico-Curti/plasticity/blob/main/docs/source/Python.rst) versions.
 
 ### CMake C++ installation
