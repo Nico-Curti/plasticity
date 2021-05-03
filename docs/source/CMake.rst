@@ -13,6 +13,7 @@ For the C++ installation:
 2) Clone the `plasticity` package from this repository, or download a stable release
 
 .. code-block:: bash
+
   git clone https://github.com/Nico-Curti/plasticity.git
   cd plasticity
 
@@ -20,11 +21,15 @@ For the C++ installation:
 Example:
 
 **Unix OS:**
+
 .. code-block:: bash
+
   ./build.sh
 
 **Windows OS:**
+
 .. code-block:: Powershell
+
   PS \>                 ./build.ps1
 
 Ubuntu
@@ -33,12 +38,14 @@ Ubuntu
 1) Define a work folder, which we will call WORKSPACE in this tutorial: this could be a "Code" folder in our home, a "c++" folder on our desktop, whatever you want. Create it if you don't already have, using your favourite method (mkdir in bash, or from the graphical interface of your distribution). We will now define an environment variable to tell the system where our folder is. Please note down the full path of this folder, which will look like `/home/$(whoami)/code/`
 
 .. code-block:: bash
+
   echo -e "\n export WORKSPACE=/full/path/to/my/folder \n" >> ~/.bashrc
   source ~/.bashrc
 
 2) Open a Bash terminal and type the following commands to install all the prerequisites.
 
 .. code-block:: bash
+
   sudo add-apt-repository ppa:ubuntu-toolchain-r/test
   sudo apt-get update
   sudo apt-get install -y gcc-8 g++-8
@@ -54,11 +61,13 @@ Ubuntu
 3) Install the Eigen library
 
 .. code-block:: bash
+
   sudo apt-get install -y libeigen3-dev
 
 4) Build the project with CMake (enable or disable OMP with the define **-DOMP**; enable or disable **Cython** building with the define **-DPYWRAP**; enable or disable testing with the define **-DBUILD_TEST**):
 
 .. code-block:: bash
+
   cd $WORKSPACE
   git clone https://github.com/Nico-Curti/plasticity
   cd plasticity
@@ -77,6 +86,7 @@ macOS
 1) If not already installed, install the XCode Command Line Tools, typing this command in a terminal:
 
 .. code-block:: bash
+
   xcode-select --install
 
 2) If not already installed, install Homebrew following the official guide here: https://brew.sh/index_it.html.
@@ -84,6 +94,7 @@ macOS
 3) Open the terminal and type these commands
 
 .. code-block:: bash
+
   brew update
   brew upgrade
   brew install gcc@8
@@ -92,6 +103,7 @@ macOS
 4) Install the Eigen library
 
 .. code-block:: bash
+
   brew install eigen
 
 5) Define a work folder, which we will call WORKSPACE in this tutorial: this could be a "Code" folder in our home, a "c++" folder on our desktop, whatever you want. Create it if you don't already have, using your favourite method (mkdir in bash, or from the graphical interface in Finder). We will now define an environment variable to tell the system where our folder is. Please note down the full path of this folder, which will look like /home/$(whoami)/code/
@@ -99,12 +111,14 @@ macOS
 6) Open a Terminal and type the following command (replace /full/path/to/my/folder with the previous path noted down)
 
 .. code-block:: bash
+
   echo -e "\n export WORKSPACE=/full/path/to/my/folder \n" >> ~/.bash_profile
   source ~/.bash_profile
 
 7) Build the project with CMake (enable or disable OMP with the define **-DOMP**; enable or disable **Cython** building with the define **-DPYWRAP**; enable or disable testing with the define **-DBUILD_TEST**):
 
 .. code-block:: bash
+
   cd $WORKSPACE
   git clone https://github.com/Nico-Curti/plasticity
   cd plasticity
@@ -125,6 +139,7 @@ Windows (7+)
 2) Open your Powershell with Administrator privileges, type the following command and confirm it:
 
 .. code-block:: Powershell
+
   PS \>                 Set-ExecutionPolicy unrestricted
 
 3) If not already installed, please install chocolatey using the official guide here: http://chocolatey.org
@@ -132,6 +147,7 @@ Windows (7+)
 4) If you are not sure about having them updated, or even installed, please install `git`, `cmake` and an updated `Powershell`. To do so, open your Powershell with Administrator privileges and type
 
 .. code-block:: Powershell
+
   PS \>                 cinst -y git cmake powershell
 
 5) Restart the PC if required by chocolatey after the latest step
@@ -143,17 +159,20 @@ Windows (7+)
 8) Define a work folder, which we will call `WORKSPACE` in this tutorial: this could be a "Code" folder in our home, a "cpp" folder on our desktop, whatever you want. Create it if you don't already have, using your favourite method (mkdir in Powershell, or from the graphical interface in explorer). We will now define an environment variable to tell the system where our folder is. Please note down its full path. Open a Powershell (as a standard user) and type
 
 .. code-block:: Powershell
+
   PS \>                 rundll32 sysdm.cpl,EditEnvironmentVariables
 
 9) In the upper part of the window that pops-up, we have to create a new environment variable, with name `WORKSPACE` and value the full path noted down before.
 If it not already in the `PATH` (this is possible only if you did it before), we also need to modify the "Path" variable adding the following string (on Windows 10 you need to add a new line to insert it, on Windows 7/8 it is necessary to append it using a `;` as a separator between other records):
 
 .. code-block:: cmd
+
                       %PROGRAMFILES%\CMake\bin
 
 10) If `vcpkg` is not installed, please follow the next procedure, otherwise please jump to #12
 
 .. code-block:: Powershell
+
   PS \>                 cd $env:WORKSPACE
   PS Code>              git clone https://github.com/Microsoft/vcpkg.git
   PS Code>              cd vcpkg
@@ -162,6 +181,7 @@ If it not already in the `PATH` (this is possible only if you did it before), we
 11) Open a Powershell with Administrator privileges and type
 
 .. code-block:: Powershell
+
   PS \>                 cd $env:WORKSPACE
   PS Code>              cd vcpkg
   PS Code\vcpkg>        .\vcpkg integrate install
@@ -169,11 +189,13 @@ If it not already in the `PATH` (this is possible only if you did it before), we
 12) Install the Eigen library
 
 .. code-block:: Powershell
+
   PS Code\vcpkg>        .\vcpkg install eigen3:x64-windows
 
 13) Open a Powershell and build `plasticity` using the `build.ps1` script
 
 .. code-block:: Powershell
+
   PS \>                 cd $env:WORKSPACE
   PS Code>              git clone https://github.com/Nico-Curti/plasticity
   PS Code>              cd plasticity
