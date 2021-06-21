@@ -4,8 +4,8 @@
 import numpy as np
 
 from plasticity.model._base import BasePlasticity
-from plasticity.model.optimizer import SGD
-from plasticity.model.weights import Normal
+from plasticity.model.optimizer import Optimizer, SGD
+from plasticity.model.weights import BaseWeights, Normal
 
 __author__  = ['Nico Curti', 'Lorenzo Squadrani', 'SimoneGasperini']
 __email__ = ['nico.curit2@unibo.it', 'lorenzo.squadrani@studio.unibo.it', 'simone.gasperini2@studio.unibo.it']

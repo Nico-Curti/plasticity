@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from ._base import BasePlasticity
-from .optimizer import SGD
-from .weights import Normal
+from .optimizer import Optimizer, SGD
+from .weights import BaseWeights, Normal
 from plasticity.lib.bcm import _BCM
 
 __author__  = ['Nico Curti']

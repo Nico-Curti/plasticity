@@ -7,8 +7,8 @@ from __future__ import print_function
 from plasticity.utils import _check_activation
 from plasticity.utils import _check_string
 from plasticity.utils import redirect_stdout
-from .optimizer import SGD
-from .weights import Uniform
+from .optimizer import Optimizer, SGD
+from .weights import BaseWeights, Uniform
 
 from sklearn.base import BaseEstimator
 from sklearn.base import TransformerMixin
