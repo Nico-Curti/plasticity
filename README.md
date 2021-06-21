@@ -578,8 +578,7 @@ with open('/path/to/whole_train_cifar10.bin', 'wb') as fp:
 
 * <img src="https://avatars0.githubusercontent.com/u/24650975?s=400&v=4" width="25px"> **Nico Curti** [git](https://github.com/Nico-Curti), [unibo](https://www.unibo.it/sitoweb/nico.curti2)
 
-* <img src="https://avatars.githubusercontent.com/u/55916809?v=4" width="25px">
-**Lorenzo Squadrani** [git](https://github.com/lorenzosquadrani)
+* <img src="https://avatars.githubusercontent.com/u/55916809?v=4" width="25px"> **Lorenzo Squadrani** [git](https://github.com/lorenzosquadrani)
 
 * <img src="https://avatars2.githubusercontent.com/u/71086758?s=400&v=4" width="25px;"/> **Simone Gasperini** [git](https://github.com/SimoneGasperini)
 
