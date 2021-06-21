@@ -34,7 +34,7 @@ class BaseWeights (object):
       Random seed generator
   '''
 
-  def __init__ (self, init_type, mu=0., sigma=1., scale=1., seed=42):
+  def __init__ (self, init_type : str, mu : float = 0., sigma : float = 1., scale : float = 1., seed : int = 42):
 
     self.init_type, init_index = _check_weights_init(init_type)
     self.mu = mu
@@ -43,7 +43,7 @@ class BaseWeights (object):
     self.seed = seed
     self._object = _weights_initialization(init_index, mu, sigma, scale, seed)
 
-  def __repr__ (self):
+  def __repr__ (self) -> str:
     '''
     Printer of BaseWeights informations
     '''

@@ -63,6 +63,10 @@ void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int & num_epochs
   for (int epoch = 0; epoch < num_epochs; ++epoch)
   {
 
+    // set the initial accumulator to zeros
+    // This vector will be check for the estimation
+    // of model convergence at each epoch
+    Eigen :: ArrayXf sum_theta = Eigen :: ArrayXf :: Zero(this->outputs);
 
 #if EIGEN_VERSION_AT_LEAST(3, 3, 90)
     // Perform an index permutation at each epoch
@@ -90,9 +94,6 @@ void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int & num_epochs
       // with a shape given by (batch_size, num_features)
       auto batch_data = X_perm.block(i * this->batch, 0, this->batch, n_features);
 
-      // (eventually) perform the weights normalization/standardization
-      this->normalize_weights();
-
       // perform the prediction of the model with the current weight matrix
 
       Eigen :: MatrixXf output = this->_predict(batch_data);
@@ -100,8 +101,15 @@ void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int & num_epochs
       // compute the gradient of the weights matrix (aka dW)
       Eigen :: MatrixXf weights_update = this->weights_update(batch_data, output);
 
+      // (eventually) perform a weight decay
+      if (this->decay != 0.f)
+        weights_update -= this->decay * this->weights;
+
       // perform the update of the weights using the properly set optimizer
       this->optimizer.update(epoch + 1, this->weights, weights_update);
+
+      // update the convergence vector
+      sum_theta += this->theta.array();
 
 #ifdef __verbose__
 
@@ -121,7 +129,7 @@ void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int & num_epochs
 #endif // __verbose__
 
     // check if the model has reached the convergency
-    if ( this->check_convergency() )
+    if ( this->check_convergence(sum_theta * (1.f / num_batches)) )
     {
 
 #ifdef __verbose__

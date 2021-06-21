@@ -1,16 +1,9 @@
 #ifndef __MNIST_loader__
 #define __MNIST_loader__
 
-#include <utils.hpp> // utility functions
-#include <fstream> // file stream
+#include <data.h> // BaseData class
 
-#ifdef __view__
-
-  #include <opencv2/core/mat.hpp>
-
-#endif
-
-#define MNIST_LABEL_MAGIC_CODE  0x801 ///< MNIST label magic code of the binary file
+#define MNIST_LABEL_MAGIC_CODE 0x801 ///< MNIST label magic code of the binary file
 #define MNIST_IMAGE_MAGIC_CODE 0x803 ///< MNIST image magic code of the binary file
 
 
@@ -36,20 +29,10 @@ namespace data_loader
 * Reference: https://github.com/wichtounet/mnist
 *
 */
-class MNIST
+class MNIST : public BaseData
 {
 
 public:
-
-  int32_t num_train_sample; ///< number of training images/labels
-  int32_t num_test_sample; ///< number of testing images/labels
-  int32_t rows; ///< number of rows in each training/testing image
-  int32_t cols; ///< number of columns in each training/testing image
-
-  std :: unique_ptr < uint8_t [] > training_images; ///< training image sequential buffer
-  std :: unique_ptr < uint8_t [] > testing_images;  ///< testing image sequential buffer
-  std :: unique_ptr < uint8_t [] > training_labels; ///< training label sequential buffer
-  std :: unique_ptr < uint8_t [] > testing_labels;  ///< testing label sequential buffer
 
   // Constructor
 
@@ -145,75 +128,6 @@ public:
   */
   void load_testing_labels (const std :: string & testing_labels);
 
-  /**
-  * @brief Load the data from the binary files
-  *
-  * @details This function load and set the MNIST dataset into the object buffers.
-  * Internal variables of the object are set according to the bytes read from the
-  * file. Some tests are internally performed to check the validity of the provided
-  * files. A runtime error is raised if something goes wrong in the loading.
-  *
-  * @param training_images Filename/Path of the training image binary file.
-  * @param training_labels Filename/Path of the training label binary file.
-  * @param testing_images Filename/Path of the testing image binary file.
-  * @param testing_labels Filename/Path of the testing label binary file.
-  *
-  */
-  void load (const std :: string & training_images, const std :: string & training_labels, const std :: string & testing_images, const std :: string & testing_labels);
-
-#ifdef __view__
-
-  /**
-  * @brief Get the corresponding training image.
-  *
-  * @details This function allows the management of the training image
-  * as series of OpenCV images. The provided index must be less than
-  * the number of training samples stored.
-  *
-  * @param idx Index of the image to get.
-  *
-  * @return Correspoding OpenCV image.
-  *
-  */
-  cv :: Mat get_train_image (const std :: size_t & idx);
-
-  /**
-  * @brief Get the corresponding testing image.
-  *
-  * @details This function allows the management of the testing image
-  * as series of OpenCV images. The provided index must be less than
-  * the number of testing samples stored.
-  *
-  * @param idx Index of the image to get.
-  *
-  * @return Correspoding OpenCV image.
-  *
-  */
-  cv :: Mat get_test_image (const std :: size_t & idx);
-
-#endif
-
-  // Utility
-
-  /**
-  * @brief Get the training buffer size.
-  *
-  * @details The training size is equal to the number of training
-  * samples multiplied by the number of rows and cols of the images.
-  *
-  * @return Training buffer size.
-  */
-  int32_t train_size ();
-
-  /**
-  * @brief Get the testing buffer size.
-  *
-  * @details The testing size is equal to the number of testing
-  * samples multiplied by the number of rows and cols of the images.
-  *
-  * @return Training buffer size.
-  */
-  int32_t test_size ();
 
 private:
 

@@ -1,0 +1,155 @@
+#ifndef __CIFAR10_loader__
+#define __CIFAR10_loader__
+
+#include <data.h>
+
+#define CIFAR10_LABEL_MAGIC_CODE 0 ///< CIFAR10 label magic code of the binary file
+#define CIFAR10_IMAGE_MAGIC_CODE 1 ///< CIFAR10 image magic code of the binary file
+
+namespace data_loader
+{
+
+/**
+* @class CIFAR10
+*
+* @brief Load the CIFAR-10 image dataset
+*
+* @details The object allows the laod of the CIFAR-10 image dataset
+* from binary files. The training/testing images and labels are
+* loaded into a sequential buffer of unsigned char (aka uint8_t)
+* into 4 different arrays (2 arrays for the images and 2 for the labels).
+* You can directly manage the sequential buffers (format required by the
+* plasticity models) or, with the help of OpenCV (enabled with the __view__
+* define), you can visualize each single image of the dataset using
+* the corresponding index.
+* The shape of the images as much as the number of samples are stored
+* into the object.
+*
+* Reference: https://github.com/wichtounet/cifar-10
+*
+*/
+class CIFAR10 : public BaseData
+{
+
+public:
+
+  // Constructor
+
+  /**
+  * @brief Default constructor
+  */
+  CIFAR10 ();
+
+  // Copy Operator and Copy Constructor
+
+  /**
+  * @brief Copy constructor.
+  *
+  * @details The copy constructor provides a deep copy of the object, i.e. all the
+  * arrays are copied and not moved.
+  *
+  * @param x CIFAR10 object
+  *
+  */
+  CIFAR10 (const CIFAR10 & x);
+
+  /**
+  * @brief Copy operator.
+  *
+  * @details The operator performs a deep copy of the object and if there are buffers
+  * already allocated, the operatore deletes them and then re-allocates an appropriated
+  * portion of memory.
+  *
+  * @param x CIFAR10 object
+  *
+  */
+  CIFAR10 & operator = (const CIFAR10 & x);
+
+  // Destructor
+
+  /**
+  * @brief Destructor.
+  *
+  * @details Completely delete the object and release the memory of the arrays.
+  *
+  */
+  ~CIFAR10 () = default;
+
+  /**
+  * @brief Load the training image data from the binary files
+  *
+  * @details This function load and set the CIFAR-10 training images into the object buffers.
+  * Internal variables of the object are set according to the bytes read from the
+  * file. Some tests are internally performed to check the validity of the provided
+  * files. A runtime error is raised if something goes wrong in the loading.
+  *
+  * @param training_images Filename/Path of the training image binary file.
+  *
+  */
+  void load_training_images (const std :: string & training_images);
+
+  /**
+  * @brief Load the training labels data from the binary files
+  *
+  * @details This function load and set the CIFAR-10 training images into the object buffers.
+  * Internal variables of the object are set according to the bytes read from the
+  * file. Some tests are internally performed to check the validity of the provided
+  * files. A runtime error is raised if something goes wrong in the loading.
+  *
+  * @param training_labels Filename/Path of the training labels binary file.
+  *
+  */
+  void load_training_labels (const std :: string & training_labels);
+
+  /**
+  * @brief Load the testing image data from the binary files
+  *
+  * @details This function load and set the CIFAR-10 testing images into the object buffers.
+  * Internal variables of the object are set according to the bytes read from the
+  * file. Some tests are internally performed to check the validity of the provided
+  * files. A runtime error is raised if something goes wrong in the loading.
+  *
+  * @param testing_images Filename/Path of the testing image binary file.
+  *
+  */
+  void load_testing_images (const std :: string & testing_images);
+
+  /**
+  * @brief Load the testing labels data from the binary files
+  *
+  * @details This function load and set the CIFAR-10 testing images into the object buffers.
+  * Internal variables of the object are set according to the bytes read from the
+  * file. Some tests are internally performed to check the validity of the provided
+  * files. A runtime error is raised if something goes wrong in the loading.
+  *
+  * @param testing_labels Filename/Path of the testing labels binary file.
+  *
+  */
+  void load_testing_labels (const std :: string & testing_labels);
+
+private:
+
+  /**
+  * @brief Core function of the file loading.
+  *
+  * @details This function allows the loading of both training and testing
+  * binary files, setting the internal variables of the corresponding buffer.
+  * The switch between training and test is performed by the magic_key provided.
+  * For the label loading the magic key must be set according to the MNIST_LABEL_MAGIC_CODE,
+  * while for the images the variable must be equal to MNIST_IMAGE_MAGIC_CODE.
+  *
+  * @param filename Filename/Path of the CIFAR-10 binary file.
+  * @param buffer Corresponding buffer to fill.
+  * @param magic_key Magic key for image/label loading.
+  * @param nsample Number of training/test variable set into this function.
+  *
+  */
+  void load_file (const std :: string & filename, std :: unique_ptr < uint8_t [] > & buffer, const uint32_t & magic_key, int32_t & nsample);
+
+};
+
+
+} // end namespace
+
+
+#endif // __CIFAR10_loader__

@@ -27,7 +27,7 @@
 //M*/
 
 #include <mnist.h>
-#include <bcm.h>
+#include <hopfield.h>
 #include <parser.h>
 
 #ifdef __view__
@@ -45,7 +45,7 @@
 void usage (char ** argv)
 {
   std :: cerr << "Error parsing! Configuration file not provided" << std :: endl;
-  std :: cerr << "BCM simulator with MNIST dataset" << std :: endl;
+  std :: cerr << "Hopfield simulator with MNIST dataset" << std :: endl;
   std :: cerr << "Usage: " << argv[0] << " [config_filename]" << std :: endl;
   std :: cerr << "\t- config_filename : Configuration file with simulation parameters" << std :: endl;
   std :: exit (1);
@@ -72,13 +72,15 @@ int main (int argc, char ** argv)
   const int batch_size             = cfg.get < int > ("batch_size", 1000);
   const int epochs_for_convergency = cfg.get < int > ("epochs_for_convergency", 100000);
   const float convergency_atol     = cfg.get < float > ("convergency_atol", 1e10f);
-  const float interaction_strength = cfg.get < float > ("interaction_strength", 0.0f);
+  //const float interaction_strength = cfg.get < float > ("interaction_strength", 0.0f);
   const int seed                   = cfg.get < int > ("seed", 42);
   const int epochs                 = cfg.get < int > ("epochs", 1000);
-  const int normalize              = cfg.get < int > ("normalize", 1);
-  const int binarize               = cfg.get < int > ("binarize", 0);
 
-  const int activation_func        = transfer :: get_activation.at(cfg.get < std :: string > ("activation", "logistic"));
+  const float delta                = cfg.get < float > ("delta", .4f);
+  const float p                    = cfg.get < float > ("p", 2.f);
+  const int k                      = cfg.get < int > ("k", 2);
+  //const int activation_func        = transfer :: get_activation.at(cfg.get < std :: string > ("activation", "logistic"));
+  const float weights_decay        = cfg.get < float > ("weights_decay", 0.f);
 
   const int optimizer_type         = optimizer :: get_optimizer.at(cfg.get < std :: string > ("optimizer", "sgd"));
   const float learning_rate        = cfg.get < float > ("learning_rate", 2e-2f);
@@ -92,7 +94,10 @@ int main (int argc, char ** argv)
   const float mu                   = cfg.get < float > ("mu", 0.f);
   const float std                  = cfg.get < float > ("std", 1.f);
   const float scale                = cfg.get < float > ("scale", 1.f);
-  const int weights_seed           = cfg.get < float > ("weights_seed", 42);
+  const int weights_seed           = cfg.get < int > ("weights_seed", 42);
+
+  const int normalize              = cfg.get < int > ("normalize", 1);
+  const int binarize               = cfg.get < int > ("binarize", 0);
 
   /******************************************************
                 Load the MNIST training set
@@ -103,7 +108,7 @@ int main (int argc, char ** argv)
 
   std :: cout << "Dataset parameters:" << std :: endl;
   std :: cout << "- Number of training images : " << dataset.num_train_sample << std :: endl;
-  std :: cout << "- Image size : [" << dataset.rows << ", " << dataset.cols << "]" << std :: endl;
+  std :: cout << "- Image size : [" << dataset.rows << ", " << dataset.cols << ", " << dataset.channels << "]" << std :: endl;
 
   /******************************************************
                 Preprocess the data
@@ -113,11 +118,14 @@ int main (int argc, char ** argv)
 
   for (int i = 0; i < dataset.train_size(); ++i)
   {
+    training[i] = static_cast < float >(dataset.training_images[i]);
+
     if (normalize)
-      training[i] = static_cast < float >(dataset.training_images[i]) / 255.f;
+      training[i] /= 255.f;
+    else
 
     if (binarize)
-      training[i] = static_cast < float >(dataset.training_images[i] != 0);
+      training[i] = static_cast < float >(training[i] != 0);
   }
 
   /******************************************************
@@ -128,8 +136,12 @@ int main (int argc, char ** argv)
   std :: cout << "- Neurons: " << outputs << std:: endl;
   std :: cout << "- Epochs: " << epochs << std:: endl;
   std :: cout << "- Batch size: " << batch_size << std:: endl;
-  std :: cout << "- Lateral interaction strength: " << interaction_strength << std:: endl;
-  std :: cout << "- Activation Function: " << cfg.get < std :: string > ("activation", "logistic (default)") << std:: endl;
+  //std :: cout << "- Lateral interaction strength: " << interaction_strength << std:: endl;
+  //std :: cout << "- Activation Function: " << cfg.get < std :: string > ("activation", "logistic (default)") << std:: endl;
+  std :: cout << "- Delta: " << delta << std:: endl;
+  std :: cout << "- P: " << p << std:: endl;
+  std :: cout << "- K: " << k << std:: endl;
+  std :: cout << "- Weights decay: " << weights_decay << std:: endl;
   std :: cout << "- Weights Model: " << cfg.get < std :: string > ("weights", "normal (default)") << std:: endl;
   std :: cout << "  - Mean: " << mu << std :: endl;
   std :: cout << "  - Std: " << std << std :: endl;
@@ -144,10 +156,11 @@ int main (int argc, char ** argv)
   std :: cout << "  - rho: " << rho << std :: endl;
 
 
-  BCM bcm (outputs, batch_size, activation_func,
-           update_args(optimizer_type, learning_rate, momentum, decay, B1, B2, rho),
-           weights_initialization(weights_type, mu, std, scale, weights_seed),
-           epochs_for_convergency, convergency_atol, interaction_strength);
+  Hopfield hopfield (outputs, batch_size,
+                     update_args(optimizer_type, learning_rate, momentum, decay, B1, B2, rho),
+                     weights_initialization(weights_type, mu, std, scale, weights_seed),
+                     epochs_for_convergency, convergency_atol,
+                     decay, delta, p, k);
 
 #ifdef __view__
 
@@ -160,10 +173,10 @@ int main (int argc, char ** argv)
 
   int32_t iter = 0;
 
-  auto callback = [&](BasePlasticity * bcm) -> void
+  auto callback = [&](BasePlasticity * hopfield) -> void
                   {
                     // set the maximum number of images/neurons available in a square matrix
-                    const int32_t num_images = std :: sqrt(bcm->weights.rows());
+                    const int32_t num_images = std :: sqrt(hopfield->weights.rows());
                     // get the number image size
                     const int32_t size = dataset.rows;
 
@@ -181,7 +194,7 @@ int main (int argc, char ** argv)
                         const int32_t index = i * num_images + j;
 
                         // get the correspoding block matrix
-                        Eigen :: MatrixXf block = bcm->weights.row(index);
+                        Eigen :: MatrixXf block = hopfield->weights.row(index);
                         // convert it to an OpenCV mat
                         cv :: Mat img;
                         cv :: eigen2cv(block, img);
@@ -227,9 +240,10 @@ int main (int argc, char ** argv)
                 Run the simulation
   *******************************************************/
 
-  bcm.fit(training.get(), dataset.num_train_sample, dataset.rows * dataset.cols, epochs, seed, callback);
+  hopfield.fit(training.get(), dataset.num_train_sample, dataset.rows * dataset.cols * dataset.channels, epochs, seed, callback);
 
   // stop the image until the ESC key
+  std :: cerr << "Press ESC to exit" << std :: endl;
   while ((cv :: waitKey(0) & 0xEFFFFF) != 27); //27 is the keycode for ESC
   cv :: destroyWindow("Learning weights");
 
@@ -239,7 +253,7 @@ int main (int argc, char ** argv)
                 Run the simulation
   *******************************************************/
 
-  bcm.fit(training.get(), dataset.num_train_sample, dataset.rows * dataset.cols, epochs, seed);
+  hopfield.fit(training.get(), dataset.num_train_sample, dataset.rows * dataset.cols * dataset.channels, epochs, seed);
 
 #endif
 

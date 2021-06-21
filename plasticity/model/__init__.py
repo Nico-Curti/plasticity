@@ -6,5 +6,5 @@
 from .bcm import BCM
 from .hopfield import Hopfield
 
-__author__  = ['Nico Curti', 'SimoneGasperini']
-__email__ = ['nico.curit2@unibo.it', 'simone.gasperini2@studio.unibo.it']
+__author__  = ['Nico Curti', 'Lorenzo Squadrani', 'SimoneGasperini']
+__email__ = ['nico.curit2@unibo.it', 'lorenzo.squadrani@studio.unibo.it', 'simone.gasperini2@studio.unibo.it']

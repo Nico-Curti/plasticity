@@ -1,6 +1,6 @@
 | **Authors**  | **Project** |  **Documentation** | **Build Status** | **Code Quality** | **Coverage** |
 |:------------:|:-----------:|:------------------:|:----------------:|:----------------:|:------------:|
-| [**N. Curti**](https://github.com/Nico-Curti) <br/> [**S. Gasperini**](https://github.com/SimoneGasperini) <br/> [**M. Ceccarelli**](https://github.com/Mat092)  | **plasticity** <br/> [![docs](https://readthedocs.org/projects/plasticity/badge/?version=latest)](https://plasticity.readthedocs.io/en/latest/?badge=latest) | **Docs:** [![plasticity Docs CI](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml) | **Windows:** <br/> [![Windows plasticity CI](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml) <br/> **Linux:** <br/> [![Linux plasticity CI](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml) <br/> **MacOS:** <br/> [![MacOS plasticity CI](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml) <br/> **Python/Cython:** <br/> [![plasticity Python CI](https://github.com/Nico-Curti/plasticity/actions/workflows/python.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/python.yml) | **Codacy:** <br/> [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9879f0e8f90140eab79c338b46c00420)](https://www.codacy.com/gh/Nico-Curti/plasticity/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nico-Curti/plasticity&amp;utm_campaign=Badge_Grade) <br/> **Codebeat:** <br/> [![codebeat badge](https://codebeat.co/badges/941ebbcf-de5a-4ff0-b4c4-9674bfb20c69)](https://codebeat.co/projects/github-com-nico-curti-plasticity-main) | **CodeCov:** <br/> [![codecov](https://codecov.io/gh/Nico-Curti/plasticity/branch/main/graph/badge.svg)](https://codecov.io/gh/Nico-Curti/plasticity) |
+| [**N. Curti**](https://github.com/Nico-Curti) <br/> [**L. Squadrani**](https://github.com/lorenzosquadrani) <br/> [**S. Gasperini**](https://github.com/SimoneGasperini) <br/> [**M. Ceccarelli**](https://github.com/Mat092)  | **plasticity** <br/> [![docs](https://readthedocs.org/projects/plasticity/badge/?version=latest)](https://plasticity.readthedocs.io/en/latest/?badge=latest) | **Docs:** [![plasticity Docs CI](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml) | **Windows:** <br/> [![Windows plasticity CI](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml) <br/> **Linux:** <br/> [![Linux plasticity CI](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml) <br/> **MacOS:** <br/> [![MacOS plasticity CI](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml) <br/> **Python/Cython:** <br/> [![plasticity Python CI](https://github.com/Nico-Curti/plasticity/actions/workflows/python.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/python.yml) | **Codacy:** <br/> [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9879f0e8f90140eab79c338b46c00420)](https://www.codacy.com/gh/Nico-Curti/plasticity/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nico-Curti/plasticity&amp;utm_campaign=Badge_Grade) <br/> **Codebeat:** <br/> [![codebeat badge](https://codebeat.co/badges/941ebbcf-de5a-4ff0-b4c4-9674bfb20c69)](https://codebeat.co/projects/github-com-nico-curti-plasticity-main) | **CodeCov:** <br/> [![codecov](https://codecov.io/gh/Nico-Curti/plasticity/branch/main/graph/badge.svg)](https://codecov.io/gh/Nico-Curti/plasticity) |
 
 [![appveyor](https://ci.appveyor.com/api/projects/status/djnkyxc64dlm4r6p/branch/main?svg=true)](https://ci.appveyor.com/project/Nico-Curti/plasticity-9jr6a/branch/main)
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/Nico-Curti/plasticity.svg?style=plastic)](https://github.com/Nico-Curti/plasticity/pulls)
@@ -31,6 +31,7 @@ Implementation and optimization of biological-inspired Neural Network models for
 * [Table of contents](#table-of-contents)
 * [Contribution](#contribution)
 * [References](#references)
+* [FAQ](#faq)
 * [Authors](#authors)
 * [License](#license)
 * [Acknowledgments](#acknowledgments)
@@ -50,11 +51,19 @@ In the paper by [D. Krotov and J. J. Hopfield](https://arxiv.org/abs/1806.10181)
 Starting from these concepts, they were able to design an algorithm (based on an extension of the *Oja rule*) capable of learning early feature detectors in a completely unsupervised way and then use them to train higher-layer weights in a usual supervised neural network.
 In particular, the Hopfield model has the structure of a 2-layers neural network which can be described by the following equations:
 
-<img src="https://render.githubusercontent.com/render/math?math=\left\{\begin{matrix}h_j=f(\sum_iw_{ij}v_i)\\c_k=tanh(\sum_js_{jk}h_j)\end{matrix}\right.">
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=h_j=f(\sum_iw_{ij}v_i)">
+</p>
+
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=c_k=tanh(\sum_js_{jk}h_j)">
+</p>
 
 where
 
-<img src="https://render.githubusercontent.com/render/math?math=f(x)=\left\{\begin{matrix}x^n,x\geq0\\0,x<0\end{matrix}\right.">
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f(x)=\left\{\begin{matrix}x^n,x\geq0\\0,x<0\end{matrix}\right.">
+</p>
 
 is the activation function of the unsupervised layer (ReLu for n=1), v<sub>i</sub>, h<sub>j</sub>, c<sub>k</sub> are respectively the input, hidden and output neurons and w<sub>ij</sub>, s<sub>jk</sub> are the receptive fields of the hidden layer (learned by the local unsupervised algorithm) and the weights learned by conventional supervised technique.
 
@@ -67,15 +76,21 @@ An exhaustive theoretical description is provided by the original paper of [Cast
 In general terms, BCM model proposes a sliding threshold for long-term potentiation (LTP) or long-term depression (LTD) induction, and states that synaptic plasticity is stabilized by a dynamic adaptation of the time-averaged post-synaptic activity.
 The BCM learning rule is described by the following equations:
 
-<img src="https://render.githubusercontent.com/render/math?math=\frac{dw_i}{dt}=y(y-\theta_M)x_i\sigma'(y)">
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=\frac{dw_i}{dt}=\frac{y(y-\theta)x_i}{\theta}">
+</p>
 
-<img src="https://render.githubusercontent.com/render/math?math=\theta_M=E[y^2]">
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=\theta=\mathbb{E}[y^2]">
+</p>
 
-where <img src="https://render.githubusercontent.com/render/math?math=E[\cdot]"> is the time-average operator and, taking the input `x`, the output `y` is computed as:
+where <img src="https://render.githubusercontent.com/render/math?math=\mathbb{E}[\cdot]"> is the time-average operator and, taking the input `x`, the output `y` is computed as:
 
-<img src="https://render.githubusercontent.com/render/math?math=y=\sigma\left(\sum_iw_ix_i\right)">
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=y=\sigma\left(\sum_iw_ix_i\right)">
+</p>
 
-In this case, the activation function <img src="https://render.githubusercontent.com/render/math?math=\sigma"> is a sigmoid.
+In the classical model the activation function <img src="https://render.githubusercontent.com/render/math?math=\sigma"> is a given by a sigmoid.
 
 See [here](https://github.com/Nico-Curti/plasticity/blob/main/docs/source/theory.rst) for further details about the models.
 
@@ -234,7 +249,7 @@ Lets see in detail how you can use the models.
 First of all you need to load your dataset.
 In all the [example](https://github.com/Nico-Curti/plasticity/blob/main/example) scripts we use the MNIST digit dataset as toy model.
 The `plasticity` library provides a simple class object for the MNIST dataset loading called `data_loader :: MNIST`: this object class allows to load both training and testing images/labels binary files related to the MNIST dataset.
-The core implementation was inspired by the [`mnist`](https://github.com/wichtounet/mnist) package: in the original project folder you can also find the required binary files for the MNIST dataset.
+The core implementation was inspired to the [`mnist`](https://github.com/wichtounet/mnist) package: in the original project folder you can also find the required binary files for the MNIST dataset.
 
 The [`run_mnist`](https://github.com/Nico-Curti/plasticity/blob/main/example/run_mnist.cpp) allows also the visualization of a subset of images sampled by the MNIST dataset using the OpenCV support.
 You can enable the OpenCV support building the library with the `-DVIEW:BOOL=ON` define.
@@ -244,9 +259,21 @@ In the MNIST dataset case this buffer of data is already exposed by the `data_lo
 
 > :warning: For sake of clarity the `data_loader :: MNIST` class exposes a `uint8_t` buffer of data which must be converted into a floating-point buffer.
 
-**Train the model** (ref. [run_bcm](https://github.com/Nico-Curti/plasticity/blob/main/example/run_bcm.cpp))
+**Load the CIFAR-10 dataset** (ref. [`run_cifar10`](https://github.com/Nico-Curti/plasticity/blob/main/example/run_cifar10.cpp))
 
-The [`run_bcm`](https://github.com/Nico-Curti/plasticity/blob/main/example/run_bcm.cpp) and [`run_hopfield`](https://github.com/Nico-Curti/plasticity/blob/main/example/run_hopfield.cpp) scripts show two possible usage-examples of the BCM and Hopfield models, respectively.
+The same procedure proposed for the MNIST dataset can be applied also for the CIFAR-10 dataset.
+A specialization of `data_loader :: BaseData` class (mother class also of the `MNIST` object) provides an equivalent interface for the management of the CIFAR-10 dataset.
+The `data_loader :: CIFAR10` class allows to load both training and testing images/labels binary files related to the CIFAR-10 dataset.
+The core implemenation was inspired to the [`cifar-10`](https://github.com/wichtounet/cifar-10/) package.
+The set of APIs and member functions/variables are the same of the `MNIST` class.
+
+> :warning: The train/test data include in the same file both labels and images.
+> The required format of the binary file is the same of the original implementation of the CIFAR-10 dataset (available [here](https://www.cs.toronto.edu/~kriz/cifar.html))
+> In the current implementation we have just concatenate together the full set of batch-files!
+
+**Train the model** (ref. [run_bcm_mnist](https://github.com/Nico-Curti/plasticity/blob/main/example/run_bcm_mnist.cpp))
+
+The [`run_bcm_mnist`](https://github.com/Nico-Curti/plasticity/blob/main/example/run_bcm_mnist.cpp) and [`run_hopfield_mnist`](https://github.com/Nico-Curti/plasticity/blob/main/example/run_hopfield_mnist.cpp) scripts show two possible usage-examples of the BCM and Hopfield models, respectively.
 The model simulations can be performed using a simple configuration file as the following one:
 
 ```
@@ -453,9 +480,106 @@ See [here](https://github.com/Nico-Curti/plasticity/blob/main/.github/CONTRIBUTI
 
 <blockquote>6- Dmitry Krotov, and John J. Hopfield. Unsupervised learning by competing hidden units, PNAS, 2019, www.pnas.org/cgi/doi/10.1073/pnas.1820458116. </blockquote>
 
+## FAQ
+
+* **How can I properly set the C++ compiler for the Python installation?**
+
+If you are working on a Ubuntu machine pay attention to properly set the environment variables related to the `C++` compiler.
+First of all take care to put the compiler executable into your environmental path:
+
+```bash
+ls -ltA /usr/bin | grep g++
+```
+
+Then you can simply use the command to properly set the right aliases/variables
+
+```bash
+export CXX=/usr/bin/g++
+export CC=/usr/bin/gcc
+```
+
+but I suggest you to put those lines into your `.bashrc` file (one for all):
+
+```bash
+echo "export CC=/usr/bin/gcc" >> ~/.bashrc
+echo "export CXX=/usr/bin/g++" >> ~/.bashrc
+```
+
+I suggest you to not use the default `Python` compiler (aka `x86_64-linux-gnu-g++`) since it can suffer of many issues during the compilation if it is not manually customized.
+
+**Note:** If you are working under Windows OS a complete guide on how to properly configure your MSVC compiler can be found [here](https://github.com/physycom/sysconfig).
+
+* **I installed the `plasticity` Python package following the instructions but I have an `ImportError` when I try to import the package as in the examples**
+
+This error is due a missing environment variable (which is not automatically set by the installation script).
+All the `C++` libraries are searched into the OS directory tree starting from the information/paths hinted by the `LD_LIBRARY_PATH` environment variable.
+When you install the `plasticity` library the produced `.so`, `.dll`, `.dylib` files are saved into the `lib` directory created into the project root directory.
+After the installation you must add this directory into the searching path.
+You can add this information editing the configuration file of your `Unix`-like system, i.e
+
+```bash
+echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/plasticity/project/directory/lib/" >> ~/.bashrc
+echo "export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/path/to/plasticity/project/directory/lib/" >> ~/.bashrc
+```
+
+or adding the `LD_LIBRARY_PATH` to your set of environment variables (especially for `Windows` users).
+
+* **Where can I find the binary files related to the MNIST dataset?**
+
+You can get the binary files of the MNIST dataset at this [link](https://github.com/wichtounet/mnist).
+The object class implemented in the `plasticity` library was inspired to the (original) implementation provided by the author of the above repository.
+You can just download (or clone) the repository and move the file wherever you want, paying attention to use the correct path to the example scripts.
+
+* **Where can I find the binary files related to the CIFAR-10 dataset?**
+
+You can get the binary files of the CIFAR-10 dataset at this [link](https://www.cs.toronto.edu/~kriz/cifar.html).
+The object class implemented in the `plasticity` library was inspired to the (original) implementation provided [here](https://github.com/wichtounet/cifar-10/).
+For a more user-friendly interface we consider a processed version of the original set of files for our simulation.
+The original data are split into 5 files related to 5 different batches.
+Furthermore, the stored images are in CHW format (ref. [here](https://www.cs.toronto.edu/~kriz/cifar.html) for the file format description).
+
+To obtain a version of the data compatible with the `plasticity` library you need to concatenate the full list of files (`data_batch_*.bin`) and transpose the images into HWC format (OpenCV compatible).
+You can manually perform this transformation or just use the following snippet:
+
+```python
+import numpy as np
+import struct
+
+filenames = ['path/to/data_batch_{:d}.bin'.format(i) for i in range(6)]
+
+labels = []
+images = []
+w, h, c = (32, 32, 3)
+
+for file in filenames:
+  with open(file, 'rb') as fp:
+    buffer = fp.read()
+    data_batch = struct.unpack('B'*(c*h*w*10000 + 10000), buffer)
+    data_batch = np.asarray(data_batch)
+
+    label = data_batch[0::c*h*w + 1]
+
+    image = np.delete(data_batch, np.arange(0, data_batch.size, w*h*c + 1))
+    image = image.reshape(10000, c, h, w).transpose(0, 2, 3, 1)
+
+  images.append(image)
+  labels.append(label)
+
+images = np.concatenate(images).astype('uint8')
+labels = np.concatenate(labels).astype('uint8')
+
+with open('/path/to/whole_train_cifar10.bin', 'wb') as fp:
+  for lbl, img in zip(labels, images):
+    fp.write(struct.pack('B', lbl))
+    fp.write(struct.pack('B'*h*w*c, *img.ravel()))
+```
+
 ## Authors
 
 * <img src="https://avatars0.githubusercontent.com/u/24650975?s=400&v=4" width="25px"> **Nico Curti** [git](https://github.com/Nico-Curti), [unibo](https://www.unibo.it/sitoweb/nico.curti2)
+
+* <img src="https://avatars.githubusercontent.com/u/55916809?v=4" width="25px">
+**Lorenzo Squadrani** [git](https://github.com/lorenzosquadrani)
 
 * <img src="https://avatars2.githubusercontent.com/u/71086758?s=400&v=4" width="25px;"/> **Simone Gasperini** [git](https://github.com/SimoneGasperini)
 
@@ -479,7 +603,7 @@ If you have found `plasticity` helpful in your research, please consider citing 
 
 ```BibTeX
 @misc{plasticity,
-  author = {Curti, Nico and Gasperini, Simone and Ceccarelli, Mattia},
+  author = {Curti, Nico and Squadrani, Lorenzo and Gasperini, Simone and Ceccarelli, Mattia},
   title = {plasticity - Unsupervised Neural Networks with biological-inspired learning rules},
   year = {2020},
   publisher = {GitHub},

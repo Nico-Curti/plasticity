@@ -42,6 +42,9 @@ class Hopfield (BasePlasticity):
     convergency_atol : float (default=0.01)
       Absolute tolerance requested for the convergency
 
+    decay : float (default=0.)
+      Weight decay scale factor.
+
     p : float (default=2.)
       Lebesgue norm of the weights
 
@@ -84,14 +87,15 @@ class Hopfield (BasePlasticity):
          PNAS, 2019, www.pnas.org/cgi/doi/10.1073/pnas.1820458116
   '''
 
-  def __init__(self, outputs=100, num_epochs=100,
-      batch_size=100, optimizer=SGD(learning_rate=2e-2),
-      delta=.4,
-      weights_init=Normal(mu=0., std=1.),
-      epochs_for_convergency=None,
-      convergency_atol=0.01,
-      p=2., k=2, random_state=42,
-      verbose=True):
+  def __init__(self, outputs : int = 100, num_epochs : int = 100,
+      batch_size : int = 100, optimizer : 'Optimizer' = SGD(lr=2e-2),
+      delta : float = .4,
+      weights_init : 'BaseWeights' = Normal(mu=0., std=1.),
+      epochs_for_convergency : int = None,
+      convergency_atol : float = 0.01,
+      decay : float = 0.,
+      p : float = 2., k : int = 2,
+      random_state : int = 42, verbose=True):
 
     super (Hopfield, self).__init__(model=_Hopfield, outputs=outputs, num_epochs=num_epochs,
                                     batch_size=batch_size, activation='Linear',

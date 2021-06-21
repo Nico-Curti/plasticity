@@ -2,13 +2,14 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+# from scipy.linalg import toeplitz
 
 from plasticity.model._base import BasePlasticity
 from plasticity.model.optimizer import SGD
 from plasticity.model.weights import Normal
 
-__author__  = ['Nico Curti', 'SimoneGasperini']
-__email__ = ['nico.curit2@unibo.it', 'simone.gasperini2@studio.unibo.it']
+__author__  = ['Nico Curti', 'Lorenzo Squadrani', 'SimoneGasperini']
+__email__ = ['nico.curit2@unibo.it', 'lorenzo.squadrani@studio.unibo.it', 'simone.gasperini2@studio.unibo.it']
 
 
 class BCM (BasePlasticity):
@@ -56,6 +57,9 @@ class BCM (BasePlasticity):
     convergency_atol : float (default=0.01)
       Absolute tolerance requested for the convergency
 
+    decay : float (default=0.)
+      Weight decay scale factor.
+
     random_state : int (default=None)
       Random seed for weights generation
 
@@ -92,15 +96,16 @@ class BCM (BasePlasticity):
          in a network of lateral interacting nonlinear neurons, Network Computation in Neural Systems, 10.1088/0954-898X/10/2/001
   '''
 
-  def __init__(self, outputs=100, num_epochs=100,
-      batch_size=100, activation='Logistic',
-      optimizer=SGD(learning_rate=2e-2),
-      weights_init=Normal(mu=0., std=1.),
-      interaction_strength=0.,
-      precision=1e-30,
-      epochs_for_convergency=None,
-      convergency_atol=0.01,
-      random_state=None, verbose=True):
+  def __init__(self, outputs : int = 100, num_epochs : int = 100,
+      batch_size : int = 100, activation : str = 'Logistic',
+      optimizer : 'Optimizer' = SGD(lr=2e-2),
+      weights_init : 'BaseWeights' = Normal(mu=0., std=1.),
+      interaction_strength : float = 0.,
+      precision : float = 1e-30,
+      epochs_for_convergency : int = None,
+      convergency_atol : float = 0.01,
+      decay : float = 0.,
+      random_state : int = None, verbose : bool = True):
 
     self._interaction_matrix = self._weights_interaction(interaction_strength, outputs)
     self.interaction_strength = interaction_strength
@@ -112,9 +117,10 @@ class BCM (BasePlasticity):
                                precision=precision,
                                epochs_for_convergency=epochs_for_convergency,
                                convergency_atol=convergency_atol,
+                               decay=decay,
                                random_state=random_state, verbose=verbose)
 
-  def _weights_interaction (self, strength, outputs):
+  def _weights_interaction (self, strength : float, outputs : np.ndarray) -> np.ndarray:
     '''
     Set the interaction matrix between weights' connections
 
@@ -134,6 +140,9 @@ class BCM (BasePlasticity):
 
     if strength != 0.:
       L = np.full(fill_value=-strength, shape=(outputs, outputs))
+      # local interaction strength
+      # r = np.linspace(outputs*strength, strength, outputs)
+      # L = toeplitz(-r, -r)
       L[np.eye(*L.shape, dtype=bool)] = 1
 
       return np.linalg.inv(L)
@@ -141,7 +150,7 @@ class BCM (BasePlasticity):
     else:
       return np.eye(M=outputs, N=outputs)
 
-  def _weights_update (self, X, output):
+  def _weights_update (self, X : np.ndarray, output : np.ndarray) -> tuple:
     '''
     Compute the weights update using the BCM learning rule.
 
@@ -173,22 +182,20 @@ class BCM (BasePlasticity):
 
     #dw = phi @ X
     dw = np.einsum('ij, jk -> ik', phi, X, optimize=True)
+    dw *= 1. / X.shape[0]
 
-    nc = np.max(np.abs(dw))
-    nc = 1. / max(nc, self.precision)
-
-    return dw * nc, theta
+    return dw, theta.squeeze()
 
 
-  def _fit (self, X):
+  def _fit (self, X : np.ndarray) -> 'BCM':
     '''
     Core function for the fit member
     '''
 
-    return super(BCM, self)._fit(X=X, norm=False)
+    return super(BCM, self)._fit(X=X)
 
 
-  def _predict (self, X):
+  def _predict (self, X : np.ndarray) -> np.ndarray:
     '''
     Core function for the predict member
     '''

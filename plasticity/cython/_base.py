@@ -58,6 +58,9 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     convergency_atol : float (default=0.01)
       Absolute tolerance requested for the convergency
 
+    decay : float (default=0.)
+      Weight decay scale factor.
+
     random_state : int (default=0)
       Random seed for weights generation
 
@@ -68,11 +71,14 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       Class Specialization variables.
   '''
 
-  def __init__ (self, model=None, outputs=100, num_epochs=100,
-      batch_size=100, activation='Linear', optimizer=SGD(learning_rate=2e-2),
-      weights_init=Uniform,
-      epochs_for_convergency=None, convergency_atol=0.01,
-      random_state=0,  verbose=True,
+  def __init__ (self, model : object = None,
+      outputs : int = 100, num_epochs : int = 100,
+      batch_size : int = 100, activation : str = 'Linear',
+      optimizer : 'Optimizer' = SGD(lr=2e-2),
+      weights_init : 'BaseWeights' = Uniform(),
+      epochs_for_convergency : int = None, convergency_atol : float = 0.01,
+      decay : float = 0.,
+      random_state : int = 0, verbose : bool = True,
       **kwargs):
 
     self.outputs = outputs
@@ -83,6 +89,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     self.weights_init = weights_init
     self.epochs_for_convergency = epochs_for_convergency if epochs_for_convergency is not None else 1
     self.convergency_atol = convergency_atol
+    self.decay = decay
     self.random_state = random_state
     self.verbose = verbose
 
@@ -92,9 +99,9 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     activation, _ = _check_activation(self, activation_func=activation)
     self._obj = model(self.outputs, self.batch_size, activation, self.optimizer._object,
                       self.weights_init._object, self.epochs_for_convergency, self.convergency_atol,
-                      *kwargs.values())
+                      self.decay, *kwargs.values())
 
-  def _join_input_label (self, X, y):
+  def _join_input_label (self, X : np.ndarray, y : np.ndarray) -> np.ndarray:
     '''
     Join the input data matrix to the labels.
     In this way the labels array/matrix is considered as a new
@@ -131,7 +138,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     return X
 
-  def fit (self, X, y=None):
+  def fit (self, X : np.ndarray, y : np.ndarray = None) -> 'BasePlasticity':
     '''
     Fit the Plasticity model weights.
 
@@ -179,7 +186,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     return self
 
-  def predict (self, X, y=None):
+  def predict (self, X : np.ndarray, y : np.ndarray = None) -> np.ndarray:
     '''
     Reduce X applying the Plasticity encoding.
 
@@ -218,7 +225,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     output = self._obj.predict(X, num_samples, num_features)
     return np.asarray(output).reshape(self._obj.outputs, num_samples)
 
-  def transform (self, X):
+  def transform (self, X : np.ndarray) -> np.ndarray:
     '''
     Apply the data reduction according to the features in the best signature found.
 
@@ -236,7 +243,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     Xnew = self.predict(X)
     return Xnew.transpose()
 
-  def fit_transform (self, X, y=None):
+  def fit_transform (self, X : np.ndarray, y : np.ndarray = None) -> np.ndarray:
     '''
     Fit the model model meta-transformer and apply the data encoding transformation.
 
@@ -263,7 +270,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     Xnew = self.transform(X)
     return Xnew
 
-  def save_weights (self, filename):
+  def save_weights (self, filename : str) -> bool:
     '''
     Save the current weights to a binary file.
 
@@ -278,12 +285,12 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     '''
     check_is_fitted(self, 'weights')
 
-    filename = _check_string(filename, exist=True)
+    filename = _check_string(filename, exist=False)
     self._obj.save_weights(filename)
 
     return True
 
-  def load_weights (self, filename):
+  def load_weights (self, filename : str) -> 'BasePlasticity':
     '''
     Load the weight matrix from a binary file.
 
@@ -303,7 +310,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     return self
 
-  def __repr__ (self):
+  def __repr__ (self) -> str:
     '''
     Object representation
     '''

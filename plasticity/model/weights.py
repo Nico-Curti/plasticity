@@ -20,7 +20,7 @@ class BaseWeights (object):
   - https://raw.githubusercontent.com/oujago/NumpyDL/master/npdl/initializations.py
   '''
 
-  def get (self, size):
+  def get (self, size : tuple) -> np.ndarray:
     '''
     Initialize the weigths matrix according to the
     specialization
@@ -38,14 +38,14 @@ class BaseWeights (object):
     raise NotImplementedError
 
   @property
-  def name (self):
+  def name (self) -> str:
     '''
     Get the name of the weight initializer function
     '''
     class_name = self.__class__.__qualname__
     return class_name
 
-  def __repr__ (self):
+  def __repr__ (self) -> str:
     '''
     Printer
     '''
@@ -71,7 +71,7 @@ class Zeros (BaseWeights):
   def __init__ (self):
     super(Zeros, self).__init__()
 
-  def get (self, size):
+  def get (self, size : tuple) -> np.ndarray:
     return np.zeros(shape=size, dtype=float)
 
 class Ones (BaseWeights):
@@ -83,7 +83,7 @@ class Ones (BaseWeights):
   def __init__ (self):
     super(Ones, self).__init__()
 
-  def get (self, size):
+  def get (self, size : tuple) -> np.ndarray:
     return np.ones(shape=size, dtype=float)
 
 class Uniform (BaseWeights):
@@ -101,11 +101,11 @@ class Uniform (BaseWeights):
       weights are sampled from U(range[0], range[1]).
   '''
 
-  def __init__ (self, scale=.05):
+  def __init__ (self, scale : float = .05):
     self.scale = scale
     super(Uniform, self).__init__()
 
-  def get (self, size):
+  def get (self, size : tuple) -> np.ndarray:
     return np.random.uniform(low=-self.scale, high=self.scale, size=size)
 
 class Normal (BaseWeights):
@@ -124,12 +124,12 @@ class Normal (BaseWeights):
       Std of initial parameters.
   '''
 
-  def __init__ (self, mu=0., std=1.):
+  def __init__ (self, mu : float = 0., std : float = 1.):
     self.mu = mu
     self.std = std
     super(Normal, self).__init__()
 
-  def get (self, size):
+  def get (self, size : tuple) -> np.ndarray:
     return np.random.normal(loc=self.mu, scale=self.std, size=size)
 
 class LecunUniform (BaseWeights):
@@ -149,7 +149,7 @@ class LecunUniform (BaseWeights):
   def __init__ (self):
     super(LecunUniform, self).__init__()
 
-  def get (self, size):
+  def get (self, size : tuple) -> np.ndarray:
     inputs = size[0]
     scale = np.sqrt(3. / inputs)
     return np.random.uniform(low=-scale, high=scale, size=size)
@@ -172,7 +172,7 @@ class GlorotUniform (BaseWeights):
   def __init__ (self):
     super(GlorotUniform, self).__init__()
 
-  def get (self, size):
+  def get (self, size : tuple) -> np.ndarray:
     inputs, outputs = size
     scale = np.sqrt(6. / (inputs + outputs))
     return np.random.uniform(low=-scale, high=scale, size=size)
@@ -195,7 +195,7 @@ class GlorotNormal (BaseWeights):
   def __init__ (self):
     super(GlorotNormal, self).__init__()
 
-  def get (self, size):
+  def get (self, size : tuple) -> np.ndarray:
     inputs, outputs = size
     std = np.sqrt(2. / (inputs + outputs))
     return np.random.normal(loc=0., scale=std, size=size)
@@ -217,7 +217,7 @@ class HeUniform (BaseWeights):
   def __init__ (self):
     super(HeUniform, self).__init__()
 
-  def get (self, size):
+  def get (self, size : tuple) -> np.ndarray:
     inputs = size[0]
     scale = np.sqrt(6. / inputs)
     return np.random.uniform(low=-scale, high=scale, size=size)
@@ -239,7 +239,7 @@ class HeNormal (BaseWeights):
   def __init__ (self):
     super(HeNormal, self).__init__()
 
-  def get (self, size):
+  def get (self, size : tuple) -> np.ndarray:
     inputs = size[0]
     std = np.sqrt(2. / inputs)
     return np.random.normal(loc=0., scale=std, size=size)
@@ -270,12 +270,12 @@ class Orthogonal (BaseWeights):
          linear neural networks." arXiv preprint arXiv:1312.6120 (2013).
   '''
 
-  def __init__ (self, gain=1.):
+  def __init__ (self, gain : float = 1.):
 
     self.gain = np.sqrt(2) if gain == 'relu' else gain
     super(Orthogonal, self).__init__()
 
-  def get (self, size):
+  def get (self, size : tuple) -> np.ndarray:
 
     flat_shape = (size[0], np.prod(size[1:]))
     a = np.random.normal(loc=0., scale=1., size=flat_shape)
@@ -311,12 +311,12 @@ class TruncatedNormal (BaseWeights):
   - https://raw.githubusercontent.com/ddbourgin/numpy-ml/master/numpy_ml/neural_nets/utils/utils.py
   '''
 
-  def __init__ (self, mu=0., std=1.):
+  def __init__ (self, mu : float = 0., std : float = 1.):
     self.mu = mu
     self.std = std
     super(TruncatedNormal, self).__init__()
 
-  def get (self, size):
+  def get (self, size : tuple) -> np.ndarray:
     samples = np.random.normal(loc=self.mu, scale=self.std, size=size)
     reject = np.logical_or(samples >= self.mu + 2 * self.std, samples <= self.mu - 2 * self.std)
 

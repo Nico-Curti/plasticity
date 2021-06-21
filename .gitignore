@@ -158,6 +158,7 @@ coverage.*
 html*
 
 # temp files
+setup_.py
 messages_*
 results_*
 *.pyd
@@ -168,3 +169,5 @@ results_*
 
 # Doxygen
 docs/source/doxydoc/
+docs/source/conf.py
+docs/Doxyfile

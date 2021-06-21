@@ -13,7 +13,7 @@ from plasticity.utils import activations
 __author__ = ['Mattia Ceccarelli', 'Nico Curti']
 __email__ = ['mattia.ceccarelli5@unibo.it', 'nico.curti2@unibo.it']
 
-def _check_activation (obj, activation_func):
+def _check_activation (obj : object, activation_func : str) -> tuple:
   '''
   Check if the activation function is valid.
 
@@ -76,7 +76,7 @@ def _check_activation (obj, activation_func):
 
   return (activation, activation_func)
 
-def _check_string (string, exist=True):
+def _check_string (string : str, exist : bool = True) -> bytes:
   '''
   Check if the input string is already encoded for c++ compatibility
 
@@ -107,7 +107,7 @@ def _check_string (string, exist=True):
 
   return string.encode('utf-8') if isinstance(string, str) else string
 
-def _check_update (upd_type):
+def _check_update (upd_type : str) -> tuple:
   '''
   Check if the update function is valid.
 
@@ -158,7 +158,7 @@ def _check_update (upd_type):
 
   return (update_type, update_num)
 
-def _check_weights_init (init_type):
+def _check_weights_init (init_type : str) -> tuple:
   '''
   Check if the weights initialization function is valid.
 
@@ -211,7 +211,7 @@ def _check_weights_init (init_type):
 
 
 @contextmanager
-def redirect_stdout (verbose):
+def redirect_stdout (verbose : bool):
   '''
   Redirect output stdout from cython wrap to devnull or not.
   This function works ONLY for cython wrap functions!!
@@ -275,7 +275,7 @@ def redirect_stdout (verbose):
                                       # CLOEXEC may be different
 
 
-def view_weights (weights, dims):
+def view_weights (weights : np.ndarray, dims : tuple) -> None:
   '''
   Plot the weight matrix as full image
 

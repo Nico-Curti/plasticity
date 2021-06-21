@@ -141,9 +141,9 @@ private:
   *
   * @details The initialization function follows the equation:
   *
-  * ```python
-  * w = np.zeros(shape=size, dtype=float)
-  * ```
+  * \f[
+  * w = Zeros()
+  * \f]
   *
   * @param weights Matrix of weights in ravel format.
   * @param inputs Number of rows of the weight matrix.
@@ -156,9 +156,9 @@ private:
   *
   * @details The initialization function follows the equation:
   *
-  * ```python
-  * w = np.ones(shape=size, dtype=float)
-  * ```
+  * \f[
+  * w = Ones()
+  * \f]
   *
   * @param weights Matrix of weights in ravel format.
   * @param inputs Number of rows of the weight matrix.
@@ -172,9 +172,9 @@ private:
   * @details Parameters are sampled from U(a, b).
   * The initialization function follows the equation:
   *
-  * ```python
-  * w = np.random.uniform(low=-scale, high=scale, size=size)
-  * ```
+  * \f[
+  * w = Uniform(-scale, scale)
+  * \f]
   *
   * @param weights Matrix of weights in ravel format.
   * @param inputs Number of rows of the weight matrix.
@@ -188,9 +188,9 @@ private:
   * @details Initial weight parameters are sampled from N(mean, std).
   * The initialization function follows the equation:
   *
-  * ```python
-  * w = np.random.normal(loc=mu, scale=std, size=size)
-  * ```
+  * \f[
+  * w = Normal(\mu, std)
+  * \f]
   *
   * @param weights Matrix of weights in ravel format.
   * @param inputs Number of rows of the weight matrix.
@@ -205,9 +205,9 @@ private:
   * where `limit` is `sqrt(3 / inputs)` where `inputs` is the number of input
   * units in the weight matrix.
   *
-  * ```c++
-  * w = uniform(w, size, std :: sqrt(3.f / inputs))
-  * ```
+  * \f[
+  * w = Uniform(-\sqrt(3 / inputs), \sqrt(3 / inputs))
+  * \f]
   *
   * @param weights Matrix of weights in ravel format.
   * @param inputs Number of rows of the weight matrix.
@@ -223,9 +223,9 @@ private:
   * of input units in the weight matrix and `outputs` is the number of output
   * units in the weight matrix.
   *
-  * ```c++
-  * w = uniform(w, size, std :: sqrt(6.f / (inputs + outputs))
-  * ```
+  * \f[
+  * w = Uniform(-\sqrt(6 / (inputs + outputs), \sqrt(6 / (inputs + outputs)))
+  * \f]
   *
   * @param weights Matrix of weights in ravel format.
   * @param inputs Number of rows of the weight matrix.
@@ -241,9 +241,9 @@ private:
   * input units in the weight matrix and `outputs` is the number of
   * output units in the weight matrix.
   *
-  * ```c++
-  * w = normal(w, size, 0.f, std :: sqrt(2.f / (inputs + outputs))
-  * ```
+  * \f[
+  * w = Normal(0, \sqrt(2 / (inputs + outputs)))
+  * \f]
   *
   * @param weights Matrix of weights in ravel format.
   * @param inputs Number of rows of the weight matrix.
@@ -258,9 +258,9 @@ private:
   * where `limit` is `sqrt(6 / inputs)` and `inputs` is the number
   * of input units in the weight matrix.
   *
-  * ```c++
-  * w = uniform(w, size, std :: sqrt(6.f / inputs)
-  * ```
+  * \f[
+  * w = Uniform(-\sqrt(6.f / inputs), \sqrt(6.f / inputs))
+  * \f]
   *
   * @param weights Matrix of weights in ravel format.
   * @param inputs Number of rows of the weight matrix.
@@ -275,9 +275,9 @@ private:
   * with `stddev = sqrt(2 / inputs)` and `inputs` is the number of input units
   * in the weight matrix.
   *
-  * ```c++
-  * w = normal(w, size, 0.f, std :: sqrt(2.f / inputs)
-  * ```
+  * \f[
+  * w = Normal(0, \sqrt(2.f / inputs))
+  * \f]
   *
   * @param weights Matrix of weights in ravel format.
   * @param inputs Number of rows of the weight matrix.

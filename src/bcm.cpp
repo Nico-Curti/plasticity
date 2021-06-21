@@ -3,8 +3,9 @@
 BCM :: BCM (const int & outputs, const int & batch_size,
             int activation, update_args optimizer, weights_initialization weights_init,
             int epochs_for_convergency, float convergency_atol,
+            float decay,
             float interaction_strength
-            ) : BasePlasticity (outputs, batch_size, activation, optimizer, weights_init, epochs_for_convergency, convergency_atol)
+            ) : BasePlasticity (outputs, batch_size, activation, optimizer, weights_init, epochs_for_convergency, convergency_atol, decay)
 {
   this->init_interaction_matrix(interaction_strength);
 }
@@ -28,6 +29,15 @@ void BCM :: init_interaction_matrix (const float & interaction_strength)
   {
     // create a temporary matrix with all the elements set as -interaction_strength
     Eigen :: MatrixXf temp = Eigen :: MatrixXf :: Constant(this->outputs, this->outputs, -interaction_strength);
+
+    // // local interaction setting a symmetric matrix
+    // Eigen :: MatrixXf symm = Eigen :: MatrixXf :: Zero(this->outputs, this->outputs);
+    // for (int32_t i = 0; i < this->outputs; ++i)
+    //   for (int32_t j = i + 1; j < this->outputs; ++j)
+    //     symm(i, j) = (this->outputs + i - j) * (-interaction_strength);
+    //
+    // Eigen :: MatrixXf temp = symm + symm.transpose();
+
     // re-fill only the diagonal values with the identity
     temp.diagonal() = Eigen :: ArrayXf :: Ones(this->outputs);
 
@@ -58,9 +68,8 @@ Eigen :: MatrixXf BCM :: weights_update (const Eigen :: MatrixXf & X, const Eige
   // dw/dt = φ * x
   Eigen :: MatrixXf weights_update = phi * X;
 
-  // normalize the weights update by the maximum value
-  // to avoid numerical instabilities
-  const float max_abs_val = 1.f / weights_update.cwiseAbs().maxCoeff();
+  // normalize the weights update according to the number of samples
+  const float max_abs_val = 1.f / X.rows();
   weights_update = weights_update.array() * (-max_abs_val); // Add the minus for compatibility with optimization algorithms
 
   return weights_update;

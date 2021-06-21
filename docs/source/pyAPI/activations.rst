@@ -1,7 +1,7 @@
 Activations
 -----------
 
-.. automodule:: utils.activations
+.. automodule:: plasticity.utils.activations
    :members:
    :undoc-members:
    :show-inheritance:

@@ -3,16 +3,19 @@
 float BasePlasticity :: precision = 1e-30f;
 
 BasePlasticity :: BasePlasticity () : optimizer (), w_init (), weights (), history (), theta (), activation (nullptr), gradient (nullptr),
-                                      batch (100), outputs (100), epochs_for_convergency (0), convergency_atol (0.f)
+                                      batch (100), outputs (100), epochs_for_convergency (0), convergency_atol (0.f),
+                                      decay (0.f)
 {
 }
 
 BasePlasticity :: BasePlasticity (const int & outputs, const int & batch_size, int activation,
                                   update_args optimizer,
                                   weights_initialization weights_init,
-                                  int epochs_for_convergency, float convergency_atol
+                                  int epochs_for_convergency, float convergency_atol,
+                                  float decay
                                   ) : optimizer (optimizer), w_init (weights_init), weights (), history (), theta (), activation (nullptr), gradient (nullptr),
-                                      batch (batch_size), outputs (outputs), epochs_for_convergency (epochs_for_convergency), convergency_atol (convergency_atol)
+                                      batch (batch_size), outputs (outputs), epochs_for_convergency (epochs_for_convergency), convergency_atol (convergency_atol),
+                                      decay (decay)
 {
   // correct epochs_for_convergency
   //this->epochs_for_convergency = std :: max(this->epochs_for_convergency, 1);
@@ -165,25 +168,25 @@ void BasePlasticity :: check_params ()
     throw std :: runtime_error("epochs_for_convergency must be an integer bigger or equal than 1");
 }
 
-bool BasePlasticity :: check_convergency ()
+bool BasePlasticity :: check_convergence (const Eigen :: ArrayXf & vec)
 {
-  // If the history queue is not full append the last (current) theta vector to the history
+  // If the history queue is not full append the last (current) vector to the history
   if ( static_cast < int >(this->history.size()) < this->epochs_for_convergency )
   {
-    this->history.emplace_back(this->theta);
+    this->history.emplace_back(vec);
     return false;
   }
 
-  // Otherwise evaluate the distances between the current theta vector
+  // Otherwise evaluate the distances between the current vector
   // and the history arrays. The distance is evaluated as the abs differences
-  // between each historical vector and the current theta.
+  // between each historical vector and the current one.
   // If the maximum value of the differences is lower than the given tollerance
   // the convergency is reached and a stop is returned.
 
   for (int i = 0; i < this->epochs_for_convergency; ++i)
   {
     // compute the vector of abs differences
-    const bool equal = this->theta.isApprox(this->history[i], this->convergency_atol);
+    const bool equal = vec.isApprox(this->history[i], this->convergency_atol);
 
     if ( !equal )
       return true;
@@ -192,13 +195,9 @@ bool BasePlasticity :: check_convergency ()
   // Since this is the case in which the history queue is full
   // we have to remove the older vector and append the current one (LIFO behavior)
   this->history.pop_front();
-  this->history.emplace_back(this->theta);
+  this->history.emplace_back(vec);
 
   return false;
-}
-
-void BasePlasticity :: normalize_weights ()
-{
 }
 
 Eigen :: MatrixXf BasePlasticity :: _predict (__unused const Eigen :: MatrixXf & data)

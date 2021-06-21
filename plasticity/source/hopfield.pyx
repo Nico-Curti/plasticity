@@ -11,9 +11,9 @@ from weights_initialization cimport _weights_initialization
 
 cdef class _Hopfield:
 
-  def __init__ (self, int outputs, int batch_size, int activation, _update_args optimizer, _weights_initialization w_init, int epochs_for_convergency, float convergency_atol, float delta, float p, int k):
+  def __init__ (self, int outputs, int batch_size, int activation, _update_args optimizer, _weights_initialization w_init, int epochs_for_convergency, float convergency_atol, float decay, float delta, float p, int k):
 
-    self.thisptr.reset(new Hopfield(outputs, batch_size, deref(optimizer.thisptr.get()), deref(w_init.thisptr.get()), epochs_for_convergency, convergency_atol, delta, p, k))
+    self.thisptr.reset(new Hopfield(outputs, batch_size, deref(optimizer.thisptr.get()), deref(w_init.thisptr.get()), epochs_for_convergency, convergency_atol, decay, delta, p, k))
     self.outputs = outputs
     self.n_features = 0
 

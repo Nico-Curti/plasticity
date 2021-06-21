@@ -16,8 +16,8 @@ from sklearn.utils import check_array
 from sklearn.utils import check_X_y
 from sklearn.utils.validation import check_is_fitted
 
-__author__  = ['Nico Curti', 'SimoneGasperini']
-__email__ = ['nico.curit2@unibo.it', 'simone.gasperini2@studio.unibo.it']
+__author__  = ['Nico Curti', 'Lorenzo Squadrani', 'SimoneGasperini']
+__email__ = ['nico.curit2@unibo.it', 'lorenzo.squadrani@studio.unibo.it', 'simone.gasperini2@studio.unibo.it']
 
 
 class BasePlasticity (BaseEstimator, TransformerMixin):
@@ -55,6 +55,9 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     convergency_atol : float (default=0.01)
       Absolute tolerance requested for the convergency
 
+    decay : float (default=0.)
+      Weight decay scale factor.
+
     random_state : int (default=None)
       Random seed for batch subdivisions
 
@@ -62,14 +65,15 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       Turn on/off the verbosity
   '''
 
-  def __init__ (self, outputs=100, num_epochs=100,
-      activation='Linear', optimizer=Optimizer,
-      batch_size=100, weights_init=BaseWeights,
-      precision=1e-30,
-      epochs_for_convergency=None,
-      convergency_atol=0.01,
-      random_state=None,
-      verbose=True):
+  def __init__ (self, outputs : int = 100, num_epochs : int = 100,
+      activation : str = 'Linear', optimizer : 'Optimizer' = Optimizer(),
+      batch_size : int = 100, weights_init : 'BaseWeights' = BaseWeights(),
+      precision : float = 1e-30,
+      epochs_for_convergency : int = None,
+      convergency_atol : float = 0.01,
+      decay : float = 0.,
+      random_state : int = None,
+      verbose : bool = True):
 
     _, activation = _check_activation(self, activation)
 
@@ -82,11 +86,12 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     self.precision = precision
     self.epochs_for_convergency = epochs_for_convergency if epochs_for_convergency is not None else num_epochs
     self.epochs_for_convergency = max(self.epochs_for_convergency, 1)
+    self.decay = decay
     self.convergency_atol = convergency_atol
     self.random_state = random_state
     self.verbose = verbose
 
-  def _weights_update (self, X, output):
+  def _weights_update (self, X : np.ndarray, output : np.ndarray) -> tuple:
     '''
     Compute the weights update using the given learning rule.
 
@@ -108,15 +113,27 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     '''
     raise NotImplementedError
 
-  def _lebesgue_norm (self):
+  def _lebesgue_norm (self, w : np.ndarray) -> np.ndarray:
     '''
     Apply the Lebesgue norm to the weights.
+
+    Parameters
+    ----------
+      w : array-like (2D)
+        Array to normalize using Lebesgue norm
+
+    Returns
+    -------
+      wnorm : array-like (2D)
+        Normalized version of the input array
     '''
     if self.p != 2:
-      sign = np.sign(self.weights)
-      self.weights = sign * np.absolute(self.weights)**(self.p - 1)
+      sign = np.sign(w)
+      return sign * np.absolute(w)**(self.p - 1)
+    else:
+      return w
 
-  def _fit_step (self, X, norm=False):
+  def _fit_step (self, X : np.ndarray) -> np.ndarray:
     '''
     Core function of fit step (forward + backward + updates).
     We divide the step into a function to allow an easier visualization
@@ -127,17 +144,11 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       X : array-like (2D)
         Input array of data
 
-      norm : bool (default=False)
-        Switch on/off the weights normalization using Lebesque norm
-
     Returns
     -------
       theta : array-like
         Array of learning progress
     '''
-
-    if norm:
-      self._lebesgue_norm()
 
     # predict the encoded values
     output = self._predict(X)
@@ -145,13 +156,17 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     # update weights
     w_update, theta = self._weights_update(X, output)
 
+    # apply the weight decay
+    if self.decay != 0.:
+      w_update -= self.decay * self.weights
+
     #self.weights[:] += epsilon * w_update
     self.weights, = self.optimizer.update(params=[self.weights], gradients=[-w_update]) # -update for compatibility with optimizers
 
     return theta
 
   @property
-  def _check_convergency (self):
+  def _check_convergency (self) -> bool:
     '''
     Check if the current training has reached the convergency.
 
@@ -175,7 +190,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     return np.allclose(self.history, last, atol=self.convergency_atol)#, rtol=self.convergency_atol)
 
-  def _join_input_label (self, X, y):
+  def _join_input_label (self, X : np.ndarray, y : np.ndarray) -> np.ndarray:
     '''
     Join the input data matrix to the labels.
     In this way the labels array/matrix is considered as a new
@@ -212,7 +227,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     return X
 
-  def _fit (self, X, norm=False):
+  def _fit (self, X : np.ndarray) -> 'BasePlasticity':
     '''
     Core function for the fit member
 
@@ -220,9 +235,6 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     ----------
       X : array-like (2D)
         Input array of data
-
-      norm : bool (default=False)
-        Switch on/off the weights normalization using Lebesque norm
 
     Returns
     -------
@@ -242,17 +254,20 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       np.random.shuffle(indices)
 
       batches = np.lib.stride_tricks.as_strided(indices, shape=(num_batches, self.batch_size), strides=(self.batch_size * 8, 8))
+      # init null values of theta for iterative summation
+      theta = np.zeros(shape=(self.outputs,), dtype=float)
 
       for batch in tqdm(batches, disable=(not self.verbose)):
 
         batch_data = X[batch, ...]
 
-        theta = self._fit_step(X=batch_data, norm=norm)
+        theta += self._fit_step(X=batch_data)
 
       # append only the last theta value of the batch
       # for the convergency evaluation since the weight matrix
       # changes (it is updated) at every batch
-      self.history.append(theta)
+      # Note: the theta must be normalized according to number of batches!
+      self.history.append(theta * (1. / num_batches))
 
       # check if the model has reached the convergency (early stopping criteria)
       if self._check_convergency:
@@ -275,7 +290,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     return self
 
-  def fit (self, X, y=None):
+  def fit (self, X : np.ndarray, y : np.ndarray = None) -> 'BasePlasticity':
     '''
     Fit the Plasticity model weights.
 
@@ -321,13 +336,13 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     return self
 
-  def _predict (self, X):
+  def _predict (self, X : np.ndarray) -> np.ndarray:
     '''
     Core function for the predict member
     '''
     raise NotImplementedError
 
-  def predict (self, X, y=None):
+  def predict (self, X : np.ndarray, y : np.ndarray = None) -> np.ndarray:
     '''
     Reduce X applying the Plasticity encoding.
 
@@ -366,7 +381,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     X = check_array(X)
     return self._predict(X)
 
-  def transform (self, X):
+  def transform (self, X : np.ndarray) -> np.ndarray:
     '''
     Apply the data reduction according to the features in the best signature found.
 
@@ -384,7 +399,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     Xnew = self._predict(X)
     return Xnew.transpose()
 
-  def fit_transform (self, X, y=None):
+  def fit_transform (self, X : np.ndarray, y : np.ndarray = None) -> np.ndarray:
     '''
     Fit the model model meta-transformer and apply the data encoding transformation.
 
@@ -412,7 +427,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     Xnew = self.transform(X)
     return Xnew
 
-  def save_weights (self, filename):
+  def save_weights (self, filename : str) -> bool:
     '''
     Save the current weights to a binary file.
 
@@ -430,7 +445,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       self.weights.tofile(fp, sep='')
     return True
 
-  def load_weights (self, filename):
+  def load_weights (self, filename : str) -> bool:
     '''
     Load the weight matrix from a binary file.
 
@@ -453,7 +468,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     return self
 
-  def __repr__(self):
+  def __repr__(self) -> str:
     '''
     Object representation
     '''

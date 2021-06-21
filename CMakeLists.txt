@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 3.9.0)
 # plasticity Version
 set (PLASTICITY_MAJOR    1)
 set (PLASTICITY_MINOR    0)
-set (PLASTICITY_REVISION 1)
+set (PLASTICITY_REVISION 2)
 set (PLASTICITY_VERSION ${PLASTICITY_MAJOR}.${PLASTICITY_MINOR}.${PLASTICITY_REVISION})
 
 project (plasticity LANGUAGES CXX VERSION ${PLASTICITY_VERSION} DESCRIPTION "Encoding models")
@@ -13,6 +13,7 @@ if ( ( "${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU" AND ${CMAKE_CXX_COMPILER_VERSION
 else ()
   set (CMAKE_CXX_STANDARD 17)
 endif()
+set (CMAKE_PROJECT_HOMEPAGE_URL "https://github.com/Nico-Curti/plasticity")
 
 add_definitions (-DMAJOR=${PLASTICITY_MAJOR} -DMINOR=${PLASTICITY_MINOR} -DREVISION=${PLASTICITY_REVISION})
 
@@ -165,7 +166,11 @@ file(GLOB SRC           "${SRC_DIR}/*.cpp" )
 file(GLOB HEADER        "${INC_DIR}/*.h"   )
 file(GLOB HPP           "${INC_DIR}/*.hpp" )
 
-include_directories(${INC_DIR} ${HPP_DIR} ${TEST_DIR})
+include_directories(${INC_DIR})
+include_directories(${HPP_DIR})
+include_directories(${TEST_DIR})
+
+configure_file(${INC_DIR}/version.h.in ${INC_DIR}/version.h @ONLY)
 
 if (PYWRAP)
   include( UseCython )
@@ -175,16 +180,13 @@ if (PYWRAP)
   add_definitions (-DNPY_NO_DEPRECATED_API)
 endif()
 
-if (BUILD_DOCS)
-  add_subdirectory(${CMAKE_SOURCE_DIR}/docs/)
-endif ()
-
 set(plasticity_INSTALL_INCLUDE_DIR ${INSTALL_INCLUDE_DIR})
 
 configure_file(${CMAKE_SOURCE_DIR}/plasticity.pc.in ${CMAKE_SOURCE_DIR}/plasticity.pc @ONLY)
-configure_file(${PYC_DIR}/__version__.py.in ${PYC_DIR}/__version__.py @ONLY)
-configure_file(${INC_DIR}/version.h.in ${INC_DIR}/version.h @ONLY)
 message(STATUS "Pkg-config generated")
+
+# allow the export of LD_LIBRARY_PATH env variable
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
 #################################################################
 #                          SUMMARY                              #
@@ -230,10 +232,6 @@ message(STATUS ""                                                               
 #                         MAIN RULES                            #
 #################################################################
 
-if (PYWRAP)
-  add_subdirectory(${PYC_DIR}/source)
-endif()
-
 add_library(${plasticitylib} SHARED ${SRC} ${HEADER} ${HPP})
 set_property(TARGET ${plasticitylib} PROPERTY POSITION_INDEPENDENT_CODE ON)
 target_include_directories(${plasticitylib} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include> $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/hpp> $<INSTALL_INTERFACE:${rFBP_INSTALL_INCLUDE_DIR}>)
@@ -244,14 +242,23 @@ list (APPEND ALL_HEADER ${HEADER})
 list (APPEND ALL_HEADER ${HPP})
 set_target_properties(${plasticitylib} PROPERTIES PUBLIC_HEADER "${ALL_HEADER}")
 
-add_executable(example_bcm ${EXAMPLE}/run_bcm.cpp)
-target_link_libraries(example_bcm ${linked_libs} ${plasticitylib})
+add_executable(example_bcm_mnist ${EXAMPLE}/run_bcm_mnist.cpp)
+target_link_libraries(example_bcm_mnist ${linked_libs} ${plasticitylib})
 
-add_executable(example_hopfield ${EXAMPLE}/run_hopfield.cpp)
-target_link_libraries(example_hopfield ${linked_libs} ${plasticitylib})
+add_executable(example_bcm_cifar10 ${EXAMPLE}/run_bcm_cifar10.cpp)
+target_link_libraries(example_bcm_cifar10 ${linked_libs} ${plasticitylib})
+
+add_executable(example_hopfield_mnist ${EXAMPLE}/run_hopfield_mnist.cpp)
+target_link_libraries(example_hopfield_mnist ${linked_libs} ${plasticitylib})
+
+add_executable(example_hopfield_cifar10 ${EXAMPLE}/run_hopfield_cifar10.cpp)
+target_link_libraries(example_hopfield_cifar10 ${linked_libs} ${plasticitylib})
 
 add_executable(example_mnist ${EXAMPLE}/run_mnist.cpp)
 target_link_libraries(example_mnist ${linked_libs} ${plasticitylib})
+
+add_executable(example_cifar10 ${EXAMPLE}/run_cifar10.cpp)
+target_link_libraries(example_cifar10 ${linked_libs} ${plasticitylib})
 
 add_executable(plasticity_infos ${EXAMPLE}/plasticity_infos.cpp)
 target_link_libraries(plasticity_infos ${linked_libs} ${plasticitylib})
@@ -261,19 +268,61 @@ if (BUILD_TEST)
   add_subdirectory(${TEST_DIR})
 endif()
 
+if (PYWRAP)
+  add_subdirectory(${PYC_DIR}/source)
+endif()
+
+# This must be the latest subdirectory included!!
+if (BUILD_DOCS)
+  add_subdirectory(${CMAKE_SOURCE_DIR}/docs/)
+endif ()
+
 #################################################################
 #                          INSTALLERS                           #
 #################################################################
 
 install(TARGETS ${plasticitylib}    EXPORT plasticityTargets
-                                    RUNTIME DESTINATION ${OUT_DIR}
-                                    LIBRARY DESTINATION ${LIB_DIR}
-                                    ARCHIVE DESTINATION ${LIB_DIR}
-                                    PUBLIC_HEADER DESTINATION ${INSTALL_INCLUDE_DIR}
+                                    RUNTIME DESTINATION "${OUT_DIR}"
+                                    LIBRARY DESTINATION "${LIB_DIR}"
+                                    ARCHIVE DESTINATION "${LIB_DIR}"
+                                    PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}"
                                     COMPONENT dev
                                     )
 
-install(TARGETS example_bcm        DESTINATION ${OUT_DIR})
-install(TARGETS example_hopfield   DESTINATION ${OUT_DIR})
-install(TARGETS example_mnist      DESTINATION ${OUT_DIR})
-install(TARGETS plasticity_infos   DESTINATION ${OUT_DIR})
+install(TARGETS example_bcm_mnist        DESTINATION ${OUT_DIR})
+install(TARGETS example_bcm_cifar10      DESTINATION ${OUT_DIR})
+install(TARGETS example_hopfield_mnist   DESTINATION ${OUT_DIR})
+install(TARGETS example_hopfield_cifar10 DESTINATION ${OUT_DIR})
+install(TARGETS example_mnist            DESTINATION ${OUT_DIR})
+install(TARGETS example_cifar10          DESTINATION ${OUT_DIR})
+install(TARGETS plasticity_infos         DESTINATION ${OUT_DIR})
+
+install(EXPORT plasticityTargets
+  FILE plasticityTargets.cmake
+  NAMESPACE plasticity::
+  DESTINATION "${INSTALL_CMAKE_DIR}"
+)
+
+
+# Export the package for use from the build-tree (this registers the build-tree with a global CMake-registry)
+export(PACKAGE plasticity)
+
+# Create the plasticityConfig.cmake
+# First of all we compute the relative path between the cmake config file and the include path
+file(RELATIVE_PATH REL_INCLUDE_DIR "${INSTALL_CMAKE_DIR}" "${INSTALL_INCLUDE_DIR}")
+set(CONF_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}" "${PROJECT_BINARY_DIR}")
+configure_file(plasticityConfig.cmake.in "${PROJECT_BINARY_DIR}/plasticityConfig.cmake" @ONLY)
+set(CONF_INCLUDE_DIRS "\${plasticity_CMAKE_DIR}/${REL_INCLUDE_DIR}")
+configure_file(plasticityConfig.cmake.in "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/plasticityConfig.cmake" @ONLY)
+
+# Create the plasticityConfigVersion.cmake
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file("${PROJECT_BINARY_DIR}/plasticityConfigVersion.cmake"
+  COMPATIBILITY SameMajorVersion
+)
+
+install(FILES
+  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/plasticityConfig.cmake"
+  "${PROJECT_BINARY_DIR}/plasticityConfigVersion.cmake"
+  DESTINATION "${INSTALL_CMAKE_DIR}"
+)

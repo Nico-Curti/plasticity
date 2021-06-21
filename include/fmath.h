@@ -155,7 +155,9 @@ float hardtanh (const float & x);
 * @brief Fast approximation of sqrt function.
 *
 * @details The Hard Tanh is evaluated as:
+*
 * .. code-block:: python
+*
 *   if x < -1:
 *     return -1.
 *   elif x <= -1 and x <= 1.:

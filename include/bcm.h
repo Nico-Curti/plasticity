@@ -38,13 +38,15 @@ public:
   * @param weights_init weights_initialization object (default=uniform initialization in [-1, 1]).
   * @param epochs_for_convergency Number of stable epochs requested for the convergency.
   * @param convergency_atol Absolute tolerance requested for the convergency.
+  * @param decay Weight decay scale factor.
   * @param interaction_strength Set the lateral interaction strength between weights.
   *
   */
   BCM (const int & outputs, const int & batch_size, int activation=transfer_t :: logistic,
        update_args optimizer=update_args(optimizer_t :: sgd),
        weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
-       int epochs_for_convergency=1, float convergency_atol=0.01,
+       int epochs_for_convergency=1, float convergency_atol=0.01f,
+       float decay=0.f,
        float interaction_strength=0.f);
 
   // Copy Operator and Copy Constructor

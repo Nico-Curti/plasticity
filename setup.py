@@ -224,8 +224,8 @@ here = os.path.abspath(os.path.dirname(__file__))
 NAME = 'plasticity'
 DESCRIPTION = 'Unsupervised Neural Networks with biological-inspired learning rules'
 URL = 'https://github.com/Nico-Curti/plasticity'
-EMAIL = 'nico.curti2@unibo.it, simone.gasperini2@studio.unibo.it, mattia.ceccarelli5@unibo.it'
-AUTHOR = 'Nico Curti, Simone Gasperini, Mattia Ceccarelli'
+EMAIL = 'nico.curti2@unibo.it, lorenzo.squadrani@studio.unibo.it, simone.gasperini2@studio.unibo.it, mattia.ceccarelli5@unibo.it'
+AUTHOR = 'Nico Curti, Lorenzo Squadrani, Simone Gasperini, Mattia Ceccarelli'
 REQUIRES_PYTHON = '>=3.5'
 VERSION = None
 KEYWORDS = 'neural-networks deep-neural-networks deep-learning image-classification'

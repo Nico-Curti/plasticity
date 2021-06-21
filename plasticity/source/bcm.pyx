@@ -13,9 +13,9 @@ from weights_initialization cimport _weights_initialization
 
 cdef class _BCM:
 
-  def __init__ (self, int outputs, int batch_size, int activation, _update_args optimizer, _weights_initialization w_init, int epochs_for_convergency, float convergency_atol, float interaction_strenght):
+  def __init__ (self, int outputs, int batch_size, int activation, _update_args optimizer, _weights_initialization w_init, int epochs_for_convergency, float convergency_atol, float decay, float interaction_strenght):
 
-    self.thisptr.reset(new BCM(outputs, batch_size, activation, deref(optimizer.thisptr.get()), deref(w_init.thisptr.get()), epochs_for_convergency, convergency_atol, interaction_strenght))
+    self.thisptr.reset(new BCM(outputs, batch_size, activation, deref(optimizer.thisptr.get()), deref(w_init.thisptr.get()), epochs_for_convergency, convergency_atol, decay, interaction_strenght))
     self.outputs = outputs
     self.n_features = 0
 

@@ -21,7 +21,7 @@ class Optimizer (object):
     update_type : str or int
       Update rule to apply
 
-    learning_rate : float (default=1e-3)
+    lr : float (default=1e-3)
       Learning rate value
 
     momentum : float (default=0.9)
@@ -40,55 +40,57 @@ class Optimizer (object):
       Decay factor in RMSProp and AdaDelta
   '''
 
-  def __init__ (self, update_type, learning_rate=1e-3, momentum=.9, decay=1e-4, B1=.9, B2=.999, rho=0.):
+  def __init__ (self, update_type : str,
+      lr : float = 1e-3, momentum : float = .9, decay : float = 1e-4,
+      B1 : float = .9, B2 : float = .999, rho : float = 0.):
 
     self.update_type, update_index = _check_update(update_type)
 
-    self._object = _update_args(update_index, learning_rate, momentum, decay, B1, B2, rho)
+    self._object = _update_args(update_index, lr, momentum, decay, B1, B2, rho)
 
   @property
-  def learning_rate (self):
+  def learning_rate (self) -> float:
     '''
     Return the current learning rate parameter
     '''
     return self._object.get_learning_rate
 
   @property
-  def momentum (self):
+  def momentum (self) -> float:
     '''
     Return the current momentum parameter
     '''
     return self._object.get_momentum
 
   @property
-  def decay (self):
+  def decay (self) -> float:
     '''
     Return the current decay parameter
     '''
     return self._object.get_decay
 
   @property
-  def B1 (self):
+  def B1 (self) -> float:
     '''
     Return the current B1 parameter
     '''
     return self._object.get_B1
 
   @property
-  def B2 (self):
+  def B2 (self) -> float:
     '''
     Return the current B2 parameter
     '''
     return self._object.get_B2
 
   @property
-  def rho (self):
+  def rho (self) -> float:
     '''
     Return the current rho parameter
     '''
     return self._object.get_rho
 
-  def __repr__ (self):
+  def __repr__ (self) -> str:
     '''
     Printer of Optimizer informations
     '''

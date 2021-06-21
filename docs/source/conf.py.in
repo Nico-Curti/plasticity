@@ -10,59 +10,18 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os
-import re
 import sys
 
-sys.path.insert(0, os.path.abspath('../../plasticity/'))
-
-def read_version (CMakeLists):
-  '''
-  Read version from variables set in CMake file
-
-  Parameters
-  ----------
-  CMakeLists : CMake file path
-
-  Returns
-  -------
-  version : tuple
-    Version as (major, minor, revision)
-  '''
-  major = re.compile(r'set\s+\(PLASTICITY_MAJOR\s+(\d+)\)')
-  minor = re.compile(r'set\s+\(PLASTICITY_MINOR\s+(\d+)\)')
-  revision = re.compile(r'set\s+\(PLASTICITY_REVISION\s+(\d+)\)')
-
-  with open(CMakeLists, 'r') as fp:
-    cmake = fp.read()
-
-  major_v = major.findall(cmake)[0]
-  minor_v = minor.findall(cmake)[0]
-  revision_v = revision.findall(cmake)[0]
-
-  version = map(int, (major_v, minor_v, revision_v))
-
-  return tuple(version)
-
-try:
-
-  LOCAL = os.path.dirname(__file__)
-
-except NameError:
-
-  LOCAL = ''
-
-VERSION = read_version(os.path.join(LOCAL, '..', '..', 'CMakeLists.txt'))
-__version__ = '.'.join(map(str, VERSION))
+sys.path.insert(0, '@CMAKE_SOURCE_DIR@')
 
 # -- Project information -----------------------------------------------------
 
-project = 'plasticity - Unsupervised Neural Networks with biological-inspired learning rules'
-copyright = '2020, Nico Curti, Simone Gasperini, Mattia Ceccarelli'
-author = 'Nico Curti, Simone Gasperini, Mattia Ceccarelli'
+project = '@CMAKE_PROJECT_NAME@ - @CMAKE_PROJECT_DESCRIPTION@'
+copyright = '2021, Nico Curti'
+author = 'Nico Curti, Lorenzo Squadrani, Simone Gasperini, Mattia Ceccarelli'
 
 # The full version, including alpha/beta/rc tags
-release = __version__
+release = '@CMAKE_PROJECT_VERSION@'
 
 master_doc = 'index'
 
@@ -74,6 +33,8 @@ master_doc = 'index'
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.napoleon',
               'sphinx.ext.viewcode',
+              'sphinx.ext.intersphinx',
+              'sphinx_rtd_theme',
               'breathe',
               'nbsphinx',
               'IPython.sphinxext.ipython_console_highlighting',
@@ -107,9 +68,13 @@ nbsphinx_output_prompt = 'Out[%s]:'
 
 
 breathe_projects = {
-  'Activations' : './doxydoc/',
-  'BasePlasticity' : './doxydoc/',
-  'BCM' : './doxydoc/',
-  'Hopfield' : './doxydoc/',
-  'data_dispatcher' : './doxydoc/',
+  'Activations' : '@CMAKE_SOURCE_DIR@/docs/source/@XML_OUTPUT_DIR@/',
+  'BasePlasticity' : '@CMAKE_SOURCE_DIR@/docs/source/@XML_OUTPUT_DIR@/',
+  'BCM' : '@CMAKE_SOURCE_DIR@/docs/source/@XML_OUTPUT_DIR@/',
+  'Hopfield' : '@CMAKE_SOURCE_DIR@/docs/source/@XML_OUTPUT_DIR@/',
+  'Optimizer' : '@CMAKE_SOURCE_DIR@/docs/source/@XML_OUTPUT_DIR@/',
+  'Weights' : '@CMAKE_SOURCE_DIR@/docs/source/@XML_OUTPUT_DIR@/',
+  'MNIST' : '@CMAKE_SOURCE_DIR@/docs/source/@XML_OUTPUT_DIR@/',
+  'CIFAR10' : '@CMAKE_SOURCE_DIR@/docs/source/@XML_OUTPUT_DIR@/',
+  'parser' : '@CMAKE_SOURCE_DIR@/docs/source/@XML_OUTPUT_DIR@/',
   }

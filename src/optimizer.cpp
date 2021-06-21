@@ -96,21 +96,17 @@ void update_args :: sgd_update (Eigen :: MatrixXf & weights, const Eigen :: Matr
   weights = weights - this->learning_rate * weights_update;
 }
 
-
 void update_args :: momentum_update (Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update)
 {
   this->v = this->momentum * this->v - this->learning_rate * weights_update;
   weights = weights + this->v;
 }
 
-
 void update_args :: nesterov_momentum_update (Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update)
 {
   this->v = this->momentum * this->v - this->learning_rate * weights_update;
   weights = weights + this->momentum * this->v - this->learning_rate * weights_update;
 }
-
-
 
 void update_args :: adagrad_update (Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update)
 {
@@ -125,7 +121,6 @@ void update_args :: rmsprop_update (Eigen :: MatrixXf & weights, const Eigen :: 
   weights = weights.array() - this->learning_rate * weights_update.array() / (this->v.cwiseSqrt().array() + update_args :: epsil);
 }
 
-
 void update_args :: adadelta_update (Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update)
 {
   this->v = this->rho * this->v + (1.f - this->rho) * weights_update.cwiseProduct(weights_update);
@@ -133,8 +128,6 @@ void update_args :: adadelta_update (Eigen :: MatrixXf & weights, const Eigen ::
   weights = weights - this->learning_rate * update;
   this->m = this->rho * this->m + (1.f - this->rho) * update.cwiseProduct(update);
 }
-
-
 
 void update_args :: adamax_update (const int & iteration, Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update)
 {

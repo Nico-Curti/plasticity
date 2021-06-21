@@ -119,7 +119,7 @@ namespace transfer
 
   float tanhy (const float & x)
   {
-    return 2.f / (1. + math :: exp (- (x + x))) - 1.f;
+    return 2.f / (1.f + math :: exp (- (x + x))) - 1.f;
   }
 
   float g_tanhy (const float & x)
@@ -177,7 +177,7 @@ namespace transfer
 
   float symm_elliot (const float & x)
   {
-    return x * steepness / (1.f + std :: fabs(x * steepness));
+    return steepness * x / (1.f + std :: fabs(x * steepness));
   }
 
   float g_symm_elliot (const float & x)
@@ -220,67 +220,6 @@ namespace transfer
     //return 4.f * math :: exp(-2.f * x / par) / (denom * denom);
     const float temp = x / par;
     return (temp + 1.f) * (2.f - temp - 1.f);
-  }
-
-  void swish_array (const float * x, const int & n, float * output_sigmoid, float * output)
-  {
-
-#ifdef _OPENMP
-#pragma omp for
-#endif
-    for (int i = 0; i < n; ++i)
-    {
-      output_sigmoid[i] = 1.f / (1.f + math :: exp(- x[i]));
-      output[i] = x[i] * output_sigmoid[i];
-    }
-  }
-
-  void swish_gradient (const float * x, const int & n, const float * sigmoid, float * delta)
-  {
-
-#ifdef _OPENMP
-#pragma omp for
-#endif
-    for (int i = 0; i < n; ++i)
-      delta[i] *= x[i] + sigmoid[i] * (1.f - x[i]);
-
-  }
-
-  void mish_array (const float * x, const int & n, float * input_activation, float * output)
-  {
-    // const float MISH_THRESHOLD = 20.0f;
-
-#ifdef _OPENMP
-#pragma omp for
-#endif
-    for (int i = 0; i < n; ++i)
-    {
-      const float x_val = x[i];
-      input_activation[i] = x[i]; // store value before activation
-
-      output[i] = x_val * (2.f / (1.f + math :: exp( -2.f * std :: log1pf(math :: exp(x_val)) )) - 1.f);
-    }
-  }
-
-  void mish_gradient (const int & n, const float * activation_input, float * delta)
-  {
-    // const float MISH_THRESHOLD = 20.0f;
-
-#ifdef _OPENMP
-#pragma omp for
-#endif
-    for (int i = 0; i < n; ++i)
-    {
-      // implementation from TensorFlow: https://github.com/tensorflow/addons/commit/093cdfa85d334cbe19a37624c33198f3140109ed
-      // implementation from Pytorch: https://github.com/thomasbrandon/mish-cuda/blob/master/csrc/mish.h#L26-L31
-      float inp = activation_input[i];
-      const float sp = std :: log1pf(math :: exp(inp));
-      const float grad_sp = 1 - math :: exp(-sp);
-      const float tsp = math :: tanh(sp);
-      const float grad_tsp = (1.f - tsp * tsp) * grad_sp;
-      const float grad = inp * grad_tsp + tsp;
-      delta[i] *= grad;
-    }
   }
 
   std :: function < float(const float &) > activate ( const int & active)

@@ -4,6 +4,47 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2021-06-15
+
+Improving documentation and CMake building.
+
+### Added
+
+- (Global) Documentation of the library usage
+- (Global) Documentation of the paper simulation
+- (Global) Tag export (Doxygen) of plasticity features
+- (Global) Tag related to Eigen and OpenCV library
+- (Global) Add missing C++ submodules in Doxygen documentation
+- (C++|Python) Add [Lorenzo](https://github.com/lorenzosquadrani) method for convergence estimation
+- (C++|Python) Add [Lorenzo](https://github.com/lorenzosquadrani) method for weight decay
+- (C++|Python) Add [Lorenzo](https://github.com/lorenzosquadrani) method for weights normalization in BCM model
+
+### Changed
+
+- (Global) Split the documentation building via CMake into submodule
+- (Global) Move the sphinx config file to CMake configuration file
+- (Global) Move the setup to CMake configuration file
+- (C++|Python) Move the Lebesgue norm to **only** the Hopfield model
+- (Python) Add typing in function signatures
+- (Global) Move the relative import of Sphinx to root folder of the project
+
+### Improvements
+
+- (Global) Improve the documentation building
+- (Global) Improve the Cython building via CMake
+- (C++) Fix documentation of activation functions
+
+### TODO
+
+- (C++) Check the convergence method of the models (theta seems to reach a value equal to the dataset size if the neuron achieved a stable state)
+- (C++) Improve the list of testing functions
+- (Python) Implement a series of tests for the package CI (see coverage)
+- (Global) Upload the package to PyPi at the first release
+- (Global) Improve/Update the documentation of the project's theory on Read-the-Docs
+- (Global) Fix Doxygen error on lambda function as default argument
+
+--------------------------------------------------------------------------------------------------
+
 ## [1.0.1] - 2021-05-03
 
 Porting of the full algorithm to the Eigen library.
@@ -39,7 +80,7 @@ Porting of the full algorithm to the Eigen library.
 
 ### TODO
 
-- (C++) Check the convergency method of the models
+- (C++) Check the convergence method of the models
 - (C++) Improve the list of testing functions
 - (Python) Implement a series of tests for the package CI (see coverage)
 - (Global) Upload the package to PyPi at the first release

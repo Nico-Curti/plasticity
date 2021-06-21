@@ -49,6 +49,9 @@ class BCM (BasePlasticity):
     convergency_atol : float (default=0.01)
       Absolute tolerance requested for the convergency
 
+    decay : float (default=0.)
+      Weight decay scale factor.
+
     interaction_strength : float (default=0.)
       Set the lateral interaction strength between weights
 
@@ -89,14 +92,15 @@ class BCM (BasePlasticity):
          10.1088/0954-898X/10/2/001
   '''
 
-  def __init__(self, outputs=100, num_epochs=100,
-      batch_size=100, activation='Logistic',
-      optimizer=SGD(learning_rate=2e-2),
-      weights_init=Normal(mu=0., std=1.),
-      epochs_for_convergency=None,
-      convergency_atol=0.01,
-      interaction_strength=0., random_state=42,
-      verbose=True):
+  def __init__(self, outputs : int = 100, num_epochs : int = 100,
+      batch_size : int = 100, activation : str = 'Logistic',
+      optimizer : 'Optimizer' = SGD(lr=2e-2),
+      weights_init : 'BaseWeights' = Normal(mu=0., std=1.),
+      epochs_for_convergency : int = None,
+      convergency_atol : float = 0.01,
+      decay : float = 0.,
+      interaction_strength : float = 0., random_state : int = 42,
+      verbose : bool = True):
 
     super (BCM, self).__init__(model=_BCM, outputs=outputs, num_epochs=num_epochs,
                                batch_size=batch_size, activation=activation,
@@ -104,6 +108,7 @@ class BCM (BasePlasticity):
                                weights_init=weights_init,
                                epochs_for_convergency=epochs_for_convergency,
                                convergency_atol=convergency_atol,
+                               decay=decay,
                                random_state=random_state, verbose=verbose,
                                interaction_strength=interaction_strength)
 

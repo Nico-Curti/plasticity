@@ -1,7 +1,7 @@
 Weights initialization
 ----------------------
 
-.. automodule:: model.weights
+.. automodule:: plasticity.model.weights
    :members:
    :undoc-members:
    :show-inheritance:

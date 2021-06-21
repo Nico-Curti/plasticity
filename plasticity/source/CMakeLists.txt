@@ -67,5 +67,14 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/update_args.cpp             DESTINATIO
 
 # setup installation
 
-#set(SETUP_PY "${CMAKE_SOURCE_DIR}/setup.py")
-#install(CODE "EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} ${SETUP_PY} develop --user)")
+set(SETUP_PY_IN "${CMAKE_SOURCE_DIR}/setup.py.in")
+set(SETUP_PY    "${CMAKE_SOURCE_DIR}/setup_.py")
+
+configure_file(${SETUP_PY_IN} ${SETUP_PY} @ONLY)
+configure_file(${PYC_DIR}/__version__.py.in ${PYC_DIR}/__version__.py @ONLY)
+
+add_custom_target(setup_plasticity ALL
+                  DEPENDS PyPlasticity
+                  COMMAND ${PYTHON_EXECUTABLE} ${SETUP_PY} develop --user
+                  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+                  COMMENT "Setup Python installation")

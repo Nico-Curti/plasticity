@@ -37,6 +37,7 @@ public:
   * @param weights_init weights_initialization object (default=uniform initialization in [-1, 1]).
   * @param epochs_for_convergency Number of stable epochs requested for the convergency.
   * @param convergency_atol Absolute tolerance requested for the convergency.
+  * @param decay Weight decay scale factor.
   * @param delta Strength of the anti-hebbian learning
   * @param p Lebesgue norm of the weights.
   * @param k Ranking parameter, must be integer that is bigger or equal than 2.
@@ -46,6 +47,7 @@ public:
             update_args optimizer=update_args(optimizer_t :: sgd),
             weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
             int epochs_for_convergency=1, float convergency_atol=0.01,
+            float decay=0.f,
             float delta=.4f, float p=2.f,
             int k=2);
 
@@ -111,9 +113,9 @@ private:
   *
   * @note The function implements the Lebesgue norm on the weight matrix following the equation:
   *
-  * \code{.py}
+  * \f[
   * W = sign(W) * abs(W)**(p - 1)
-  * \endcode
+  * \f]
   *
   */
   void normalize_weights ();

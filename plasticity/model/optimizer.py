@@ -37,7 +37,7 @@ class Optimizer (object):
       Class Specialization variables.
   '''
 
-  def __init__ (self, lr=2e-2, decay=0., lr_min=0., lr_max=np.inf, *args, **kwargs):
+  def __init__ (self, lr : float = 2e-2, decay : float = 0., lr_min : float = 0., lr_max : float = np.inf):
 
     self.lr = lr
     self.decay = decay
@@ -46,7 +46,7 @@ class Optimizer (object):
 
     self.iterations = 1
 
-  def update (self, params, gradients):
+  def update (self, params : np.ndarray, gradients : np.ndarray) -> 'Optimizer':
     '''
     Update the optimizer parameters
 
@@ -68,7 +68,7 @@ class Optimizer (object):
 
     return self
 
-  def __repr__ (self):
+  def __repr__ (self) -> str:
     '''
     Printer
     '''
@@ -109,7 +109,7 @@ class SGD (Optimizer):
 
     super(SGD, self).__init__(*args, **kwargs)
 
-  def update (self, params, gradients):
+  def update (self, params : np.ndarray, gradients : np.ndarray) -> np.ndarray:
     '''
     Update the given parameters according to the class optimization algorithm
 
@@ -160,14 +160,14 @@ class Momentum (Optimizer):
       Class Specialization variables.
   '''
 
-  def __init__ (self, momentum=.9, *args, **kwargs):
+  def __init__ (self, momentum : float = .9, *args, **kwargs):
 
     super(Momentum, self).__init__(*args, **kwargs)
     self.momentum = momentum
 
     self.velocity = None
 
-  def update (self, params, gradients):
+  def update (self, params : np.ndarray, gradients : np.ndarray) -> np.ndarray:
     '''
     Update the given parameters according to the class optimization algorithm
 
@@ -222,14 +222,14 @@ class NesterovMomentum (Optimizer):
       Class Specialization variables.
   '''
 
-  def __init__ (self, momentum=.9, *args, **kwargs):
+  def __init__ (self, momentum : float = .9, *args, **kwargs):
 
     super(NesterovMomentum, self).__init__(*args, **kwargs)
     self.momentum = momentum
 
     self.velocity = None
 
-  def update (self, params, gradients):
+  def update (self, params : np.ndarray, gradients : np.ndarray) -> np.ndarray:
     '''
     Update the given parameters according to the class optimization algorithm
 
@@ -284,14 +284,14 @@ class Adagrad (Optimizer):
       Class Specialization variables.
   '''
 
-  def __init__ (self, epsilon=1e-6, *args, **kwargs):
+  def __init__ (self, epsilon : float = 1e-6, *args, **kwargs):
 
     super(Adagrad, self).__init__(*args, **kwargs)
     self.epsilon = epsilon
 
     self.cache = None
 
-  def update (self, params, gradients):
+  def update (self, params : np.ndarray, gradients : np.ndarray) -> np.ndarray:
     '''
     Update the given parameters according to the class optimization algorithm
 
@@ -350,7 +350,7 @@ class RMSprop (Optimizer):
       Class Specialization variables.
   '''
 
-  def __init__ (self, rho=.9, epsilon=1e-6, *args, **kwargs):
+  def __init__ (self, rho : float =.9, epsilon : float =1e-6, *args, **kwargs):
 
     super(RMSprop, self).__init__(*args, **kwargs)
 
@@ -360,7 +360,7 @@ class RMSprop (Optimizer):
     self.cache = None
     self.iterations = 0
 
-  def update (self, params, gradients):
+  def update (self, params : np.ndarray, gradients : np.ndarray) -> np.ndarray:
     '''
     Update the given parameters according to the class optimization algorithm
 
@@ -421,7 +421,7 @@ class Adadelta (Optimizer):
       Class Specialization variables.
   '''
 
-  def __init__ (self, rho=0.9, epsilon=1e-6, *args, **kwargs):
+  def __init__ (self, rho : float = 0.9, epsilon : float = 1e-6, *args, **kwargs):
 
     super(Adadelta, self).__init__(*args, **kwargs)
 
@@ -431,7 +431,7 @@ class Adadelta (Optimizer):
     self.cache = None
     self.delta = None
 
-  def update (self, params, gradients):
+  def update (self, params : np.ndarray, gradients : np.ndarray) -> np.ndarray:
     '''
     Update the given parameters according to the class optimization algorithm
 
@@ -502,7 +502,7 @@ class Adam (Optimizer):
       Class Specialization variables.
   '''
 
-  def __init__ (self, beta1=0.9, beta2=0.999, epsilon=1e-8, *args, **kwargs):
+  def __init__ (self, beta1 : float = 0.9, beta2 : float = 0.999, epsilon : float = 1e-8, *args, **kwargs):
 
     super(Adam, self).__init__(*args, **kwargs)
 
@@ -513,7 +513,7 @@ class Adam (Optimizer):
     self.ms = None
     self.vs = None
 
-  def update (self, params, gradients):
+  def update (self, params : np.ndarray, gradients : np.ndarray) -> np.ndarray:
     '''
     Update the given parameters according to the class optimization algorithm
 
@@ -585,7 +585,7 @@ class Adamax (Optimizer):
       Class Specialization variables.
   '''
 
-  def __init__ (self, beta1=0.9, beta2=0.999, epsilon=1e-8, *args, **kwargs):
+  def __init__ (self, beta1 : float = 0.9, beta2 : float = 0.999, epsilon : float = 1e-8, *args, **kwargs):
 
     super(Adamax, self).__init__(*args, **kwargs)
 
@@ -596,7 +596,7 @@ class Adamax (Optimizer):
     self.ms = None
     self.vs = None
 
-  def update (self, params, gradients):
+  def update (self, params : np.ndarray, gradients : np.ndarray) -> np.ndarray:
     '''
     Update the given parameters according to the class optimization algorithm
 

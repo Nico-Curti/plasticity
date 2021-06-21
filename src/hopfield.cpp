@@ -3,8 +3,9 @@
 Hopfield :: Hopfield (const int & outputs, const int & batch_size, update_args optimizer,
                       weights_initialization weights_init,
                       int epochs_for_convergency, float convergency_atol,
+                      float decay,
                       float delta, float p, int k
-                      ) : BasePlasticity (outputs, batch_size, transfer_t :: linear, optimizer, weights_init, epochs_for_convergency, convergency_atol),
+                      ) : BasePlasticity (outputs, batch_size, transfer_t :: linear, optimizer, weights_init, epochs_for_convergency, convergency_atol, decay),
                           k (k), delta (delta), p (p)
 {
   this->check_params();
@@ -82,18 +83,12 @@ Eigen :: MatrixXf Hopfield :: weights_update (const Eigen :: MatrixXf & X, const
 }
 
 
-void Hopfield :: normalize_weights ()
-{
-  // apply the Lebesgue norm to the weights matrix
-  if ( this->p != 2.f )
-    this->weights = this->weights.unaryExpr([&](const float & w) -> float {return std :: copysign(std :: pow(std :: fabs(w), this->p - 1.f), w);});
-}
-
-
 Eigen :: MatrixXf Hopfield :: _predict (const Eigen :: MatrixXf & data)
 {
+  // apply Lebesgue norm
+  Eigen :: MatrixXf wnorm = (this->p != 2.f) ? this->weights.unaryExpr([&](const float & w) -> float {return std :: copysign(std :: pow(std :: fabs(w), this->p - 1.f), w);}) : this->weights;
   // Compute the output as W @ X
-  Eigen :: MatrixXf output = this->weights * data.transpose();
+  Eigen :: MatrixXf output = wnorm * data.transpose();
 
   return output;
 }

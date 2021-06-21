@@ -53,7 +53,7 @@ public:
 
 protected:
 
-  std :: deque < Eigen :: VectorXf > history; ///< deque for the convergency monitoring
+  std :: deque < Eigen :: ArrayXf > history; ///< deque for the convergency monitoring
   Eigen :: VectorXf theta;                    ///< array of means
 
   std :: function < float(const float &) > activation; ///< pointer to activation function
@@ -64,6 +64,7 @@ protected:
   int epochs_for_convergency; ///< number of stable epochs requested for the convergency
 
   float convergency_atol;     ///< Absolute tolerance requested for the convergency
+  float decay;                ///< Weight decay scale factor
 
   static float precision;     ///< Parameter that controls numerical precision of the weight updates.
 
@@ -93,12 +94,14 @@ public:
   * @param weights_init weights_initialization object (default=uniform initialization in [-1, 1]).
   * @param epochs_for_convergency Number of stable epochs requested for the convergency.
   * @param convergency_atol Absolute tolerance requested for the convergency.
+  * @param decay Weight decay scale factor.
   *
   */
   BasePlasticity (const int & outputs, const int & batch_size, int activation=transfer_t :: linear,
                   update_args optimizer=update_args(optimizer_t :: sgd),
                   weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
-                  int epochs_for_convergency=1, float convergency_atol=0.01);
+                  int epochs_for_convergency=1, float convergency_atol=0.01f,
+                  float decay=0.f);
 
 
   // Copy Operator and Copy Constructor
@@ -295,16 +298,10 @@ private:
   * learning parameter in a fixed (epochs_for_convergency) number
   * of epochs for all the outputs.
   *
-  */
-  bool check_convergency ();
-
-  /**
-  * @brief Normalize the weights according to the given function.
-  *
-  * @note This function must be overrided.
+  * @param vec Vector containing updates to check for the convergence estimation
   *
   */
-  virtual void normalize_weights ();
+  bool check_convergence (const Eigen :: ArrayXf & vec);
 
   /**
   * @brief Core function of the fit formula

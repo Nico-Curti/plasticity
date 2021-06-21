@@ -10,9 +10,19 @@ C++ supported compilers:
 |msvc version|
 
 The `plasticity` project is written in `C++` and it supports also older standard versions (std=c++1+).
-The package installation can be performed via [`CMake`](https://github.com/Nico-Curti/plasticity/blob/main/CMakeLists.txt).
+The package installation can be performed via CMake_.
 The only requirement for the installation of the `C++` library is the `Eigen3` library.
 You can easily install the `Eigen3` library with the following commands:
+
++--------------+-----------------------------------+
+| **OS**       |  **Command**                      |
++==============+===================================+
+| **Linux**    | `sudo apt install libeigen3-dev`  |
++--------------+-----------------------------------+
+| **MacOS**    | `brew install eigen`              |
++--------------+-----------------------------------+
+| **Windows**  | `vcpkg install eigen3`            |
++--------------+-----------------------------------+
 
 You can also use the `plasticity` package in `Python` using the `Cython` wrap provided inside this project.
 The only requirements are the following:

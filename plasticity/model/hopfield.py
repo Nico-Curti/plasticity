@@ -7,8 +7,8 @@ from plasticity.model._base import BasePlasticity
 from plasticity.model.optimizer import SGD
 from plasticity.model.weights import Normal
 
-__author__  = ['Nico Curti', 'SimoneGasperini']
-__email__ = ['nico.curit2@unibo.it', 'simone.gasperini2@studio.unibo.it']
+__author__  = ['Nico Curti', 'Lorenzo Squadrani', 'SimoneGasperini']
+__email__ = ['nico.curit2@unibo.it', 'lorenzo.squadrani@studio.unibo.it', 'simone.gasperini2@studio.unibo.it']
 
 
 class Hopfield (BasePlasticity):
@@ -52,6 +52,9 @@ class Hopfield (BasePlasticity):
     convergency_atol : float (default=0.01)
       Absolute tolerance requested for the convergency
 
+    decay : float (default=0.)
+      Weight decay scale factor.
+
     random_state : int (default=None)
       Random seed for weights generation
 
@@ -88,15 +91,16 @@ class Hopfield (BasePlasticity):
          PNAS, 2019, www.pnas.org/cgi/doi/10.1073/pnas.1820458116
   '''
 
-  def __init__(self, outputs=100, num_epochs=100,
-      batch_size=100, delta=.4,
-      optimizer=SGD(learning_rate=2e-2),
-      weights_init=Normal(mu=0., std=1.),
-      p=2., k=2,
-      precision=1e-30,
-      epochs_for_convergency=None,
-      convergency_atol=0.01,
-      random_state=None, verbose=True):
+  def __init__(self, outputs : int = 100, num_epochs : int = 100,
+      batch_size : int = 100, delta : float = .4,
+      optimizer : 'Optimizer' = SGD(lr=2e-2),
+      weights_init : 'BaseWeights' = Normal(mu=0., std=1.),
+      p : float = 2., k : int = 2,
+      precision : float = 1e-30,
+      epochs_for_convergency : int = None,
+      convergency_atol : float = 0.01,
+      decay : float = 0.,
+      random_state : int = None, verbose=True):
 
     self.delta = delta
     self.p = p
@@ -109,9 +113,10 @@ class Hopfield (BasePlasticity):
                                     precision=precision,
                                     epochs_for_convergency=epochs_for_convergency,
                                     convergency_atol=convergency_atol,
+                                    decay=decay,
                                     random_state=random_state, verbose=verbose)
 
-  def _weights_update (self, X, output):
+  def _weights_update (self, X : np.ndarray, output : np.ndarray) -> tuple:
     '''
     Approximation introduced by Krotov.
     Instead of solving dynamical equations we use the currents as a proxy
@@ -150,26 +155,26 @@ class Hopfield (BasePlasticity):
     ds = np.einsum('ij, jk -> ik', yl, X, optimize=True) - xx * self.weights
 
     nc = np.max(np.abs(ds))
-    nc = 1. / max(nc, self.precision)
+    ds[:] *= 1. / max(nc, self.precision)
 
-    return ds * nc, xx
+    return ds, xx.squeeze()
 
-
-  def _fit (self, X):
+  def _fit (self, X : np.ndarray) -> 'Hopfield':
     '''
     Core function for the fit member
     '''
 
-    return super(Hopfield, self)._fit(X=X, norm=True)
+    return super(Hopfield, self)._fit(X=X)
 
 
-  def _predict (self, X):
+  def _predict (self, X : np.ndarray) -> np.ndarray:
     '''
     Core function for the predict member
     '''
 
     # return self.weights @ X
-    return np.einsum('ij, kj -> ik', self.weights, X, optimize=True)
+    w = self._lebesgue_norm(self.weights)
+    return np.einsum('ij, kj -> ik', w, X, optimize=True)
 
 
 if __name__ == '__main__':

@@ -8,3 +8,8 @@ C++ API
    BCM
    Hopfield
    Activations
+   Optimizer
+   Weights
+   MNIST
+   CIFAR10
+   parser

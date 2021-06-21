@@ -1,7 +1,7 @@
 BasePlasticity
 --------------
 
-.. automodule:: model._base
+.. automodule:: plasticity.model._base
    :members:
    :show-inheritance:
    :inherited-members:

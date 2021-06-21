@@ -29,7 +29,7 @@ class Activations (object):
     self._name = name
 
   @staticmethod
-  def activate (x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
     '''
     Abstract activation function
 
@@ -55,7 +55,7 @@ class Activations (object):
     raise NotImplementedError
 
   @staticmethod
-  def gradient (x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
     '''
     Abstract gradient function
 
@@ -81,13 +81,13 @@ class Activations (object):
     raise NotImplementedError
 
   @property
-  def name (self):
+  def name (self) -> str:
     '''
     Get the name of the activation function
     '''
     return self._name
 
-  def __repr__ (self):
+  def __repr__ (self) -> str:
     '''
     Printer
     '''
@@ -103,12 +103,12 @@ class Logistic (Activations):
     super(Logistic, self).__init__('Logistic')
 
   @staticmethod
-  def activate (x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
     return expit(x)
     #return 1. / (1. + np.exp(-x))
 
   @staticmethod
-  def gradient (x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
     return (1. - x) * x
 
 # set alias
@@ -123,11 +123,11 @@ class Loggy (Activations):
     super(Loggy, self).__init__('Loggy')
 
   @staticmethod
-  def activate (x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
     return 2. / (1. + np.exp(-x)) - 1.
 
   @staticmethod
-  def gradient (x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
     return 2. * (1. - (x + 1.) * .5) * (x + 1.) * .5
 
 
@@ -140,7 +140,7 @@ class Relu (Activations):
     super(Relu, self).__init__('Relu')
 
   @staticmethod
-  def activate (x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x
 
@@ -148,7 +148,7 @@ class Relu (Activations):
     return y
 
   @staticmethod
-  def gradient (x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x
 
@@ -165,7 +165,7 @@ class Elu (Activations):
     super(Elu, self).__init__('Elu')
 
   @staticmethod
-  def activate (x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x
 
@@ -173,7 +173,7 @@ class Elu (Activations):
     return y
 
   @staticmethod
-  def gradient (x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x
 
@@ -190,7 +190,7 @@ class Relie (Activations):
     super(Relie, self).__init__('Relie')
 
   @staticmethod
-  def activate (x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x
 
@@ -198,7 +198,7 @@ class Relie (Activations):
     return y
 
   @staticmethod
-  def gradient (x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x
 
@@ -215,7 +215,7 @@ class Ramp (Activations):
     super(Ramp, self).__init__('Ramp')
 
   @staticmethod
-  def activate (x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x
 
@@ -223,7 +223,7 @@ class Ramp (Activations):
     return y + .1 * x
 
   @staticmethod
-  def gradient (x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
 
     return (x > 0.) + .1
 
@@ -236,11 +236,11 @@ class Linear (Activations):
     super(Linear, self).__init__('Linear')
 
   @staticmethod
-  def activate(x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
     return x
 
   @staticmethod
-  def gradient(x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
     return np.ones_like(a=x, dtype=float)
 
 
@@ -253,11 +253,11 @@ class Tanh (Activations):
     super(Tanh, self).__init__('Tanh')
 
   @staticmethod
-  def activate(x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
     return np.tanh(x)
 
   @staticmethod
-  def gradient(x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
     return 1. - x * x
 
 
@@ -269,7 +269,7 @@ class Plse (Activations):
     super(Plse, self).__init__('Plse')
 
   @staticmethod
-  def activate (x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
     y = x.copy()
     y[x < -4.] = (y[x < -4.] + 4.) * 1e-2
     y[x >  4.] = (y[x >  4.] - 4.) * 1e-2 + 1.
@@ -280,7 +280,7 @@ class Plse (Activations):
     return y
 
   @staticmethod
-  def gradient (x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
     y = x.copy()
     func  = np.vectorize(lambda t: (t<0.)  or (t>1.))
     func2 = np.vectorize(lambda t: (t>=0.) or (t<=1.))
@@ -297,7 +297,7 @@ class Leaky (Activations):
     super(Leaky, self).__init__('Leaky')
 
   @staticmethod
-  def activate (x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x
 
@@ -305,7 +305,7 @@ class Leaky (Activations):
     return y
 
   @staticmethod
-  def gradient (x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x
 
@@ -322,7 +322,7 @@ class Stair (Activations):
     super(Stair, self).__init__('Stair')
 
   @staticmethod
-  def activate(x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x
 
@@ -334,7 +334,7 @@ class Stair (Activations):
     return y
 
   @staticmethod
-  def gradient(x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x
 
@@ -351,7 +351,7 @@ class Hardtan (Activations):
     super(Hardtan, self).__init__('Hardtan')
 
   @staticmethod
-  def activate(x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x
 
@@ -361,7 +361,7 @@ class Hardtan (Activations):
     return y
 
   @staticmethod
-  def gradient(x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x
     y[:] = np.zeros(shape=y.shape)
@@ -381,7 +381,7 @@ class Lhtan (Activations):
     super(Lhtan, self).__init__('Lhtan')
 
   @staticmethod
-  def activate (x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x
 
@@ -390,7 +390,7 @@ class Lhtan (Activations):
     return y
 
   @staticmethod
-  def gradient (x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x.copy()
     # those functions select the correct elements
@@ -410,12 +410,12 @@ class Selu (Activations):
     super(Selu, self).__init__('Selu')
 
   @staticmethod
-  def activate (x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
 
     return (x >= 0.) * 1.0507 * x + (x < 0.) * 1.0507 * 1.6732 * (np.exp(x) - 1.)
 
   @staticmethod
-  def gradient (x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
 
     return (x >= 0.) * 1.0507 + (x < 0.) * (x + 1.0507 * 1.6732)
 
@@ -430,12 +430,12 @@ class Elliot (Activations):
     super(Elliot, self).__init__('Elliot')
 
   @staticmethod
-  def activate (x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
 
     return .5 * Elliot.STEEPNESS * x / (1. + np.abs(x + Elliot.STEEPNESS)) + .5
 
   @staticmethod
-  def gradient (x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
 
     last_fwd = 1. + np.abs(x * Elliot.STEEPNESS)
     return .5 * Elliot.STEEPNESS / (last_fwd * last_fwd)
@@ -452,12 +452,12 @@ class SymmElliot (Activations):
     super(SymmElliot, self).__init__('SymmElliot')
 
   @staticmethod
-  def activate (x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
 
     return x * SymmElliot.STEEPNESS / (1. + np.abs(x * SymmElliot.STEEPNESS))
 
   @staticmethod
-  def gradient (x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
 
     last_fwd = 1. + np.abs(x * SymmElliot.STEEPNESS)
     return SymmElliot.STEEPNESS / (last_fwd * last_fwd)
@@ -470,12 +470,12 @@ class SoftPlus (Activations):
     super(SoftPlus, self).__init__('SoftPlus')
 
   @staticmethod
-  def activate (x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
 
     return np.log(1. + np.exp(x))
 
   @staticmethod
-  def gradient (x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
 
     ey = np.exp(x)
     return ey / (1. + ey)
@@ -489,12 +489,12 @@ class SoftSign (Activations):
     super(SoftSign, self).__init__('SoftSign')
 
   @staticmethod
-  def activate (x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
 
     return x / (np.abs(x) + 1.)
 
   @staticmethod
-  def gradient (x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
 
     fy = np.abs(x) + 1.
     return 1. / (fy * fy)
@@ -507,7 +507,7 @@ class Asymmetriclogistic (Activations):
     super(Asymmetriclogistic, self).__init__('Asymmetriclogistic')
 
   @staticmethod
-  def activate (x, copy=False):
+  def activate (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x
 
@@ -520,7 +520,7 @@ class Asymmetriclogistic (Activations):
     return y
 
   @staticmethod
-  def gradient (x, copy=False):
+  def gradient (x : np.ndarray, copy : bool = False) -> np.ndarray:
     if copy: y = x.copy()
     else:    y = x
 
