@@ -177,6 +177,28 @@ class GlorotUniform (BaseWeights):
     scale = np.sqrt(6. / (inputs + outputs))
     return np.random.uniform(low=-scale, high=scale, size=size)
 
+class LecunNormal (BaseWeights):
+
+  '''
+  Lecun normal initializer.
+
+  It draws samples from a truncated normal distribution centered on 0
+  with `stddev = sqrt(1 / inputs))` [2]_
+  where `inputs` is the number of input units in the weight matrix.
+
+  References
+  ----------
+  .. [2] LeCun 98, Efficient Backprop, http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf
+  '''
+
+  def __init__ (self):
+    super(LecunNormal, self).__init__()
+
+  def get (self, size : tuple) -> np.ndarray:
+    inputs, outputs = size
+    std = np.sqrt(1. / inputs)
+    return np.random.normal(loc=0., scale=std, size=size)
+
 class GlorotNormal (BaseWeights):
 
   '''

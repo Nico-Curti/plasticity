@@ -156,6 +156,23 @@ class GlorotUniform (BaseWeights):
 
     super(GlorotUniform, self).__init__(init_type='GlorotUniform')
 
+class LecunNormal (BaseWeights):
+
+  '''
+  Lecun normal initializer.
+
+  It draws samples from a truncated normal distribution centered on 0
+  with `stddev = sqrt(1 / inputs))` [2]_
+  where `inputs` is the number of input units in the weight matrix.
+
+  References
+  ----------
+  .. [2] LeCun 98, Efficient Backprop, http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf
+  '''
+
+  def __init__ (self):
+    super(LecunNormal, self).__init__(init_type='LecunNormal')
+
 class GlorotNormal (BaseWeights):
 
   '''

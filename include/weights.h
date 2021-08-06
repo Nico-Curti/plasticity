@@ -7,7 +7,7 @@
 #include <numeric>       // std :: inner_product
 
 
-enum weights_init_t { zeros = 0, ones, uniform, normal, lecun_uniform, glorot_uniform, glorot_normal, he_uniform, he_normal
+enum weights_init_t { zeros = 0, ones, uniform, normal, lecun_uniform, glorot_uniform, lecun_normal, glorot_normal, he_uniform, he_normal
 };///< weights initialization types
 
 
@@ -20,6 +20,7 @@ namespace weights_init
                                                                         {"normal"         , normal},
                                                                         {"lecun_uniform"  , lecun_uniform},
                                                                         {"glorot_uniform" , glorot_uniform},
+                                                                        {"lecun_normal"   , lecun_normal},
                                                                         {"glorot_normal"  , glorot_normal},
                                                                         {"he_uniform"     , he_uniform},
                                                                         {"he_normal"      , he_normal},
@@ -38,6 +39,7 @@ namespace weights_init
 *   - Normal
 *   - Lecun Uniform
 *   - Glorot Uniform
+*   - Lecun Normal
 *   - Glorot Normal
 *   - He Uniform
 *   - He Normal
@@ -232,6 +234,23 @@ private:
   * @param outputs Number of columns of the weight matrix.
   */
   void glorot_uniform (float * weights, const int & inputs, const int & outputs);
+
+  /**
+  * @brief Lecun normal initializer.
+  *
+  * @details It draws samples from a truncated normal distribution centered on 0
+  * with `stddev = sqrt(1 / inputs)` and `inputs` is the number of
+  * input units in the weight matrix.
+  *
+  * \f[
+  * w = Normal(0, \sqrt(1 / inputs)))
+  * \f]
+  *
+  * @param weights Matrix of weights in ravel format.
+  * @param inputs Number of rows of the weight matrix.
+  * @param outputs Number of columns of the weight matrix.
+  */
+  void lecun_normal (float * weights, const int & inputs, const int & outputs);
 
   /**
   * @brief Glorot normal initializer, also called Xavier normal initializer.

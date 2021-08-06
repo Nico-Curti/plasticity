@@ -18,7 +18,12 @@ void BasePlasticity :: fit (float * X, const int & n_samples, const int & n_feat
 template < class Callback >
 void BasePlasticity :: fit (const Eigen :: MatrixXf & X, const int & num_epochs, int seed, Callback callback)
 {
-  // extracthe the number of features as the number of columns of the input matrix
+  if (this->batch > X.rows())
+    throw std :: runtime_error("Incorrect batch_size found. "
+      "The batch_size must be less or equal to the number of samples. "
+      "Given " + std :: to_string(this->batch) + " for " + std :: to_string(X.rows()) + " samples");
+
+  // extract the number of features as the number of columns of the input matrix
   const int n_features = X.cols();
 
   // allocate the weights matrix

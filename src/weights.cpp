@@ -38,6 +38,7 @@ void weights_initialization :: init (float * weights, const int & inputs, const 
     case weights_init_t :: normal :         return this->normal(weights, inputs, outputs);
     case weights_init_t :: lecun_uniform :  return this->lecun_uniform(weights, inputs, outputs);
     case weights_init_t :: glorot_uniform : return this->glorot_uniform(weights, inputs, outputs);
+    case weights_init_t :: lecun_normal :   return this->lecun_normal(weights, inputs, outputs);
     case weights_init_t :: glorot_normal :  return this->glorot_normal(weights, inputs, outputs);
     case weights_init_t :: he_uniform :     return this->he_uniform(weights, inputs, outputs);
     case weights_init_t :: he_normal :      return this->he_normal(weights, inputs, outputs);
@@ -111,6 +112,19 @@ void weights_initialization :: glorot_uniform (float * weights, const int & inpu
                      [&]()
                      {
                        return random_uniform(this->engine);
+                     });
+}
+
+void weights_initialization :: lecun_normal (float * weights, const int & inputs, const int & outputs)
+{
+  const int size = inputs * outputs;
+  const float sigma = math :: sqrt(1.f / inputs);
+  std :: normal_distribution < float > random_normal (this->mu, sigma);
+
+  std :: generate_n (weights, size,
+                     [&]()
+                     {
+                       return random_normal(this->engine);
                      });
 }
 

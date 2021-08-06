@@ -33,7 +33,7 @@ class config
   static std :: regex comment_regex; ///< regex comment, aka all tokens after a "#" character
   static std :: regex value_regex; ///< regex for the value split
 
-  std :: unordered_map < std :: string, std :: string> map; ///< internal data lut
+  std :: unordered_map < std :: string, std :: string > map; ///< internal data lut
 
 public:
 
