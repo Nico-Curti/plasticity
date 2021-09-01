@@ -5,9 +5,9 @@ tqdm
 matplotlib
 
 breathe<4.13.0
-sphinx==1.8
+sphinx==4.1.2
 sphinx-rtd-theme
 sphinxcontrib-napoleon
 sphinxcontrib-programoutput
-nbsphinx
+nbsphinx==0.8.7
 IPython
