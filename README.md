@@ -295,6 +295,15 @@ convergency_atol = 1e10
 interaction_strength = 0.0
 seed = 42
 epochs = 20
+weights_decay = 0.0
+
+# BCM
+memory_factor = 0.9
+
+# Hopfield
+p = 4
+delta = 0.4
+k = 2
 
 # Activation function
 
@@ -330,6 +339,7 @@ BCM (const int & outputs, const int & batch_size, int activation=transfer_t :: l
      update_args optimizer=update_args(optimizer_t :: sgd),
      weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
      int epochs_for_convergency=1, float convergency_atol=1e-2f,
+     float decay=0.f, float memory_factor=0.5f,
      float interaction_strength=0.f)
 ```
 
@@ -340,6 +350,7 @@ Hopfield (const int & outputs, const int & batch_size,
           update_args optimizer=update_args(optimizer_t :: sgd),
           weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
           int epochs_for_convergency=1, float convergency_atol=1e-2f,
+          float decay=0.f,
           float delta=.4f, float p=2.f,
           int k=2)
 ```
