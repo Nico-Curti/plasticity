@@ -28,49 +28,49 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
   Parameters
   ----------
     outputs : int (default=100)
-      Number of hidden units
+      Number of hidden units.
 
     num_epochs : int (default=100)
-      Maximum number of epochs for model convergency
+      Maximum number of epochs for model convergence.
 
     batch_size : int (default=100)
-      Size of the minibatch
+      Size of the minibatch.
 
     weights_init : BaseWeights object
       Weights initialization strategy.
 
     activation : str (default="Linear")
-      Name of the activation function
+      Name of the activation function.
 
     optimizer : Optimizer (default=SGD)
-      Optimizer object (derived by the base class Optimizer)
+      Optimizer object (derived by the base class Optimizer).
 
     precision : float (default=1e-30)
-      Parameter that controls numerical precision of the weight updates
+      Parameter that controls numerical precision of the weight updates.
 
-    epochs_for_convergency : int (default=None)
-      Number of stable epochs requested for the convergency.
+    epochs_for_convergence : int (default=None)
+      Number of stable epochs requested for the convergence.
       If None the training proceeds up to the maximum number of epochs (num_epochs).
 
-    convergency_atol : float (default=0.01)
-      Absolute tolerance requested for the convergency
+    convergence_atol : float (default=0.01)
+      Absolute tolerance requested for the convergence.
 
     decay : float (default=0.)
       Weight decay scale factor.
 
     random_state : int (default=None)
-      Random seed for batch subdivisions
+      Random seed for batch subdivisions.
 
     verbose : bool (default=True)
-      Turn on/off the verbosity
+      Turn on/off the verbosity.
   '''
 
   def __init__ (self, outputs : int = 100, num_epochs : int = 100,
       activation : str = 'Linear', optimizer : 'Optimizer' = Optimizer(),
       batch_size : int = 100, weights_init : 'BaseWeights' = BaseWeights(),
       precision : float = 1e-30,
-      epochs_for_convergency : int = None,
-      convergency_atol : float = 0.01,
+      epochs_for_convergence : int = None,
+      convergence_atol : float = 0.01,
       decay : float = 0.,
       random_state : int = None,
       verbose : bool = True):
@@ -84,10 +84,10 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     self.optimizer = optimizer
     self.weights_init = weights_init
     self.precision = precision
-    self.epochs_for_convergency = epochs_for_convergency if epochs_for_convergency is not None else num_epochs
-    self.epochs_for_convergency = max(self.epochs_for_convergency, 1)
+    self.epochs_for_convergence = epochs_for_convergence if epochs_for_convergence is not None else num_epochs
+    self.epochs_for_convergence = max(self.epochs_for_convergence, 1)
     self.decay = decay
-    self.convergency_atol = convergency_atol
+    self.convergence_atol = convergence_atol
     self.random_state = random_state
     self.verbose = verbose
 
@@ -161,14 +161,15 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       w_update -= self.decay * self.weights
 
     #self.weights[:] += epsilon * w_update
-    self.weights, = self.optimizer.update(params=[self.weights], gradients=[-w_update]) # -update for compatibility with optimizers
+    # -update for compatibility with optimizers
+    self.weights, = self.optimizer.update(params=[self.weights], gradients=[-w_update])
 
     return theta
 
   @property
-  def _check_convergency (self) -> bool:
+  def _check_convergence (self) -> bool:
     '''
-    Check if the current training has reached the convergency.
+    Check if the current training has reached the convergence.
 
     Returns
     -------
@@ -178,17 +179,17 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     Notes
     -----
     .. note::
-      The convergency is estimated by the stability or not of the
-      learning parameter in a fixed (epochs_for_convergency) number
+      The convergence is estimated by the stability or not of the
+      learning parameter in a fixed (epochs_for_convergence) number
       of epochs for all the outputs.
     '''
 
-    if len(self.history) < self.epochs_for_convergency:
+    if len(self.history) < self.epochs_for_convergence:
       return False
 
     last = np.full_like(self.history, fill_value=self.history[-1])
 
-    return np.allclose(self.history, last, atol=self.convergency_atol)#, rtol=self.convergency_atol)
+    return np.allclose(self.history, last, atol=self.convergence_atol)
 
   def _join_input_label (self, X : np.ndarray, y : np.ndarray) -> np.ndarray:
     '''
@@ -253,7 +254,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       # random shuffle the input
       np.random.shuffle(indices)
 
-      batches = np.lib.stride_tricks.as_strided(indices, shape=(num_batches, self.batch_size), strides=(self.batch_size * 8, 8))
+      batches = np.lib.stride_tricks.as_strided(indices, shape=(num_batches, self.batch_size),
+                                                strides=(self.batch_size * 8, 8))
       # init null values of theta for iterative summation
       theta = np.zeros(shape=(self.outputs,), dtype=float)
 
@@ -264,15 +266,15 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
         theta += self._fit_step(X=batch_data)
 
       # append only the last theta value of the batch
-      # for the convergency evaluation since the weight matrix
+      # for the convergence evaluation since the weight matrix
       # changes (it is updated) at every batch
       # Note: the theta must be normalized according to number of batches!
       self.history.append(theta * (1. / num_batches))
 
-      # check if the model has reached the convergency (early stopping criteria)
-      if self._check_convergency:
+      # check if the model has reached the convergence (early stopping criteria)
+      if self._check_convergence:
         if self.verbose:
-          print('Early stopping: the training has reached the convergency criteria')
+          print('Early stopping: the training has reached the convergence criteria')
         break
 
       ##### WEIGHTS SYMMETRIC ORTHOGONALIZATION (once at the end of each epoch)
@@ -326,12 +328,15 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     num_samples, num_features = X.shape
 
     if self.batch_size > num_samples:
-      raise ValueError('Incorrect batch_size found. The batch_size must be less or equal to the number of samples. '
+      raise ValueError('Incorrect batch_size found. '
+                       'The batch_size must be less or equal to the number of samples. '
                        'Given {:d} for {:d} samples'.format(self.batch_size, num_samples))
 
-    #self.weights = np.random.normal(loc=self.mu, scale=self.sigma, size=(self.outputs, num_features))
+    #self.weights = np.random.normal(loc=self.mu,
+    #                                scale=self.sigma,
+    #                                size=(self.outputs, num_features))
     self.weights = self.weights_init.get(size=(self.outputs, num_features))
-    self.history = deque(maxlen=self.epochs_for_convergency)
+    self.history = deque(maxlen=self.epochs_for_convergence)
     self._fit(X)
 
     return self
@@ -374,7 +379,9 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       # return (self.weights @ X).transpose()
       old_activation = self.activation
       self.activation = Linear()
-      result = self._predict(X).transpose()#np.einsum('ij, kj -> ik', self.weights, X, optimize=True).transpose() # without activation
+      # without activation
+      # np.einsum('ij, kj -> ik', self.weights, X, optimize=True).transpose()
+      result = self._predict(X).transpose()
       self.activation = old_activation
       return result
 
@@ -476,6 +483,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     params = self.__init__.__code__.co_varnames
     params = set(params) - {'self'}
     args = ', '.join(['{0}={1}'.format(k, str(getattr(self, k)))
-                      if not isinstance(getattr(self, k), str) else '{0}="{1}"'.format(k, str(getattr(self, k)))
+                      if not isinstance(getattr(self, k), str)
+                      else '{0}="{1}"'.format(k, str(getattr(self, k)))
                       for k in params])
     return '{0}({1})'.format(class_name, args)

@@ -183,12 +183,12 @@ class LecunNormal (BaseWeights):
   Lecun normal initializer.
 
   It draws samples from a truncated normal distribution centered on 0
-  with `stddev = sqrt(1 / inputs))` [2]_
+  with `stddev = sqrt(1 / inputs))` [4]_
   where `inputs` is the number of input units in the weight matrix.
 
   References
   ----------
-  .. [2] LeCun 98, Efficient Backprop, http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf
+  .. [4] LeCun 98, Efficient Backprop, http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf
   '''
 
   def __init__ (self):
@@ -205,13 +205,13 @@ class GlorotNormal (BaseWeights):
   Glorot normal initializer, also called Xavier normal initializer.
 
   It draws samples from a truncated normal distribution centered on 0
-  with `stddev = sqrt(2 / (inputs + outputs))` [4]_
+  with `stddev = sqrt(2 / (inputs + outputs))` [5]_
   where `inputs` is the number of input units in the weight matrix
   and `outputs` is the number of output units in the weight matrix.
 
   References
   ----------
-  .. [4] Glorot & Bengio, AISTATS 2010. http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf
+  .. [5] Glorot & Bengio, AISTATS 2010. http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf
   '''
 
   def __init__ (self):
@@ -228,12 +228,12 @@ class HeUniform (BaseWeights):
   He uniform variance scaling initializer.
 
   It draws samples from a uniform distribution within [-limit, limit]
-  where `limit` is `sqrt(6 / inputs)` [5]_
+  where `limit` is `sqrt(6 / inputs)` [6]_
   where `inputs` is the number of input units in the weight matrix.
 
   References
   ----------
-  .. [5] He et al., http://arxiv.org/abs/1502.01852
+  .. [6] He et al., http://arxiv.org/abs/1502.01852
   '''
 
   def __init__ (self):
@@ -250,12 +250,12 @@ class HeNormal (BaseWeights):
   He normal initializer.
 
   It draws samples from a truncated normal distribution centered on 0
-  with `stddev = sqrt(2 / inputs)` [6]_
+  with `stddev = sqrt(2 / inputs)` [7]_
   where `inputs` is the number of input units in the weight matrix.
 
   References
   ----------
-  .. [6] He et al., http://arxiv.org/abs/1502.01852
+  .. [7] He et al., http://arxiv.org/abs/1502.01852
   '''
 
   def __init__ (self):
@@ -271,7 +271,7 @@ class Orthogonal (BaseWeights):
   '''
   Intialize weights as Orthogonal matrix.
 
-  Orthogonal matrix initialization [7]_. For n-dimensional shapes where
+  Orthogonal matrix initialization [8]_. For n-dimensional shapes where
   n > 2, the n-1 trailing axes are flattened. For convolutional layers, this
   corresponds to the fan-in, so this makes the initialization usable for
   both dense and convolutional layers.
@@ -287,7 +287,7 @@ class Orthogonal (BaseWeights):
 
   References
   ----------
-  .. [7] Saxe, Andrew M., James L. McClelland, and Surya Ganguli.
+  .. [8] Saxe, Andrew M., James L. McClelland, and Surya Ganguli.
          "Exact solutions to the nonlinear dynamics of learning in deep
          linear neural networks." arXiv preprint arXiv:1312.6120 (2013).
   '''

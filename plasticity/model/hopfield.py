@@ -19,10 +19,10 @@ class Hopfield (BasePlasticity):
   Parameters
   ----------
     outputs : int (default=100)
-      Number of hidden units
+      Number of hidden units.
 
     num_epochs : int (default=100)
-      Maximum number of epochs for model convergency
+      Maximum number of epochs for model convergence.
 
     batch_size : int (default=10)
       Size of the minibatch
@@ -31,13 +31,13 @@ class Hopfield (BasePlasticity):
       Optimizer object (derived by the base class Optimizer)
 
     delta : float (default=0.4)
-      Strength of the anti-hebbian learning
+      Strength of the anti-Hebbian learning.
 
     weights_init : BaseWeights object (default="Normal")
       Weights initialization strategy.
 
     p : float (default=2.)
-      Lebesgue norm of the weights
+      Lebesgue norm of the weights.
 
     k : int (default=2)
       Ranking parameter, must be integer that is bigger or equal than 2
@@ -45,21 +45,21 @@ class Hopfield (BasePlasticity):
     precision : float (default=1e-30)
       Parameter that controls numerical precision of the weight updates
 
-    epochs_for_convergency : int (default=None)
-      Number of stable epochs requested for the convergency.
+    epochs_for_convergence : int (default=None)
+      Number of stable epochs requested for the convergence.
       If None the training proceeds up to the maximum number of epochs (num_epochs).
 
-    convergency_atol : float (default=0.01)
-      Absolute tolerance requested for the convergency
+    convergence_atol : float (default=0.01)
+      Absolute tolerance requested for the convergence.
 
     decay : float (default=0.)
       Weight decay scale factor.
 
     random_state : int (default=None)
-      Random seed for weights generation
+      Random seed for weights generation.
 
     verbose : bool (default=True)
-      Turn on/off the verbosity
+      Turn on/off the verbosity.
 
   Examples
   --------
@@ -97,8 +97,8 @@ class Hopfield (BasePlasticity):
       weights_init : 'BaseWeights' = Normal(mu=0., std=1.),
       p : float = 2., k : int = 2,
       precision : float = 1e-30,
-      epochs_for_convergency : int = None,
-      convergency_atol : float = 0.01,
+      epochs_for_convergence : int = None,
+      convergence_atol : float = 0.01,
       decay : float = 0.,
       random_state : int = None, verbose=True):
 
@@ -111,8 +111,8 @@ class Hopfield (BasePlasticity):
                                     optimizer=optimizer,
                                     weights_init=weights_init,
                                     precision=precision,
-                                    epochs_for_convergency=epochs_for_convergency,
-                                    convergency_atol=convergency_atol,
+                                    epochs_for_convergence=epochs_for_convergence,
+                                    convergence_atol=convergence_atol,
                                     decay=decay,
                                     random_state=random_state, verbose=verbose)
 

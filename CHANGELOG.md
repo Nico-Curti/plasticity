@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.2] - 2021-06-15
+## [1.0.2] - 2021-09-01
 
 Improving documentation and CMake building.
 
@@ -18,6 +18,7 @@ Improving documentation and CMake building.
 - (C++|Python) Add [Lorenzo](https://github.com/lorenzosquadrani) method for convergence estimation
 - (C++|Python) Add [Lorenzo](https://github.com/lorenzosquadrani) method for weight decay
 - (C++|Python) Add [Lorenzo](https://github.com/lorenzosquadrani) method for weights normalization in BCM model
+- (C++|Python) Add [Lorenzo](https://github.com/lorenzosquadrani) method for theta moving average update in BCM model
 
 ### Changed
 
@@ -33,6 +34,7 @@ Improving documentation and CMake building.
 - (Global) Improve the documentation building
 - (Global) Improve the Cython building via CMake
 - (C++) Fix documentation of activation functions
+- (Global) Fix math issue in documentation build updating Sphinx (as suggested by [Riccardo](https://github.com/riccardoBiondi))
 
 ### TODO
 

@@ -21,19 +21,19 @@ class BCM (BasePlasticity):
   is learning to differentiate between those stimuli that excite the postsynaptic
   neuron strongly and those stimuli that excite that neuron weakly.
   Learned BCM feature detectors cannot, however, be simply used as the lowest layer
-  of a feedforward network so that the entire network is competitive to a network of
-  the same size trained with backpropagation algorithm end-to-end.
+  of a feed-forward network so that the entire network is competitive to a network of
+  the same size trained with back-propagation algorithm end-to-end.
 
   Parameters
   ----------
     outputs : int (default=100)
-      Number of hidden units
+      Number of hidden units.
 
     num_epochs : int (default=100)
-      Maximum number of epochs for model convergency
+      Maximum number of epochs for model convergence.
 
     batch_size : int (default=10)
-      Size of the minibatch
+      Size of the minibatch.
 
     activation : string or Activations object (default='Logistic')
       Activation function to apply
@@ -50,21 +50,24 @@ class BCM (BasePlasticity):
     precision : float (default=1e-30)
       Parameter that controls numerical precision of the weight updates
 
-    epochs_for_convergency : int (default=None)
-      Number of stable epochs requested for the convergency.
+    epochs_for_convergence : int (default=None)
+      Number of stable epochs requested for the convergence.
       If None the training proceeds up to the maximum number of epochs (num_epochs).
 
-    convergency_atol : float (default=0.01)
-      Absolute tolerance requested for the convergency
+    convergence_atol : float (default=0.01)
+      Absolute tolerance requested for the convergence.
 
     decay : float (default=0.)
       Weight decay scale factor.
 
+    memory_factor : float (default=0.5)
+      Memory factor for weighting the theta updates.
+
     random_state : int (default=None)
-      Random seed for weights generation
+      Random seed for weights generation.
 
     verbose : bool (default=True)
-      Turn on/off the verbosity
+      Turn on/off the verbosity.
 
   Examples
   --------
@@ -93,7 +96,8 @@ class BCM (BasePlasticity):
   References
   ----------
   .. [1] Castellani G., Intrator N., Shouval H.Z., Cooper L.N. Solutions of the BCM learning rule
-         in a network of lateral interacting nonlinear neurons, Network Computation in Neural Systems, 10.1088/0954-898X/10/2/001
+         in a network of lateral interacting nonlinear neurons, Network Computation in Neural Systems,
+         10.1088/0954-898X/10/2/001
   '''
 
   def __init__(self, outputs : int = 100, num_epochs : int = 100,
@@ -102,21 +106,23 @@ class BCM (BasePlasticity):
       weights_init : 'BaseWeights' = Normal(mu=0., std=1.),
       interaction_strength : float = 0.,
       precision : float = 1e-30,
-      epochs_for_convergency : int = None,
-      convergency_atol : float = 0.01,
+      epochs_for_convergence : int = None,
+      convergence_atol : float = 0.01,
       decay : float = 0.,
+      memory_factor: float = 0.5,
       random_state : int = None, verbose : bool = True):
 
     self._interaction_matrix = self._weights_interaction(interaction_strength, outputs)
     self.interaction_strength = interaction_strength
+    self.memory_factor = memory_factor
 
     super (BCM, self).__init__(outputs=outputs, num_epochs=num_epochs,
                                batch_size=batch_size, activation=activation,
                                optimizer=optimizer,
                                weights_init=weights_init,
                                precision=precision,
-                               epochs_for_convergency=epochs_for_convergency,
-                               convergency_atol=convergency_atol,
+                               epochs_for_convergence=epochs_for_convergence,
+                               convergence_atol=convergence_atol,
                                decay=decay,
                                random_state=random_state, verbose=verbose)
 
@@ -178,13 +184,16 @@ class BCM (BasePlasticity):
     '''
 
     theta = np.mean(output**2, axis=1, keepdims=True)
+
+    self.theta = self.memory_factor * self.theta + (1 - self.memory_factor) * theta
+
     phi = output * (output - theta) * (1. / (theta + self.precision))
 
     #dw = phi @ X
     dw = np.einsum('ij, jk -> ik', phi, X, optimize=True)
     dw *= 1. / X.shape[0]
 
-    return dw, theta.squeeze()
+    return dw, self.theta.squeeze()
 
 
   def _fit (self, X : np.ndarray) -> 'BCM':
@@ -192,6 +201,7 @@ class BCM (BasePlasticity):
     Core function for the fit member
     '''
 
+    self.theta = np.zeros(shape=(self.outputs), dtype=float)
     return super(BCM, self)._fit(X=X)
 
 
@@ -200,8 +210,17 @@ class BCM (BasePlasticity):
     Core function for the predict member
     '''
 
-    # return self.activation.activation( self._interaction_matrix @ self.weights @ X.T, copy=True)
-    return self.activation.activate(np.einsum('ij, jk, lk -> il', self._interaction_matrix, self.weights, X, optimize=True), copy=True)
+    # return self.activation.activation(self._interaction_matrix @ self.weights @ X.T,
+    #                                   copy=True)
+    # return self.activation.activate(np.einsum('ij, jk, lk -> il',
+    #                                           self._interaction_matrix,
+    #                                           self.weights,
+    #                                           X,
+    #                                           optimize=True), copy=True)
+    # split the einsum with intermediate buffers for a faster computation
+    _ = np.einsum('ij, jk -> ik', self._interaction_matrix, self.weights, optimize=True)
+    _ = np.einsum('ik, lk -> il', _, X, optimize=True)
+    return self.activation.activate(_, copy=True)
 
 
 if __name__ == '__main__':

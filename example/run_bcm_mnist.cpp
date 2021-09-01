@@ -78,6 +78,7 @@ int main (int argc, char ** argv)
   const int normalize              = cfg.get < int > ("normalize", 1);
   const int binarize               = cfg.get < int > ("binarize", 0);
   const float weights_decay        = cfg.get < float > ("weights_decay", 0.f);
+  const float memory_factor        = cfg.get < float > ("memory_factor", 0.5f);
 
   const int activation_func        = transfer :: get_activation.at(cfg.get < std :: string > ("activation", "logistic"));
 
@@ -136,6 +137,7 @@ int main (int argc, char ** argv)
   std :: cout << "- Lateral interaction strength: " << interaction_strength << std:: endl;
   std :: cout << "- Activation Function: " << cfg.get < std :: string > ("activation", "logistic (default)") << std:: endl;
   std :: cout << "- Weights decay: " << weights_decay << std:: endl;
+  std :: cout << "- Memory factor: " << memory_factor << std:: endl;
   std :: cout << "- Weights Model: " << cfg.get < std :: string > ("weights", "normal (default)") << std:: endl;
   std :: cout << "  - Mean: " << mu << std :: endl;
   std :: cout << "  - Std: " << std << std :: endl;
@@ -153,7 +155,7 @@ int main (int argc, char ** argv)
   BCM bcm (outputs, batch_size, activation_func,
            update_args(optimizer_type, learning_rate, momentum, decay, B1, B2, rho),
            weights_initialization(weights_type, mu, std, scale, weights_seed),
-           epochs_for_convergency, convergency_atol, decay, interaction_strength);
+           epochs_for_convergency, convergency_atol, decay, memory_factor, interaction_strength);
 
 #ifdef __view__
 

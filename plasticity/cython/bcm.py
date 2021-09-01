@@ -28,7 +28,7 @@ class BCM (BasePlasticity):
       Number of hidden units
 
     num_epochs : int (default=100)
-      Number of epochs for model convergency
+      Number of epochs for model convergence
 
     batch_size : int (default=10)
       Size of the minibatch
@@ -42,15 +42,18 @@ class BCM (BasePlasticity):
     weights_init : BaseWeights object (default="Normal")
       Weights initialization strategy.
 
-    epochs_for_convergency : int (default=None)
-      Number of stable epochs requested for the convergency.
+    epochs_for_convergence : int (default=None)
+      Number of stable epochs requested for the convergence.
       If None the training proceeds up to the maximum number of epochs (num_epochs).
 
-    convergency_atol : float (default=0.01)
-      Absolute tolerance requested for the convergency
+    convergence_atol : float (default=0.01)
+      Absolute tolerance requested for the convergence
 
     decay : float (default=0.)
       Weight decay scale factor.
+
+    memory_factor : float (default=0.5)
+      Memory factor for weighting the theta updates.
 
     interaction_strength : float (default=0.)
       Set the lateral interaction strength between weights
@@ -96,9 +99,10 @@ class BCM (BasePlasticity):
       batch_size : int = 100, activation : str = 'Logistic',
       optimizer : 'Optimizer' = SGD(lr=2e-2),
       weights_init : 'BaseWeights' = Normal(mu=0., std=1.),
-      epochs_for_convergency : int = None,
-      convergency_atol : float = 0.01,
+      epochs_for_convergence : int = None,
+      convergence_atol : float = 0.01,
       decay : float = 0.,
+      memory_factor: float = 0.5,
       interaction_strength : float = 0., random_state : int = 42,
       verbose : bool = True):
 
@@ -106,9 +110,10 @@ class BCM (BasePlasticity):
                                batch_size=batch_size, activation=activation,
                                optimizer=optimizer,
                                weights_init=weights_init,
-                               epochs_for_convergency=epochs_for_convergency,
-                               convergency_atol=convergency_atol,
+                               epochs_for_convergence=epochs_for_convergence,
+                               convergence_atol=convergence_atol,
                                decay=decay,
+                               memory_factor=memory_factor,
                                random_state=random_state, verbose=verbose,
                                interaction_strength=interaction_strength)
 

@@ -31,41 +31,41 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
   Parameters
   ----------
     model : type
-      Cython model type
+      Cython model type.
 
     outputs : int (default=100)
-      Number of hidden units
+      Number of hidden units.
 
     num_epochs : int (default=100)
-      Number of epochs for model convergency
+      Number of epochs for model convergence.
 
     batch_size : int (default=100)
-      Size of the minibatch
+      Size of the minibatch.
 
     activation : str (default="linear")
-      Name of the activation function
+      Name of the activation function.
 
     optimizer : Optimizer object (default=SGD)
-      The optimization algorithm to use during the training
+      The optimization algorithm to use during the training.
 
     weights_init : BaseWeights object (default="Uniform")
       Weights initialization strategy.
 
-    epochs_for_convergency : int (default=None)
-      Number of stable epochs requested for the convergency.
+    epochs_for_convergence : int (default=None)
+      Number of stable epochs requested for the convergence.
       If None the training proceeds up to the maximum number of epochs (num_epochs).
 
-    convergency_atol : float (default=0.01)
-      Absolute tolerance requested for the convergency
+    convergence_atol : float (default=0.01)
+      Absolute tolerance requested for the convergence.
 
     decay : float (default=0.)
       Weight decay scale factor.
 
     random_state : int (default=0)
-      Random seed for weights generation
+      Random seed for weights generation.
 
     verbose : bool (default=True)
-      Turn on/off the verbosity
+      Turn on/off the verbosity.
 
     **kwargs : dict
       Class Specialization variables.
@@ -76,7 +76,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       batch_size : int = 100, activation : str = 'Linear',
       optimizer : 'Optimizer' = SGD(lr=2e-2),
       weights_init : 'BaseWeights' = Uniform(),
-      epochs_for_convergency : int = None, convergency_atol : float = 0.01,
+      epochs_for_convergence : int = None, convergence_atol : float = 0.01,
       decay : float = 0.,
       random_state : int = 0, verbose : bool = True,
       **kwargs):
@@ -87,8 +87,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     self.activation = activation
     self.optimizer = optimizer
     self.weights_init = weights_init
-    self.epochs_for_convergency = epochs_for_convergency if epochs_for_convergency is not None else 1
-    self.convergency_atol = convergency_atol
+    self.epochs_for_convergence = epochs_for_convergence if epochs_for_convergence is not None else 1
+    self.convergence_atol = convergence_atol
     self.decay = decay
     self.random_state = random_state
     self.verbose = verbose
@@ -98,7 +98,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     activation, _ = _check_activation(self, activation_func=activation)
     self._obj = model(self.outputs, self.batch_size, activation, self.optimizer._object,
-                      self.weights_init._object, self.epochs_for_convergency, self.convergency_atol,
+                      self.weights_init._object, self.epochs_for_convergence, self.convergence_atol,
                       self.decay, *kwargs.values())
 
   def _join_input_label (self, X : np.ndarray, y : np.ndarray) -> np.ndarray:

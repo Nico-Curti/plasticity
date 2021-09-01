@@ -3,21 +3,24 @@
 BCM :: BCM (const int & outputs, const int & batch_size,
             int activation, update_args optimizer, weights_initialization weights_init,
             int epochs_for_convergency, float convergency_atol,
-            float decay,
+            float decay, float memory_factor,
             float interaction_strength
             ) : BasePlasticity (outputs, batch_size, activation, optimizer, weights_init, epochs_for_convergency, convergency_atol, decay)
 {
   this->init_interaction_matrix(interaction_strength);
+  this->memory_factor = memory_factor;
 }
 
 
 BCM :: BCM (const BCM & b) : BasePlasticity (b)
 {
+  this->memory_factor = memory_factor;
 }
 
 BCM & BCM :: operator = (const BCM & b)
 {
   BasePlasticity :: operator = (b);
+  this->memory_factor = memory_factor;
 
   return *this;
 }
@@ -55,14 +58,17 @@ void BCM :: init_interaction_matrix (const float & interaction_strength)
 Eigen :: MatrixXf BCM :: weights_update (const Eigen :: MatrixXf & X, const Eigen :: MatrixXf & output)
 {
   // evaluate the theta array as the average of the output rows
-  this->theta = output.array().square().rowwise().mean();
+  Eigen :: VectorXf theta = output.array().square().rowwise().mean();
+
+  // update the theta array with the moving average
+  this->theta = this->memory_factor * this->theta + (1.f - this->memory_factor) * theta;
 
   // compute the phi array, i.e the Law and Cooper function
   // Step 1 : φ = y * (y - θ)
   // Step 2: φ = φ / θ
-  Eigen :: MatrixXf phi = output.cwiseProduct(output.colwise() - this->theta);
+  Eigen :: MatrixXf phi = output.cwiseProduct(output.colwise() - theta);
   // NOTE: add an extra epsilon term in the denominator to avoid possible numerical issues
-  phi = phi.array().colwise() / (this->theta.array() + BasePlasticity :: precision);
+  phi = phi.array().colwise() / (theta.array() + BasePlasticity :: precision);
 
   // compute the weights update using Law and Cooper rule
   // dw/dt = φ * x

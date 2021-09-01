@@ -58,6 +58,9 @@ void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int & num_epochs
   permutation.setIdentity();
 #endif
 
+  // init theta as zeros array
+  this->theta = Eigen :: VectorXf :: Zero(this->outputs);
+
   // init the random number generator for the permutation
   std :: mt19937 engine(seed);
 

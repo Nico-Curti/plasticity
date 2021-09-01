@@ -821,6 +821,12 @@
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
+      <name>lecun_normal</name>
+      <anchorfile>weights_8h.html</anchorfile>
+      <anchor>a9bfa7623aa902dbd0dbd5198fadc6062a36a2e205b8aef5e9783ec215f5d71d07</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
       <name>glorot_normal</name>
       <anchorfile>weights_8h.html</anchorfile>
       <anchor>a9bfa7623aa902dbd0dbd5198fadc6062a1ecbd47303e142538e773fc7f41671da</anchor>
@@ -1170,8 +1176,8 @@
       <type></type>
       <name>BCM</name>
       <anchorfile>classBCM.html</anchorfile>
-      <anchor>a846c3c111b5945eb91b8a3f83f424873</anchor>
-      <arglist>(const int &amp;outputs, const int &amp;batch_size, int activation=transfer_t ::logistic, update_args optimizer=update_args(optimizer_t ::sgd), weights_initialization weights_init=weights_initialization(weights_init_t ::normal), int epochs_for_convergency=1, float convergency_atol=0.01f, float decay=0.f, float interaction_strength=0.f)</arglist>
+      <anchor>a31ddf68b2e37f08a0cfd6f0ec99790ea</anchor>
+      <arglist>(const int &amp;outputs, const int &amp;batch_size, int activation=transfer_t ::logistic, update_args optimizer=update_args(optimizer_t ::sgd), weights_initialization weights_init=weights_initialization(weights_init_t ::normal), int epochs_for_convergency=1, float convergency_atol=0.01f, float decay=0.f, float memory_factor=0.5f, float interaction_strength=0.f)</arglist>
     </member>
     <member kind="function">
       <type></type>
