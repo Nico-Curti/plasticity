@@ -386,7 +386,8 @@ int main (int argc, char ** argv)
   for (int i = 0; i < dataset.train_size(); ++i)
     training[i] = static_cast < float >(dataset.training_images[i]) / 255.f;
 
-  BCM bcm (100, 100, transfer_t :: relu, update_args(optimizer_t :: sgd));
+  BCM bcm (100, 100, transfer_t :: relu, update_args(optimizer_t :: adam),
+           weights_initialization(weights_init_t :: he_normal));
 
   bcm.fit(training.get(), dataset.num_train_sample, dataset.rows * dataset.cols, 10);
   bcm.save_weights("BCM_MNIST_simulation.bin")
@@ -407,6 +408,9 @@ The you can call the `fit` member function with the desired parameters.
 
 ```python
 from plasticity.model import BCM
+from plasticity.model.optimizer import Adam
+from plasticity.model.weights import HeNormal
+
 from sklearn.datasets import fetch_openml
 
 # Download the MNIST dataset
@@ -415,7 +419,8 @@ X, y = fetch_openml(name='mnist_784', version=1, data_id=None, return_X_y=True)
 # normalize the sample into [0, 1]
 X *= 1. / 255
 
-model = BCM(outputs=100, num_epochs=10, batch_size=100, interaction_strenght=0.)
+model = BCM(outputs=100, num_epochs=10, batch_size=100, interaction_strength=0.,
+            optimizer=Adam(lr=1e-3), activation='relu', weights_init=HeNormal())
 model.fit(X)
 ```
 

@@ -257,7 +257,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       batches = np.lib.stride_tricks.as_strided(indices, shape=(num_batches, self.batch_size),
                                                 strides=(self.batch_size * 8, 8))
       # init null values of theta for iterative summation
-      theta = np.zeros(shape=(self.outputs,), dtype=float)
+      theta = np.zeros(shape=(self.outputs, ), dtype=float)
 
       for batch in tqdm(batches, disable=(not self.verbose)):
 

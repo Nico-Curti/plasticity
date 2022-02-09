@@ -234,7 +234,7 @@ message(STATUS ""                                                               
 
 add_library(${plasticitylib} SHARED ${SRC} ${HEADER} ${HPP})
 set_property(TARGET ${plasticitylib} PROPERTY POSITION_INDEPENDENT_CODE ON)
-target_include_directories(${plasticitylib} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include> $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/hpp> $<INSTALL_INTERFACE:${rFBP_INSTALL_INCLUDE_DIR}>)
+target_include_directories(${plasticitylib} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include> $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/hpp> $<INSTALL_INTERFACE:${plasticity_INSTALL_INCLUDE_DIR}>)
 target_link_libraries(${plasticitylib} ${linked_libs})
 #target_compile_definitions(${plasticitylib} PRIVATE -D__verbose__)
 

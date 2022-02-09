@@ -183,17 +183,18 @@ class BCM (BasePlasticity):
       the BCM learning rule.
     '''
 
-    theta = np.mean(output**2, axis=1, keepdims=True)
+    theta = np.mean(output**2, axis=1)
 
     self.theta = self.memory_factor * self.theta + (1 - self.memory_factor) * theta
 
+    theta = theta.reshape(-1, 1)
     phi = output * (output - theta) * (1. / (theta + self.precision))
 
     #dw = phi @ X
     dw = np.einsum('ij, jk -> ik', phi, X, optimize=True)
     dw *= 1. / X.shape[0]
 
-    return dw, self.theta.squeeze()
+    return dw, self.theta
 
 
   def _fit (self, X : np.ndarray) -> 'BCM':
@@ -201,7 +202,7 @@ class BCM (BasePlasticity):
     Core function for the fit member
     '''
 
-    self.theta = np.zeros(shape=(self.outputs), dtype=float)
+    self.theta = np.zeros(shape=(self.outputs, ), dtype=float)
     return super(BCM, self)._fit(X=X)
 
 
