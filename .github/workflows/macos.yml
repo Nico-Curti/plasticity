@@ -6,6 +6,8 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -17,16 +19,18 @@ jobs:
       matrix:
         cfg:
 
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.2.1, generator: Ninja}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.3.1, generator: Ninja}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.4.1, generator: Ninja}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.5, generator: Ninja}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.6, generator: Ninja}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 11.7, generator: Ninja}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.0.1, generator: Ninja}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.1, generator: Ninja}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.1.1, generator: Ninja}
-          - {os: macOS-10.15, cc: xcode, cxx: xcode, cpp-version: 12.2, generator: Ninja}
+          - {os: macOS-11, cc: xcode, cxx: xcode, cpp-version: 11.7,   generator: Ninja}
+          - {os: macOS-11, cc: xcode, cxx: xcode, cpp-version: 12.4,   generator: Ninja}
+          - {os: macOS-11, cc: xcode, cxx: xcode, cpp-version: 12.5.1, generator: Ninja}
+          #- {os: macOS-11, cc: xcode, cxx: xcode, cpp-version: 13.0,   generator: Ninja}
+          - {os: macOS-11, cc: xcode, cxx: xcode, cpp-version: 13.1,   generator: Ninja}
+          - {os: macOS-11, cc: xcode, cxx: xcode, cpp-version: 13.2.1, generator: Ninja}
+
+          - {os: macOS-12, cc: xcode, cxx: xcode, cpp-version: 13.1,   generator: Ninja}
+          - {os: macOS-12, cc: xcode, cxx: xcode, cpp-version: 13.2.1, generator: Ninja}
+          - {os: macOS-12, cc: xcode, cxx: xcode, cpp-version: 13.3.1, generator: Ninja}
+          - {os: macOS-12, cc: xcode, cxx: xcode, cpp-version: 13.4,   generator: Ninja}
+          - {os: macOS-12, cc: xcode, cxx: xcode, cpp-version: 13.4.1, generator: Ninja}
 
     steps:
     - name: Checkout

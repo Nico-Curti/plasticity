@@ -1,3 +1,31 @@
+/*M///////////////////////////////////////////////////////////////////////////////////////
+//
+//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
+//
+//  The OpenHiP package is licensed under the MIT "Expat" License:
+//
+//  Copyright (c) 2021: Nico Curti.
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  the software is provided "as is", without warranty of any kind, express or
+//  implied, including but not limited to the warranties of merchantability,
+//  fitness for a particular purpose and noninfringement. in no event shall the
+//  authors or copyright holders be liable for any claim, damages or other
+//  liability, whether in an action of contract, tort or otherwise, arising from,
+//  out of or in connection with the software or the use or other dealings in the
+//  software.
+//
+//M*/
+
 #include <activations.h>
 
 namespace transfer
@@ -18,7 +46,7 @@ namespace transfer
 
   float stair (const float & x)
   {
-    const int n = static_cast < int >(std :: floor (x));
+    const int32_t n = static_cast < int32_t >(std :: floor (x));
     return (n % 2) ? (x - n) + std :: floor(x * .5f) : std :: floor(x * .5f);
   }
 
@@ -210,7 +238,8 @@ namespace transfer
 
   float asymm_logistic (const float & x)
   {
-    return x < 0.f ? -1.f * (2.f / (1.f + math :: exp(2.f * x)) - 1.f) : 50.f * (2.f / (1.f + math :: exp(-2.f * x / 50.f)) - 1.f);
+    return x < 0.f ? -1.f * (2.f / (1.f + math :: exp(2.f * x)) - 1.f) :
+                     50.f * (2.f / (1.f + math :: exp(-2.f * x / 50.f)) - 1.f);
   }
 
   float g_asymm_logistic (const float & x)
@@ -222,7 +251,7 @@ namespace transfer
     return (temp + 1.f) * (2.f - temp - 1.f);
   }
 
-  std :: function < float(const float &) > activate ( const int & active)
+  std :: function < float(const float &) > activate ( const int32_t & active)
   {
     switch (active)
     {
@@ -249,7 +278,7 @@ namespace transfer
     }
   }
 
-  std :: function < float(const float &) > gradient ( const int & active)
+  std :: function < float(const float &) > gradient ( const int32_t & active)
   {
     switch (active)
     {

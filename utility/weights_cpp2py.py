@@ -7,7 +7,7 @@ import argparse
 import numpy as np
 
 __author__  = ['Nico Curti']
-__email__ = ['nico.curit2@unibo.it']
+__email__ = ['nico.curti2@unibo.it']
 
 
 def parse_args ():

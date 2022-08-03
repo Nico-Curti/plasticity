@@ -1,3 +1,31 @@
+/*M///////////////////////////////////////////////////////////////////////////////////////
+//
+//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
+//
+//  The OpenHiP package is licensed under the MIT "Expat" License:
+//
+//  Copyright (c) 2021: Nico Curti.
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  the software is provided "as is", without warranty of any kind, express or
+//  implied, including but not limited to the warranties of merchantability,
+//  fitness for a particular purpose and noninfringement. in no event shall the
+//  authors or copyright holders be liable for any claim, damages or other
+//  liability, whether in an action of contract, tort or otherwise, arising from,
+//  out of or in connection with the software or the use or other dealings in the
+//  software.
+//
+//M*/
+
 #ifndef __weights_h__
 #define __weights_h__
 
@@ -7,24 +35,27 @@
 #include <numeric>       // std :: inner_product
 
 
-enum weights_init_t { zeros = 0, ones, uniform, normal, lecun_uniform, glorot_uniform, lecun_normal, glorot_normal, he_uniform, he_normal
+enum weights_init_t { zeros = 0, ones, uniform,
+                      normal, lecun_uniform, glorot_uniform,
+                      lecun_normal, glorot_normal, he_uniform,
+                      he_normal
 };///< weights initialization types
 
 
 namespace weights_init
 {
-  static const std :: unordered_map < std :: string, int > get_weights {
-                                                                        {"zeros"          , zeros},
-                                                                        {"ones"           , ones},
-                                                                        {"uniform"        , uniform},
-                                                                        {"normal"         , normal},
-                                                                        {"lecun_uniform"  , lecun_uniform},
-                                                                        {"glorot_uniform" , glorot_uniform},
-                                                                        {"lecun_normal"   , lecun_normal},
-                                                                        {"glorot_normal"  , glorot_normal},
-                                                                        {"he_uniform"     , he_uniform},
-                                                                        {"he_normal"      , he_normal},
-                                                                       }; ///< Utility for the weight initialization functions management
+  static const std :: unordered_map < std :: string, int32_t > get_weights {
+    {"zeros"          , zeros},
+    {"ones"           , ones},
+    {"uniform"        , uniform},
+    {"normal"         , normal},
+    {"lecun_uniform"  , lecun_uniform},
+    {"glorot_uniform" , glorot_uniform},
+    {"lecun_normal"   , lecun_normal},
+    {"glorot_normal"  , glorot_normal},
+    {"he_uniform"     , he_uniform},
+    {"he_normal"      , he_normal},
+   }; ///< Utility for the weight initialization functions management
 } // end namespace
 
 
@@ -57,11 +88,11 @@ class weights_initialization
 
   std :: mt19937 engine; ///< Random number generator
 
-  int type;    ///< Initialization type to use
+  int32_t type; ///< Initialization type to use
 
-  float mu;    ///< mean of the weights distribution (used in normal distribution initializations)
-  float sigma; ///< standard deviation of the weights distribution (used in normal distribution initialization)
-  float scale; ///< bound of the distribution domain (used in uniform distribution initialization)
+  float mu;     ///< mean of the weights distribution (used in normal distribution initializations)
+  float sigma;  ///< standard deviation of the weights distribution (used in normal distribution initialization)
+  float scale;  ///< bound of the distribution domain (used in uniform distribution initialization)
 
 
 public:
@@ -89,7 +120,9 @@ public:
   * @param seed Random number generator seed.
   *
   */
-  weights_initialization (const int & type, float mu=0.f, float sigma=1.f, float scale=1.f, int seed=42);
+  weights_initialization (const int32_t & type,
+    float mu=0.f, float sigma=1.f, float scale=1.f,
+    int32_t seed=42);
 
   // Destructors
 
@@ -134,7 +167,7 @@ public:
   * @param inputs Number of rows of the weight matrix.
   * @param outputs Number of columns of the weight matrix.
   */
-  void init (float * weights, const int & inputs, const int & outputs);
+  void init (float * weights, const int32_t & inputs, const int32_t & outputs);
 
 private:
 
@@ -151,7 +184,7 @@ private:
   * @param inputs Number of rows of the weight matrix.
   * @param outputs Number of columns of the weight matrix.
   */
-  void zeros (float * weights, const int & inputs, const int & outputs);
+  void zeros (float * weights, const int32_t & inputs, const int32_t & outputs);
 
   /**
   * @brief Initialize weights with one values
@@ -166,7 +199,7 @@ private:
   * @param inputs Number of rows of the weight matrix.
   * @param outputs Number of columns of the weight matrix.
   */
-  void ones (float * weights, const int & inputs, const int & outputs);
+  void ones (float * weights, const int32_t & inputs, const int32_t & outputs);
 
   /**
   * @brief Sample initial weights from the uniform distribution.
@@ -182,7 +215,7 @@ private:
   * @param inputs Number of rows of the weight matrix.
   * @param outputs Number of columns of the weight matrix.
   */
-  void uniform (float * weights, const int & inputs, const int & outputs);
+  void uniform (float * weights, const int32_t & inputs, const int32_t & outputs);
 
   /**
   * @brief Sample initial weights from the Gaussian distribution.
@@ -198,7 +231,7 @@ private:
   * @param inputs Number of rows of the weight matrix.
   * @param outputs Number of columns of the weight matrix.
   */
-  void normal (float * weights, const int & inputs, const int & outputs);
+  void normal (float * weights, const int32_t & inputs, const int32_t & outputs);
 
   /**
   * @brief LeCun uniform initializer.
@@ -215,7 +248,7 @@ private:
   * @param inputs Number of rows of the weight matrix.
   * @param outputs Number of columns of the weight matrix.
   */
-  void lecun_uniform (float * weights, const int & inputs, const int & outputs);
+  void lecun_uniform (float * weights, const int32_t & inputs, const int32_t & outputs);
 
   /**
   * @brief Glorot uniform initializer, also called Xavier uniform initializer.
@@ -233,7 +266,7 @@ private:
   * @param inputs Number of rows of the weight matrix.
   * @param outputs Number of columns of the weight matrix.
   */
-  void glorot_uniform (float * weights, const int & inputs, const int & outputs);
+  void glorot_uniform (float * weights, const int32_t & inputs, const int32_t & outputs);
 
   /**
   * @brief Lecun normal initializer.
@@ -250,7 +283,7 @@ private:
   * @param inputs Number of rows of the weight matrix.
   * @param outputs Number of columns of the weight matrix.
   */
-  void lecun_normal (float * weights, const int & inputs, const int & outputs);
+  void lecun_normal (float * weights, const int32_t & inputs, const int32_t & outputs);
 
   /**
   * @brief Glorot normal initializer, also called Xavier normal initializer.
@@ -268,7 +301,7 @@ private:
   * @param inputs Number of rows of the weight matrix.
   * @param outputs Number of columns of the weight matrix.
   */
-  void glorot_normal (float * weights, const int & inputs, const int & outputs);
+  void glorot_normal (float * weights, const int32_t & inputs, const int32_t & outputs);
 
   /**
   * @brief He uniform variance scaling initializer.
@@ -285,7 +318,7 @@ private:
   * @param inputs Number of rows of the weight matrix.
   * @param outputs Number of columns of the weight matrix.
   */
-  void he_uniform (float * weights, const int & inputs, const int & outputs);
+  void he_uniform (float * weights, const int32_t & inputs, const int32_t & outputs);
 
   /**
   * @brief He normal initializer.
@@ -302,7 +335,7 @@ private:
   * @param inputs Number of rows of the weight matrix.
   * @param outputs Number of columns of the weight matrix.
   */
-  void he_normal (float * weights, const int & inputs, const int & outputs);
+  void he_normal (float * weights, const int32_t & inputs, const int32_t & outputs);
 
 }; // end class
 

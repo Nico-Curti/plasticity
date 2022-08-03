@@ -62,7 +62,8 @@ class Activations (object):
     Parameters
     ----------
       x : array-like
-        Input array (already activated!) to evaluate according to the desired gradient function
+        Input array (already activated!) to evaluate according
+        to the desired gradient function
 
       copy : bool (default=False)
         Make a copy of the input array or just modify it

@@ -1,6 +1,6 @@
 [metadata]
-name = plasticity,
-description = Unsupervised Neural Networks with biological-inspired learning rules,
+name = @CMAKE_PROJECT_NAME@,
+description = @CMAKE_PROJECT_DESCRIPTION@,
 long_description = file: README.md,
 author = Nico Curti,
 author_email = nico.curti2@unibo.it,

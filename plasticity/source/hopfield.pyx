@@ -1,19 +1,30 @@
 # distutils: language = c++
 # cython: language_level=2
 
-from cython.operator cimport dereference as deref
 from libcpp.string cimport string
+from cython.operator cimport dereference as deref
 
 from hopfield cimport Hopfield
 from update_args cimport _update_args
 from weights_initialization cimport _weights_initialization
 
+__author__  = ['Nico Curti']
+__email__ = ['nico.curti2@unibo.it']
+
 
 cdef class _Hopfield:
 
-  def __init__ (self, int outputs, int batch_size, int activation, _update_args optimizer, _weights_initialization w_init, int epochs_for_convergence, float convergence_atol, float decay, float delta, float p, int k):
+  def __init__ (self, int outputs, int batch_size, int activation,
+    _update_args optimizer, _weights_initialization w_init,
+    int epochs_for_convergence,
+    float convergence_atol, float decay,
+    float delta, float p, int k):
 
-    self.thisptr.reset(new Hopfield(outputs, batch_size, deref(optimizer.thisptr.get()), deref(w_init.thisptr.get()), epochs_for_convergence, convergence_atol, decay, delta, p, k))
+    self.thisptr.reset(new Hopfield(outputs, batch_size,
+                                    deref(optimizer.thisptr.get()), deref(w_init.thisptr.get()),
+                                    epochs_for_convergence,
+                                    convergence_atol, decay,
+                                    delta, p, k))
     self.outputs = outputs
     self.n_features = 0
 

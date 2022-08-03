@@ -1,3 +1,31 @@
+/*M///////////////////////////////////////////////////////////////////////////////////////
+//
+//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
+//
+//  The OpenHiP package is licensed under the MIT "Expat" License:
+//
+//  Copyright (c) 2021: Nico Curti.
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  the software is provided "as is", without warranty of any kind, express or
+//  implied, including but not limited to the warranties of merchantability,
+//  fitness for a particular purpose and noninfringement. in no event shall the
+//  authors or copyright holders be liable for any claim, damages or other
+//  liability, whether in an action of contract, tort or otherwise, arising from,
+//  out of or in connection with the software or the use or other dealings in the
+//  software.
+//
+//M*/
+
 #ifndef __update_args_h__
 #define __update_args_h__
 
@@ -8,22 +36,24 @@
 #include <Eigen/Dense>   // Eigen classes
 
 
-enum optimizer_t { adam = 0, momentum, nesterov_momentum, adagrad, rmsprop, adadelta, adamax, sgd
+enum optimizer_t { adam = 0, momentum, nesterov_momentum,
+                   adagrad, rmsprop, adadelta,
+                   adamax, sgd
 }; ///< optimizer types
 
 namespace optimizer
 {
 
-static const std :: unordered_map < std :: string, int > get_optimizer {
-                                                                          {"adam"              , adam},
-                                                                          {"momentum"          , momentum},
-                                                                          {"nesterov_momentum" , nesterov_momentum},
-                                                                          {"adagrad"           , adagrad},
-                                                                          {"rmsprop"           , rmsprop},
-                                                                          {"adadelta"          , adadelta},
-                                                                          {"adamax"            , adamax},
-                                                                          {"sgd"               , sgd},
-                                                                        }; ///< Utility for the optimizer management
+static const std :: unordered_map < std :: string, int32_t > get_optimizer {
+    {"adam"              , adam},
+    {"momentum"          , momentum},
+    {"nesterov_momentum" , nesterov_momentum},
+    {"adagrad"           , adagrad},
+    {"rmsprop"           , rmsprop},
+    {"adadelta"          , adadelta},
+    {"adamax"            , adamax},
+    {"sgd"               , sgd},
+  }; ///< Utility for the optimizer management
 
 }
 
@@ -60,7 +90,7 @@ protected:
 
 public:
 
-  int type;            ///< Optimization type to use
+  int32_t type;        ///< Optimization type to use
 
   float learning_rate; ///< Learning rate value
   float momentum;      ///< Momentum parameter
@@ -95,7 +125,8 @@ public:
   * @param rho TODO.
   *
   */
-  update_args (const int & type, float learning_rate=0.02, float momentum=.9f, float decay=0.0001, float B1=.9f, float B2=.999f, float rho=0.f);
+  update_args (const int32_t & type, float learning_rate=0.02, float momentum=.9f,
+    float decay=0.0001, float B1=.9f, float B2=.999f, float rho=0.f);
 
   // Destructors
 
@@ -142,7 +173,7 @@ public:
   * @param rows Number of weights/parameters rows to update.
   * @param cols Number of weights/parameters cols to update.
   */
-  void init_arrays (const int & rows, const int & cols);
+  void init_arrays (const int32_t & rows, const int32_t & cols);
 
   /**
   * @brief Update the given parameters using the optimization algorithm
@@ -154,7 +185,8 @@ public:
   * @param weights_update Array of input gradients.
   *
   */
-  void update ( const int & iteration, Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update );
+  void update ( const int32_t & iteration, Eigen :: MatrixXf & weights,
+    const Eigen :: MatrixXf & weights_update );
 
 private:
 
@@ -166,7 +198,8 @@ private:
   * @param weights_update Array of input gradients.
   *
   */
-  void adam_update ( const int & iteration, Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update );
+  void adam_update ( const int32_t & iteration, Eigen :: MatrixXf & weights,
+    const Eigen :: MatrixXf & weights_update );
 
   /**
   * @brief Stochastic Gradient Descent optimization step
@@ -230,7 +263,8 @@ private:
   * @param weights_update Array of input gradients.
   *
   */
-  void adamax_update ( const int & iteration, Eigen :: MatrixXf & weights, const Eigen :: MatrixXf & weights_update );
+  void adamax_update ( const int32_t & iteration, Eigen :: MatrixXf & weights,
+    const Eigen :: MatrixXf & weights_update );
 
 };
 

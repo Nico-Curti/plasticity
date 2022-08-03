@@ -4,7 +4,7 @@ red=$(tput setaf 1)
 green=$(tput setaf 2)
 reset=$(tput sgr0)
 
-test_files=$(ls ./bin/test_*)
+test_files=$(ls ../bin/test_*)
 
 echo "${green}Run testing${reset}"
 

@@ -1,12 +1,10 @@
-prefix=@CMAKE_SOURCE_DIR@
-exec_prefix=${prefix}
-includedir=${prefix}/include
-hppdir=${prefix}/hpp
-libdir=${exec_prefix}/lib
+libdir=@CMAKE_SOURCE_PATH@/lib
+includedir=@CMAKE_SOURCE_PATH@/include
+hppdir=@CMAKE_SOURCE_PATH@/hpp
 
-Name: plasticity
-Description: Neural Networks with unsupervised biological-inspired learning rules
+Name: @CMAKE_PROJECT_NAME@
+Description: @CMAKE_PROJECT_DESCRIPTION@
 
 Version: @PLASTICITY_VERSION@
-Cflags: -I${includedir}/ -I${hppdir}/
-Libs: -L${libdir} -l@CMAKE_STATIC_LIBRARY_PREFIX@@plasticitylib@
+Libs: -L${libdir} -l@CMAKE_STATIC_LIBRARY_PREFIX@plasticity/lib/
+Cflags: -I${includedir} -I${hppdir}

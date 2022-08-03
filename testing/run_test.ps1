@@ -1,6 +1,6 @@
 #!/usr/bin/env pwsh
 
-$test_files = Get-ChildItem -Path ./bin/ -Include test_*
+$test_files = Get-ChildItem -Path ../bin/ -Include test_*
 
 Write-Host "Run testing" -ForegroundColor Yellow
 

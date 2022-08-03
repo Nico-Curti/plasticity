@@ -144,6 +144,7 @@ __pycache__/
 [Dd]ata/
 [Dd]ist/
 .eggs/
+include/[Pp]lasticity/
 
 # Utilities
 [Uu]tilities/
@@ -159,6 +160,7 @@ html*
 
 # temp files
 setup_.py
+setup.cfg
 messages_*
 results_*
 *.pyd
@@ -171,3 +173,5 @@ results_*
 docs/source/doxydoc/
 docs/source/conf.py
 docs/Doxyfile
+docs/build
+docs/doxydoc

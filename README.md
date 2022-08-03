@@ -1,6 +1,6 @@
 | **Authors**  | **Project** |  **Documentation** | **Build Status** | **Code Quality** | **Coverage** |
 |:------------:|:-----------:|:------------------:|:----------------:|:----------------:|:------------:|
-| [**N. Curti**](https://github.com/Nico-Curti) <br/> [**L. Squadrani**](https://github.com/lorenzosquadrani) <br/> [**S. Gasperini**](https://github.com/SimoneGasperini) <br/> [**M. Ceccarelli**](https://github.com/Mat092)  | **plasticity** <br/> [![docs](https://readthedocs.org/projects/plasticity/badge/?version=latest)](https://plasticity.readthedocs.io/en/latest/?badge=latest) | **Docs:** [![plasticity Docs CI](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml) | **Windows:** <br/> [![Windows plasticity CI](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml) <br/> **Linux:** <br/> [![Linux plasticity CI](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml) <br/> **MacOS:** <br/> [![MacOS plasticity CI](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml) <br/> **Python/Cython:** <br/> [![plasticity Python CI](https://github.com/Nico-Curti/plasticity/actions/workflows/python.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/python.yml) | **Codacy:** <br/> [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9879f0e8f90140eab79c338b46c00420)](https://www.codacy.com/gh/Nico-Curti/plasticity/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nico-Curti/plasticity&amp;utm_campaign=Badge_Grade) <br/> **Codebeat:** <br/> [![codebeat badge](https://codebeat.co/badges/941ebbcf-de5a-4ff0-b4c4-9674bfb20c69)](https://codebeat.co/projects/github-com-nico-curti-plasticity-main) | **CodeCov:** <br/> [![codecov](https://codecov.io/gh/Nico-Curti/plasticity/branch/main/graph/badge.svg)](https://codecov.io/gh/Nico-Curti/plasticity) |
+| [**N. Curti**](https://github.com/Nico-Curti) <br/> [**L. Squadrani**](https://github.com/lorenzosquadrani) <br/> [**S. Gasperini**](https://github.com/SimoneGasperini) <br/> [**M. Ceccarelli**](https://github.com/Mat092)  | **plasticity** <br/> [![Entropy](https://img.shields.io/badge/Entropy-10.3390/e24050682-g.svg)](https://www.mdpi.com/1099-4300/24/5/682) | [![Doxygen Sphinx](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml) <br/> [![ReadTheDocs](https://readthedocs.org/projects/plasticity/badge/?version=latest)](https://plasticity.readthedocs.io/en/latest/?badge=latest) | [![Windows](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml) <br/> [![Linux](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml) <br/> [![MacOS](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml) <br/> [![Python](https://github.com/Nico-Curti/plasticity/actions/workflows/python.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/python.yml) | [![Codacy](https://app.codacy.com/project/badge/Grade/9879f0e8f90140eab79c338b46c00420)](https://www.codacy.com/gh/Nico-Curti/plasticity/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nico-Curti/plasticity&amp;utm_campaign=Badge_Grade) <br/> [![codebeat](https://codebeat.co/badges/941ebbcf-de5a-4ff0-b4c4-9674bfb20c69)](https://codebeat.co/projects/github-com-nico-curti-plasticity-main) | [![codecov](https://codecov.io/gh/Nico-Curti/plasticity/branch/main/graph/badge.svg)](https://codecov.io/gh/Nico-Curti/plasticity) |
 
 [![appveyor](https://ci.appveyor.com/api/projects/status/djnkyxc64dlm4r6p/branch/main?svg=true)](https://ci.appveyor.com/project/Nico-Curti/plasticity-9jr6a/branch/main)
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/Nico-Curti/plasticity.svg?style=plastic)](https://github.com/Nico-Curti/plasticity/pulls)
@@ -116,8 +116,13 @@ You can easily install the `Eigen3` library with the following commands:
 | **MacOS**    | `brew install eigen`              |
 | **Windows**  | `vcpkg install eigen3`            |
 
-> **Note:** For Windows users we suggest to use [`vcpkg`](https://github.com/microsoft/vcpkg) for the library installation/management.
-> **Note:** You can easily `Eigen3` install the library from source at this [link](https://gitlab.com/libeigen/eigen.git) to get the latest (more efficient) release.
+| :triangular_flag_on_post: Note |
+|:-------------------------------|
+| For Windows users we suggest to use [`vcpkg`](https://github.com/microsoft/vcpkg) for the library installation/management. |
+
+| :triangular_flag_on_post: Note |
+|:-------------------------------|
+| You can easily `Eigen3` install the library from source at this [link](https://gitlab.com/libeigen/eigen.git) to get the latest (more efficient) release. |
 
 If you want visualize the model weights you have to build the library with the `-DVIEW:BOOL=ON`: in this case the `OpenCV` support is required for the installation.
 
@@ -169,64 +174,68 @@ or more easily
 
 if you are working on a Windows machine the correct script to call is the [`build.ps1`](https://Nico-Curti/plasticity/blob/main/build.ps1) with the same command line arguments.
 
-**NOTE 1:** the only requirement of the library is `Eigen3`.
-Please pay attention to install this dependency before running the CMake installation to avoid any issue.
+The `CMake` command line can be customized according to the following parameters:
 
-**Note 2:** We support all the versions of the `Eigen3` library but we strongly recommend a version >= 3.3.90.
+* `-DOMP:BOOL` : Enable/Disable the OpenMP support for multi-threading computation
+* `-DBUILD_DOCS:BOOL` : Enable/Disable the build of docs using Doxygen and Sphinx
+* `-DPYWRAP:BOOL` : Enable/Disable the build of Python wrap of the library via Cython (see next section for Python requirements)
+* `-DBUILD_TEST:BOOL` : Enable/Disable the build of C++ testing scripts
+* `-DVERBOSE:BOOL` : Enable/Disable the progress bar during training epochs
+* `-DVIEW:BOOL` : Enable/Disable the visualization of neurons' weights during training
 
-**NOTE 3:** if you want enable the `Cython` support compile the library with `-DPYWRAP=ON`.
-The `Cython` packages will be compiled and correctly positioned in the `plasticity` Python package **BUT** you need to run also the setup before use it.
-An alternative is to install the `Python` package directly with the setup script: in this way the `CMake` is called inside the package building and all the dependencies automatically checked.
+| :warning: WARNING |
+|:------------------|
+| The `-DVIEW:BOOL` option is available **only** with the support of OpenCV library! Pay attention to install it before the building of the library! |
+
+| :triangular_flag_on_post: Note |
+|:-------------------------------|
+| The only requirement of the library is `Eigen3`. Please pay attention to install this dependency before running the CMake installation to avoid any issue. |
+
+| :triangular_flag_on_post: Note |
+|:-------------------------------|
+| We support all the versions of the `Eigen3` library but we strongly recommend a version >= 3.3.90. |
+
+| :triangular_flag_on_post: Note |
+|:-------------------------------|
+| If you want enable the `Cython` support compile the library with `-DPYWRAP=ON`. The `Cython` packages will be compiled and correctly positioned in the `plasticity` Python package **BUT** you need to run also the setup before use it. An alternative is to install the `Python` package directly with the setup script: in this way the `CMake` is called inside the package building and all the dependencies automatically checked. |
 
 ### Python installation
 
 Python version supported : ![Python version](https://img.shields.io/badge/python-3.5|3.6|3.7|3.8|3.9-blue.svg)
 
-The easiest way to install the package is to use `pip`
-
-```bash
-python -m pip install plasticity
-```
-
-> :warning: The setup file requires the `Cython` and `Numpy` packages, thus make sure to pre-install them!
-> We are working on some workarounds to solve this issue.
-
 The `Python` installation can be performed with or without the `C++` installation.
-The `Python` installation is always executed using [`setup.py`](https://github.com/Nico-Curti/plasticity/blob/main/setup.py) script.
+The `Python` installation is always executed using [`setup.py`](https://github.com/Nico-Curti/DNetPRO/blob/master/setup.py) script.
 
-If you have already built the `plasticity` `C++` library the installation is performed faster and the `Cython` wrap was already built using the `-DPYWRAP` definition.
+If you have already build the `plasticity` `C++` library the installation is performed faster and the `Cython` wrap directly links to the last library installed.
 Otherwise the full list of dependencies is build.
 
-In both cases the installation steps are
+In both cases the installation steps are:
 
-```bash
-python -m pip install -r ./requirements.txt
+```mermaid
+graph LR;
+    A(Install<br>Requirements) -->|python -m pip install -r requirements.txt| B(Install<br>plasticity)
+    B -->|python setup.py install| C(Package<br>Install)
+    B -->|python setup.py develop --user| D(Development<br>Mode)
 ```
 
-to install the prerequisites and then
+| :warning: WARNING |
+|:------------------|
+| The installation of the `Python` modules requires the `CMake` support and all the listed above libraries.<br>If you are working under *Window OS* we require the usage of `VCPKG` for the installation of the libraries and a precise configuration of the environment variables.<br>In particular you need to set the variables `VCPKG_ROOT=/path/to/vcpkg/rootdir/` and `VCPKG_DEFAULT_TRIPLET=x64-windows`.<br>A full working example of OS configuration can be found in the CI actions of the project, available [here](https://github.com/Nico-Curti/plasticity/blob/main/.github/workflows/) |
 
-```bash
-python setup.py install
-```
+| :warning: WARNING |
+|:------------------|
+| All the `CMake` flags are set internally in the `setup.py` script with default values.<br>You can manually turn on/off the multi-threading support passing the flag `--omp` at the setup command line, *i.e.* `python setup.py develop --user --omp` |
 
-or for installing in development mode:
-
-```bash
-python setup.py develop --user
-```
-
-> :warning: The current installation via pip has no requirements about the version of `setuptools` package.
-> If the already installed version of `setuptools` is `>= 50.*` you can find some troubles during the installation of our package (ref. [issue](https://github.com/Nico-Curti/rFBP/issues/5)).
-> We suggest to temporary downgrade the `setuptools` version to `49.3.0` to workaround this `setuptools` issue.
-
-**Note:** The requirement of the `Eigen3` library is mandatory also for the `Cython` installation!
-Make sure to have installed all the requirements before running the `setup.py` command.
+| :triangular_flag_on_post: Note |
+|:-------------------------------|
+| The requirement of the `Eigen3` library is mandatory also for the `Cython` installation! Make sure to have installed all the requirements before running the `setup.py` command. |
 
 ## Efficiency
 
-![Comparison of time performances between the pure-`Python` implementation and `Cython` version of the `BCM` model varying the input dimension sizes (number of samples and number of features). For each input configuration 10 runs of both algorithm were performed keeping fixed all the other parameters. In the simulation we used 10 epochs and a SGD optimization algorithm.](./img/BCM_timing.png)
-
-![Comparison of time performances between the pure-`Python` implementation and `Cython` version of the `Hopfield` model varying the input dimension sizes (number of samples and number of features). For each input configuration 10 runs of both algorithm were performed keeping fixed all the other parameters. In the simulation we used 10 epochs and a SGD optimization algorithm.](./img/Hopfield_timing.png)
+| BCM | Hopfield |
+| --- | -------- |
+| ![BCM](./img/BCM_timing.png) | ![Hopfield](./img/Hopfield_timing.png) |
+| Comparison of time performances between the pure-`Python` implementation and `Cython` version of the `BCM` model varying the input dimension sizes (number of samples and number of features). For each input configuration 10 runs of both algorithm were performed keeping fixed all the other parameters. In the simulation we used 10 epochs and a SGD optimization algorithm. | Comparison of time performances between the pure-`Python` implementation and `Cython` version of the `Hopfield` model varying the input dimension sizes (number of samples and number of features). For each input configuration 10 runs of both algorithm were performed keeping fixed all the other parameters. In the simulation we used 10 epochs and a SGD optimization algorithm. |
 
 We test the computational efficiency of both the implementation (pure-`Python` and `Cython` with multi-threading enabled).
 The tests were performed keeping fixed all the training parameters and varying just the input dimension (number of samples and number of features).
@@ -257,7 +266,9 @@ You can enable the OpenCV support building the library with the `-DVIEW:BOOL=ON`
 The most important thing to take in mind is that all the `plasticty` models work with a 1D buffer of floating-point data as input.
 In the MNIST dataset case this buffer of data is already exposed by the `data_loader :: MNIST` class as the "ravel" buffer of image pixels.
 
-> :warning: For sake of clarity the `data_loader :: MNIST` class exposes a `uint8_t` buffer of data which must be converted into a floating-point buffer.
+| :warning: WARNING |
+|:------------------|
+| For sake of clarity the `data_loader :: MNIST` class exposes a `uint8_t` buffer of data which must be converted into a floating-point buffer. |
 
 **Load the CIFAR-10 dataset** (ref. [`run_cifar10`](https://github.com/Nico-Curti/plasticity/blob/main/example/run_cifar10.cpp))
 
@@ -267,9 +278,9 @@ The `data_loader :: CIFAR10` class allows to load both training and testing imag
 The core implemenation was inspired to the [`cifar-10`](https://github.com/wichtounet/cifar-10/) package.
 The set of APIs and member functions/variables are the same of the `MNIST` class.
 
-> :warning: The train/test data include in the same file both labels and images.
-> The required format of the binary file is the same of the original implementation of the CIFAR-10 dataset (available [here](https://www.cs.toronto.edu/~kriz/cifar.html))
-> In the current implementation we have just concatenate together the full set of batch-files!
+| :warning: WARNING |
+|:------------------|
+| The train/test data include in the same file both labels and images. The required format of the binary file is the same of the original implementation of the CIFAR-10 dataset (available [here](https://www.cs.toronto.edu/~kriz/cifar.html)). In the current implementation we have just concatenate together the full set of batch-files! |
 
 **Train the model** (ref. [run_bcm_mnist](https://github.com/Nico-Curti/plasticity/blob/main/example/run_bcm_mnist.cpp))
 
@@ -442,10 +453,9 @@ The results should appear like this
   </div>
 </a>
 
-> **Note:** The above image was generated by a series of simulations!
-> The `view_weights` function just plots the final version of the weights matrix.
-> You can obtained an animation plot of the neuron convergency using the C++ version of the code with an appropriated callback function (ref. [here](https://github.com/Nico-Curti/plasticity/blob/main/example/run_bcm.cpp) for an example code) or with a little hack of the library code.
-> We intentionally do not provide a callback support in the Python version of the model since its user interface must be as much as possible equivalent to a scikit-learn object.
+| :triangular_flag_on_post: Note |
+|:-------------------------------|
+| The above image was generated by a series of simulations! The `view_weights` function just plots the final version of the weights matrix. You can obtained an animation plot of the neuron convergency using the C++ version of the code with an appropriated callback function (ref. [here](https://github.com/Nico-Curti/plasticity/blob/main/example/run_bcm.cpp) for an example code) or with a little hack of the library code. We intentionally do not provide a callback support in the Python version of the model since its user interface must be as much as possible equivalent to a scikit-learn object. |
 
 ## Testing
 
@@ -523,7 +533,9 @@ echo "export CXX=/usr/bin/g++" >> ~/.bashrc
 
 I suggest you to not use the default `Python` compiler (aka `x86_64-linux-gnu-g++`) since it can suffer of many issues during the compilation if it is not manually customized.
 
-**Note:** If you are working under Windows OS a complete guide on how to properly configure your MSVC compiler can be found [here](https://github.com/physycom/sysconfig).
+| :triangular_flag_on_post: Note |
+|:-------------------------------|
+| If you are working under Windows OS a complete guide on how to properly configure your MSVC compiler can be found [here](https://github.com/physycom/sysconfig). |
 
 * **I installed the `plasticity` Python package following the instructions but I have an `ImportError` when I try to import the package as in the examples**
 
@@ -590,6 +602,16 @@ with open('/path/to/whole_train_cifar10.bin', 'wb') as fp:
     fp.write(struct.pack('B'*h*w*c, *img.ravel()))
 ```
 
+* **How can I install the library via `VCPKG` dependency manager?**
+
+The `plasticity` library is not yet supported via `vcpkg` (I have not submitted any PR yet).
+However, in the [`cmake`](https://github.com/Nico-Curti/plasticity/blob/master/cmake) folder you can find a complete directory-tree named `vcpkg`.
+You can simply copy&paste the entire `vcpkg` folder over the original (cloned [here](https://github.com/microsoft/vcpkg)) project to manage the entire installation of the library *also* via vcpkg.
+
+| :triangular_flag_on_post: Note |
+|:-------------------------------|
+| Since no releases have been published yet, the [`portfile`](https://github.com/Nico-Curti/plasticity/blob/master/cmake/ports/plasticity/portfile.cmake) is not complete and you need to manually set the `REF` and `SHA512` variables! |
+
 ## Authors
 
 * <img src="https://avatars0.githubusercontent.com/u/24650975?s=400&v=4" width="25px"> **Nico Curti** [git](https://github.com/Nico-Curti), [unibo](https://www.unibo.it/sitoweb/nico.curti2)
@@ -614,7 +636,26 @@ We thank also the author(s) of [Catch2](https://github.com/catchorg/Catch2) libr
 
 ## Citation
 
-If you have found `plasticity` helpful in your research, please consider citing the project repository
+If you have found `plasticity` helpful in your research, please consider citing the original paper
+
+
+```BibTex
+@article{10.3390/e24050682,
+  author = {Squadrani, Lorenzo and Curti, Nico and Giampieri, Enrico and Remondini, Daniel and Blais, Brian and Castellani, Gastone},
+  title = {Effectiveness of Biologically Inspired Neural Network Models in Learning and Patterns Memorization},
+  journal = {Entropy},
+  volume = {24},
+  year = {2022},
+  number = {5},
+  article-NUMBER = {682},
+  url = {https://www.mdpi.com/1099-4300/24/5/682},
+  pubmedid = {35626566},
+  issn = {1099-4300},
+  doi = {10.3390/e24050682}
+}
+```
+
+or just this repository
 
 ```BibTeX
 @misc{plasticity,
@@ -622,6 +663,6 @@ If you have found `plasticity` helpful in your research, please consider citing 
   title = {plasticity - Unsupervised Neural Networks with biological-inspired learning rules},
   year = {2020},
   publisher = {GitHub},
-  howpublished = {\url{https://github.com/Nico-Curti/plasticity}},
+  howpublished = {\url{https://github.com/Nico-Curti/plasticity}}
 }
 ```

@@ -3,6 +3,7 @@
 get_filename_component(plasticity_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 list(APPEND CMAKE_MODULE_PATH "${plasticity_CMAKE_DIR}")
 
+include(FindPackageHandleStandardArgs)
 include(CMakeFindDependencyMacro)
 
 if(MSVC)

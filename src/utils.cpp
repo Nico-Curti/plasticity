@@ -1,3 +1,31 @@
+/*M///////////////////////////////////////////////////////////////////////////////////////
+//
+//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
+//
+//  The OpenHiP package is licensed under the MIT "Expat" License:
+//
+//  Copyright (c) 2021: Nico Curti.
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  the software is provided "as is", without warranty of any kind, express or
+//  implied, including but not limited to the warranties of merchantability,
+//  fitness for a particular purpose and noninfringement. in no event shall the
+//  authors or copyright holders be liable for any claim, damages or other
+//  liability, whether in an action of contract, tort or otherwise, arising from,
+//  out of or in connection with the software or the use or other dealings in the
+//  software.
+//
+//M*/
+
 #include <utils.hpp>
 
 namespace utils
@@ -15,16 +43,16 @@ namespace utils
     return static_cast < double > (std :: chrono :: duration_cast < std :: chrono :: milliseconds > (std :: chrono :: high_resolution_clock :: now () - start_time).count() ) * 1e-3; // seconds
   }
 
-  void print_progress (const int & i, const int & num_iter, std :: chrono :: time_point < std :: chrono :: high_resolution_clock > & timer)
+  void print_progress (const int32_t & i, const int32_t & num_iter, std :: chrono :: time_point < std :: chrono :: high_resolution_clock > & timer)
   {
     auto _it = utils :: elapsed_time(timer);
     timer = utils :: what_time_is_it_now();
 
     const float perc = static_cast < float >(i) / num_iter;
 
-    int lpad = static_cast < int >(std :: floor(perc * PBWIDTH));
+    int32_t lpad = static_cast < int32_t >(std :: floor(perc * PBWIDTH));
     lpad     = lpad > PBWIDTH ? PBWIDTH : lpad;
-    int null_size = (PBWIDTH - 1 - lpad);
+    int32_t null_size = (PBWIDTH - 1 - lpad);
     null_size = null_size < 0 ? 0 : null_size;
 
     double c_it = i / _it;

@@ -17,8 +17,8 @@ from sklearn.utils import check_X_y
 from sklearn.utils.validation import check_is_fitted
 
 __author__  = ['Nico Curti', 'Lorenzo Squadrani', 'SimoneGasperini']
-__email__ = ['nico.curit2@unibo.it', 'lorenzo.squadrani@studio.unibo.it', 'simone.gasperini2@studio.unibo.it']
-
+__email__ = ['nico.curti2@unibo.it', 'lorenzo.squadrani@studio.unibo.it', 'simone.gasperini2@studio.unibo.it']
+__all__ = ['BasePlasticity']
 
 class BasePlasticity (BaseEstimator, TransformerMixin):
 

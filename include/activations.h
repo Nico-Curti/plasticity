@@ -1,3 +1,31 @@
+/*M///////////////////////////////////////////////////////////////////////////////////////
+//
+//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
+//
+//  The OpenHiP package is licensed under the MIT "Expat" License:
+//
+//  Copyright (c) 2021: Nico Curti.
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  the software is provided "as is", without warranty of any kind, express or
+//  implied, including but not limited to the warranties of merchantability,
+//  fitness for a particular purpose and noninfringement. in no event shall the
+//  authors or copyright holders be liable for any claim, damages or other
+//  liability, whether in an action of contract, tort or otherwise, arising from,
+//  out of or in connection with the software or the use or other dealings in the
+//  software.
+//
+//M*/
+
 #ifndef __activations_h__
 #define __activations_h__
 
@@ -7,7 +35,14 @@
 #include <functional>    // std :: function
 
 
-enum transfer_t { logistic = 0, loggy, relu, elu, relie, ramp, linear, Tanh, plse, leaky, stair, hardtan, lhtan, selu, elliot, symm_elliot, softplus, softsign, asymm_logistic, sigmoid = logistic
+enum transfer_t { logistic = 0, loggy, relu,
+                  elu, relie, ramp,
+                  linear, Tanh, plse,
+                  leaky, stair, hardtan,
+                  lhtan, selu, elliot,
+                  symm_elliot, softplus,
+                  softsign, asymm_logistic,
+                  sigmoid = logistic
 }; ///< activation types
 
 
@@ -15,28 +50,28 @@ namespace transfer
 {
 
 
-  static const std :: unordered_map < std :: string, int > get_activation {
-                                                                            {"logistic"    , logistic},
-                                                                            {"sigmoid"     , logistic},
-                                                                            {"loggy"       , loggy},
-                                                                            {"relu"        , relu},
-                                                                            {"elu"         , elu},
-                                                                            {"relie"       , relie},
-                                                                            {"ramp"        , ramp},
-                                                                            {"linear"      , linear},
-                                                                            {"tanh"        , Tanh},
-                                                                            {"plse"        , plse},
-                                                                            {"leaky"       , leaky},
-                                                                            {"stair"       , stair},
-                                                                            {"hardtan"     , hardtan},
-                                                                            {"lhtan"       , lhtan},
-                                                                            {"selu"        , selu},
-                                                                            {"elliot"      , elliot},
-                                                                            {"s_elliot"    , symm_elliot},
-                                                                            {"softplus"    , softplus},
-                                                                            {"softsign"    , softsign},
-                                                                            {"as_logistic" , asymm_logistic}
-                                                                          }; ///< Utility for the activations management
+  static const std :: unordered_map < std :: string, int32_t > get_activation {
+    {"logistic"    , logistic},
+    {"sigmoid"     , logistic},
+    {"loggy"       , loggy},
+    {"relu"        , relu},
+    {"elu"         , elu},
+    {"relie"       , relie},
+    {"ramp"        , ramp},
+    {"linear"      , linear},
+    {"tanh"        , Tanh},
+    {"plse"        , plse},
+    {"leaky"       , leaky},
+    {"stair"       , stair},
+    {"hardtan"     , hardtan},
+    {"lhtan"       , lhtan},
+    {"selu"        , selu},
+    {"elliot"      , elliot},
+    {"s_elliot"    , symm_elliot},
+    {"softplus"    , softplus},
+    {"softsign"    , softsign},
+    {"as_logistic" , asymm_logistic}
+  }; ///< Utility for the activations management
 
   /**
   * @brief Linear activation function.
@@ -606,7 +641,7 @@ namespace transfer
   *
   * @return Pointer to the desired function.
   */
-  std :: function < float(const float &) > activate ( const int & active );
+  std :: function < float(const float &) > activate ( const int32_t & active );
   /**
   * @brief Switch case between gradient functions.
   *
@@ -618,7 +653,7 @@ namespace transfer
   *
   * @return Pointer to the desired function.
   */
-  std :: function < float(const float &) > gradient ( const int & active );
+  std :: function < float(const float &) > gradient ( const int32_t & active );
 
 }
 

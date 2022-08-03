@@ -6,6 +6,8 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -18,8 +20,6 @@ jobs:
         cfg:
           - {os: windows-latest, cc: cl, cxx: MSVC, cpp-version: 19.28.29333.0, generator: Ninja}
           - {os: windows-latest, cc: cl, cxx: MSVC, cpp-version: 19.28.29333.0, generator: MinGW Makefiles}
-          - {os: windows-2016, cc: cl, cxx: MSVC, cpp-version: 19.16.27044.0, generator: Ninja}
-          - {os: windows-2016, cc: cl, cxx: MSVC, cpp-version: 19.16.27044.0, generator: MinGW Makefiles}
 
     steps:
     - name: Checkout
@@ -30,18 +30,18 @@ jobs:
     - name: Get latest CMake
       uses: lukka/get-cmake@latest
 
-    - name: Restore from cache and run vcpkg (Windows)
-      env:
-        vcpkgResponseFile: ${{ github.workspace }}/cmake/vcpkg_windows.diff
-      uses: lukka/run-vcpkg@v7
-      with:
-        vcpkgArguments: '@${{ env.vcpkgResponseFile }}'
-        vcpkgDirectory: '${{ github.workspace }}/vcpkg'
-        vcpkgGitCommitId: '30124253eecff36bc90f73341edbfb4f845e2a1e'
-        appendedCacheKey: ${{ hashFiles(env.vcpkgResponseFile) }}
+    - name: Setup vcpkg and install dependencies
+      run: |
+        git clone https://github.com/microsoft/vcpkg
+        ./vcpkg/bootstrap-vcpkg.bat
+        ./vcpkg/vcpkg integrate install
+        ./vcpkg/vcpkg install eigen3
 
     - name: Build with CMake and vcpkg
       uses: lukka/run-cmake@v3
+      env:
+        VCPKG_ROOT: '${{ github.workspace }}/vcpkg/'
+        VCPKG_DEFAULT_TRIPLET: 'x64-windows'
       with:
         cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
         cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'

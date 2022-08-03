@@ -21,7 +21,7 @@ import numpy as np
 
 __author__  = ['Nico Curti']
 __email__   = ['nico.curti2@unibo.it']
-
+__all__ = ['BasePlasticity']
 
 class BasePlasticity (BaseEstimator, TransformerMixin):
 
@@ -53,7 +53,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     epochs_for_convergence : int (default=None)
       Number of stable epochs requested for the convergence.
-      If None the training proceeds up to the maximum number of epochs (num_epochs).
+      If None the training proceeds up to the maximum
+      number of epochs (num_epochs).
 
     convergence_atol : float (default=0.01)
       Absolute tolerance requested for the convergence.
@@ -98,7 +99,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
     activation, _ = _check_activation(self, activation_func=activation)
     self._obj = model(self.outputs, self.batch_size, activation, self.optimizer._object,
-                      self.weights_init._object, self.epochs_for_convergence, self.convergence_atol,
+                      self.weights_init._object, self.epochs_for_convergence,
+                      self.convergence_atol,
                       self.decay, *kwargs.values())
 
   def _join_input_label (self, X : np.ndarray, y : np.ndarray) -> np.ndarray:
@@ -164,8 +166,10 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
       The model tries to memorize the given input producing a valid encoding.
 
     .. warnings::
-      The array of labels is not used by the model since its function is just to encode the features.
-      It is inserted in the function signature just for a compatibility with sklearn APIs.
+      The array of labels is not used by the model since its function is just
+      to encode the features.
+      It is inserted in the function signature just for a compatibility
+      with sklearn APIs.
     '''
 
     if y is not None:
@@ -176,7 +180,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     X = np.ascontiguousarray(X.ravel().astype('float32'))
 
     if self.batch_size > num_samples:
-      raise ValueError('Incorrect batch_size found. The batch_size must be less or equal to the number of samples. '
+      raise ValueError('Incorrect batch_size found. '
+                       'The batch_size must be less or equal to the number of samples. '
                        'Given {:d} for {:d} samples'.format(self.batch_size, num_samples))
 
     with redirect_stdout(self.verbose):
@@ -206,8 +211,10 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     Notes
     -----
     .. warnings::
-      The array of labels is not used by the model since its function is just to encode the features.
-      It is inserted in the function signature just for a compatibility with sklearn APIs.
+      The array of labels is not used by the model since its function is
+      just to encode the features.
+      It is inserted in the function signature just for a compatibility
+      with sklearn APIs.
     '''
     check_is_fitted(self, 'weights')
 
@@ -227,7 +234,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
   def transform (self, X : np.ndarray) -> np.ndarray:
     '''
-    Apply the data reduction according to the features in the best signature found.
+    Apply the data reduction according to the features in the best
+    signature found.
 
     Parameters
     ----------
@@ -245,7 +253,8 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
 
   def fit_transform (self, X : np.ndarray, y : np.ndarray = None) -> np.ndarray:
     '''
-    Fit the model model meta-transformer and apply the data encoding transformation.
+    Fit the model model meta-transformer and apply the data
+    encoding transformation.
 
     Parameters
     ----------
@@ -263,8 +272,10 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     Notes
     -----
     .. warnings::
-      The array of labels is not used by the model since its function is just to encode the features.
-      It is inserted in the function signature just for a compatibility with sklearn APIs.
+      The array of labels is not used by the model since its function is
+      just to encode the features.
+      It is inserted in the function signature just for a compatibility
+      with sklearn APIs.
     '''
     self.fit(X, y)
     Xnew = self.transform(X)
@@ -318,6 +329,7 @@ class BasePlasticity (BaseEstimator, TransformerMixin):
     params = self.__init__.__code__.co_varnames
     params = set(params) - {'self', 'kwargs', 'model'}
     args = ', '.join(['{0}={1}'.format(k, str(getattr(self, k)))
-                      if not isinstance(getattr(self, k), str) else '{0}="{1}"'.format(k, str(getattr(self, k)))
+                      if not isinstance(getattr(self, k), str)
+                      else '{0}="{1}"'.format(k, str(getattr(self, k)))
                       for k in params])
     return '{0}({1})'.format(class_name, args)

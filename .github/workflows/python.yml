@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+
 jobs:
   build:
 
@@ -15,20 +18,10 @@ jobs:
     strategy:
       matrix:
         cfg:
-          - {os: ubuntu-latest, cc: gcc, cxx: g++, python-version: 3.5}
           - {os: ubuntu-latest, cc: gcc, cxx: g++, python-version: 3.6}
           - {os: ubuntu-latest, cc: gcc, cxx: g++, python-version: 3.7}
           - {os: ubuntu-latest, cc: gcc, cxx: g++, python-version: 3.8}
-
-          #- {os: windows-latest, cc: cl, cxx: MSVC19.28.29333.0, python-version: 3.5}
-          #- {os: windows-latest, cc: cl, cxx: MSVC19.28.29333.0, python-version: 3.6}
-          #- {os: windows-latest, cc: cl, cxx: MSVC19.28.29333.0, python-version: 3.7}
-          #- {os: windows-latest, cc: cl, cxx: MSVC19.28.29333.0, python-version: 3.8}
-
-          #- {os: macOS-10.15, cc: xcode, cxx: xcode11.2.1, python-version: 3.5}
-          #- {os: macOS-10.15, cc: xcode, cxx: xcode11.2.1, python-version: 3.6}
-          #- {os: macOS-10.15, cc: xcode, cxx: xcode11.2.1, python-version: 3.7}
-          #- {os: macOS-10.15, cc: xcode, cxx: xcode11.2.1, python-version: 3.8}
+          - {os: ubuntu-latest, cc: gcc, cxx: g++, python-version: 3.9}
 
     steps:
 
@@ -58,29 +51,6 @@ jobs:
         # Install the Eigen Library
         sudo apt-get install -y libeigen3-dev
 
-    - name: Install compiler and dependencies (macOS)
-      if: runner.os == 'macOS'
-      run: |
-        curl -LO https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci; source ./macports-ci install
-
-        sudo xcode-select -switch /Applications/Xcode_11.2.1.app
-        echo "CC=clang" >> $GITHUB_ENV
-        echo "CXX=clang++" >> $GITHUB_ENV
-
-        # Install the Eigen Library
-        brew install eigen
-
-    - name: Restore from cache and run vcpkg (Windows)
-      if: runner.os == 'Windows'
-      env:
-        vcpkgResponseFile: ${{ github.workspace }}/cmake/vcpkg_windows.diff
-      uses: lukka/run-vcpkg@v6
-      with:
-        vcpkgArguments: '@${{ env.vcpkgResponseFile }}'
-        vcpkgDirectory: '${{ github.workspace }}/vcpkg'
-        vcpkgGitCommitId: '8121b4ec3d6a11353daf7639ed9082a78e617a2e'
-        appendedCacheKey: ${{ hashFiles(env.vcpkgResponseFile) }}
-
     - name: Install dependencies
       run: |
 
@@ -100,14 +70,11 @@ jobs:
         # python3 -m flake8 ./plasticity --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
     - name: Install plasticity
-      env:
-        WORKSPACE: ${{ github.workspace }}/
-        VCPKG_ROOT: ${{ github.workspace }}/vcpkg/
-        VCPKG_DEFAULT_TRIPLET: x64-windows
       run: |
         python3 setup.py develop --user
 
     #- name: Test with pytest
+    #  env:
+    #    LD_LIBRARY_PATH: ${{ github.workspace }}/lib/ # for Linux
     #  run: |
     #    python3 -m pytest ./testing/ --cov=plasticity --cov-config=.coveragerc
-

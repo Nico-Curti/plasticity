@@ -13,6 +13,11 @@ from plasticity.utils import activations
 __author__ = ['Mattia Ceccarelli', 'Nico Curti']
 __email__ = ['mattia.ceccarelli5@unibo.it', 'nico.curti2@unibo.it']
 
+__all__ = ['_check_activation', '_check_string', '_check_update',
+           '_check_weights_init', 'redirect_stdout',
+           'view_weights',
+           ]
+
 def _check_activation (obj : object, activation_func : str) -> tuple:
   '''
   Check if the activation function is valid.
@@ -23,8 +28,8 @@ def _check_activation (obj : object, activation_func : str) -> tuple:
       Object type which call this function
 
     activation_func : string or Activations object
-      activation function to check. If the Activations object is not created yet
-      the 'eval' is done on the object.
+      activation function to check. If the Activations object is
+      not created yet the 'eval' is done on the object.
 
   Returns
   -------
@@ -36,8 +41,10 @@ def _check_activation (obj : object, activation_func : str) -> tuple:
   Notes
   -----
   .. note::
-    You can use this function to verify if the given activation function is valid.
-    The function can be passed either as a string either as object or simply as class object.
+    You can use this function to verify if the given activation
+    function is valid.
+    The function can be passed either as a string either as object
+    or simply as class object.
 
   Examples
   --------
@@ -51,7 +58,8 @@ def _check_activation (obj : object, activation_func : str) -> tuple:
   '''
 
   if isinstance(activation_func, str):
-    allowed_activation_func = [f.lower() for f in dir(activations) if isclass(getattr(activations, f)) and f != 'Activations']
+    allowed_activation_func = [f.lower() for f in dir(activations)
+                               if isclass(getattr(activations, f)) and f != 'Activations']
 
     if activation_func.lower() not in allowed_activation_func:
       class_name = obj.__class__.__name__
@@ -72,7 +80,8 @@ def _check_activation (obj : object, activation_func : str) -> tuple:
 
   # temporary solution to avoid not implemented activation function
   if activation > 18: # Asymmetric Logistic is the last available activation function
-    raise NotImplementedError('The {0} activation function is not implemented yet!'.format(activation_func.name))
+    raise NotImplementedError('The {0} activation function is not implemented yet!'.format(
+      activation_func.name))
 
   return (activation, activation_func)
 
@@ -103,7 +112,8 @@ def _check_string (string : str, exist : bool = True) -> bytes:
 
   if exist:
     if not os.path.isfile(string):
-      raise FileNotFoundError('Could not open or find the data file. Given: {}'.format(string))
+      raise FileNotFoundError('Could not open or find the data file. Given: {}'.format(
+        string))
 
   return string.encode('utf-8') if isinstance(string, str) else string
 
@@ -144,7 +154,8 @@ def _check_update (upd_type : str) -> tuple:
   if isinstance(upd_type, str):
 
     if upd_type not in allowed_upd:
-      raise ValueError('Optimizer: incorrect value of Update Function given. Possible values are ({})'.format(', '.join(allowed_upd)))
+      raise ValueError('Optimizer: incorrect value of Update Function given. Possible values are ({})'.format(
+        ', '.join(allowed_upd)))
 
     update_type = upd_type
     update_num = allowed_upd.index(update_type)
@@ -154,7 +165,8 @@ def _check_update (upd_type : str) -> tuple:
     update_num = upd_type
 
   else:
-    raise ValueError('Optimizer: incorrect value of Update Function given. Possible values are ({})'.format(', '.join(allowed_upd)))
+    raise ValueError('Optimizer: incorrect value of Update Function given. Possible values are ({})'.format(
+      ', '.join(allowed_upd)))
 
   return (update_type, update_num)
 
@@ -195,7 +207,8 @@ def _check_weights_init (init_type : str) -> tuple:
   if isinstance(init_type, str):
 
     if init_type not in allowed_init:
-      raise ValueError('Weights initialization: incorrect value of weights initialization Function given. Possible values are ({})'.format(', '.join(allowed_init)))
+      raise ValueError('Weights initialization: incorrect value of weights initialization Function given. Possible values are ({})'.format(
+        ', '.join(allowed_init)))
 
     init_type = init_type
     init_num = allowed_init.index(init_type)
@@ -205,7 +218,8 @@ def _check_weights_init (init_type : str) -> tuple:
     init_num = init_type
 
   else:
-      raise ValueError('Weights initialization: incorrect value of weights initialization Function given. Possible values are ({})'.format(', '.join(allowed_init)))
+      raise ValueError('Weights initialization: incorrect value of weights initialization Function given. Possible values are ({})'.format(
+        ', '.join(allowed_init)))
 
   return (init_type, init_num)
 
@@ -320,4 +334,3 @@ def view_weights (weights : np.ndarray, dims : tuple) -> None:
   fig.colorbar(im, ticks=[np.min(selected_weights), 0, np.max(selected_weights)])
 
   plt.show()
-

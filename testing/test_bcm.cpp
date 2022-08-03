@@ -13,9 +13,9 @@ std :: mt19937 engine(SEED);
 
 TEST_CASE ( "Constructor" )
 {
-  const int outputs = 10;
-  const int batch_size = 10;
-  const int activation = transfer_t :: linear;
+  const int32_t outputs = 10;
+  const int32_t batch_size = 10;
+  const int32_t activation = transfer_t :: linear;
   const float strenght = 0.f;
 
   update_args optimizer(optimizer_t :: sgd);
@@ -30,9 +30,9 @@ TEST_CASE ( "Constructor" )
 
 TEST_CASE ( "Save/Load weights" )
 {
-  const int outputs = 10;
-  const int batch_size = 10;
-  const int activation = transfer_t :: linear;
+  const int32_t outputs = 10;
+  const int32_t batch_size = 10;
+  const int32_t activation = transfer_t :: linear;
   const float strenght = 0.f;
 
   update_args optimizer(optimizer_t :: sgd);
@@ -41,11 +41,13 @@ TEST_CASE ( "Save/Load weights" )
   BCM model(outputs, batch_size, activation, optimizer, weights_init, 1., 1e-2f, strenght);
 
   REQUIRE_THROWS_AS (model.save_weights("dummy"), std :: runtime_error);
-  REQUIRE_THROWS_WITH (model.save_weights("dummy"), "Fitted error. The model is not fitted yet.\nPlease call the fit function before using the predict member.");
+  REQUIRE_THROWS_WITH (model.save_weights("dummy"),
+    "Fitted error. The model is not fitted yet.\n"
+    "Please call the fit function before using the predict member.");
 
-  const int num_epochs = 1;
-  const int num_samples = batch_size;
-  const int num_features = 5;
+  const int32_t num_epochs = 1;
+  const int32_t num_samples = batch_size;
+  const int32_t num_features = 5;
 
   std :: unique_ptr < float[] > data(new float[num_samples * num_features]);
 
@@ -78,9 +80,9 @@ TEST_CASE ( "Save/Load weights" )
 
 TEST_CASE ( "Fale prediction" )
 {
-  const int outputs = 10;
-  const int batch_size = 10;
-  const int activation = transfer_t :: linear;
+  const int32_t outputs = 10;
+  const int32_t batch_size = 10;
+  const int32_t activation = transfer_t :: linear;
   const float strenght = 0.f;
 
   update_args optimizer(optimizer_t :: sgd);
@@ -88,9 +90,9 @@ TEST_CASE ( "Fale prediction" )
 
   BCM model(outputs, batch_size, activation, optimizer, weights_init, 1., 1e-2f, strenght);
 
-  const int num_epochs = 1;
-  const int num_samples = batch_size;
-  const int num_features = 5;
+  const int32_t num_epochs = 1;
+  const int32_t num_samples = batch_size;
+  const int32_t num_features = 5;
 
   std :: unique_ptr < float[] > data(new float[num_samples * num_features]);
 
@@ -102,21 +104,26 @@ TEST_CASE ( "Fale prediction" )
                        return random_normal(engine);
                      });
 
-  REQUIRE_THROWS_WITH (model.predict(data.get(), num_samples, num_features), "Fitted error. The model is not fitted yet.\nPlease call the fit function before using the predict member.");
+  REQUIRE_THROWS_WITH (model.predict(data.get(), num_samples, num_features),
+    "Fitted error. The model is not fitted yet.\n"
+    "Please call the fit function before using the predict member.");
 
   model.fit(data.get(), num_samples, num_features, num_epochs);
   REQUIRE (model.weights.rows() == outputs);
   REQUIRE (model.weights.cols() == num_features);
 
-  REQUIRE_THROWS_WITH (model.predict(data.get(), num_samples, num_samples), "Invalid dimensions found. The input (n_samples, n_features) shape is inconsistent with the number of weights (" + std :: to_string(outputs * num_features) + ")");
+  REQUIRE_THROWS_WITH (model.predict(data.get(), num_samples, num_samples),
+    "Invalid dimensions found. The input (n_samples, n_features)"
+    "shape is inconsistent with the number of weights (" +
+    std :: to_string(outputs * num_features) + ")");
 }
 
 
 TEST_CASE ( "Fit buffer" )
 {
-  const int outputs = 10;
-  const int batch_size = 10;
-  const int activation = transfer_t :: linear;
+  const int32_t outputs = 10;
+  const int32_t batch_size = 10;
+  const int32_t activation = transfer_t :: linear;
   const float strenght = 0.f;
 
   update_args optimizer(optimizer_t :: sgd);
@@ -124,9 +131,9 @@ TEST_CASE ( "Fit buffer" )
 
   BCM model(outputs, batch_size, activation, optimizer, weights_init, 1., 1e-2f, strenght);
 
-  const int num_epochs = 1;
-  const int num_samples = batch_size;
-  const int num_features = 5;
+  const int32_t num_epochs = 1;
+  const int32_t num_samples = batch_size;
+  const int32_t num_features = 5;
 
   std :: unique_ptr < float[] > data(new float[num_samples * num_features]);
 
@@ -148,9 +155,9 @@ TEST_CASE ( "Fit buffer" )
 
 TEST_CASE ( "Predict" )
 {
-  const int outputs = 10;
-  const int batch_size = 10;
-  const int activation = transfer_t :: linear;
+  const int32_t outputs = 10;
+  const int32_t batch_size = 10;
+  const int32_t activation = transfer_t :: linear;
   const float strenght = 0.f;
 
   update_args optimizer(optimizer_t :: sgd);
@@ -158,9 +165,9 @@ TEST_CASE ( "Predict" )
 
   BCM model(outputs, batch_size, activation, optimizer, weights_init, 1., 1e-2f, strenght);
 
-  const int num_epochs = 1;
-  const int num_samples = batch_size;
-  const int num_features = 5;
+  const int32_t num_epochs = 1;
+  const int32_t num_samples = batch_size;
+  const int32_t num_features = 5;
 
   std :: unique_ptr < float[] > data(new float[num_samples * num_features]);
 

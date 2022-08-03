@@ -17,3 +17,6 @@ exclude_paths:
   - plasticity/model/__init__.py
   - plasticity/cython/__init__.py
   - plasticity/utils/__init__.py
+  - testing/**
+  - timing/**
+  - utility/**

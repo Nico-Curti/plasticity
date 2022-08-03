@@ -1,8 +1,8 @@
 # distutils: language = c++
 # cython: language_level=2
 
-from cython.operator cimport dereference as deref
 from libcpp.string cimport string
+from cython.operator cimport dereference as deref
 
 cimport numpy as np
 import numpy as np
@@ -11,11 +11,22 @@ from bcm cimport BCM
 from update_args cimport _update_args
 from weights_initialization cimport _weights_initialization
 
+__author__  = ['Nico Curti']
+__email__ = ['nico.curti2@unibo.it']
+
 cdef class _BCM:
 
-  def __init__ (self, int outputs, int batch_size, int activation, _update_args optimizer, _weights_initialization w_init, int epochs_for_convergence, float convergence_atol, float decay, float memory_factor, float interaction_strenght):
+  def __init__ (self, int outputs, int batch_size, int activation,
+    _update_args optimizer, _weights_initialization w_init,
+    int epochs_for_convergence,
+    float convergence_atol, float decay,
+    float memory_factor, float interaction_strenght):
 
-    self.thisptr.reset(new BCM(outputs, batch_size, activation, deref(optimizer.thisptr.get()), deref(w_init.thisptr.get()), epochs_for_convergence, convergence_atol, decay, memory_factor, interaction_strenght))
+    self.thisptr.reset(new BCM(outputs, batch_size, activation,
+                               deref(optimizer.thisptr.get()), deref(w_init.thisptr.get()),
+                               epochs_for_convergence,
+                               convergence_atol, decay,
+                               memory_factor, interaction_strenght))
     self.outputs = outputs
     self.n_features = 0
 

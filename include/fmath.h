@@ -1,3 +1,31 @@
+/*M///////////////////////////////////////////////////////////////////////////////////////
+//
+//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
+//
+//  The OpenHiP package is licensed under the MIT "Expat" License:
+//
+//  Copyright (c) 2021: Nico Curti.
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  the software is provided "as is", without warranty of any kind, express or
+//  implied, including but not limited to the warranties of merchantability,
+//  fitness for a particular purpose and noninfringement. in no event shall the
+//  authors or copyright holders be liable for any claim, damages or other
+//  liability, whether in an action of contract, tort or otherwise, arising from,
+//  out of or in connection with the software or the use or other dealings in the
+//  software.
+//
+//M*/
+
 #ifndef __fmath_h__
 #define __fmath_h__
 
@@ -194,7 +222,7 @@ float rsqrt (const float & x);
 *
 * @return The sign of the input as [-1, 0, 1].
 */
-int sign (const float & x);
+int32_t sign (const float & x);
 
 /**
 * @brief Gratest Common Divisor between the two variables.
@@ -206,7 +234,7 @@ int sign (const float & x);
 *
 * @return The GCD of the two inputs.
 */
-int gcd (const int & a, const int & b); // greatest commond divisor
+int32_t gcd (const int32_t & a, const int32_t & b); // greatest commond divisor
 
 /**
 * @brief Greatest divisor (GD) of the number.
@@ -217,7 +245,7 @@ int gcd (const int & a, const int & b); // greatest commond divisor
 *
 * @return The greatest divisor of the input
 */
-int gd (const int & a);
+int32_t gd (const int32_t & a);
 }
 
 #endif // __fmath_h__

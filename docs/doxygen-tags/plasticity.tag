@@ -2,7 +2,7 @@
 <tagfile>
   <compound kind="file">
     <name>activations.h</name>
-    <path>/home/nico/Desktop/Code/plasticity/include/</path>
+    <path>/home/ncurti/Code/plasticity/include/</path>
     <filename>activations_8h.html</filename>
     <includes id="fmath_8h" name="fmath.h" local="no" imported="no">fmath.h</includes>
     <namespace>transfer</namespace>
@@ -403,20 +403,20 @@
       <type>std ::function&lt; float(const float &amp;) &gt;</type>
       <name>activate</name>
       <anchorfile>namespacetransfer.html</anchorfile>
-      <anchor>a74c69d07c8fbfee9e8b8026d13fb68b3</anchor>
-      <arglist>(const int &amp;active)</arglist>
+      <anchor>a7df3df6fe02c96b67b2df769088512b8</anchor>
+      <arglist>(const int32_t &amp;active)</arglist>
     </member>
     <member kind="variable">
       <type>std ::function&lt; float(const float &amp;) &gt;</type>
       <name>gradient</name>
       <anchorfile>namespacetransfer.html</anchorfile>
-      <anchor>a85df5dac767d25bfb67f70e30e8f967f</anchor>
-      <arglist>(const int &amp;active)</arglist>
+      <anchor>ada898f0e5190b53e9cf5d16443f3b6cb</anchor>
+      <arglist>(const int32_t &amp;active)</arglist>
     </member>
   </compound>
   <compound kind="file">
     <name>base.h</name>
-    <path>/home/nico/Desktop/Code/plasticity/include/</path>
+    <path>/home/ncurti/Code/plasticity/include/</path>
     <filename>base_8h.html</filename>
     <includes id="activations_8h" name="activations.h" local="no" imported="no">activations.h</includes>
     <includes id="optimizer_8h" name="optimizer.h" local="no" imported="no">optimizer.h</includes>
@@ -425,13 +425,13 @@
   </compound>
   <compound kind="file">
     <name>bcm.h</name>
-    <path>/home/nico/Desktop/Code/plasticity/include/</path>
+    <path>/home/ncurti/Code/plasticity/include/</path>
     <filename>bcm_8h.html</filename>
     <class kind="class">BCM</class>
   </compound>
   <compound kind="file">
     <name>cifar10.h</name>
-    <path>/home/nico/Desktop/Code/plasticity/include/</path>
+    <path>/home/ncurti/Code/plasticity/include/</path>
     <filename>cifar10_8h.html</filename>
     <includes id="data_8h" name="data.h" local="no" imported="no">data.h</includes>
     <class kind="class">data_loader::CIFAR10</class>
@@ -453,19 +453,19 @@
   </compound>
   <compound kind="file">
     <name>cmap.h</name>
-    <path>/home/nico/Desktop/Code/plasticity/include/</path>
+    <path>/home/ncurti/Code/plasticity/include/</path>
     <filename>cmap_8h.html</filename>
   </compound>
   <compound kind="file">
     <name>data.h</name>
-    <path>/home/nico/Desktop/Code/plasticity/include/</path>
+    <path>/home/ncurti/Code/plasticity/include/</path>
     <filename>data_8h.html</filename>
     <class kind="class">data_loader::BaseData</class>
     <namespace>data_loader</namespace>
   </compound>
   <compound kind="file">
     <name>fmath.h</name>
-    <path>/home/nico/Desktop/Code/plasticity/include/</path>
+    <path>/home/ncurti/Code/plasticity/include/</path>
     <filename>fmath_8h.html</filename>
     <includes id="utils_8h" name="utils.h" local="no" imported="no">utils.h</includes>
     <namespace>math</namespace>
@@ -547,36 +547,36 @@
       <arglist>(const float &amp;x)</arglist>
     </member>
     <member kind="function">
-      <type>int</type>
+      <type>int32_t</type>
       <name>sign</name>
       <anchorfile>namespacemath.html</anchorfile>
-      <anchor>abb8e0d8db22fad9f3804a0341bac8eef</anchor>
+      <anchor>af241ac8b686f243c6965493c7d129770</anchor>
       <arglist>(const float &amp;x)</arglist>
     </member>
     <member kind="function">
-      <type>int</type>
+      <type>int32_t</type>
       <name>gcd</name>
       <anchorfile>namespacemath.html</anchorfile>
-      <anchor>a55838ccfd75b9e437b202e781dd4b049</anchor>
-      <arglist>(const int &amp;a, const int &amp;b)</arglist>
+      <anchor>a11ec46c637f6817026e2da574bbea526</anchor>
+      <arglist>(const int32_t &amp;a, const int32_t &amp;b)</arglist>
     </member>
     <member kind="function">
-      <type>int</type>
+      <type>int32_t</type>
       <name>gd</name>
       <anchorfile>namespacemath.html</anchorfile>
-      <anchor>ab6303a0f45d5a302af6a2dd0c6d63307</anchor>
-      <arglist>(const int &amp;a)</arglist>
+      <anchor>a2acf1110de340e1f9c46a741d0d543f9</anchor>
+      <arglist>(const int32_t &amp;a)</arglist>
     </member>
   </compound>
   <compound kind="file">
     <name>hopfield.h</name>
-    <path>/home/nico/Desktop/Code/plasticity/include/</path>
+    <path>/home/ncurti/Code/plasticity/include/</path>
     <filename>hopfield_8h.html</filename>
     <class kind="class">Hopfield</class>
   </compound>
   <compound kind="file">
     <name>mnist.h</name>
-    <path>/home/nico/Desktop/Code/plasticity/include/</path>
+    <path>/home/ncurti/Code/plasticity/include/</path>
     <filename>mnist_8h.html</filename>
     <includes id="data_8h" name="data.h" local="no" imported="no">data.h</includes>
     <class kind="class">data_loader::MNIST</class>
@@ -598,7 +598,7 @@
   </compound>
   <compound kind="file">
     <name>optimizer.h</name>
-    <path>/home/nico/Desktop/Code/plasticity/include/</path>
+    <path>/home/ncurti/Code/plasticity/include/</path>
     <filename>optimizer_8h.html</filename>
     <includes id="fmath_8h" name="fmath.h" local="no" imported="no">fmath.h</includes>
     <class kind="class">update_args</class>
@@ -661,14 +661,14 @@
   </compound>
   <compound kind="file">
     <name>parser.h</name>
-    <path>/home/nico/Desktop/Code/plasticity/include/</path>
+    <path>/home/ncurti/Code/plasticity/include/</path>
     <filename>parser_8h.html</filename>
     <class kind="class">parser::config</class>
     <namespace>parser</namespace>
   </compound>
   <compound kind="file">
     <name>utils.h</name>
-    <path>/home/nico/Desktop/Code/plasticity/include/</path>
+    <path>/home/ncurti/Code/plasticity/include/</path>
     <filename>utils_8h.html</filename>
     <includes id="fmath_8h" name="fmath.h" local="no" imported="no">fmath.h</includes>
     <namespace>utils</namespace>
@@ -731,7 +731,7 @@
   </compound>
   <compound kind="file">
     <name>version.h</name>
-    <path>/home/nico/Desktop/Code/plasticity/include/</path>
+    <path>/home/ncurti/Code/plasticity/include/</path>
     <filename>version_8h.html</filename>
     <namespace>info</namespace>
     <member kind="define">
@@ -772,7 +772,7 @@
   </compound>
   <compound kind="file">
     <name>weights.h</name>
-    <path>/home/nico/Desktop/Code/plasticity/include/</path>
+    <path>/home/ncurti/Code/plasticity/include/</path>
     <filename>weights_8h.html</filename>
     <includes id="fmath_8h" name="fmath.h" local="no" imported="no">fmath.h</includes>
     <class kind="class">weights_initialization</class>
@@ -1003,8 +1003,8 @@
       <type></type>
       <name>BasePlasticity</name>
       <anchorfile>classBasePlasticity.html</anchorfile>
-      <anchor>a88a60d0b8957141347f2c84e08aee01d</anchor>
-      <arglist>(const int &amp;outputs, const int &amp;batch_size, int activation=transfer_t ::linear, update_args optimizer=update_args(optimizer_t ::sgd), weights_initialization weights_init=weights_initialization(weights_init_t ::normal), int epochs_for_convergency=1, float convergency_atol=0.01f, float decay=0.f)</arglist>
+      <anchor>a0be44d06d4eb9bdebdd4129518238162</anchor>
+      <arglist>(const int32_t &amp;outputs, const int32_t &amp;batch_size, int32_t activation=transfer_t ::linear, update_args optimizer=update_args(optimizer_t ::sgd), weights_initialization weights_init=weights_initialization(weights_init_t ::normal), int32_t epochs_for_convergency=1, float convergency_atol=0.01f, float decay=0.f)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -1038,15 +1038,15 @@
       <type>void</type>
       <name>fit</name>
       <anchorfile>classBasePlasticity.html</anchorfile>
-      <anchor>afcedbad1b9d4a9566d51ae9a23bd89ae</anchor>
-      <arglist>(const Eigen ::MatrixXf &amp;X, const int &amp;num_epochs, int seed=42, Callback callback=[](BasePlasticity *) -&gt; void {})</arglist>
+      <anchor>afbe18157a2312292c6fa158bf71110aa</anchor>
+      <arglist>(const Eigen ::MatrixXf &amp;X, const int &amp;num_epochs, int32_t seed=42, Callback callback=[](BasePlasticity *) -&gt; void {})</arglist>
     </member>
     <member kind="function">
       <type>float *</type>
       <name>predict</name>
       <anchorfile>classBasePlasticity.html</anchorfile>
-      <anchor>a672726f0d6221ab9c02a1f17ae45ec76</anchor>
-      <arglist>(float *X, const int &amp;n_samples, const int &amp;n_features)</arglist>
+      <anchor>a0246976a354ed27e03d7aff5c8039fe2</anchor>
+      <arglist>(float *X, const int32_t &amp;n_samples, const int32_t &amp;n_features)</arglist>
     </member>
     <member kind="function">
       <type>float *</type>
@@ -1126,24 +1126,24 @@
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
-      <type>int</type>
+      <type>int32_t</type>
       <name>batch</name>
       <anchorfile>classBasePlasticity.html</anchorfile>
-      <anchor>a4a6ecb6e802bdfc043346c41b2682ca1</anchor>
+      <anchor>ac99cb59d1924a34129388bafa8c8671b</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
-      <type>int</type>
+      <type>int32_t</type>
       <name>outputs</name>
       <anchorfile>classBasePlasticity.html</anchorfile>
-      <anchor>a6128541398550402261cf3eb1d6d1822</anchor>
+      <anchor>a686718e54ebbd4da849c2dc81659784c</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
-      <type>int</type>
+      <type>int32_t</type>
       <name>epochs_for_convergency</name>
       <anchorfile>classBasePlasticity.html</anchorfile>
-      <anchor>a510a58d019657002b7b292072cd4a9e9</anchor>
+      <anchor>aead30b299239e24cc3014c3b84d4387f</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable" protection="protected">
@@ -1176,8 +1176,8 @@
       <type></type>
       <name>BCM</name>
       <anchorfile>classBCM.html</anchorfile>
-      <anchor>a31ddf68b2e37f08a0cfd6f0ec99790ea</anchor>
-      <arglist>(const int &amp;outputs, const int &amp;batch_size, int activation=transfer_t ::logistic, update_args optimizer=update_args(optimizer_t ::sgd), weights_initialization weights_init=weights_initialization(weights_init_t ::normal), int epochs_for_convergency=1, float convergency_atol=0.01f, float decay=0.f, float memory_factor=0.5f, float interaction_strength=0.f)</arglist>
+      <anchor>ab358daa993dbe178bfe97c72eb5ce8e3</anchor>
+      <arglist>(const int32_t &amp;outputs, const int32_t &amp;batch_size, int32_t activation=transfer_t ::logistic, update_args optimizer=update_args(optimizer_t ::sgd), weights_initialization weights_init=weights_initialization(weights_init_t ::normal), int32_t epochs_for_convergency=1, float convergency_atol=0.01f, float decay=0.f, float memory_factor=0.5f, float interaction_strength=0.f)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -1295,8 +1295,8 @@
       <type></type>
       <name>Hopfield</name>
       <anchorfile>classHopfield.html</anchorfile>
-      <anchor>a718e075d8067c740b3f226a41e609f6f</anchor>
-      <arglist>(const int &amp;outputs, const int &amp;batch_size, update_args optimizer=update_args(optimizer_t ::sgd), weights_initialization weights_init=weights_initialization(weights_init_t ::normal), int epochs_for_convergency=1, float convergency_atol=0.01, float decay=0.f, float delta=.4f, float p=2.f, int k=2)</arglist>
+      <anchor>a721e1d15d006da61f8c2d2b62ddb04ae</anchor>
+      <arglist>(const int32_t &amp;outputs, const int32_t &amp;batch_size, update_args optimizer=update_args(optimizer_t ::sgd), weights_initialization weights_init=weights_initialization(weights_init_t ::normal), int32_t epochs_for_convergency=1, float convergency_atol=0.01, float decay=0.f, float delta=.4f, float p=2.f, int32_t k=2)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -1395,8 +1395,8 @@
       <type></type>
       <name>update_args</name>
       <anchorfile>classupdate__args.html</anchorfile>
-      <anchor>aa2835ecfb079cbed6151cb378721cf64</anchor>
-      <arglist>(const int &amp;type, float learning_rate=0.02, float momentum=.9f, float decay=0.0001, float B1=.9f, float B2=.999f, float rho=0.f)</arglist>
+      <anchor>a160b707cebb6f80f96d0da9b58faa125</anchor>
+      <arglist>(const int32_t &amp;type, float learning_rate=0.02, float momentum=.9f, float decay=0.0001, float B1=.9f, float B2=.999f, float rho=0.f)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -1423,21 +1423,21 @@
       <type>void</type>
       <name>init_arrays</name>
       <anchorfile>classupdate__args.html</anchorfile>
-      <anchor>a182ef2e05c5a82f2d4a6f19bc32c5694</anchor>
-      <arglist>(const int &amp;rows, const int &amp;cols)</arglist>
+      <anchor>aecb5217561fa467e8b3eae76d2b9ad32</anchor>
+      <arglist>(const int32_t &amp;rows, const int32_t &amp;cols)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>update</name>
       <anchorfile>classupdate__args.html</anchorfile>
-      <anchor>a178553ae2dd2a17865329099ccded442</anchor>
-      <arglist>(const int &amp;iteration, Eigen ::MatrixXf &amp;weights, const Eigen ::MatrixXf &amp;weights_update)</arglist>
+      <anchor>aa1546e7c6eb6201290e74d7e16c33ac9</anchor>
+      <arglist>(const int32_t &amp;iteration, Eigen ::MatrixXf &amp;weights, const Eigen ::MatrixXf &amp;weights_update)</arglist>
     </member>
     <member kind="variable">
-      <type>int</type>
+      <type>int32_t</type>
       <name>type</name>
       <anchorfile>classupdate__args.html</anchorfile>
-      <anchor>a4a08ebbe1d10e53ca44966dc7cb5e83e</anchor>
+      <anchor>a6070eef52b2ef369d3cebfdef293e791</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -1511,8 +1511,8 @@
       <type></type>
       <name>weights_initialization</name>
       <anchorfile>classweights__initialization.html</anchorfile>
-      <anchor>aff8148f7d7be02a2274a39c921b7d579</anchor>
-      <arglist>(const int &amp;type, float mu=0.f, float sigma=1.f, float scale=1.f, int seed=42)</arglist>
+      <anchor>a01caa2b51cced8cbc8424d73284b798f</anchor>
+      <arglist>(const int32_t &amp;type, float mu=0.f, float sigma=1.f, float scale=1.f, int32_t seed=42)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -1539,8 +1539,8 @@
       <type>void</type>
       <name>init</name>
       <anchorfile>classweights__initialization.html</anchorfile>
-      <anchor>abe12e988f0d01cd299a51b0a2e472718</anchor>
-      <arglist>(float *weights, const int &amp;inputs, const int &amp;outputs)</arglist>
+      <anchor>a20afc04515e9147aaecf791d19b8d9b3</anchor>
+      <arglist>(float *weights, const int32_t &amp;inputs, const int32_t &amp;outputs)</arglist>
     </member>
   </compound>
   <compound kind="namespace">
@@ -1649,25 +1649,25 @@
       <arglist>(const float &amp;x)</arglist>
     </member>
     <member kind="function">
-      <type>int</type>
+      <type>int32_t</type>
       <name>sign</name>
       <anchorfile>namespacemath.html</anchorfile>
-      <anchor>abb8e0d8db22fad9f3804a0341bac8eef</anchor>
+      <anchor>af241ac8b686f243c6965493c7d129770</anchor>
       <arglist>(const float &amp;x)</arglist>
     </member>
     <member kind="function">
-      <type>int</type>
+      <type>int32_t</type>
       <name>gcd</name>
       <anchorfile>namespacemath.html</anchorfile>
-      <anchor>a55838ccfd75b9e437b202e781dd4b049</anchor>
-      <arglist>(const int &amp;a, const int &amp;b)</arglist>
+      <anchor>a11ec46c637f6817026e2da574bbea526</anchor>
+      <arglist>(const int32_t &amp;a, const int32_t &amp;b)</arglist>
     </member>
     <member kind="function">
-      <type>int</type>
+      <type>int32_t</type>
       <name>gd</name>
       <anchorfile>namespacemath.html</anchorfile>
-      <anchor>ab6303a0f45d5a302af6a2dd0c6d63307</anchor>
-      <arglist>(const int &amp;a)</arglist>
+      <anchor>a2acf1110de340e1f9c46a741d0d543f9</anchor>
+      <arglist>(const int32_t &amp;a)</arglist>
     </member>
   </compound>
   <compound kind="namespace">
@@ -1952,15 +1952,15 @@
       <type>std ::function&lt; float(const float &amp;) &gt;</type>
       <name>activate</name>
       <anchorfile>namespacetransfer.html</anchorfile>
-      <anchor>a74c69d07c8fbfee9e8b8026d13fb68b3</anchor>
-      <arglist>(const int &amp;active)</arglist>
+      <anchor>a7df3df6fe02c96b67b2df769088512b8</anchor>
+      <arglist>(const int32_t &amp;active)</arglist>
     </member>
     <member kind="variable">
       <type>std ::function&lt; float(const float &amp;) &gt;</type>
       <name>gradient</name>
       <anchorfile>namespacetransfer.html</anchorfile>
-      <anchor>a85df5dac767d25bfb67f70e30e8f967f</anchor>
-      <arglist>(const int &amp;active)</arglist>
+      <anchor>ada898f0e5190b53e9cf5d16443f3b6cb</anchor>
+      <arglist>(const int32_t &amp;active)</arglist>
     </member>
   </compound>
   <compound kind="namespace">

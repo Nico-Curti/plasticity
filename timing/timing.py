@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from __future__ import division
-from __future__ import print_function
-
 import timeit
 import itertools
 import multiprocessing
@@ -134,4 +131,3 @@ if __name__ == '__main__':
       fp.write('{}\n'.format(save))
 
       print('  took {:.3f} seconds'.format(cy_toc - py_tic), flush=True)
-

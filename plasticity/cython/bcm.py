@@ -7,8 +7,8 @@ from .weights import BaseWeights, Normal
 from plasticity.lib.bcm import _BCM
 
 __author__  = ['Nico Curti']
-__email__ = ['nico.curit2@unibo.it']
-
+__email__ = ['nico.curti2@unibo.it']
+__all__ = ['BCM']
 
 class BCM (BasePlasticity):
 
@@ -90,8 +90,11 @@ class BCM (BasePlasticity):
 
   References
   ----------
-  .. [1] Castellani G., Intrator N., Shouval H.Z., Cooper L.N. Solutions of the BCM learning
-         rule in a network of lateral interacting nonlinear neurons, Network Computation in Neural Systems,
+  .. [1] Squadrani L., Curti N., Giampieri E., Remondini D., Blais B., Castellani G.
+         Effectiveness of Biologically Inspired Neural Network Models in Learning and Patterns
+         Memorization. Entropy 2022, 24, 682. https://doi.org/10.3390/e24050682
+  .. [2] Castellani G., Intrator N., Shouval H.Z., Cooper L.N. Solutions of the BCM learning rule
+         in a network of lateral interacting nonlinear neurons, Network Computation in Neural Systems,
          10.1088/0954-898X/10/2/001
   '''
 

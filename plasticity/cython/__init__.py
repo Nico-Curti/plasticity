@@ -7,4 +7,4 @@ from .bcm import BCM
 from .hopfield import Hopfield
 
 __author__  = ['Nico Curti']
-__email__ = ['nico.curit2@unibo.it']
+__email__ = ['nico.curti2@unibo.it']

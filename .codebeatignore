@@ -1,2 +1,5 @@
 *.md
 *.bib
+./testing/
+./timing/
+./utility

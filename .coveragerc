@@ -3,6 +3,9 @@ branch = True
 omit =
     */plasticity/__init__.py
     */plasticity/__version__.py
+    */testing/*
+    */timing/*
+    */utility/*
 [report]
 # Regexes for lines to exclude from consideration
 exclude_lines =

@@ -48,7 +48,7 @@ If ( $build_type -eq $null )
   #Remove-Item .\build_win_debug -Force -Recurse -ErrorAction SilentlyContinue
   New-Item -Path .\build_win_debug -ItemType directory -Force
   Set-Location build_win_debug
-  cmake -G "Visual Studio 16 2019" -T "host=x64" -A "x64" "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" "-DVCPKG_TARGET_TRIPLET=$env:VCPKG_DEFAULT_TRIPLET" "-DCMAKE_BUILD_TYPE=Debug" ${other_cmake_flags} ..
+  cmake -G "Visual Studio 16 2019" -T "host=x64" -A "x64" "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" "-DVCPKG_TARGET_TRIPLET=$env:VCPKG_DEFAULT_TRIPLET" "-DCMAKE_BUILD_TYPE:STRING=Debug" ${other_cmake_flags} ..
   cmake --build . --config Debug --target install
   Set-Location ..
 
@@ -56,7 +56,7 @@ If ( $build_type -eq $null )
   #Remove-Item .\build_win_release -Force -Recurse -ErrorAction SilentlyContinue
   New-Item -Path .\build_win_release -ItemType directory -Force
   Set-Location build_win_release
-  cmake -G "Visual Studio 16 2019" -T "host=x64" -A "x64" "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" "-DVCPKG_TARGET_TRIPLET=$env:VCPKG_DEFAULT_TRIPLET" "-DCMAKE_BUILD_TYPE=Release" ${other_cmake_flags} ..
+  cmake -G "Visual Studio 16 2019" -T "host=x64" -A "x64" "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" "-DVCPKG_TARGET_TRIPLET=$env:VCPKG_DEFAULT_TRIPLET" "-DCMAKE_BUILD_TYPE:STRING=Release" ${other_cmake_flags} ..
   cmake --build . --config Release --target install
   Set-Location ..
 }
@@ -66,7 +66,7 @@ ElseIf ( $build_type -eq "Debug" -or $build_type -eq "debug" )
   #Remove-Item .\build_win_debug -Force -Recurse -ErrorAction SilentlyContinue
   New-Item -Path .\build_win_debug -ItemType directory -Force
   Set-Location build_win_debug
-  cmake -G "Visual Studio 16 2019" -T "host=x64" -A "x64" "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" "-DVCPKG_TARGET_TRIPLET=$env:VCPKG_DEFAULT_TRIPLET" "-DCMAKE_BUILD_TYPE=Debug" ${other_cmake_flags} ..
+  cmake -G "Visual Studio 16 2019" -T "host=x64" -A "x64" "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" "-DVCPKG_TARGET_TRIPLET=$env:VCPKG_DEFAULT_TRIPLET" "-DCMAKE_BUILD_TYPE:STRING=Debug" ${other_cmake_flags} ..
   cmake --build . --config Debug --target install
   Set-Location ..
 }
@@ -76,7 +76,7 @@ ElseIf ( $build_type -eq "Release" -or $build_type -eq "release" )
   #Remove-Item .\build_win_release -Force -Recurse -ErrorAction SilentlyContinue
   New-Item -Path .\build_win_release -ItemType directory -Force
   Set-Location build_win_release
-  cmake -G "Visual Studio 16 2019" -T "host=x64" -A "x64" "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" "-DVCPKG_TARGET_TRIPLET=$env:VCPKG_DEFAULT_TRIPLET" "-DCMAKE_BUILD_TYPE=Release" ${other_cmake_flags} ..
+  cmake -G "Visual Studio 16 2019" -T "host=x64" -A "x64" "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" "-DVCPKG_TARGET_TRIPLET=$env:VCPKG_DEFAULT_TRIPLET" "-DCMAKE_BUILD_TYPE:STRING=Release" ${other_cmake_flags} ..
   cmake --build . --config Release --target install
   Set-Location ..
 }

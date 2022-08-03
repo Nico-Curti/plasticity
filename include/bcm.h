@@ -1,3 +1,31 @@
+/*M///////////////////////////////////////////////////////////////////////////////////////
+//
+//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
+//
+//  The OpenHiP package is licensed under the MIT "Expat" License:
+//
+//  Copyright (c) 2021: Nico Curti.
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  the software is provided "as is", without warranty of any kind, express or
+//  implied, including but not limited to the warranties of merchantability,
+//  fitness for a particular purpose and noninfringement. in no event shall the
+//  authors or copyright holders be liable for any claim, damages or other
+//  liability, whether in an action of contract, tort or otherwise, arising from,
+//  out of or in connection with the software or the use or other dealings in the
+//  software.
+//
+//M*/
+
 #ifndef __bcm_h__
 #define __bcm_h__
 
@@ -8,12 +36,14 @@
 *
 * @brief Bienenstock, Cooper and Munro algorithm (BCM).
 *
-* @details The idea of BCM theory is that for a random sequence of input patterns a synapse
-* is learning to differentiate between those stimuli that excite the postsynaptic
-* neuron strongly and those stimuli that excite that neuron weakly.
-* Learned BCM feature detectors cannot, however, be simply used as the lowest layer
-* of a feedforward network so that the entire network is competitive to a network of
-* the same size trained with backpropagation algorithm end-to-end.
+* @details The idea of BCM theory is that for a random sequence of input
+* patterns a synapse is learning to differentiate between those stimuli
+* that excite the postsynaptic neuron strongly and those stimuli that
+* excite that neuron weakly.
+* Learned BCM feature detectors cannot, however, be simply used as the
+* lowest layer of a feedforward network so that the entire network is
+* competitive to a network of the same size trained with backpropagation
+* algorithm end-to-end.
 *
 */
 class BCM : public BasePlasticity
@@ -40,15 +70,17 @@ public:
   * @param epochs_for_convergency Number of stable epochs requested for the convergency.
   * @param convergency_atol Absolute tolerance requested for the convergency.
   * @param decay Weight decay scale factor.
+  * @param memory_factor Memory factor for weighting the theta updates.
   * @param interaction_strength Set the lateral interaction strength between weights.
   *
   */
-  BCM (const int & outputs, const int & batch_size, int activation=transfer_t :: logistic,
-       update_args optimizer=update_args(optimizer_t :: sgd),
-       weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
-       int epochs_for_convergency=1, float convergency_atol=0.01f,
-       float decay=0.f, float memory_factor=0.5f,
-       float interaction_strength=0.f);
+  BCM (const int32_t & outputs, const int32_t & batch_size,
+    int32_t activation=transfer_t :: logistic,
+    update_args optimizer=update_args(optimizer_t :: sgd),
+    weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
+    int32_t epochs_for_convergency=1, float convergency_atol=0.01f,
+    float decay=0.f, float memory_factor=0.5f,
+    float interaction_strength=0.f);
 
   // Copy Operator and Copy Constructor
 
@@ -99,12 +131,13 @@ private:
   * \theta_M = E[y^2]
   * \f]
   *
-  * The Law and Cooper form has all of the same fixed points as the Intrator and Cooper form,
-  * but speed of synaptic modification increases when the threshold is small, and decreases as
-  * the threshold increases.
-  * The practical result is that the simulation can be run with artificially high learning rates,
-  * and wild oscillations are reduced. This form has been used primarily when running simulations of networks,
-  * where the run-time of the simulation can be prohibitive.
+  * The Law and Cooper form has all of the same fixed points as the Intrator and Cooper
+  * form, but speed of synaptic modification increases when the threshold is small,
+  * and decreases as the threshold increases.
+  * The practical result is that the simulation can be run with artificially high
+  * learning rates, and wild oscillations are reduced. This form has been used primarily
+  * when running simulations of networks, where the run-time of the simulation can
+  * be prohibitive.
   *
   * @param X Batch of data.
   * @param output Output of the model as computed by the _predict function

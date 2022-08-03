@@ -1,3 +1,31 @@
+/*M///////////////////////////////////////////////////////////////////////////////////////
+//
+//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
+//
+//  The OpenHiP package is licensed under the MIT "Expat" License:
+//
+//  Copyright (c) 2021: Nico Curti.
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  the software is provided "as is", without warranty of any kind, express or
+//  implied, including but not limited to the warranties of merchantability,
+//  fitness for a particular purpose and noninfringement. in no event shall the
+//  authors or copyright holders be liable for any claim, damages or other
+//  liability, whether in an action of contract, tort or otherwise, arising from,
+//  out of or in connection with the software or the use or other dealings in the
+//  software.
+//
+//M*/
+
 #ifndef __utils_h__
 #define __utils_h__
 
@@ -101,7 +129,8 @@ namespace utils
   * @param timer Start time (the timer is reset at the end of the function).
   *
   */
-  void print_progress (const int & i, const int & num_iter, std :: chrono :: time_point < std :: chrono :: high_resolution_clock > & timer);
+  void print_progress (const int & i, const int & num_iter,
+    std :: chrono :: time_point < std :: chrono :: high_resolution_clock > & timer);
 
   // OS functions
 
@@ -137,7 +166,8 @@ namespace utils
 *
 */
 template < typename Char, typename Traits, typename Allocator >
-std :: basic_string < Char, Traits, Allocator > operator * (const std :: basic_string < Char, Traits, Allocator > & s, std :: size_t n);
+std :: basic_string < Char, Traits, Allocator > operator * (
+  const std :: basic_string < Char, Traits, Allocator > & s, std :: size_t n);
 
 /**
 * @brief Overload operator * between integers and strings
@@ -155,6 +185,7 @@ std :: basic_string < Char, Traits, Allocator > operator * (const std :: basic_s
 *
 */
 template < typename Char, typename Traits, typename Allocator >
-std :: basic_string < Char, Traits, Allocator > operator * (std :: size_t n, const std :: basic_string < Char, Traits, Allocator > & s);
+std :: basic_string < Char, Traits, Allocator > operator * (
+  std :: size_t n, const std :: basic_string < Char, Traits, Allocator > & s);
 
 #endif // __utils_h__

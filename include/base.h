@@ -1,3 +1,31 @@
+/*M///////////////////////////////////////////////////////////////////////////////////////
+//
+//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
+//
+//  The OpenHiP package is licensed under the MIT "Expat" License:
+//
+//  Copyright (c) 2021: Nico Curti.
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  the software is provided "as is", without warranty of any kind, express or
+//  implied, including but not limited to the warranties of merchantability,
+//  fitness for a particular purpose and noninfringement. in no event shall the
+//  authors or copyright holders be liable for any claim, damages or other
+//  liability, whether in an action of contract, tort or otherwise, arising from,
+//  out of or in connection with the software or the use or other dealings in the
+//  software.
+//
+//M*/
+
 #ifndef __base_h__
 #define __base_h__
 
@@ -59,9 +87,9 @@ protected:
   std :: function < float(const float &) > activation; ///< pointer to activation function
   std :: function < float(const float &) > gradient;   ///< pointer to gradient function
 
-  int batch;                  ///< batch size
-  int outputs;                ///< number of hidden units
-  int epochs_for_convergency; ///< number of stable epochs requested for the convergency
+  int32_t batch;                  ///< batch size
+  int32_t outputs;                ///< number of hidden units
+  int32_t epochs_for_convergency; ///< number of stable epochs requested for the convergency
 
   float convergency_atol;     ///< Absolute tolerance requested for the convergency
   float decay;                ///< Weight decay scale factor
@@ -97,11 +125,12 @@ public:
   * @param decay Weight decay scale factor.
   *
   */
-  BasePlasticity (const int & outputs, const int & batch_size, int activation=transfer_t :: linear,
-                  update_args optimizer=update_args(optimizer_t :: sgd),
-                  weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
-                  int epochs_for_convergency=1, float convergency_atol=0.01f,
-                  float decay=0.f);
+  BasePlasticity (const int32_t & outputs, const int32_t & batch_size,
+    int32_t activation=transfer_t :: linear,
+    update_args optimizer=update_args(optimizer_t :: sgd),
+    weights_initialization weights_init=weights_initialization(weights_init_t :: normal),
+    int32_t epochs_for_convergency=1, float convergency_atol=0.01f,
+    float decay=0.f);
 
 
   // Copy Operator and Copy Constructor
@@ -146,8 +175,9 @@ public:
   *
   * @details The model computes the weights and thus the encoded features
   * using the given plasticity rule.
-  * The signature of the function is totally equivalent to the the Python counterpart
-  * except by the pointer arrays which require the dimension size as extra parameters.
+  * The signature of the function is totally equivalent to the the
+  * Python counterpart except by the pointer arrays which require the
+  * dimension size as extra parameters.
   *
   * @note This function must be called before the predict member-function.
   * A check is performed internally to ensure it.
@@ -163,7 +193,8 @@ public:
   *
   */
   template < class Callback = std :: function < void (BasePlasticity *) > >
-  void fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs, int seed=42, Callback callback=[](BasePlasticity *) -> void {});
+  void fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs,
+    int seed=42, Callback callback=[](BasePlasticity *) -> void {});
 
   /**
   * @brief Train the model/encoder
@@ -179,7 +210,8 @@ public:
   *
   */
   template < class Callback = std :: function < void (BasePlasticity *) > >
-  void fit (const Eigen :: MatrixXf & X, const int & num_epochs, int seed=42, Callback callback=[](BasePlasticity *) -> void {});
+  void fit (const Eigen :: MatrixXf & X, const int & num_epochs,
+    int32_t seed=42, Callback callback=[](BasePlasticity *) -> void {});
 
   /**
   * @brief Predict the model/encoder
@@ -199,7 +231,7 @@ public:
   * @return The array of encoded features.
   *
   */
-  float * predict (float * X, const int & n_samples, const int & n_features);
+  float * predict (float * X, const int32_t & n_samples, const int32_t & n_features);
 
   /**
   * @brief Predict the model/encoder
@@ -218,8 +250,8 @@ public:
   *
   * @details The weights matrix is saved in binary format.
   * The first value of the file is an integer corresponding to the number of
-  * weights (rows x cols) of the weight matrix, followed by the (float) weight matrix
-  * in ravel format.
+  * weights (rows x cols) of the weight matrix, followed by the (float)
+  * weight matrix in ravel format.
   *
   * @param filename Filename or path where the file is saved.
   *
@@ -230,10 +262,10 @@ public:
   * @brief Load the current weight matrix.
   *
   * @details The weights matrix is loaded according to the format
-  * specified in the save_weights function, i.e. the first first value of the file
-  * is an integer corresponding to the number of weights (rows x cols) of the weight matrix,
-  * followed by the (float) weight matrix
-  * in ravel format.
+  * specified in the save_weights function, i.e. the first first value of
+  * the file is an integer corresponding to the number of weights
+  * (rows x cols) of the weight matrix, followed by the (float) weight
+  * matrix in ravel format.
   *
   * @param filename Filename or path of the weight.
   */
@@ -267,17 +299,19 @@ private:
   /**
   * @brief Check the input dimensions.
   *
-  * @note The function checks if the given dimensions are consistent with the input ones.
+  * @note The function checks if the given dimensions are consistent with
+  * the input ones.
   *
   * @param n_features dimension of the X matrix, i.e. the number of cols
   *
   */
-  void check_dims (const int & n_features);
+  void check_dims (const int32_t & n_features);
 
   /**
   * @brief Check if the model is already fitted.
   *
-  * @note The function checks if function fit has been already called before the prediction.
+  * @note The function checks if function fit has been already called
+  * before the prediction.
   * The check is performed on the value of the output array
   *
   */
@@ -286,7 +320,8 @@ private:
   /**
   * @brief Check the given parameters.
   *
-  * @note The function checks if the input variable epochs_for_convergency is positive defined and greater than 1
+  * @note The function checks if the input variable epochs_for_convergency
+  * is positive defined and greater than 1
   *
   */
   void check_params ();
@@ -318,7 +353,8 @@ private:
   *
   */
   template < class Callback >
-  void _fit (const Eigen :: MatrixXf & X, const int & num_epochs, const int & seed, Callback callback);
+  void _fit (const Eigen :: MatrixXf & X, const int32_t & num_epochs,
+    const int32_t & seed, Callback callback);
 
   /**
   * @brief Core function of the predict formula

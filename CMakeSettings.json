@@ -2,34 +2,11 @@
   // See https://go.microsoft.com//fwlink//?linkid=834763 for more information about this file.
   "configurations": [
     {
-      "buildCommandArgs": "-m -v:minimal",
       "buildRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\build\\${name}",
-      "cmakeCommandArgs": "",
-      "configurationType": "Debug",
-      "generator": "Visual Studio 16 2019 Win64",
-      "name": "x64-Debug",
-      "variables": [
-        {
-          "name": "CMAKE_TOOLCHAIN_FILE",
-          "value": "${env.VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake"
-        },
-        {
-          "name": "VCPKG_TARGET_TRIPLET",
-          "value": "${env.VCPKG_DEFAULT_TRIPLET}"
-        },
-        {
-          "name": "CMAKE_BUILD_TYPE",
-          "value": "Debug"
-        }
-      ]
-    },
-    {
-      "buildCommandArgs": "-m -v:minimal",
-      "buildRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\build\\${name}",
-      "cmakeCommandArgs": "",
+      "generator": "Ninja",
       "configurationType": "Release",
-      "generator": "Visual Studio 16 2019 Win64",
-      "name": "x64-Release",
+      "inheritEnvironments": [ "msvc_x64" ],
+      "name": "x64-Ninja-Release",
       "variables": [
         {
           "name": "CMAKE_TOOLCHAIN_FILE",
@@ -42,6 +19,27 @@
         {
           "name": "CMAKE_BUILD_TYPE",
           "value": "Release"
+        }
+      ]
+    },
+    {
+      "buildRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\build\\${name}",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x64" ],
+      "name": "x64-Ninja-Debug",
+      "variables": [
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "${env.VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake"
+        },
+        {
+          "name": "VCPKG_TARGET_TRIPLET",
+          "value": "${env.VCPKG_DEFAULT_TRIPLET}"
+        },
+        {
+          "name": "CMAKE_BUILD_TYPE",
+          "value": "Debug"
         }
       ]
     }

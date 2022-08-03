@@ -7,8 +7,8 @@ from .weights import BaseWeights, Normal
 from plasticity.lib.hopfield import _Hopfield
 
 __author__  = ['Nico Curti']
-__email__ = ['nico.curit2@unibo.it']
-
+__email__ = ['nico.curti2@unibo.it']
+__all__ = ['Hopfield']
 
 class Hopfield (BasePlasticity):
 

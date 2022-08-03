@@ -15,23 +15,6 @@ number_of_build_workers=$(grep -c ^processor /proc/cpuinfo)
 
 other_cmake_flags="${@:2}"
 
-if [ "$build_type" == "" ]; then
-  #rm -rf build_release
-  mkdir -p build_release
-  cd build_release
-  cmake .. -DCMAKE_BUILD_TYPE="Release" $other_cmake_flags
-  cd ..
-
-  #rm -rf build_debug
-  mkdir -p build_debug
-  cd build_debug
-  cmake .. -DCMAKE_BUILD_TYPE="Debug" $other_cmake_flags
-  cd ..
-
-  cd build_debug   && cmake --build . --target install --parallel $number_of_build_workers && cd ..
-  cd build_release && cmake --build . --target install --parallel $number_of_build_workers && cd ..
-
-
 elif [ "$build_type" == "Release" ] || [ "$build_type" == "release" ]; then
   echo "${green}Building Release project${reset}"
   build_type=Release

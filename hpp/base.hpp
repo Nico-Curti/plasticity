@@ -1,10 +1,39 @@
+/*M///////////////////////////////////////////////////////////////////////////////////////
+//
+//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
+//
+//  The OpenHiP package is licensed under the MIT "Expat" License:
+//
+//  Copyright (c) 2021: Nico Curti.
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  the software is provided "as is", without warranty of any kind, express or
+//  implied, including but not limited to the warranties of merchantability,
+//  fitness for a particular purpose and noninfringement. in no event shall the
+//  authors or copyright holders be liable for any claim, damages or other
+//  liability, whether in an action of contract, tort or otherwise, arising from,
+//  out of or in connection with the software or the use or other dealings in the
+//  software.
+//
+//M*/
+
 #ifndef __base_hpp__
 #define __base_hpp__
 
 #include <base.h>
 
 template < class Callback >
-void BasePlasticity :: fit (float * X, const int & n_samples, const int & n_features, const int & num_epochs, int seed, Callback callback)
+void BasePlasticity :: fit (float * X, const int32_t & n_samples, const int32_t & n_features,
+  const int32_t & num_epochs, int32_t seed, Callback callback)
 {
   // convert the input array to Eigen matrix
   // NOTE: perform a copy of the array to avoid possible troubles
@@ -16,15 +45,17 @@ void BasePlasticity :: fit (float * X, const int & n_samples, const int & n_feat
 }
 
 template < class Callback >
-void BasePlasticity :: fit (const Eigen :: MatrixXf & X, const int & num_epochs, int seed, Callback callback)
+void BasePlasticity :: fit (const Eigen :: MatrixXf & X, const int32_t & num_epochs,
+  int32_t seed, Callback callback)
 {
   if (this->batch > X.rows())
     throw std :: runtime_error("Incorrect batch_size found. "
       "The batch_size must be less or equal to the number of samples. "
-      "Given " + std :: to_string(this->batch) + " for " + std :: to_string(X.rows()) + " samples");
+      "Given " + std :: to_string(this->batch) + " for " +
+      std :: to_string(X.rows()) + " samples");
 
   // extract the number of features as the number of columns of the input matrix
-  const int n_features = X.cols();
+  const int32_t n_features = X.cols();
 
   // allocate the weights matrix
   this->weights = Eigen :: MatrixXf(this->outputs, n_features);
@@ -39,17 +70,18 @@ void BasePlasticity :: fit (const Eigen :: MatrixXf & X, const int & num_epochs,
 }
 
 template < class Callback >
-void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int & num_epochs, const int & seed, Callback callback)
+void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int32_t & num_epochs,
+  const int32_t & seed, Callback callback)
 {
   // compute the number of possible batches
-  const int num_batches = X.rows() / this->batch;
+  const int32_t num_batches = X.rows() / this->batch;
   // extract the number of matrix shape
-  const int n_samples = X.rows();
-  const int n_features = X.cols();
+  const int32_t n_samples = X.rows();
+  const int32_t n_features = X.cols();
 
 #if EIGEN_VERSION_AT_LEAST(3, 3, 90)
   // Build the index permutation generator
-  std :: vector < int > batch_indices(n_samples);
+  std :: vector < int32_t > batch_indices(n_samples);
   std :: iota(batch_indices.begin(), batch_indices.end(), 0);
 #else
   // The solution with eigen permutation is very very very slow...
@@ -68,7 +100,7 @@ void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int & num_epochs
   Eigen :: initParallel();
 
   // start the loop along the epochs
-  for (int epoch = 0; epoch < num_epochs; ++epoch)
+  for (int32_t epoch = 0; epoch < num_epochs; ++epoch)
   {
 
     // set the initial accumulator to zeros
@@ -82,7 +114,9 @@ void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int & num_epochs
     // apply the index permutation on the data
     Eigen :: MatrixXf X_perm = X(batch_indices, Eigen :: all); // permute rows
 #else
-    std :: shuffle(permutation.indices().data(), permutation.indices().data() + permutation.indices().size(), engine);
+    std :: shuffle(permutation.indices().data(),
+                   permutation.indices().data() + permutation.indices().size(),
+                   engine);
     // apply the index permutation on the data
     Eigen :: MatrixXf X_perm = permutation * X; // permute rows
 #endif
@@ -95,11 +129,11 @@ void BasePlasticity :: _fit (const Eigen :: MatrixXf & X, const int & num_epochs
 #endif // __verbose__
 
     // start the evaluation of the batches
-    for (int i = 0; i < num_batches; ++i)
+    for (int32_t i = 0; i < num_batches; ++i)
     {
 
-      // Get the batch data as block starting from the i*batch row and the first (0) column
-      // with a shape given by (batch_size, num_features)
+      // Get the batch data as block starting from the i*batch row
+      // and the first (0) column with a shape given by (batch_size, num_features)
       auto batch_data = X_perm.block(i * this->batch, 0, this->batch, n_features);
 
       // perform the prediction of the model with the current weight matrix
