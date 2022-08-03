@@ -1,4 +1,4 @@
-name: MacOS plasticity CI
+name: MacOS
 
 on:
   push:

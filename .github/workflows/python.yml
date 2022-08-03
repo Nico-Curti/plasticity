@@ -1,4 +1,4 @@
-name: plasticity Python CI
+name: Python
 
 on:
   push:

@@ -1,8 +1,9 @@
-| **Authors**  | **Project** |  **Documentation** | **Build Status** | **Code Quality** | **Coverage** |
-|:------------:|:-----------:|:------------------:|:----------------:|:----------------:|:------------:|
-| [**N. Curti**](https://github.com/Nico-Curti) <br/> [**L. Squadrani**](https://github.com/lorenzosquadrani) <br/> [**S. Gasperini**](https://github.com/SimoneGasperini) <br/> [**M. Ceccarelli**](https://github.com/Mat092)  | **plasticity** <br/> [![Entropy](https://img.shields.io/badge/Entropy-10.3390/e24050682-g.svg)](https://www.mdpi.com/1099-4300/24/5/682) | [![Doxygen Sphinx](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml) <br/> [![ReadTheDocs](https://readthedocs.org/projects/plasticity/badge/?version=latest)](https://plasticity.readthedocs.io/en/latest/?badge=latest) | [![Windows](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml) <br/> [![Linux](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml) <br/> [![MacOS](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml) <br/> [![Python](https://github.com/Nico-Curti/plasticity/actions/workflows/python.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/python.yml) | [![Codacy](https://app.codacy.com/project/badge/Grade/9879f0e8f90140eab79c338b46c00420)](https://www.codacy.com/gh/Nico-Curti/plasticity/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nico-Curti/plasticity&amp;utm_campaign=Badge_Grade) <br/> [![codebeat](https://codebeat.co/badges/941ebbcf-de5a-4ff0-b4c4-9674bfb20c69)](https://codebeat.co/projects/github-com-nico-curti-plasticity-main) | [![codecov](https://codecov.io/gh/Nico-Curti/plasticity/branch/main/graph/badge.svg)](https://codecov.io/gh/Nico-Curti/plasticity) |
+| **Authors**  | **Project** |  **Documentation** | **Build Status** | **Code Quality** |
+|:------------:|:-----------:|:------------------:|:----------------:|:----------------:|
+| [**N. Curti**](https://github.com/Nico-Curti) <br/> [**L. Squadrani**](https://github.com/lorenzosquadrani) <br/> [**S. Gasperini**](https://github.com/SimoneGasperini) <br/> [**M. Ceccarelli**](https://github.com/Mat092)  | **plasticity** <br/> [![Entropy](https://img.shields.io/badge/Entropy-10.3390/e24050682-g.svg)](https://www.mdpi.com/1099-4300/24/5/682) | [![Doxygen Sphinx](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml) <br/> [![ReadTheDocs](https://readthedocs.org/projects/plasticity/badge/?version=latest)](https://plasticity.readthedocs.io/en/latest/?badge=latest) | [![Windows](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml) <br/> [![Linux](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml) <br/> [![MacOS](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml) <br/> [![Python](https://github.com/Nico-Curti/plasticity/actions/workflows/python.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/python.yml) | [![Codacy](https://app.codacy.com/project/badge/Grade/9879f0e8f90140eab79c338b46c00420)](https://www.codacy.com/gh/Nico-Curti/plasticity/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nico-Curti/plasticity&amp;utm_campaign=Badge_Grade) <br/> [![codebeat](https://codebeat.co/badges/941ebbcf-de5a-4ff0-b4c4-9674bfb20c69)](https://codebeat.co/projects/github-com-nico-curti-plasticity-main) |
 
-[![appveyor](https://ci.appveyor.com/api/projects/status/djnkyxc64dlm4r6p/branch/main?svg=true)](https://ci.appveyor.com/project/Nico-Curti/plasticity-9jr6a/branch/main)
+**Appveryor:** [![appveyor](https://ci.appveyor.com/api/projects/status/djnkyxc64dlm4r6p/branch/main?svg=true)](https://ci.appveyor.com/project/Nico-Curti/plasticity-9jr6a/branch/main)
+
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/Nico-Curti/plasticity.svg?style=plastic)](https://github.com/Nico-Curti/plasticity/pulls)
 [![GitHub issues](https://img.shields.io/github/issues/Nico-Curti/plasticity.svg?style=plastic)](https://github.com/Nico-Curti/plasticity/issues)
 
@@ -72,6 +73,7 @@ is the activation function of the unsupervised layer (ReLu for n=1), v<sub>i</su
 In this project, a parallel approach founded on the same concepts is proposed.
 In particular, it has been developed a model based on the *BCM theory* (E. Bienenstock, L. Cooper, and P. Munro).
 An exhaustive theoretical description is provided by the original paper of [Castellani et al.](https://pubmed.ncbi.nlm.nih.gov/10378187/).
+The proposed implementation is discussed in the work of [Squadrani & Curti et al.](https://www.mdpi.com/1099-4300/24/5/682).
 
 In general terms, BCM model proposes a sliding threshold for long-term potentiation (LTP) or long-term depression (LTD) induction, and states that synaptic plasticity is stabilized by a dynamic adaptation of the time-averaged post-synaptic activity.
 The BCM learning rule is described by the following equations:
@@ -166,11 +168,11 @@ mkdir -p build
 cd build && cmake .. && cmake --build . --target install
 ```
 
-or more easily
+`plasticity` could be built with the *build* scripts in the project, as:
 
-```bash
-./build.sh Release
-```
+|              |  **Linux**    |  **MacOS**    |  **Windows**  |
+|:------------:|:--------------|:--------------|:--------------|
+| **Script**   | `./build.sh`  | `./build.sh`  | `./build.ps1` |
 
 if you are working on a Windows machine the correct script to call is the [`build.ps1`](https://Nico-Curti/plasticity/blob/main/build.ps1) with the same command line arguments.
 
@@ -413,9 +415,9 @@ The `plasticity` classes are totally equivalent to a `scikit-learn` feature-enco
 First of all you need to import the desired `plasticity` model.
 The you can call the `fit` member function with the desired parameters.
 
-> **NOTE:** following the scikit-learn philosophy all the class parameters (a lot of possible parameters!) are initialized by default values.
-> In this way you can build the object without any preliminary knowledge about the model.
-> However, we strongly recommend to read the full list of possible variables using the `help` command.
+| :triangular_flag_on_post: Note |
+|:-------------------------------|
+| Following the scikit-learn philosophy all the class parameters (a lot of possible parameters!) are initialized by default values. In this way you can build the object without any preliminary knowledge about the model. However, we strongly recommend to read the full list of possible variables using the `help` command. |
 
 ```python
 from plasticity.model import BCM
@@ -447,11 +449,9 @@ view_weights (model.weights, dims=(28, 28))
 
 The results should appear like this
 
-<a href="https://github.com/Nico-Curti/plasticity/blob/main/img/BCM_weights.gif">
-  <div class="image">
-    <img src="img/BCM_weights.gif" width="392" height="392">
-  </div>
-</a>
+| <img src="img/BCM_weights.gif" width="392" height="392"> |
+| -- |
+| Weights learned by 100 arbitrarily chosen BCM neurons after convergence on MNIST dataset. The bitmap shows the progression of neurons synapses starting from a random configuration (initial condition) along 10 training epochs. |
 
 | :triangular_flag_on_post: Note |
 |:-------------------------------|
@@ -494,17 +494,19 @@ See [here](https://github.com/Nico-Curti/plasticity/blob/main/.github/CONTRIBUTI
 
 ## References
 
-<blockquote>1- Castellani G., Intrator N., Shouval H.Z., Cooper L.N. Solutions of the BCM learning rule in a network of lateral interacting nonlinear neurons, Network Computation in Neural Systems, 10.1088/0954-898X/10/2/001. </blockquote>
+<blockquote>1- Squadrani L, Curti N, Giampieri E, Remondini D, Blais B, Castellani G. Effectiveness of Biologically Inspired Neural Network Models in Learning and Patterns Memorization. Entropy. 2022; 24(5):682. https://doi.org/10.3390/e24050682 </blockquote>
 
-<blockquote>2- Blais B., Shouval H., Cooper L.N. Time Dependence of Visual Deprivation: A Comparison between Models of Plasticity and Experimental Results, Psychology, 1996, 10.21236/ada316967. </blockquote>
+<blockquote>2- Castellani G., Intrator N., Shouval H.Z., Cooper L.N. Solutions of the BCM learning rule in a network of lateral interacting nonlinear neurons, Network Computation in Neural Systems, https://doi.org/10.1088/0954-898X/10/2/001. </blockquote>
 
-<blockquote>3- Blais B. DEMONSTRATION Plasticity: A Synaptic Modification Simulation Environment, 1986, https://github.com/bblais/plasticity </blockquote>
+<blockquote>3- Blais B., Shouval H., Cooper L.N. Time Dependence of Visual Deprivation: A Comparison between Models of Plasticity and Experimental Results, Psychology, 1996, https://doi.org/10.21236/ada316967. </blockquote>
 
-<blockquote>4- Yeung, Luk Chong and Blais, B.S. and Cooper, L.N and Shouval, Harel, Metaplasticity and the Unified Calcium Model Lead to Input Selectivity in Spiking Neurons (February 2003). Science Direct Working Paper No S1574-034X(04)70246-X, Available at SSRN: https://ssrn.com/abstract=2978356 </blockquote>
+<blockquote>4- Blais B. DEMONSTRATION Plasticity: A Synaptic Modification Simulation Environment, 1986, https://github.com/bblais/plasticity </blockquote>
 
-<blockquote>5- Blais B., Cooper L.N. BCM theory (January 2008), 10.4249/scholarpedia.1570 </blockquote>
+<blockquote>5- Yeung, Luk Chong and Blais, B.S. and Cooper, L.N and Shouval, Harel, Metaplasticity and the Unified Calcium Model Lead to Input Selectivity in Spiking Neurons (February 2003). Science Direct Working Paper No S1574-034X(04)70246-X, Available at SSRN: https://ssrn.com/abstract=2978356 </blockquote>
 
-<blockquote>6- Dmitry Krotov, and John J. Hopfield. Unsupervised learning by competing hidden units, PNAS, 2019, www.pnas.org/cgi/doi/10.1073/pnas.1820458116. </blockquote>
+<blockquote>6- Blais B., Cooper L.N. BCM theory (January 2008), https://doi.org/10.4249/scholarpedia.1570 </blockquote>
+
+<blockquote>7- Dmitry Krotov, and John J. Hopfield. Unsupervised learning by competing hidden units, PNAS, 2019, www.pnas.org/cgi/doi/10.1073/pnas.1820458116. </blockquote>
 
 ## FAQ
 
