@@ -2,7 +2,7 @@
 |:------------:|:-----------:|:------------------:|:----------------:|:----------------:|
 | [**N. Curti**](https://github.com/Nico-Curti) <br/> [**L. Squadrani**](https://github.com/lorenzosquadrani) <br/> [**S. Gasperini**](https://github.com/SimoneGasperini) <br/> [**M. Ceccarelli**](https://github.com/Mat092)  | **plasticity** <br/> [![Entropy](https://img.shields.io/badge/Entropy-10.3390/e24050682-g.svg)](https://www.mdpi.com/1099-4300/24/5/682) | [![Doxygen Sphinx](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/docs.yml) <br/> [![ReadTheDocs](https://readthedocs.org/projects/plasticity/badge/?version=latest)](https://plasticity.readthedocs.io/en/latest/?badge=latest) | [![Windows](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/windows.yml) <br/> [![Linux](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/linux.yml) <br/> [![MacOS](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/macos.yml) <br/> [![Python](https://github.com/Nico-Curti/plasticity/actions/workflows/python.yml/badge.svg)](https://github.com/Nico-Curti/plasticity/actions/workflows/python.yml) | [![Codacy](https://app.codacy.com/project/badge/Grade/9879f0e8f90140eab79c338b46c00420)](https://www.codacy.com/gh/Nico-Curti/plasticity/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nico-Curti/plasticity&amp;utm_campaign=Badge_Grade) <br/> [![codebeat](https://codebeat.co/badges/941ebbcf-de5a-4ff0-b4c4-9674bfb20c69)](https://codebeat.co/projects/github-com-nico-curti-plasticity-main) |
 
-**Appveryor:** [![appveyor](https://ci.appveyor.com/api/projects/status/djnkyxc64dlm4r6p/branch/main?svg=true)](https://ci.appveyor.com/project/Nico-Curti/plasticity-9jr6a/branch/main)
+**Appveyor:** [![appveyor](https://ci.appveyor.com/api/projects/status/djnkyxc64dlm4r6p/branch/main?svg=true)](https://ci.appveyor.com/project/Nico-Curti/plasticity-9jr6a/branch/main)
 
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/Nico-Curti/plasticity.svg?style=plastic)](https://github.com/Nico-Curti/plasticity/pulls)
 [![GitHub issues](https://img.shields.io/github/issues/Nico-Curti/plasticity.svg?style=plastic)](https://github.com/Nico-Curti/plasticity/issues)
@@ -173,8 +173,6 @@ cd build && cmake .. && cmake --build . --target install
 |              |  **Linux**    |  **MacOS**    |  **Windows**  |
 |:------------:|:--------------|:--------------|:--------------|
 | **Script**   | `./build.sh`  | `./build.sh`  | `./build.ps1` |
-
-if you are working on a Windows machine the correct script to call is the [`build.ps1`](https://Nico-Curti/plasticity/blob/main/build.ps1) with the same command line arguments.
 
 The `CMake` command line can be customized according to the following parameters:
 

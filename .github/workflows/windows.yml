@@ -35,7 +35,7 @@ jobs:
         git clone https://github.com/microsoft/vcpkg
         ./vcpkg/bootstrap-vcpkg.bat
         ./vcpkg/vcpkg integrate install
-        ./vcpkg/vcpkg install eigen3
+        ./vcpkg/vcpkg install eigen3:x64-windows
 
     - name: Build with CMake and vcpkg
       uses: lukka/run-cmake@v3
